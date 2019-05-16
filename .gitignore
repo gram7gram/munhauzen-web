@@ -1,0 +1,14 @@
+www/node_modules
+api/node_modules
+
+www/build
+
+.DS_Store
+.idea
+
+npm-debug.log*
+
+www/.env
+api/.env
+www/package-lock.json
+api/package-lock.json
