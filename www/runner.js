@@ -5,10 +5,6 @@ process.on('unhandledRejection', (reason, p) => {
 
 require('dotenv').config({path: `.env`});
 
-const db = require('./database/mongo');
-
-db.connect()
-
 const server = require('./server');
 
 server.listen(process.env.PORT, () => {

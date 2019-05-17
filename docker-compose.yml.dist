@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+
+  proxy:
+    image: jwilder/nginx-proxy:alpine
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    networks:
+      - backend
+    volumes:
+      - '/var/run/docker.sock:/tmp/docker.sock:ro'
+      - '/etc/letsencrypt/live/fingertips.com/fullchain.pem:/etc/nginx/certs/fingertips.com.crt'
+      - '/etc/letsencrypt/live/fingertips.com/privkey.pem:/etc/nginx/certs/fingertips.com.key'
+
+  api:
+    build: ./api/env
+    environment:
+      - VIRTUAL_HOST=munhauzen-api.fingertips.com
+    depends_on:
+      - db
+    networks:
+      - backend
+    volumes:
+      - './api:/var/www'
+
+  www:
+    build: ./www/env
+    environment:
+      - VIRTUAL_HOST=munhauzen.fingertips.com
+    networks:
+      - backend
+    volumes:
+      - './www:/var/www'
+
+  db:
+    build: mongo:4.1
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=~
+      - MONGO_INITDB_DATABASE=munhauzen
+    networks:
+      - backend
+    volumes:
+      - '.:/var/www'
+      - '.persistency/monogo/data:/data/db'
+
+networks:
+  backend:
+    driver: "bridge"

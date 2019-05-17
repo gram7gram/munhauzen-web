@@ -1,36 +1,31 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+//const morgan = require('morgan')
+const cors = require('cors')
 
-const AudioFailsRESTController = require(`./controllers/api/AudioFailsRESTController`);
-const AudioRESTController = require(`./controllers/api/AudioRESTController`);
-const ImageRESTController = require(`./controllers/api/ImageRESTController`);
-const ScenarioRESTController = require(`./controllers/api/ScenarioRESTController`);
+const AudioFailsRESTController = require(`./controllers/AudioFailsRESTController`);
+const AudioRESTController = require(`./controllers/AudioRESTController`);
+const ImageRESTController = require(`./controllers/ImageRESTController`);
+const ScenarioRESTController = require(`./controllers/ScenarioRESTController`);
+const InventoryRESTController = require(`./controllers/InventoryRESTController`);
+const ChapterRESTController = require(`./controllers/ChapterRESTController`);
+
 const ErrorLogger = require(`./services/ErrorLogger`);
 
 const app = express();
 
-// CORS
-app.use((req, res, next) => {
-
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
-  res.removeHeader('x-powered-by');
-
-  next();
-
-});
-
+app.use(cors());
+//app.use(morgan('tiny'))
 app.use(bodyParser.json());
-
 app.use(cookieParser());
 
-// Configure routes
-app.use('/api/v1/:locale', AudioFailsRESTController);
-app.use('/api/v1/:locale', AudioRESTController);
-app.use('/api/v1/:locale', ImageRESTController);
-app.use('/api/v1/:locale', ScenarioRESTController);
+app.use('/api/v1', AudioFailsRESTController);
+app.use('/api/v1', AudioRESTController);
+app.use('/api/v1', ImageRESTController);
+app.use('/api/v1', ScenarioRESTController);
+app.use('/api/v1', InventoryRESTController);
+app.use('/api/v1', ChapterRESTController);
 
 app.all('*', (req, res) => {
   res.status(404).json({
@@ -40,6 +35,4 @@ app.all('*', (req, res) => {
 
 app.use(ErrorLogger);
 
-app.listen(process.env.PORT, () => {
-  console.log('Server started')
-});
+module.exports = app
