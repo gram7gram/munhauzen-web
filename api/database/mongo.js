@@ -27,7 +27,7 @@ mongoose.connection.on('connecting', () => {
 
 mongoose.connection.on('connected', () => {
 
-  //console.log(`Connected with mongo database @ ${MONGO_HOST}`);
+  console.log(`Connected with mongo database @ ${MONGO_HOST}`);
 
 });
 

@@ -16,3 +16,5 @@ api/package-lock.json
 docker-compose.yml
 api/env/Dockerfile
 www/env/Dockerfile
+
+.persistency

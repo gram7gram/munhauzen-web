@@ -1,8 +1,8 @@
 const {boot, expect, tearDown} = require('../../WebTestCase')
-const chaptersService = require('../../../server/services/ChapterService')
+const inventoryService = require('../../../server/services/InventoryService')
 const {cid} = require('../../utils')
 
-describe('ChapterRESTController', () => {
+describe('InventoryRESTController', () => {
 
   let app
 
@@ -12,9 +12,9 @@ describe('ChapterRESTController', () => {
 
   afterEach(tearDown)
 
-  it('GET /api/v1/chapters is successful', (done) => {
+  it('GET /api/v1/inventory is successful', (done) => {
 
-    app.get('/api/v1/chapters')
+    app.get('/api/v1/inventory')
       .end((err, res) => {
 
         expect(res.statusCode).to.equal(200)
@@ -25,14 +25,13 @@ describe('ChapterRESTController', () => {
       });
   })
 
-  it('POST /api/v1/chapters is successful', (done) => {
+  it('POST /api/v1/inventory is successful', (done) => {
 
     const entity = {
-      name: cid(10),
-      icon: cid(20),
+      name: cid(10).toUpperCase(),
     }
 
-    app.post('/api/v1/chapters')
+    app.post('/api/v1/inventory')
       .type('application/json')
       .send(JSON.stringify(entity))
       .end((err, res) => {
@@ -40,20 +39,19 @@ describe('ChapterRESTController', () => {
         expect(res.statusCode).to.equal(201)
         expect(res.body._id).not.to.equal(undefined)
         expect(res.body.name).to.equal(entity.name)
-        expect(res.body.icon).to.equal(entity.icon)
 
         done();
       });
   })
 
-  it('GET /api/v1/chapters/:id is successful', (done) => {
+  it('GET /api/v1/inventory/:id is successful', (done) => {
 
-    const entity = chaptersService.create({
-      name: cid(10),
-      icon: cid(10)
+    const entity = inventoryService.create({
+      name: cid(10).toUpperCase(),
     })
 
-    app.get(`/api/v1/chapters/${entity._id}`)
+
+    app.get(`/api/v1/inventory/${entity._id}`)
       .end((err, res) => {
 
         expect(res.statusCode).to.equal(200)
@@ -62,18 +60,17 @@ describe('ChapterRESTController', () => {
       });
   })
 
-  it('PUT /api/v1/chapters/:id is successful', (done) => {
+  it('PUT /api/v1/inventory/:id is successful', (done) => {
 
-    const entity = chaptersService.create({
-      name: cid(10),
-      icon: cid(20),
+    const entity = inventoryService.create({
+      name: cid(10).toUpperCase(),
     })
 
     const changes = {
-      name: cid(12)
+      name: cid(12).toUpperCase()
     }
 
-    app.put(`/api/v1/chapters/${entity._id}`)
+    app.put(`/api/v1/inventory/${entity._id}`)
       .type('application/json')
       .send(JSON.stringify(changes))
       .end((err, res) => {
@@ -85,14 +82,13 @@ describe('ChapterRESTController', () => {
       });
   })
 
-  it('DELETE /api/v1/chapters/:id is successful', (done) => {
+  it('DELETE /api/v1/inventory/:id is successful', (done) => {
 
-    const entity = chaptersService.create({
-      name: cid(10),
-      icon: cid(20),
+    const entity = inventoryService.create({
+      name: cid(10).toUpperCase(),
     })
 
-    app.del(`/api/v1/chapters/${entity._id}`)
+    app.del(`/api/v1/inventory/${entity._id}`)
       .end((err, res) => {
 
         expect(res.statusCode).to.equal(204)

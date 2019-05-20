@@ -13,8 +13,12 @@ chai.use(chaiHttp);
 db.connect()
 
 module.exports = {
-  tearDown: () => {},
-  boot: () => chai.request(server),
+  tearDown: (done) => {
+    done()
+  },
+  boot: () => {
+    return chai.request(server)
+  },
   server,
   db,
   expect: chai.expect

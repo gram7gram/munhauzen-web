@@ -1,4 +1,5 @@
 const express = require('express');
+const inventoryService = require('../services/InventoryService')
 const Inventory = require('../../database/model/Inventory').Inventory;
 const checkId = require('../services/RequestParamsValidator').checkId
 const router = new express.Router();
@@ -39,20 +40,10 @@ router.get('/inventory/:id', checkId, async (req, res) => {
 router.post('/inventory', async (req, res) => {
 
   try {
-    const entity = new Inventory(req.body)
 
-    const validator = entity.validateSync();
-    if (validator) {
-      res.status(400).json({
-        message: 'Bad request',
-        errors: validator.errors
-      })
-      return
-    }
+    const entity = inventoryService.create(req.body)
 
-    await entity.save()
-
-    res.status(201).json(entity.toObject())
+    res.status(201).json(entity)
 
   } catch (e) {
     res.status(500).json(e)
@@ -70,18 +61,7 @@ router.put('/inventory/:id', checkId, async (req, res) => {
       return
     }
 
-    entity.set(req.body);
-
-    const validator = entity.validateSync();
-    if (validator) {
-      res.status(400).json({
-        message: 'Bad request',
-        errors: validator.errors
-      })
-      return
-    }
-
-    await entity.update()
+    inventoryService.update(entity, req.body)
 
     res.status(200).json(entity.toObject())
 
@@ -95,7 +75,7 @@ router.delete('/inventory/:id', checkId, async (req, res) => {
 
     await Inventory.deleteOne({_id: req.params.id})
 
-    res.status(201).json(null)
+    res.status(204).json(null)
 
   } catch (e) {
     res.status(500).json(e)

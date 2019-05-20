@@ -60,6 +60,35 @@ describe('ImageRESTController', () => {
       });
   })
 
+  it('GET /api/v1/images/:id is successful', (done) => {
+
+    const entity = imageService.create({
+      name: cid(10),
+      file: cid(20),
+      translations: [
+        {
+          locale: 'ru',
+          description: cid(30),
+          statusTitle: cid(5)
+        },
+        {
+          locale: 'ua',
+          description: cid(30),
+          statusTitle: cid(5)
+        }
+      ]
+    })
+
+
+    app.get(`/api/v1/images/${entity._id}`)
+      .end((err, res) => {
+
+        expect(res.statusCode).to.equal(200)
+
+        done();
+      });
+  })
+
   it('PUT /api/v1/images/:id is successful', (done) => {
 
     const entity = imageService.create({

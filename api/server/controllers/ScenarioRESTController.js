@@ -1,4 +1,5 @@
 const express = require('express');
+const scenarioService = require('../services/ScenarioService')
 const Scenario = require('../../database/model/Scenario').Scenario;
 const checkId = require('../services/RequestParamsValidator').checkId
 const router = new express.Router();
@@ -39,20 +40,10 @@ router.get('/scenario/:id', checkId, async (req, res) => {
 router.post('/scenario', async (req, res) => {
 
   try {
-    const entity = new Scenario(req.body)
 
-    const validator = entity.validateSync();
-    if (validator) {
-      res.status(400).json({
-        message: 'Bad request',
-        errors: validator.errors
-      })
-      return
-    }
+    const entity = scenarioService.create(req.body)
 
-    await entity.save()
-
-    res.status(201).json(entity.toObject())
+    res.status(201).json(entity)
 
   } catch (e) {
     res.status(500).json(e)
@@ -70,18 +61,7 @@ router.put('/scenario/:id', checkId, async (req, res) => {
       return
     }
 
-    entity.set(req.body);
-
-    const validator = entity.validateSync();
-    if (validator) {
-      res.status(400).json({
-        message: 'Bad request',
-        errors: validator.errors
-      })
-      return
-    }
-
-    await entity.update()
+    scenarioService.update(entity, req.body)
 
     res.status(200).json(entity.toObject())
 
@@ -95,7 +75,7 @@ router.delete('/scenario/:id', checkId, async (req, res) => {
 
     await Scenario.deleteOne({_id: req.params.id})
 
-    res.status(201).json(null)
+    res.status(204).json(null)
 
   } catch (e) {
     res.status(500).json(e)

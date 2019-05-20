@@ -17,10 +17,12 @@ const Decision = new mongoose.Schema({
     required: true
   },
   inventoryRequired: {
-    type: [String]
+    type: [String],
+    uppercase: true,
   },
   inventoryAbsent: {
-    type: [String]
+    type: [String],
+    uppercase: true,
   },
 })
 
@@ -37,6 +39,7 @@ const Image = new mongoose.Schema({
   transition: {
     type: String,
     enum: ["FADE_IN"],
+    uppercase: true,
     required: false
   },
 })
@@ -64,11 +67,13 @@ const schema = new mongoose.Schema({
   },
   inventoryAdd: {
     type: String,
+    uppercase: true,
     required: false
   },
   action: {
     type: String,
     enum: ["CLICK", "GOTO"],
+    uppercase: true,
     required: true
   },
   audio: {

@@ -1,4 +1,5 @@
 const express = require('express');
+const chapterService = require('../services/ChapterService')
 const Chapter = require('../../database/model/Chapter').Chapter;
 const checkId = require('../services/RequestParamsValidator').checkId
 const router = new express.Router();
@@ -39,20 +40,10 @@ router.get('/chapters/:id', checkId, async (req, res) => {
 router.post('/chapters', async (req, res) => {
 
   try {
-    const entity = new Chapter(req.body)
 
-    const validator = entity.validateSync();
-    if (validator) {
-      res.status(400).json({
-        message: 'Bad request',
-        errors: validator.errors
-      })
-      return
-    }
+    const entity = chapterService.create(req.body)
 
-    await entity.save()
-
-    res.status(201).json(entity.toObject())
+    res.status(201).json(entity)
 
   } catch (e) {
     res.status(500).json(e)
@@ -70,18 +61,7 @@ router.put('/chapters/:id', checkId, async (req, res) => {
       return
     }
 
-    entity.set(req.body);
-
-    const validator = entity.validateSync();
-    if (validator) {
-      res.status(400).json({
-        message: 'Bad request',
-        errors: validator.errors
-      })
-      return
-    }
-
-    await entity.update()
+    chapterService.update(entity, req.body)
 
     res.status(200).json(entity.toObject())
 
@@ -95,7 +75,7 @@ router.delete('/chapters/:id', checkId, async (req, res) => {
 
     await Chapter.deleteOne({_id: req.params.id})
 
-    res.status(201).json(null)
+    res.status(204).json(null)
 
   } catch (e) {
     res.status(500).json(e)

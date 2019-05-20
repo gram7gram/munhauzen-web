@@ -1,8 +1,8 @@
 const {boot, expect, tearDown} = require('../../WebTestCase')
-const audioService = require('../../../server/services/AudioService')
+const audioFailService = require('../../../server/services/AudioFailService')
 const {cid} = require('../../utils')
 
-describe('AudioRESTController', () => {
+describe('AudioFailRESTController', () => {
 
   let app
 
@@ -12,9 +12,9 @@ describe('AudioRESTController', () => {
 
   afterEach(tearDown)
 
-  it('GET /api/v1/audio is successful', (done) => {
+  it('GET /api/v1/audio-fails is successful', (done) => {
 
-    app.get('/api/v1/audio')
+    app.get('/api/v1/audio-fails')
       .end((err, res) => {
 
         expect(res.statusCode).to.equal(200)
@@ -25,11 +25,12 @@ describe('AudioRESTController', () => {
       });
   })
 
-  it('POST /api/v1/audio is successful', (done) => {
+  it('POST /api/v1/audio-fails is successful', (done) => {
 
     const entity = {
       name: cid(10),
       file: cid(20),
+      audio: cid(20),
       translations: [
         {
           locale: 'ru',
@@ -42,13 +43,14 @@ describe('AudioRESTController', () => {
       ]
     }
 
-    app.post('/api/v1/audio')
+    app.post('/api/v1/audio-fails')
       .type('application/json')
       .send(JSON.stringify(entity))
       .end((err, res) => {
 
         expect(res.statusCode).to.equal(201)
         expect(res.body._id).not.to.equal(undefined)
+        expect(res.body.audio).to.equal(entity.audio)
         expect(res.body.name).to.equal(entity.name)
         expect(res.body.file).to.equal(entity.file)
         expect(res.body.translations).not.to.equal(undefined)
@@ -58,11 +60,12 @@ describe('AudioRESTController', () => {
       });
   })
 
-  it('GET /api/v1/audio/:id is successful', (done) => {
+  it('GET /api/v1/audio-fails/:id is successful', (done) => {
 
-    const entity = audioService.create({
+    const entity = audioFailService.create({
       name: cid(10),
       file: cid(20),
+      audio: cid(20),
       translations: [
         {
           locale: 'ru',
@@ -76,7 +79,7 @@ describe('AudioRESTController', () => {
     })
 
 
-    app.get(`/api/v1/audio/${entity._id}`)
+    app.get(`/api/v1/audio-fails/${entity._id}`)
       .end((err, res) => {
 
         expect(res.statusCode).to.equal(200)
@@ -85,11 +88,12 @@ describe('AudioRESTController', () => {
       });
   })
 
-  it('PUT /api/v1/audio/:id is successful', (done) => {
+  it('PUT /api/v1/audio-fails/:id is successful', (done) => {
 
-    const entity = audioService.create({
+    const entity = audioFailService.create({
       name: cid(10),
       file: cid(20),
+      audio: cid(20),
       translations: [
         {
           locale: 'ru',
@@ -106,7 +110,7 @@ describe('AudioRESTController', () => {
       name: cid(12)
     }
 
-    app.put(`/api/v1/audio/${entity._id}`)
+    app.put(`/api/v1/audio-fails/${entity._id}`)
       .type('application/json')
       .send(JSON.stringify(changes))
       .end((err, res) => {
@@ -118,11 +122,12 @@ describe('AudioRESTController', () => {
       });
   })
 
-  it('DELETE /api/v1/audio/:id is successful', (done) => {
+  it('DELETE /api/v1/audio-fails/:id is successful', (done) => {
 
-    const entity = audioService.create({
+    const entity = audioFailService.create({
       name: cid(10),
       file: cid(20),
+      audio: cid(20),
       translations: [
         {
           locale: 'ru',
@@ -135,7 +140,7 @@ describe('AudioRESTController', () => {
       ]
     })
 
-    app.del(`/api/v1/audio/${entity._id}`)
+    app.del(`/api/v1/audio-fails/${entity._id}`)
       .end((err, res) => {
 
         expect(res.statusCode).to.equal(204)

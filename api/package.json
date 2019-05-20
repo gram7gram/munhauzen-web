@@ -12,7 +12,7 @@
     "morgan": "^1.9.1"
   },
   "scripts": {
-    "start": "node runner.js",
+    "start": "babel-node runner.js",
     "test": "mocha --colors --recursive --exit"
   },
   "eslintConfig": {
