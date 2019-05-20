@@ -2,19 +2,24 @@ const path = require('path');
 const express = require('express');
 const Router = new express.Router();
 
+const indexFile = path.resolve(__dirname + '../../../build/index.html')
+
 const index = (req, res) => {
-  res.status(200).sendFile(path.resolve('../../public/index.html'));
+  res.status(200).sendFile(indexFile);
 }
 
-Router.get('/', index);
+const routes = [
+  '/',
+  '/scenario',
+  '/images',
+  '/audio',
+  '/audio-fails',
+]
 
-Router.get('/scenario', index);
+routes.forEach(route => {
+  Router.get(route, index);
+})
 
-Router.get('/images', index);
-
-Router.get('/audio-fails', index);
-
-Router.get('/*', index);
 
 module.exports = Router;
 
