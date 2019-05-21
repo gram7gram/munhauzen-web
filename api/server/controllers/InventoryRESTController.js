@@ -7,7 +7,7 @@ const router = new express.Router();
 router.get('/inventory', async (req, res) => {
 
   try {
-    const items = await Inventory.find().lean()
+    const items = await Inventory.find().sort({_id: -1}).lean()
 
     res.status(200).json({
       items,

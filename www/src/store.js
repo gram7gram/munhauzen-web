@@ -17,7 +17,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 const initial = {
   App: {
-    locale: 'ru'
+    locale: 'ru',
+    locales: ['ru', 'en', 'ua']
   }
 }
 

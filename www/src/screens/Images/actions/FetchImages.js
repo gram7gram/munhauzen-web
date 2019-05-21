@@ -2,10 +2,9 @@ import axios from 'axios'
 import {
   FETCH_IMAGES_BEFORE, FETCH_IMAGES_FAILURE, FETCH_IMAGES_SUCCESS,
 } from '../actions'
+import parameters from '../../../parameters'
 
-export default filters => (dispatch, getState) => {
-
-  const locale = getState().App.locale
+export default filters => (dispatch) => {
 
   const query = [
 
@@ -18,7 +17,7 @@ export default filters => (dispatch, getState) => {
     }
   })
 
-  axios.get(`${process.env.API_HOST}/api/v1/${locale}/images` + (query.length > 0 ? '?' + query.join('&') : ''))
+  axios.get(`${parameters.apiHost}/api/v1/images` + (query.length > 0 ? '?' + query.join('&') : ''))
     .then(({data}) => {
 
       dispatch({

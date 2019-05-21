@@ -7,7 +7,7 @@ const router = new express.Router();
 router.get('/scenario', async (req, res) => {
 
   try {
-    const items = await Scenario.find().lean()
+    const items = await Scenario.find().sort({_id: -1}).lean()
 
     res.status(200).json({
       items,

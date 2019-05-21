@@ -1,12 +1,10 @@
 
 process.on('unhandledRejection', (reason, p) => {
-  console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
-});
+  console.log('Unhandled Rejection at: Promise', p, 'reason:', reason)
+})
 
-require('dotenv').config({path: `.env`});
+const server = require('./server')
 
-const server = require('./server');
-
-server.listen(process.env.PORT, () => {
+server.listen(80, () => {
   console.log('Server started')
-});
+})

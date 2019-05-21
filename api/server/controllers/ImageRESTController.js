@@ -7,7 +7,7 @@ const router = new express.Router();
 router.get('/images', async (req, res) => {
 
   try {
-    const items = await Image.find().lean()
+    const items = await Image.find().sort({_id: -1}).lean()
 
     res.status(200).json({
       items,

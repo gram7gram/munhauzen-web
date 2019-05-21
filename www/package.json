@@ -10,6 +10,7 @@
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "i18n-js": "^3.2.2",
+    "lodash": "^4.17.11",
     "mocha": "^6.1.4",
     "morgan": "^1.9.1",
     "node-sass": "^4.12.0",
@@ -26,10 +27,10 @@
     "reselect": "^4.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "PORT=3000 react-scripts start",
+    "build:prod": "react-scripts build",
     "test:react": "react-scripts test",
-    "test:server": "mocha --colors --recursive --exit"
+    "test:server": "mocha --colors --recursive --exit tests/server"
   },
   "eslintConfig": {
     "extends": "react-app"

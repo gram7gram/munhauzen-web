@@ -1,13 +1,31 @@
 {
-  "landing": {
-    "title": "Добро пожаловать!",
-    "start_session": "Начать тренировку",
-    "show_more": "Показать еще",
-    "no_more_items": "Больше нету тренировок",
-    "remove_all": "Удалить все"
+  "images": {
+    "title": "Картинки"
   },
-  "rate": {
-    "title": "Оцени меня",
-    "content": "Поделитесь своим мнением о приложении"
+  "image_edit": {
+    "title": "Редакт. картинки",
+    "title_new": "Новая картинка",
+    "name": "Название",
+    "file": "Файл",
+    "type": "Тип картинки",
+    "isAnimation": "Анимация",
+    "isForbidden": "isForbidden",
+    "isBonus": "Бонус",
+    "isSuperBonus": "Супер-бонус",
+    "description": "Описание картинки",
+    "statueTitle": "Описание достижения"
+  },
+  "image_types": {
+    "color": "Заливка",
+    "bonus": "Бонус",
+    "statue": "Достижение"
+  },
+  "placeholders": {
+    "loading": "Загрузка...",
+    "search": "Поиск",
+    "new": "Добавить",
+    "cancel": "Отмена",
+    "remove": "Удалить",
+    "save": "Сохранить"
   }
 }

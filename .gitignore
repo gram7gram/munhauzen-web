@@ -13,6 +13,8 @@ api/.env
 www/package-lock.json
 api/package-lock.json
 
+www/src/parameters.js
+
 docker-compose.yml
 api/env/Dockerfile
 www/env/Dockerfile
