@@ -1,10 +1,30 @@
+@font-face {
+  font-family: BuxtonSketch;
+  src: url('../assets/BuxtonSketch.ttf');
+  font-weight: bold;
+}
+
 @import './bootstrap.scss';
+
+.bg-yellow {
+  background-color: #e2e2bd;
+}
+
+* {
+  font-family: 'BuxtonSketch';
+  font-size: 15pt;
+}
+
+a {
+  color: black
+}
 
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url('../assets/images/p0.jpg') repeat;
 }
 
 code {

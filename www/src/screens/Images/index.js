@@ -91,7 +91,7 @@ class Images extends Component {
 
     const {search} = this.props.Images
 
-    return <div className="container my-2 py-3 bg-white shadow-sm">
+    return <div className="container my-2 py-3 bg-yellow shadow-sm">
       <div className="row">
         <div className="col-12">
           <h1 className="text-center">{i18n.t('images.title')}</h1>

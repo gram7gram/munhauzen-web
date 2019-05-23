@@ -100,7 +100,7 @@ class Inventory extends Component {
 
     const {search, isMenu, isStatue} = this.props.Inventory
 
-    return <div className="container my-2 py-3 bg-white shadow-sm">
+    return <div className="container my-2 py-3 bg-yellow shadow-sm">
       <div className="row">
         <div className="col-12">
           <h1 className="text-center">{i18n.t('inventory.title')}</h1>

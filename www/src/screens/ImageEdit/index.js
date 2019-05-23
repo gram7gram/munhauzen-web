@@ -100,7 +100,7 @@ class ImageEdit extends Component {
 
     const currentTranslation = model.translations[translationTab] || null
 
-    return <div className="container my-2 py-3 bg-white shadow-sm">
+    return <div className="container my-2 py-3 bg-yellow shadow-sm">
       <div className="row">
         <div className="col-12">
           <div className="row">

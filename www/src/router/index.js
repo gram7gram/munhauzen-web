@@ -16,6 +16,8 @@ import Inventory from '../screens/Inventory';
 import InventoryEdit from '../screens/InventoryEdit';
 import Scenario from '../screens/Scenario';
 import ScenarioEdit from '../screens/ScenarioEdit';
+import Chapter from '../screens/Chapter';
+import ChapterEdit from '../screens/ChapterEdit';
 
 export function createRouter() {
   return <BrowserRouter>
@@ -25,6 +27,10 @@ export function createRouter() {
     <Switch>
 
       <Route exact path={Pages.HOME} component={Home}/>
+
+      <Route exact path={Pages.CHAPTERS} component={Chapter}/>
+      <Route exact path={Pages.CHAPTER_CREATE} component={ChapterEdit}/>
+      <Route path={Pages.CHAPTER_EDIT} component={ChapterEdit}/>
 
       <Route exact path={Pages.AUDIO_FAILS} component={AudioFail}/>
       <Route exact path={Pages.AUDIO_FAILS_CREATE} component={AudioFailEdit}/>

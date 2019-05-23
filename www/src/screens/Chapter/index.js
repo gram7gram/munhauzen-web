@@ -8,7 +8,7 @@ import i18n from '../../i18n'
 import Card from './components/Card'
 import {CHANGE_FILTER, FETCH_ITEMS_REQUEST} from './actions'
 
-class AudioFail extends Component {
+class Chapter extends Component {
 
   componentDidMount() {
     this.props.dispatch({
@@ -31,6 +31,15 @@ class AudioFail extends Component {
     })
   }
 
+  changeFilterBool = key => e => {
+    this.props.dispatch({
+      type: CHANGE_FILTER,
+      payload: {
+        [key]: e.target.checked
+      }
+    })
+  }
+
   resetIfEsc = e => {
 
     switch (e.keyCode) {
@@ -38,7 +47,7 @@ class AudioFail extends Component {
         this.props.dispatch({
           type: CHANGE_FILTER,
           payload: {
-            search: null
+            search: ''
           }
         })
 
@@ -47,22 +56,20 @@ class AudioFail extends Component {
 
   renderContent() {
 
-    const {isLoading, items, search} = this.props.AudioFail
+    const {isLoading, items, search} = this.props.Chapter
 
     let displayedItems
 
     if (search) {
 
-      const query = search.toLowerCase()
+      const query = (search || '').toLowerCase()
 
       displayedItems = items.filter(item =>
-        item.name.toLowerCase().indexOf(query) !== -1
-        || !!item.translations.find(trans => trans.description.toLowerCase().indexOf(query) !== -1)
+        (query && item.name.toLowerCase().indexOf(query) !== -1)
       )
     } else {
       displayedItems = items
     }
-
 
     if (displayedItems.length === 0) {
       if (isLoading) {
@@ -71,16 +78,16 @@ class AudioFail extends Component {
         </div>
       } else {
         return <div className="text-center">
-          <h4>{i18n.t('images.not_found_title')}</h4>
-          <p>{i18n.t('images.not_found_footer')}</p>
+          <h4>{i18n.t('placeholders.not_found_title')}</h4>
+          <p>{i18n.t('placeholders.not_found_footer')}</p>
         </div>
       }
     }
 
     return <div className="row no-gutters">
-      {displayedItems.map((fail, key) =>
+      {displayedItems.map((chapter, key) =>
         <div key={key} className="col-12 col-sm-6 col-md-4 col-xl-3">
-          <Card fail={fail}/>
+          <Card chapter={chapter}/>
         </div>
       )}
     </div>
@@ -89,27 +96,32 @@ class AudioFail extends Component {
 
   render() {
 
-    const {search} = this.props.AudioFail
+    const {search } = this.props.Chapter
 
     return <div className="container my-2 py-3 bg-yellow shadow-sm">
       <div className="row">
         <div className="col-12">
-          <h1 className="text-center">{i18n.t('audio_fail.title')}</h1>
+          <h1 className="text-center">{i18n.t('chapter.title')}</h1>
 
-          <div className="row">
+          <div className="row mb-2">
             <div className="col-auto">
-              <Link to={Pages.AUDIO_FAILS_CREATE}
-                    className="btn btn-sm btn-success">{i18n.t('placeholders.new')}</Link>
+              <Link to={Pages.CHAPTER_CREATE}
+                    className="btn btn-sm btn-success mr-1">
+                {i18n.t('placeholders.new')}
+              </Link>
+
             </div>
             <div className="col-auto">
-              <div className="input-group input-group-sm mb-2">
+              <div className="form-inline">
+                <div className="form-group">
 
-                <input type="text"
-                       className="form-control"
-                       value={search || ''}
-                       placeholder={i18n.t('placeholders.search')}
-                       onChange={this.changeFilterString('search')}/>
+                  <input type="text"
+                         className="form-control form-control-sm"
+                         value={search || ''}
+                         placeholder={i18n.t('placeholders.search')}
+                         onChange={this.changeFilterString('search')}/>
 
+                </div>
               </div>
             </div>
           </div>
@@ -121,12 +133,12 @@ class AudioFail extends Component {
   }
 }
 
-AudioFail.propTypes = {
-  AudioFail: PropTypes.any.isRequired
+Chapter.propTypes = {
+  Chapter: PropTypes.any.isRequired
 }
 
 const selectors = createStructuredSelector({
-  AudioFail: store => store.AudioFail
+  Chapter: store => store.Chapter
 })
 
-export default connect(selectors)(AudioFail);
+export default connect(selectors)(Chapter);

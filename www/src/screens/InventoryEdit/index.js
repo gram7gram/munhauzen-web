@@ -51,7 +51,7 @@ class InventoryEdit extends Component {
     const {model} = this.props.InventoryEdit
 
     this.props.dispatch(Remove(model, () => {
-      this.props.history.push(Pages.IMAGES)
+      this.props.history.push(Pages.INVENTORY)
     }))
   }
 
@@ -120,7 +120,7 @@ class InventoryEdit extends Component {
       this.props.inventory.filter(item => model.relatedInventory.indexOf(item._id) !== -1)
       : []
 
-    return <div className="container my-2 py-3 bg-white shadow-sm">
+    return <div className="container my-2 py-3 bg-yellow shadow-sm">
       <div className="row">
         <div className="col-12">
           <div className="row">

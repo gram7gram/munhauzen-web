@@ -22,10 +22,10 @@ class Card extends PureComponent {
     const trans = fail.translations.find(item => item.locale === locale)
 
     return <div className="card mb-2 mr-2">
-      <div className="card-header p-2">
+      <div className="card-header px-2 py-1">
         <Link
           to={Pages.AUDIO_FAILS_EDIT.replace(':id', fail._id)}
-          className="h5 m-0 text-truncate">{fail.name}</Link>
+          className="text-truncate">{fail.name}</Link>
       </div>
       <div className="card-body p-2">
 

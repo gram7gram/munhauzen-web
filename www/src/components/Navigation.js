@@ -6,6 +6,7 @@ import i18n from "../i18n";
 const nav = [
   {value: Pages.HOME, label: i18n.t('navigation.home')},
   {value: Pages.SCENARIO, label: i18n.t('navigation.scenario')},
+  {value: Pages.CHAPTERS, label: i18n.t('navigation.chapter')},
   {value: Pages.IMAGES, label: i18n.t('navigation.images')},
   {value: Pages.AUDIO, label: i18n.t('navigation.audio')},
   {value: Pages.AUDIO_FAILS, label: i18n.t('navigation.audio_fails')},

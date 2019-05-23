@@ -2,13 +2,14 @@
   "navigation": {
     "home": "Главная",
     "scenario": "Сценарий",
+    "chapter": "Главы",
     "audio_fails": "Фейлы",
     "audio": "Аудио",
     "images": "Картинки",
     "inventory": "Инвентарь"
   },
   "home": {
-    "title": "Главная"
+    "title": "Барон Мюнхаузен"
   },
   "scenario": {
     "title": "Сценарий"
@@ -32,6 +33,14 @@
     "relatedInventory": "Набор инвентаря, при котором происходит получение инвентаря",
     "isStatue": "Статуетка",
     "isMenu": "Меню"
+  },
+  "chapter": {
+    "title": "Главы"
+  },
+  "chapter_edit": {
+    "title": "Редакт. главы",
+    "title_new": "Новая глава",
+    "icon": "Картинка"
   },
   "audio": {
     "title": "Аудио"
@@ -80,5 +89,8 @@
     "cancel": "Отмена",
     "remove": "Удалить",
     "save": "Сохранить"
+  },
+  "validation": {
+    "required": "Значение обязательно"
   }
 }

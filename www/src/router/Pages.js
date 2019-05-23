@@ -4,6 +4,10 @@ export const IMAGES = '/images';
 export const IMAGE_CREATE = '/images/new';
 export const IMAGE_EDIT = '/images/:id';
 
+export const CHAPTERS = '/chapters';
+export const CHAPTER_CREATE = '/chapters/new';
+export const CHAPTER_EDIT = '/chapters/:id';
+
 export const SCENARIO = '/scenario';
 export const SCENARIO_CREATE = '/scenario/new';
 export const SCENARIO_EDIT = '/scenario/:id';

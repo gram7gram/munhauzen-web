@@ -91,7 +91,7 @@ class Audio extends Component {
 
     const {search} = this.props.Audio
 
-    return <div className="container my-2 py-3 bg-white shadow-sm">
+    return <div className="container my-2 py-3 bg-yellow shadow-sm">
       <div className="row">
         <div className="col-12">
           <h1 className="text-center">{i18n.t('audio.title')}</h1>

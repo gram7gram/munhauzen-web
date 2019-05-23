@@ -10,32 +10,28 @@ import {createStructuredSelector} from "reselect";
 class Card extends PureComponent {
 
   remove = () => {
-    const {scenario} = this.props
+    const {chapter} = this.props
 
-    this.props.dispatch(Remove(scenario))
+    this.props.dispatch(Remove(chapter))
   }
 
   render() {
 
-    const {scenario, locale} = this.props
-
-    const trans = scenario.translations.find(item => item.locale === locale)
+    const {chapter} = this.props
 
     return <div className="card mb-2 mr-2">
       <div className="card-header px-2 py-1">
         <Link
-          to={Pages.IMAGE_EDIT.replace(':id', scenario._id)}
-          className="text-truncate">{scenario.name}</Link>
+          to={Pages.CHAPTER_EDIT.replace(':id', chapter._id)}
+          className="text-truncate">{chapter.name}</Link>
       </div>
       <div className="card-body p-2">
 
-        {trans
-          ? <p className="text-muted mb-1">{trans.description}</p>
-          : null}
-
-        <button
-          className="btn btn-sm btn-outline-danger"
-          onClick={this.remove}>{i18n.t('placeholders.remove')}</button>
+        <div>
+          <button
+            className="btn btn-sm btn-outline-danger"
+            onClick={this.remove}>{i18n.t('placeholders.remove')}</button>
+        </div>
       </div>
 
     </div>
@@ -43,7 +39,7 @@ class Card extends PureComponent {
 }
 
 Card.propTypes = {
-  scenario: PropTypes.any.isRequired,
+  chapter: PropTypes.any.isRequired,
   locale: PropTypes.any.isRequired,
 }
 

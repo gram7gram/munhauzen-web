@@ -11,6 +11,8 @@ import Scenario from './screens/Scenario/sagas';
 import ScenarioEdit from './screens/ScenarioEdit/sagas';
 import AudioFail from './screens/AudioFail/sagas';
 import AudioFailEdit from './screens/AudioFailEdit/sagas';
+import Chapter from './screens/Chapter/sagas';
+import ChapterEdit from './screens/ChapterEdit/sagas';
 
 export default function* root() {
   yield all([
@@ -25,5 +27,7 @@ export default function* root() {
     fork(InventoryEdit),
     fork(Scenario),
     fork(ScenarioEdit),
+    fork(Chapter),
+    fork(ChapterEdit),
   ]);
 }

@@ -12,6 +12,8 @@ import Inventory from '../screens/Inventory/reducers';
 import InventoryEdit from '../screens/InventoryEdit/reducers';
 import Scenario from '../screens/Scenario/reducers';
 import ScenarioEdit from '../screens/ScenarioEdit/reducers';
+import Chapter from '../screens/Chapter/reducers';
+import ChapterEdit from '../screens/ChapterEdit/reducers';
 
 export default combineReducers({
   App,
@@ -26,4 +28,6 @@ export default combineReducers({
   InventoryEdit,
   Scenario,
   ScenarioEdit,
+  Chapter,
+  ChapterEdit,
 });

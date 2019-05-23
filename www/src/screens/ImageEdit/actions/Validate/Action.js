@@ -10,18 +10,18 @@ export default model => {
 
   if (!model.name) {
     ++validator.count
-    validator.errors.name = i18n.t('validation_required')
+    validator.errors.name = i18n.t('validation.required')
   }
 
   if (!model.file) {
     ++validator.count
-    validator.errors.file = i18n.t('validation_required')
+    validator.errors.file = i18n.t('validation.required')
   }
 
   Object.values(model.translations).forEach(trans => {
     if (!trans.description) {
       ++validator.count
-      validator.errors['description_' + trans.locale] = i18n.t('validation_required')
+      validator.errors['description_' + trans.locale] = i18n.t('validation.required')
     }
   })
 
