@@ -21,7 +21,7 @@ class ImageCard extends PureComponent {
 
     const trans = image.translations.find(item => item.locale === locale)
 
-    return <div className="card mb-2">
+    return <div className="card mb-2 mr-2">
       <div className="card-header p-2">
         <Link
           to={Pages.IMAGE_EDIT.replace(':id', image._id)}

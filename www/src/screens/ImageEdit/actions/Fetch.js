@@ -1,13 +1,13 @@
 import axios from 'axios'
 import {
-  FETCH_IMAGE_BEFORE, FETCH_IMAGE_FAILURE, FETCH_IMAGE_SUCCESS,
+  FETCH_ITEM_BEFORE, FETCH_ITEM_FAILURE, FETCH_ITEM_SUCCESS,
 } from '../actions'
 import parameters from "../../../parameters";
 
 export default id => (dispatch) => {
 
   dispatch({
-    type: FETCH_IMAGE_BEFORE,
+    type: FETCH_ITEM_BEFORE,
     payload: {
       id
     }
@@ -17,7 +17,7 @@ export default id => (dispatch) => {
     .then(({data}) => {
 
       dispatch({
-        type: FETCH_IMAGE_SUCCESS,
+        type: FETCH_ITEM_SUCCESS,
         payload: data
       })
 
@@ -29,7 +29,7 @@ export default id => (dispatch) => {
       }
 
       dispatch({
-        type: FETCH_IMAGE_FAILURE,
+        type: FETCH_ITEM_FAILURE,
         payload: e.message
       })
     })

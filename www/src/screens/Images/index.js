@@ -6,19 +6,19 @@ import {createStructuredSelector} from 'reselect'
 import * as Pages from '../../router/Pages'
 import i18n from '../../i18n'
 import ImageCard from './components/ImageCard'
-import {CHANGE_FILTER, FETCH_IMAGES_REQUEST} from './actions'
+import {CHANGE_FILTER, FETCH_ITEMS_REQUEST} from './actions'
 
 class Images extends Component {
 
   componentDidMount() {
     this.props.dispatch({
-      type: FETCH_IMAGES_REQUEST
+      type: FETCH_ITEMS_REQUEST
     })
 
     document.addEventListener("keydown", this.resetIfEsc, false);
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     document.removeEventListener("keydown", this.resetIfEsc, false);
   }
 
@@ -77,7 +77,7 @@ class Images extends Component {
       }
     }
 
-    return <div className="row">
+    return <div className="row no-gutters">
       {displayedItems.map((image, key) =>
         <div key={key} className="col-12 col-sm-6 col-md-4 col-xl-3">
           <ImageCard image={image}/>
@@ -91,7 +91,7 @@ class Images extends Component {
 
     const {search} = this.props.Images
 
-    return <div className="container">
+    return <div className="container my-2 py-3 bg-white shadow-sm">
       <div className="row">
         <div className="col-12">
           <h1 className="text-center">{i18n.t('images.title')}</h1>

@@ -1,5 +1,5 @@
 import {all, put, select, takeLatest, throttle} from 'redux-saga/effects'
-import {CHANGE, CHANGE_TRANSLATION, FETCH_IMAGE_SUCCESS, VALIDATION_REQUEST} from '../actions'
+import {CHANGE, CHANGE_TRANSLATION, FETCH_ITEM_SUCCESS, VALIDATION_REQUEST} from '../actions'
 import Validate from '../actions/Validate'
 
 function* requestValidation() {
@@ -19,7 +19,7 @@ export default function* sagas() {
 
     throttle(400, [
       CHANGE,
-      FETCH_IMAGE_SUCCESS,
+      FETCH_ITEM_SUCCESS,
       CHANGE_TRANSLATION
     ], requestValidation),
 

@@ -1,23 +1,12 @@
 const mongoose = require('mongoose');
 
-const Translation = new mongoose.Schema({
-  locale: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-})
-
 const schema = new mongoose.Schema({
   name: {
     type: String,
     required: true
   },
   audio: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true
   },
   file: {
@@ -25,8 +14,12 @@ const schema = new mongoose.Schema({
     unique: false,
     required: true
   },
-  translations: {
-    type: [Translation],
+  locale: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
     required: true
   },
 })

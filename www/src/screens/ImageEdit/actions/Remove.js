@@ -5,14 +5,14 @@ import parameters from "../../../parameters";
 export default (model, callback) => (dispatch) => {
 
   dispatch({
-    type: Actions.REMOVE_IMAGE_BEFORE,
+    type: Actions.REMOVE_ITEM_BEFORE,
   })
 
   axios.delete(`${parameters.apiHost}/api/v1/images/${model._id}`)
     .then(() => {
 
       dispatch({
-        type: Actions.REMOVE_IMAGE_SUCCESS,
+        type: Actions.REMOVE_ITEM_SUCCESS,
       })
 
       if (callback) {
@@ -27,7 +27,7 @@ export default (model, callback) => (dispatch) => {
       }
 
       dispatch({
-        type: Actions.REMOVE_IMAGE_FAILURE,
+        type: Actions.REMOVE_ITEM_FAILURE,
         payload: e.message
       })
     })

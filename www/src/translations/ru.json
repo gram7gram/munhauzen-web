@@ -1,4 +1,52 @@
 {
+  "navigation": {
+    "home": "Главная",
+    "scenario": "Сценарий",
+    "audio_fails": "Фейлы",
+    "audio": "Аудио",
+    "images": "Картинки",
+    "inventory": "Инвентарь"
+  },
+  "home": {
+    "title": "Главная"
+  },
+  "scenario": {
+    "title": "Сценарий"
+  },
+  "scenario_edit": {
+    "title": "Редакт. сценарий",
+    "title_new": "Новый сценарий"
+  },
+  "inventory": {
+    "title": "Инвентарь",
+    "isMenuFilter": "Только меню",
+    "isStatueFilter": "Только статуетки",
+    "isMenuBadge": "Меню",
+    "isStatueBadge": "Статуетка"
+  },
+  "inventory_edit": {
+    "title": "Редакт. инвентарь",
+    "title_new": "Новый инвентарь",
+    "statueDescription": "Описание статуетки",
+    "relatedScenario": "Сценарии, при которых происходит получение инвентаря",
+    "relatedInventory": "Набор инвентаря, при котором происходит получение инвентаря",
+    "isStatue": "Статуетка",
+    "isMenu": "Меню"
+  },
+  "audio": {
+    "title": "Аудио"
+  },
+  "audio_edit": {
+    "title": "Редакт. аудио",
+    "title_new": "Новое аудио"
+  },
+  "audio_fail": {
+    "title": "Фейлы"
+  },
+  "audio_fail_edit": {
+    "title": "Редакт. фейла",
+    "title_new": "Новый фейл"
+  },
   "images": {
     "title": "Картинки"
   },
@@ -22,6 +70,11 @@
   },
   "placeholders": {
     "loading": "Загрузка...",
+    "import_file": "Импортировать",
+    "export_file": "Экспортировать",
+    "name": "Название",
+    "not_found_title": "Ничего не найдено",
+    "not_found_footer": "Попробуйте изменить поисковый запрос",
     "search": "Поиск",
     "new": "Добавить",
     "cancel": "Отмена",

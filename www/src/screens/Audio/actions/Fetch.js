@@ -1,27 +1,25 @@
 import axios from 'axios'
 import {
-  FETCH_IMAGES_BEFORE, FETCH_IMAGES_FAILURE, FETCH_IMAGES_SUCCESS,
+  FETCH_ITEMS_BEFORE, FETCH_ITEMS_FAILURE, FETCH_ITEMS_SUCCESS,
 } from '../actions'
 import parameters from '../../../parameters'
 
 export default filters => (dispatch) => {
 
-  const query = [
-
-  ]
+  const query = []
 
   dispatch({
-    type: FETCH_IMAGES_BEFORE,
+    type: FETCH_ITEMS_BEFORE,
     payload: {
       query
     }
   })
 
-  axios.get(`${parameters.apiHost}/api/v1/images` + (query.length > 0 ? '?' + query.join('&') : ''))
+  axios.get(`${parameters.apiHost}/api/v1/audio` + (query.length > 0 ? '?' + query.join('&') : ''))
     .then(({data}) => {
 
       dispatch({
-        type: FETCH_IMAGES_SUCCESS,
+        type: FETCH_ITEMS_SUCCESS,
         payload: data
       })
 
@@ -33,7 +31,7 @@ export default filters => (dispatch) => {
       }
 
       dispatch({
-        type: FETCH_IMAGES_FAILURE,
+        type: FETCH_ITEMS_FAILURE,
         payload: e.message
       })
     })

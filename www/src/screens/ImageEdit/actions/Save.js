@@ -9,7 +9,7 @@ const parseBeforeSubmit = model => {
 
   delete data._id
 
-  data.translations = objectValues(data.translations)
+  data.translations = Object.values(data.translations)
 
   return data
 }
@@ -19,7 +19,7 @@ export default model => (dispatch) => {
   const data = parseBeforeSubmit(model)
 
   dispatch({
-    type: Actions.SAVE_IMAGE_BEFORE,
+    type: Actions.SAVE_BEFORE,
   })
 
   let promise
@@ -33,7 +33,7 @@ export default model => (dispatch) => {
     .then(({data}) => {
 
       dispatch({
-        type: Actions.SAVE_IMAGE_SUCCESS,
+        type: Actions.SAVE_SUCCESS,
         payload: data
       })
 
@@ -45,7 +45,7 @@ export default model => (dispatch) => {
       }
 
       dispatch({
-        type: Actions.SAVE_IMAGE_FAILURE,
+        type: Actions.SAVE_FAILURE,
         payload: e.response.data
       })
     })

@@ -7,7 +7,7 @@ import i18n from '../../i18n'
 import * as Pages from '../../router/Pages'
 import Save from './actions/Save'
 import Remove from './actions/Remove'
-import FetchImage from './actions/FetchImage'
+import Fetch from './actions/Fetch'
 import {CHANGE, CHANGE_TRANSLATION, RESET, SET_TRANSLATION_TAB} from "./actions";
 
 const typeOptions = [
@@ -24,7 +24,7 @@ class ImageEdit extends Component {
     const {locale} = this.props
 
     if (id) {
-      this.props.dispatch(FetchImage(id))
+      this.props.dispatch(Fetch(id))
     }
 
     this.setTab(locale)()
@@ -177,7 +177,7 @@ class ImageEdit extends Component {
             <label>
               <input
                 type="checkbox"
-                value={model.isAnimation}
+                checked={model.isAnimation}
                 onChange={this.changeBool('isAnimation')}/>
               &nbsp;{i18n.t('image_edit.isAnimation')}
             </label>
@@ -188,7 +188,7 @@ class ImageEdit extends Component {
             <label>
               <input
                 type="checkbox"
-                value={model.isForbidden}
+                checked={model.isForbidden}
                 onChange={this.changeBool('isForbidden')}/>
               &nbsp;{i18n.t('image_edit.isForbidden')}
             </label>
@@ -199,7 +199,7 @@ class ImageEdit extends Component {
             <label>
               <input
                 type="checkbox"
-                value={model.isBonus}
+                checked={model.isBonus}
                 onChange={this.changeBool('isBonus')}/>
               &nbsp;{i18n.t('image_edit.isBonus')}
             </label>
@@ -210,7 +210,7 @@ class ImageEdit extends Component {
             <label>
               <input
                 type="checkbox"
-                value={model.isSuperBonus}
+                checked={model.isSuperBonus}
                 onChange={this.changeBool('isSuperBonus')}/>
               &nbsp;{i18n.t('image_edit.isSuperBonus')}
             </label>
