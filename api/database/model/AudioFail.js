@@ -14,6 +14,16 @@ const schema = new mongoose.Schema({
     unique: false,
     required: true
   },
+  isFailMunhauzen: {
+    type: Boolean,
+    default: false,
+    required: true
+  },
+  isFailDaughter: {
+    type: Boolean,
+    default: false,
+    required: true
+  },
   locale: {
     type: String,
     required: true

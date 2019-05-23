@@ -8,26 +8,16 @@ import * as Pages from '../../router/Pages'
 import Save from './actions/Save'
 import Remove from './actions/Remove'
 import Fetch from './actions/Fetch'
-import {CHANGE, CHANGE_TRANSLATION, RESET, SET_TRANSLATION_TAB} from "./actions";
-
-const typeOptions = [
-  {value: 'color', label: i18n.t('image_types.color')},
-  {value: 'bonus', label: i18n.t('image_types.bonus')},
-  {value: 'statue', label: i18n.t('image_types.statue')},
-]
+import {CHANGE, RESET} from "./actions";
 
 class AudioEdit extends Component {
 
   componentDidMount() {
-
     const {id} = this.props.match.params
-    const {locale} = this.props
 
     if (id) {
       this.props.dispatch(Fetch(id))
     }
-
-    this.setTab(locale)()
   }
 
   componentWillUnmount() {
@@ -50,13 +40,6 @@ class AudioEdit extends Component {
     }))
   }
 
-  setTab = payload => () => {
-    this.props.dispatch({
-      type: SET_TRANSLATION_TAB,
-      payload
-    })
-  }
-
   change = (key, value) => {
     this.props.dispatch({
       type: CHANGE,
@@ -66,22 +49,13 @@ class AudioEdit extends Component {
     })
   }
 
-  changeSelect = name => e => this.change(name, e.target.value)
-
-  changeBool = name => e => this.change(name, e.target.checked)
-
   changeString = name => e => this.change(name, e.target.value)
 
-  changeLocaleString = name => e => {
-    const {translationTab} = this.props.AudioEdit
+  changeInt = name => e => {
+    let value = parseInt(e.target.value)
+    if (isNaN(value)) value = 0
 
-    this.props.dispatch({
-      type: CHANGE_TRANSLATION,
-      locale: translationTab,
-      payload: {
-        [name]: e.target.value
-      }
-    })
+    this.change(name, value)
   }
 
   getError = name => {
@@ -95,10 +69,7 @@ class AudioEdit extends Component {
 
   render() {
 
-    const {locales} = this.props
-    const {model, translationTab, isLoading, isValid, serverErrors} = this.props.AudioEdit
-
-    const currentTranslation = model.translations[translationTab] || null
+    const {model, isLoading, isValid, serverErrors} = this.props.AudioEdit
 
     return <div className="container my-2 py-3 bg-yellow shadow-sm">
       <div className="row">
@@ -138,9 +109,8 @@ class AudioEdit extends Component {
 
         <div className="col-12">
 
-
           <div className="form-group">
-            <label>{i18n.t('image_edit.name')}</label>
+            <label>{i18n.t('placeholders.name')}</label>
             <input
               type="text"
               className="form-control form-control-sm"
@@ -150,7 +120,7 @@ class AudioEdit extends Component {
           </div>
 
           <div className="form-group">
-            <label>{i18n.t('image_edit.file')}</label>
+            <label>{i18n.t('placeholders.file')}</label>
             <input
               type="text"
               className="form-control form-control-sm"
@@ -160,89 +130,16 @@ class AudioEdit extends Component {
           </div>
 
           <div className="form-group">
-            <label>{i18n.t('image_edit.type')}</label>
-            <select
+            <label>{i18n.t('audio_edit.duration')}</label>
+            <input
+              type="number"
+              min={0}
+              step={1}
               className="form-control form-control-sm"
-              value={model.type || -1}
-              onChange={this.changeSelect('type')}>
-              <option value={-1}>...</option>
-              {typeOptions.map((type, key) =>
-                <option key={key} value={type.value}>{type.label}</option>
-              )}
-            </select>
-            {this.getError('type')}
+              value={model.duration || ''}
+              onChange={this.changeInt('duration')}/>
+            {this.getError('duration')}
           </div>
-
-          <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
-                value={model.isAnimation}
-                onChange={this.changeBool('isAnimation')}/>
-              &nbsp;{i18n.t('image_edit.isAnimation')}
-            </label>
-            {this.getError('isAnimation')}
-          </div>
-
-          <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
-                value={model.isForbidden}
-                onChange={this.changeBool('isForbidden')}/>
-              &nbsp;{i18n.t('image_edit.isForbidden')}
-            </label>
-            {this.getError('isForbidden')}
-          </div>
-
-          <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
-                value={model.isBonus}
-                onChange={this.changeBool('isBonus')}/>
-              &nbsp;{i18n.t('image_edit.isBonus')}
-            </label>
-            {this.getError('isBonus')}
-          </div>
-
-          <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
-                value={model.isSuperBonus}
-                onChange={this.changeBool('isSuperBonus')}/>
-              &nbsp;{i18n.t('image_edit.isSuperBonus')}
-            </label>
-            {this.getError('isSuperBonus')}
-          </div>
-
-          <ul className="nav nav-tabs mb-2">
-            {locales.map((locale, key) =>
-              <li key={key} className="nav-item" onClick={this.setTab(locale)}>
-                <span className={"nav-link" + (translationTab === locale ? " active" : '')}>{locale}</span>
-              </li>
-            )}
-          </ul>
-
-          <div className="form-group">
-            <label>{i18n.t('image_edit.description')}</label>
-            <textarea
-              className="form-control form-control-sm"
-              value={currentTranslation && currentTranslation.description ? currentTranslation.description : ''}
-              onChange={this.changeLocaleString('description')}/>
-            {this.getError('description_' + translationTab)}
-          </div>
-
-          <div className="form-group">
-            <label>{i18n.t('image_edit.statueTitle')}</label>
-            <textarea
-              className="form-control form-control-sm"
-              value={currentTranslation && currentTranslation.statueTitle ? currentTranslation.statueTitle : ''}
-              onChange={this.changeLocaleString('statueTitle')}/>
-            {this.getError('statueTitle_' + translationTab)}
-          </div>
-
 
         </div>
       </div>

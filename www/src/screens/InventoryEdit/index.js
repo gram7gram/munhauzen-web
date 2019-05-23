@@ -180,8 +180,7 @@ class InventoryEdit extends Component {
               options={this.props.scenario.map(item => ({
                 value: item._id,
                 label: item.name
-              }))}
-            />
+              }))}/>
           </div>
 
           <div className="form-group">
@@ -196,8 +195,7 @@ class InventoryEdit extends Component {
               options={this.props.inventory.filter(item => item._id !== model._id).map(item => ({
                 value: item._id,
                 label: item.name
-              }))}
-            />
+              }))}/>
           </div>
 
           <div className="form-group">

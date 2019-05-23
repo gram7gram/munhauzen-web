@@ -47,14 +47,19 @@
   },
   "audio_edit": {
     "title": "Редакт. аудио",
-    "title_new": "Новое аудио"
+    "title_new": "Новое аудио",
+    "duration": "Длительность"
   },
   "audio_fail": {
     "title": "Фейлы"
   },
   "audio_fail_edit": {
     "title": "Редакт. фейла",
-    "title_new": "Новый фейл"
+    "title_new": "Новый фейл",
+    "isFailMunhauzen": "Фейл Мюнхаузена",
+    "isFailDaughter": "Фейл дочери",
+    "locale": "Локаль при которой доступен фейл",
+    "audio": "Аудио для текущего фейла"
   },
   "images": {
     "title": "Картинки"
@@ -82,6 +87,8 @@
     "import_file": "Импортировать",
     "export_file": "Экспортировать",
     "name": "Название",
+    "file": "Файл",
+    "description": "Описание",
     "not_found_title": "Ничего не найдено",
     "not_found_footer": "Попробуйте изменить поисковый запрос",
     "search": "Поиск",

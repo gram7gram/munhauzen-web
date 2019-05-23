@@ -1,5 +1,4 @@
 import {combineReducers} from 'redux';
-import keyBy from 'lodash/keyBy';
 import * as Actions from "../actions";
 
 const _id = (prev = null, action) => {
@@ -53,17 +52,17 @@ const file = (prev = null, action) => {
   }
 }
 
-const type = (prev = null, action) => {
+const audio = (prev = null, action) => {
   switch (action.type) {
     case Actions.CHANGE:
-      if (action.payload.type !== undefined) {
-        return action.payload.type
+      if (action.payload.audio !== undefined) {
+        return action.payload.audio
       }
 
       return prev
     case Actions.SAVE_SUCCESS:
     case Actions.FETCH_ITEM_SUCCESS:
-      return action.payload.type || null
+      return action.payload.audio || null
     case Actions.FETCH_ITEM_BEFORE:
     case Actions.RESET:
       return null
@@ -72,17 +71,74 @@ const type = (prev = null, action) => {
   }
 }
 
-const isAnimation = (prev = false, action) => {
+const locale = (prev = null, action) => {
   switch (action.type) {
     case Actions.CHANGE:
-      if (action.payload.isAnimation !== undefined) {
-        return action.payload.isAnimation
+      if (action.payload.locale !== undefined) {
+        return action.payload.locale
       }
 
       return prev
     case Actions.SAVE_SUCCESS:
     case Actions.FETCH_ITEM_SUCCESS:
-      return action.payload.isAnimation || false
+      return action.payload.locale || null
+    case Actions.FETCH_ITEM_BEFORE:
+    case Actions.RESET:
+      return null
+    default:
+      return prev
+  }
+}
+
+const description = (prev = null, action) => {
+  switch (action.type) {
+    case Actions.CHANGE:
+      if (action.payload.description !== undefined) {
+        return action.payload.description
+      }
+
+      return prev
+    case Actions.SAVE_SUCCESS:
+    case Actions.FETCH_ITEM_SUCCESS:
+      return action.payload.description || null
+    case Actions.FETCH_ITEM_BEFORE:
+    case Actions.RESET:
+      return null
+    default:
+      return prev
+  }
+}
+
+const duration = (prev = 0, action) => {
+  switch (action.type) {
+    case Actions.CHANGE:
+      if (action.payload.duration !== undefined) {
+        return action.payload.duration
+      }
+
+      return prev
+    case Actions.SAVE_SUCCESS:
+    case Actions.FETCH_ITEM_SUCCESS:
+      return action.payload.duration || 0
+    case Actions.FETCH_ITEM_BEFORE:
+    case Actions.RESET:
+      return 0
+    default:
+      return prev
+  }
+}
+
+const isFailMunhauzen = (prev = false, action) => {
+  switch (action.type) {
+    case Actions.CHANGE:
+      if (action.payload.isFailMunhauzen !== undefined) {
+        return action.payload.isFailMunhauzen
+      }
+
+      return prev
+    case Actions.SAVE_SUCCESS:
+    case Actions.FETCH_ITEM_SUCCESS:
+      return action.payload.isFailMunhauzen || false
     case Actions.FETCH_ITEM_BEFORE:
     case Actions.RESET:
       return false
@@ -91,90 +147,20 @@ const isAnimation = (prev = false, action) => {
   }
 }
 
-const isForbidden = (prev = false, action) => {
+const isFailDaughter = (prev = false, action) => {
   switch (action.type) {
     case Actions.CHANGE:
-      if (action.payload.isForbidden !== undefined) {
-        return action.payload.isForbidden
+      if (action.payload.isFailDaughter !== undefined) {
+        return action.payload.isFailDaughter
       }
 
       return prev
     case Actions.SAVE_SUCCESS:
     case Actions.FETCH_ITEM_SUCCESS:
-      return action.payload.isForbidden || false
+      return action.payload.isFailDaughter || false
     case Actions.FETCH_ITEM_BEFORE:
     case Actions.RESET:
       return false
-    default:
-      return prev
-  }
-}
-
-const isBonus = (prev = false, action) => {
-  switch (action.type) {
-    case Actions.CHANGE:
-      if (action.payload.isBonus !== undefined) {
-        return action.payload.isBonus
-      }
-
-      return prev
-    case Actions.SAVE_SUCCESS:
-    case Actions.FETCH_ITEM_SUCCESS:
-      return action.payload.isBonus || false
-    case Actions.FETCH_ITEM_BEFORE:
-    case Actions.RESET:
-      return false
-    default:
-      return prev
-  }
-}
-const isSuperBonus = (prev = false, action) => {
-  switch (action.type) {
-    case Actions.CHANGE:
-      if (action.payload.isSuperBonus !== undefined) {
-        return action.payload.isSuperBonus
-      }
-
-      return prev
-    case Actions.SAVE_SUCCESS:
-    case Actions.FETCH_ITEM_SUCCESS:
-      return action.payload.isSuperBonus || false
-    case Actions.FETCH_ITEM_BEFORE:
-    case Actions.RESET:
-      return false
-    default:
-      return prev
-  }
-}
-
-
-const translations = (prev = {}, action) => {
-  switch (action.type) {
-    case Actions.CHANGE_TRANSLATION:
-
-      const {locale} = action
-
-      const state = {...prev}
-
-      if (state[locale] === undefined) {
-        state[locale] = {locale}
-      }
-
-      state[locale] = {
-        ...state[locale],
-        ...action.payload
-      }
-
-      return state
-    case Actions.SAVE_SUCCESS:
-    case Actions.FETCH_ITEM_SUCCESS:
-      return action.payload.translations
-        ? keyBy(action.payload.translations, 'locale')
-        : {}
-
-    case Actions.FETCH_ITEM_BEFORE:
-    case Actions.RESET:
-      return {}
     default:
       return prev
   }
@@ -182,12 +168,12 @@ const translations = (prev = {}, action) => {
 
 export default combineReducers({
   _id,
+  audio,
   name,
   file,
-  type,
-  isAnimation,
-  isForbidden,
-  isBonus,
-  isSuperBonus,
-  translations,
+  duration,
+  locale,
+  description,
+  isFailMunhauzen,
+  isFailDaughter,
 });

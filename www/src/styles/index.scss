@@ -10,6 +10,16 @@
   background-color: #e2e2bd;
 }
 
+.nav-tabs {
+  border-bottom: none;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  color: black;
+  background: none;
+  border-color: #464413 #464413 #0000;
+}
+
 * {
   font-family: 'BuxtonSketch';
   font-size: 15pt;

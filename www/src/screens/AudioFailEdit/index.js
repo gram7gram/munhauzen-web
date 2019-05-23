@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter, Link} from 'react-router-dom';
+import Select from 'react-select'
 import PropTypes from 'prop-types'
 import {createStructuredSelector} from 'reselect'
 import i18n from '../../i18n'
@@ -8,26 +9,21 @@ import * as Pages from '../../router/Pages'
 import Save from './actions/Save'
 import Remove from './actions/Remove'
 import Fetch from './actions/Fetch'
-import {CHANGE, CHANGE_TRANSLATION, RESET, SET_TRANSLATION_TAB} from "./actions";
-
-const typeOptions = [
-  {value: 'color', label: i18n.t('image_types.color')},
-  {value: 'bonus', label: i18n.t('image_types.bonus')},
-  {value: 'statue', label: i18n.t('image_types.statue')},
-]
+import FetchAudio from '../Audio/actions/Fetch'
+import {CHANGE, RESET} from "./actions";
 
 class AudioFailEdit extends Component {
 
   componentDidMount() {
-
     const {id} = this.props.match.params
-    const {locale} = this.props
 
     if (id) {
       this.props.dispatch(Fetch(id))
     }
 
-    this.setTab(locale)()
+    if (this.props.audio.length === 0) {
+      this.props.dispatch(FetchAudio())
+    }
   }
 
   componentWillUnmount() {
@@ -46,15 +42,8 @@ class AudioFailEdit extends Component {
     const {model} = this.props.AudioFailEdit
 
     this.props.dispatch(Remove(model, () => {
-      this.props.history.push(Pages.AUDIO_FAILS_EDIT)
+      this.props.history.push(Pages.AUDIO_FAILS)
     }))
-  }
-
-  setTab = payload => () => {
-    this.props.dispatch({
-      type: SET_TRANSLATION_TAB,
-      payload
-    })
   }
 
   change = (key, value) => {
@@ -66,22 +55,19 @@ class AudioFailEdit extends Component {
     })
   }
 
-  changeSelect = name => e => this.change(name, e.target.value)
-
   changeBool = name => e => this.change(name, e.target.checked)
 
   changeString = name => e => this.change(name, e.target.value)
 
-  changeLocaleString = name => e => {
-    const {translationTab} = this.props.AudioFailEdit
+  changeInt = name => e => {
+    let value = parseInt(e.target.value)
+    if (isNaN(value)) value = 0
 
-    this.props.dispatch({
-      type: CHANGE_TRANSLATION,
-      locale: translationTab,
-      payload: {
-        [name]: e.target.value
-      }
-    })
+    this.change(name, value)
+  }
+
+  setAudio = selected => {
+    this.change('audio', selected ? selected.value : null)
   }
 
   getError = name => {
@@ -96,22 +82,23 @@ class AudioFailEdit extends Component {
   render() {
 
     const {locales} = this.props
-    const {model, translationTab, isLoading, isValid, serverErrors} = this.props.AudioFailEdit
+    const {model, isLoading, isValid, serverErrors} = this.props.AudioFailEdit
 
-    const currentTranslation = model.translations[translationTab] || null
+    const selectedAudio = model.audio ?
+      this.props.audio.find(item => model.audio === item._id)
+      : null
 
     return <div className="container my-2 py-3 bg-yellow shadow-sm">
       <div className="row">
         <div className="col-12">
           <div className="row">
             <div className="col-12 col-lg-6 text-center text-lg-left">
-              <h1
-                className="h3">{model._id ? i18n.t('audio_fail_edit.title') : i18n.t('audio_fail_edit.title_new')}</h1>
+              <h1 className="h3">{model._id ? i18n.t('audio_fail_edit.title') : i18n.t('audio_fail_edit.title_new')}</h1>
             </div>
             <div className="col-12 col-lg-6 text-center text-lg-right">
 
               <Link
-                to={Pages.AUDIO_FAILS}
+                to={Pages.AUDIO}
                 className="btn btn-sm btn-outline-secondary mr-1">
                 {i18n.t('placeholders.cancel')}
               </Link>
@@ -139,9 +126,22 @@ class AudioFailEdit extends Component {
 
         <div className="col-12">
 
+          <div className="form-group">
+            <label>{i18n.t('audio_fail_edit.audio')}</label>
+            <Select
+              onChange={this.setAudio}
+              value={selectedAudio ? {
+                value: selectedAudio._id,
+                label: selectedAudio.name
+              } : null}
+              options={this.props.audio.map(item => ({
+                value: item._id,
+                label: item.name
+              }))}/>
+          </div>
 
           <div className="form-group">
-            <label>{i18n.t('image_edit.name')}</label>
+            <label>{i18n.t('placeholders.name')}</label>
             <input
               type="text"
               className="form-control form-control-sm"
@@ -151,7 +151,7 @@ class AudioFailEdit extends Component {
           </div>
 
           <div className="form-group">
-            <label>{i18n.t('image_edit.file')}</label>
+            <label>{i18n.t('placeholders.file')}</label>
             <input
               type="text"
               className="form-control form-control-sm"
@@ -161,89 +161,50 @@ class AudioFailEdit extends Component {
           </div>
 
           <div className="form-group">
-            <label>{i18n.t('image_edit.type')}</label>
+            <label>
+              <input
+                type="checkbox"
+                checked={model.isFailMunhauzen}
+                onChange={this.changeBool('isFailMunhauzen')}/>
+              &nbsp;{i18n.t('audio_fail_edit.isFailMunhauzen')}
+            </label>
+            {this.getError('isFailMunhauzen')}
+          </div>
+
+          <div className="form-group">
+            <label>
+              <input
+                type="checkbox"
+                checked={model.isFailDaughter}
+                onChange={this.changeBool('isFailDaughter')}/>
+              &nbsp;{i18n.t('audio_fail_edit.isFailDaughter')}
+            </label>
+            {this.getError('isFailDaughter')}
+          </div>
+
+          <div className="form-group">
+            <label>{i18n.t('audio_fail_edit.locale')}</label>
             <select
               className="form-control form-control-sm"
-              value={model.type || -1}
-              onChange={this.changeSelect('type')}>
+              value={model.locale || -1}
+              onChange={this.changeString('locale')}>
               <option value={-1}>...</option>
-              {typeOptions.map((type, key) =>
-                <option key={key} value={type.value}>{type.label}</option>
+              {locales.map((locale, key) =>
+                <option key={key} value={locale}>{locale}</option>
               )}
             </select>
-            {this.getError('type')}
+            {this.getError('description')}
           </div>
 
           <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
-                value={model.isAnimation}
-                onChange={this.changeBool('isAnimation')}/>
-              &nbsp;{i18n.t('image_edit.isAnimation')}
-            </label>
-            {this.getError('isAnimation')}
-          </div>
-
-          <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
-                value={model.isForbidden}
-                onChange={this.changeBool('isForbidden')}/>
-              &nbsp;{i18n.t('image_edit.isForbidden')}
-            </label>
-            {this.getError('isForbidden')}
-          </div>
-
-          <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
-                value={model.isBonus}
-                onChange={this.changeBool('isBonus')}/>
-              &nbsp;{i18n.t('image_edit.isBonus')}
-            </label>
-            {this.getError('isBonus')}
-          </div>
-
-          <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
-                value={model.isSuperBonus}
-                onChange={this.changeBool('isSuperBonus')}/>
-              &nbsp;{i18n.t('image_edit.isSuperBonus')}
-            </label>
-            {this.getError('isSuperBonus')}
-          </div>
-
-          <ul className="nav nav-tabs mb-2">
-            {locales.map((locale, key) =>
-              <li key={key} className="nav-item" onClick={this.setTab(locale)}>
-                <span className={"nav-link" + (translationTab === locale ? " active" : '')}>{locale}</span>
-              </li>
-            )}
-          </ul>
-
-          <div className="form-group">
-            <label>{i18n.t('image_edit.description')}</label>
-            <textarea
+            <label>{i18n.t('placeholders.description')}</label>
+            <input
+              type="text"
               className="form-control form-control-sm"
-              value={currentTranslation && currentTranslation.description ? currentTranslation.description : ''}
-              onChange={this.changeLocaleString('description')}/>
-            {this.getError('description_' + translationTab)}
+              value={model.description || ''}
+              onChange={this.changeString('description')}/>
+            {this.getError('description')}
           </div>
-
-          <div className="form-group">
-            <label>{i18n.t('image_edit.statueTitle')}</label>
-            <textarea
-              className="form-control form-control-sm"
-              value={currentTranslation && currentTranslation.statueTitle ? currentTranslation.statueTitle : ''}
-              onChange={this.changeLocaleString('statueTitle')}/>
-            {this.getError('statueTitle_' + translationTab)}
-          </div>
-
 
         </div>
       </div>
@@ -254,13 +215,13 @@ class AudioFailEdit extends Component {
 AudioFailEdit.propTypes = {
   AudioFailEdit: PropTypes.any.isRequired,
   match: PropTypes.any.isRequired,
-  locale: PropTypes.any.isRequired,
+  audio: PropTypes.any.isRequired,
   locales: PropTypes.any.isRequired,
 }
 
 const selectors = createStructuredSelector({
   AudioFailEdit: store => store.AudioFailEdit,
-  locale: store => store.App.locale,
+  audio: store => store.Audio.items,
   locales: store => store.App.locales,
 })
 
