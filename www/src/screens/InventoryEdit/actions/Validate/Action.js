@@ -12,13 +12,6 @@ export default model => {
     validator.errors.name = i18n.t('validation.required')
   }
 
-  if (model.relatedScenario.length === 0 && model.relatedInventory.length === 0) {
-    ++validator.count
-    validator.errors.relatedScenario = i18n.t('validation.required')
-    ++validator.count
-    validator.errors.relatedInventory = i18n.t('validation.required')
-  }
-
   const trans = Object.values(model.statueTranslations)
 
   if (model.isStatue && trans.length === 0) {

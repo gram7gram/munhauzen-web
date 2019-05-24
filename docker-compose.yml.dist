@@ -5,6 +5,8 @@ services:
   proxy:
     image: jwilder/nginx-proxy:alpine
     restart: unless-stopped
+    environment:
+      - HTTPS_METHOD=nohttps
     ports:
       - '80:80'
 #      - '443:443'
@@ -18,6 +20,7 @@ services:
   api:
     build: ./api/env
     environment:
+      - HTTPS_METHOD=nohttps
       - VIRTUAL_HOST=munhauzen-api.fingertips.cf
     depends_on:
       - db
@@ -29,6 +32,7 @@ services:
   www:
     build: ./www/env
     environment:
+      - HTTPS_METHOD=nohttps
       - VIRTUAL_HOST=munhauzen.fingertips.cf
     networks:
       - backend

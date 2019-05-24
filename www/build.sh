@@ -1,4 +1,4 @@
-echo "Do not forget to update `parameters.js`..."
+echo "Do not forget to update parameters.js..."
 
 ./npm run build:prod
 
