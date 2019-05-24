@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter, Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types'
 import {createStructuredSelector} from 'reselect'
 import i18n from '../../i18n'
@@ -8,7 +8,7 @@ import * as Pages from '../../router/Pages'
 import Save from './actions/Save'
 import Remove from './actions/Remove'
 import Fetch from './actions/Fetch'
-import {CHANGE, RESET} from "./actions";
+import {CHANGE, CHANGE_TRANSLATION, RESET, SET_TRANSLATION_TAB} from "./actions";
 
 class ChapterEdit extends Component {
 
@@ -19,11 +19,20 @@ class ChapterEdit extends Component {
     if (id) {
       this.props.dispatch(Fetch(id))
     }
+
+    this.setTab(this.props.locale)()
   }
 
   componentWillUnmount() {
     this.props.dispatch({
       type: RESET
+    })
+  }
+
+  setTab = payload => () => {
+    this.props.dispatch({
+      type: SET_TRANSLATION_TAB,
+      payload
     })
   }
 
@@ -52,6 +61,18 @@ class ChapterEdit extends Component {
 
   changeString = name => e => this.change(name, e.target.value)
 
+  changeLocaleString = name => e => {
+    const {translationTab} = this.props.ChapterEdit
+
+    this.props.dispatch({
+      type: CHANGE_TRANSLATION,
+      locale: translationTab,
+      payload: {
+        [name]: e.target.value
+      }
+    })
+  }
+
   getError = name => {
     const {validator} = this.props.ChapterEdit
 
@@ -63,7 +84,11 @@ class ChapterEdit extends Component {
 
   render() {
 
-    const {model, isLoading, isValid, serverErrors} = this.props.ChapterEdit
+    const {locales} = this.props
+    const {model, translationTab, isLoading, isValid, serverErrors} = this.props.ChapterEdit
+
+    const currentTranslation = model.translations !== undefined && model.translations[translationTab]
+      ? model.translations[translationTab] : null
 
     return <div className="container my-2 py-3 bg-yellow shadow-sm">
       <div className="row">
@@ -123,6 +148,23 @@ class ChapterEdit extends Component {
             {this.getError('icon')}
           </div>
 
+          <ul className="nav nav-tabs mb-2">
+            {locales.map((locale, key) =>
+              <li key={key} className="nav-item" onClick={this.setTab(locale)}>
+                <span className={"nav-link" + (translationTab === locale ? " active" : '')}>{locale}</span>
+              </li>
+            )}
+          </ul>
+
+          <div className="form-group">
+            <label>{i18n.t('chapter_edit.description')}</label>
+            <textarea
+              className="form-control form-control-sm"
+              value={currentTranslation && currentTranslation.description ? currentTranslation.description : ''}
+              onChange={this.changeLocaleString('description')}/>
+            {this.getError('description_' + translationTab)}
+          </div>
+
         </div>
       </div>
     </div>
@@ -132,10 +174,14 @@ class ChapterEdit extends Component {
 ChapterEdit.propTypes = {
   ChapterEdit: PropTypes.any.isRequired,
   match: PropTypes.any.isRequired,
+  locale: PropTypes.any.isRequired,
+  locales: PropTypes.any.isRequired,
 }
 
 const selectors = createStructuredSelector({
   ChapterEdit: store => store.ChapterEdit,
+  locale: store => store.App.locale,
+  locales: store => store.App.locales,
 })
 
 export default withRouter(

@@ -5,7 +5,7 @@ import Select from 'react-select'
 import PropTypes from 'prop-types'
 import {createStructuredSelector} from 'reselect'
 import i18n from '../../../i18n'
-import {CHANGE_IMAGE, ADD_IMAGE, REMOVE_IMAGE} from "../actions";
+import {ADD_IMAGE, CHANGE_IMAGE, REMOVE_IMAGE} from "../actions";
 
 class Images extends Component {
 

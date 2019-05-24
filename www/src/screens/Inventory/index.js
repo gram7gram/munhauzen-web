@@ -142,8 +142,8 @@ class Inventory extends Component {
 
                   <label>
                     <input type="checkbox"
-                         checked={isMenu}
-                         onChange={this.changeFilterBool('isMenu')}/>
+                           checked={isMenu}
+                           onChange={this.changeFilterBool('isMenu')}/>
                     &nbsp;{i18n.t('inventory.isMenuFilter')}
                   </label>
 
@@ -152,8 +152,8 @@ class Inventory extends Component {
 
                   <label>
                     <input type="checkbox"
-                         checked={isStatue}
-                         onChange={this.changeFilterBool('isStatue')}/>
+                           checked={isStatue}
+                           onChange={this.changeFilterBool('isStatue')}/>
                     &nbsp;{i18n.t('inventory.isStatueFilter')}
                   </label>
 

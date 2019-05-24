@@ -1,7 +1,5 @@
 import axios from 'axios'
-import {
-  FETCH_ITEM_BEFORE, FETCH_ITEM_FAILURE, FETCH_ITEM_SUCCESS,
-} from '../actions'
+import {FETCH_ITEM_BEFORE, FETCH_ITEM_FAILURE, FETCH_ITEM_SUCCESS,} from '../actions'
 import parameters from "../../../parameters";
 
 export default id => (dispatch) => {

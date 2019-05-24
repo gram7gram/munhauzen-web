@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter, Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import Select from 'react-select'
 import PropTypes from 'prop-types'
 import {createStructuredSelector} from 'reselect'

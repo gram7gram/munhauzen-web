@@ -1,3 +1,13 @@
-export default {
-  apiHost: 'http://munhauzen-api.fingertips.cf'
+const env = process.env.NODE_ENV || 'production'
+
+const config = {
+  development: {
+    apiHost: 'http://0.0.0.0:20000',
+  },
+  production: {
+    apiHost: 'http://185.227.111.144:20001',
+//    apiHost: 'http://munhauzen-api.fingertips.cf',
+  }
 }
+
+export default config[env]

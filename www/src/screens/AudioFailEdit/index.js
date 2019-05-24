@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter, Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import Select from 'react-select'
 import PropTypes from 'prop-types'
 import {createStructuredSelector} from 'reselect'
@@ -86,7 +86,8 @@ class AudioFailEdit extends Component {
         <div className="col-12">
           <div className="row">
             <div className="col-12 col-lg-6 text-center text-lg-left">
-              <h1 className="h3">{model._id ? i18n.t('audio_fail_edit.title') : i18n.t('audio_fail_edit.title_new')}</h1>
+              <h1
+                className="h3">{model._id ? i18n.t('audio_fail_edit.title') : i18n.t('audio_fail_edit.title_new')}</h1>
             </div>
             <div className="col-12 col-lg-6 text-center text-lg-right">
 

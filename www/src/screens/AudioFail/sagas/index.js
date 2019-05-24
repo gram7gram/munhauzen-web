@@ -1,4 +1,4 @@
-import {all, throttle, put} from 'redux-saga/effects';
+import {all, put, throttle} from 'redux-saga/effects';
 import Fetch from "../actions/Fetch";
 
 import {FETCH_ITEMS_REQUEST} from "../actions";

@@ -105,7 +105,7 @@ class Chapter extends Component {
 
   render() {
 
-    const {search } = this.props.Chapter
+    const {search} = this.props.Chapter
 
     return <div className="container my-2 py-3 bg-yellow shadow-sm">
       <div className="row">

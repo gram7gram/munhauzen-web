@@ -39,7 +39,7 @@ class Card extends PureComponent {
       <td>
         <div>{chapter.name}</div>
         {trans
-          ? <div className="small text-muted">{trans.text}</div>
+          ? <div className="small text-muted">{trans.description}</div>
           : null}
       </td>
     </tr>

@@ -1,6 +1,5 @@
 import {convertWeight} from "../Units";
 import moment from "moment";
-import objectValues from "../utils/objectValues";
 
 export const getMetrics = (training, startedAt, completedAt, unit) => {
 
