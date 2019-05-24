@@ -16,7 +16,19 @@
   },
   "scenario_edit": {
     "title": "Редакт. сценарий",
-    "title_new": "Новый сценарий"
+    "title_new": "Новый сценарий",
+    "decision_title": "Развитие сценария",
+    "text": "Содержание кнопки в игре",
+    "image": "Картинка",
+    "images": "Картинки",
+    "audio": "Аудио",
+    "duration": "Длительность, мс",
+    "decisions": "Развитие",
+    "chapter": "Глава",
+    "scenario": "Сценарий",
+    "action": "Действие",
+    "inventoryRequired": "Инвентарь, что обязательно должен игрок иметь",
+    "inventoryAbsent": "Инвентарь, что обязательно игрок не должен иметь"
   },
   "inventory": {
     "title": "Инвентарь",
@@ -58,6 +70,8 @@
     "title_new": "Новый фейл",
     "isFailMunhauzen": "Фейл Мюнхаузена",
     "isFailDaughter": "Фейл дочери",
+    "isFailOpenedOnStart": "Фейл стает доступен при первом запуске",
+    "isFailOpenedOnComplete": "Фейл стает доступен при прохождении книги",
     "locale": "Локаль при которой доступен фейл",
     "audio": "Аудио для текущего фейла"
   },
@@ -71,7 +85,7 @@
     "file": "Файл",
     "type": "Тип картинки",
     "isAnimation": "Анимация",
-    "isForbidden": "isForbidden",
+    "isForbidden": "Скрывать в галерее?",
     "isBonus": "Бонус",
     "isSuperBonus": "Супер-бонус",
     "description": "Описание картинки",

@@ -206,6 +206,39 @@ class AudioFailEdit extends Component {
             {this.getError('description')}
           </div>
 
+          <div className="form-group">
+            <label>
+              <input
+                type="checkbox"
+                checked={model.isFailDaughter}
+                onChange={this.changeBool('isFailDaughter')}/>
+              &nbsp;{i18n.t('audio_fail_edit.isFailDaughter')}
+            </label>
+            {this.getError('isFailDaughter')}
+          </div>
+
+          <div className="form-group">
+            <label>
+              <input
+                type="checkbox"
+                checked={model.isFailOpenedOnStart}
+                onChange={this.changeBool('isFailOpenedOnStart')}/>
+              &nbsp;{i18n.t('audio_fail_edit.isFailOpenedOnStart')}
+            </label>
+            {this.getError('isFailOpenedOnStart')}
+          </div>
+
+          <div className="form-group">
+            <label>
+              <input
+                type="checkbox"
+                checked={model.isFailOpenedOnComplete}
+                onChange={this.changeBool('isFailOpenedOnComplete')}/>
+              &nbsp;{i18n.t('audio_fail_edit.isFailOpenedOnComplete')}
+            </label>
+            {this.getError('isFailOpenedOnComplete')}
+          </div>
+
         </div>
       </div>
     </div>

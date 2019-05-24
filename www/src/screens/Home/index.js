@@ -12,15 +12,26 @@ const images = [
 
 const Home = () => <div className="container my-2 py-3">
   <div className="row">
-    <div className="col-12 text-center">
-      <h1 className="my-3">{i18n.t('home.title')}</h1>
-
+    <div className="col-8 mx-auto">
       <div className="row">
-        <div className="col-6 mx-auto">
-          <img src={images[random.int(0, images.length - 1)]} className="img-fluid"/>
-        </div>
-      </div>
+        <div className="col-6 text-center">
+          <h1 className="my-3">{i18n.t('home.title')}</h1>
 
+          <button className="btn btn-block btn-warning mb-2">
+            <i className="fa fa-upload"/>&nbsp;{i18n.t('placeholders.import_file')}
+          </button>
+
+          <button className="btn btn-block btn-success mb-2">
+            <i className="fa fa-download"/>&nbsp;{i18n.t('placeholders.export_file')}
+          </button>
+        </div>
+
+        <div className="col-6 text-center">
+          <img src={images[random.int(0, images.length - 1)]}
+               className="img-fluid shadow"/>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>

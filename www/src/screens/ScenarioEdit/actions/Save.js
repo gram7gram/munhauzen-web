@@ -1,7 +1,6 @@
 import axios from 'axios'
 import * as Actions from '../actions'
 import parameters from "../../../parameters";
-import objectValues from "../../../utils/objectValues";
 
 const parseBeforeSubmit = model => {
 
@@ -9,6 +8,9 @@ const parseBeforeSubmit = model => {
 
   delete data._id
 
+  data.decisions = Object.values(data.decisions)
+  data.images = Object.values(data.images)
+  data.audio = Object.values(data.audio)
   data.translations = Object.values(data.translations)
 
   return data

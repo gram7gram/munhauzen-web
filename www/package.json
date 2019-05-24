@@ -9,6 +9,7 @@
     "chai-http": "^4.3.0",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
+    "font-awesome": "^4.7.0",
     "i18n-js": "^3.2.2",
     "lodash": "^4.17.11",
     "mocha": "^6.1.4",

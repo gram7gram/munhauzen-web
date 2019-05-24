@@ -1,7 +1,6 @@
 import axios from 'axios'
 import * as Actions from '../actions'
 import parameters from "../../../parameters";
-import objectValues from "../../../utils/objectValues";
 
 const parseBeforeSubmit = model => {
 

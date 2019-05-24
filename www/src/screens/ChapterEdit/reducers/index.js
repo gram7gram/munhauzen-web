@@ -1,7 +1,6 @@
 import {combineReducers} from 'redux';
 import * as Actions from "../actions";
 import model from "./model";
-import objectValues from "../../../utils/objectValues";
 
 const isLoading = (prev = false, action) => {
   switch (action.type) {

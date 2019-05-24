@@ -1,10 +1,10 @@
 import {all, put, select, takeLatest, throttle} from 'redux-saga/effects'
-import {CHANGE, CHANGE_TRANSLATION, FETCH_ITEM_SUCCESS, VALIDATION_REQUEST} from '../actions'
+import * as Actions from '../actions'
 import Validate from '../actions/Validate'
 
 function* requestValidation() {
   yield put({
-    type: VALIDATION_REQUEST
+    type: Actions.VALIDATION_REQUEST
   })
 }
 
@@ -18,13 +18,21 @@ export default function* sagas() {
   yield all([
 
     throttle(400, [
-      CHANGE,
-      FETCH_ITEM_SUCCESS,
-      CHANGE_TRANSLATION
+      Actions.CHANGE,
+      Actions.CHANGE_TRANSLATION,
+      Actions.CHANGE_DECISION,
+      Actions.CHANGE_IMAGE,
+      Actions.CHANGE_AUDIO,
+      Actions.REMOVE_AUDIO,
+      Actions.REMOVE_IMAGE,
+      Actions.REMOVE_DECISION,
+      Actions.ADD_IMAGE,
+      Actions.ADD_AUDIO,
+      Actions.ADD_DECISION,
+      Actions.FETCH_ITEM_SUCCESS,
+      Actions.CHANGE_TRANSLATION,
     ], requestValidation),
 
-    takeLatest([
-      VALIDATION_REQUEST,
-    ], runValidation)
+    takeLatest(Actions.VALIDATION_REQUEST, runValidation)
   ])
 }

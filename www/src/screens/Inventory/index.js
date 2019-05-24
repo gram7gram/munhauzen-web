@@ -107,20 +107,11 @@ class Inventory extends Component {
 
           <div className="row mb-2">
             <div className="col-auto">
+
               <Link to={Pages.INVENTORY_CREATE}
                     className="btn btn-sm btn-success mr-1">
                 {i18n.t('placeholders.new')}
               </Link>
-
-              <button
-                className="btn btn-sm btn-warning mr-1">
-                {i18n.t('placeholders.import_file')}
-              </button>
-
-              <button
-                className="btn btn-sm btn-primary">
-                {i18n.t('placeholders.export_file')}
-              </button>
 
             </div>
             <div className="col-auto">

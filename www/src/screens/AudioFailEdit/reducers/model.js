@@ -166,6 +166,44 @@ const isFailDaughter = (prev = false, action) => {
   }
 }
 
+const isFailOpenedOnStart = (prev = false, action) => {
+  switch (action.type) {
+    case Actions.CHANGE:
+      if (action.payload.isFailOpenedOnStart !== undefined) {
+        return action.payload.isFailOpenedOnStart
+      }
+
+      return prev
+    case Actions.SAVE_SUCCESS:
+    case Actions.FETCH_ITEM_SUCCESS:
+      return action.payload.isFailOpenedOnStart || false
+    case Actions.FETCH_ITEM_BEFORE:
+    case Actions.RESET:
+      return false
+    default:
+      return prev
+  }
+}
+
+const isFailOpenedOnComplete = (prev = false, action) => {
+  switch (action.type) {
+    case Actions.CHANGE:
+      if (action.payload.isFailOpenedOnComplete !== undefined) {
+        return action.payload.isFailOpenedOnComplete
+      }
+
+      return prev
+    case Actions.SAVE_SUCCESS:
+    case Actions.FETCH_ITEM_SUCCESS:
+      return action.payload.isFailOpenedOnComplete || false
+    case Actions.FETCH_ITEM_BEFORE:
+    case Actions.RESET:
+      return false
+    default:
+      return prev
+  }
+}
+
 export default combineReducers({
   _id,
   audio,
@@ -176,4 +214,6 @@ export default combineReducers({
   description,
   isFailMunhauzen,
   isFailDaughter,
+  isFailOpenedOnStart,
+  isFailOpenedOnComplete,
 });

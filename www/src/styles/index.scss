@@ -20,8 +20,15 @@
   border-color: #464413 #464413 #0000;
 }
 
+.nav-link.active {
+  text-decoration: underline;
+}
+
 * {
-  font-family: 'BuxtonSketch';
+  font-family: 'BuxtonSketch', sans-serif;
+}
+
+.nav {
   font-size: 15pt;
 }
 

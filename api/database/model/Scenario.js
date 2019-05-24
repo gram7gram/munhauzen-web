@@ -16,6 +16,12 @@ const Decision = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
+  action: {
+    type: String,
+    enum: ["CLICK", "GOTO"],
+    uppercase: true,
+    required: true
+  },
   inventoryRequired: {
     type: [mongoose.Schema.Types.ObjectId],
     uppercase: true,
@@ -65,22 +71,13 @@ const schema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
-  inventoryAdd: {
-    type: mongoose.Schema.Types.ObjectId,
-    uppercase: true,
+  audio: {
+    type: [Audio],
     required: false
   },
-  action: {
-    type: String,
-    enum: ["CLICK", "GOTO"],
-    uppercase: true,
-    required: true
-  },
-  audio: {
-    type: [Audio]
-  },
   images: {
-    type: [Image]
+    type: [Image],
+    required: false
   },
   decisions: {
     type: [Decision],

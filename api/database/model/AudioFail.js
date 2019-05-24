@@ -19,6 +19,16 @@ const schema = new mongoose.Schema({
     default: false,
     required: true
   },
+  isFailOpenedOnStart: {
+    type: Boolean,
+    default: false,
+    required: true
+  },
+  isFailOpenedOnComplete: {
+    type: Boolean,
+    default: false,
+    required: true
+  },
   isFailDaughter: {
     type: Boolean,
     default: false,
