@@ -33,7 +33,7 @@ services:
     build: ./www/env
     environment:
       - HTTPS_METHOD=nohttps
-      - VIRTUAL_HOST=munhauzen.fingertips.cf
+      - VIRTUAL_HOST=munhauzen.fingertips.cf,fingertips.cf,www.fingertips.cf
     networks:
       - backend
     volumes:

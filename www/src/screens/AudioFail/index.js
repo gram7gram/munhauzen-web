@@ -76,7 +76,7 @@ class AudioFail extends Component {
       } else {
         return <div className="text-center">
           <h4>{i18n.t('placeholders.not_found_title')}</h4>
-          <p>{i18n.t('imagplaceholderses.not_found_footer')}</p>
+          <p>{i18n.t('placeholders.not_found_footer')}</p>
         </div>
       }
     }
