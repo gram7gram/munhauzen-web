@@ -17,19 +17,5 @@ export default model => {
     validator.errors.file = i18n.t('validation.required')
   }
 
-  const trans = Object.values(model.translations)
-
-  if (trans.length === 0) {
-    ++validator.count
-    validator.errors.translations = i18n.t('validation.required')
-  }
-
-  trans.forEach(trans => {
-    if (!trans.description) {
-      ++validator.count
-      validator.errors['description_' + trans.locale] = i18n.t('validation.required')
-    }
-  })
-
   return validator
 }

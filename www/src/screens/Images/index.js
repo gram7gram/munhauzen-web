@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import {createStructuredSelector} from 'reselect'
 import * as Pages from '../../router/Pages'
 import i18n from '../../i18n'
-import ImageCard from './components/ImageCard'
+import Card from './components/Card'
 import {CHANGE_FILTER, FETCH_ITEMS_REQUEST} from './actions'
 
 class Images extends Component {
@@ -63,7 +63,6 @@ class Images extends Component {
       displayedItems = items
     }
 
-
     if (displayedItems.length === 0) {
       if (isLoading) {
         return <div className="text-center">
@@ -71,18 +70,28 @@ class Images extends Component {
         </div>
       } else {
         return <div className="text-center">
-          <h4>{i18n.t('images.not_found_title')}</h4>
-          <p>{i18n.t('images.not_found_footer')}</p>
+          <h4>{i18n.t('placeholders.not_found_title')}</h4>
+          <p>{i18n.t('placeholders.not_found_footer')}</p>
         </div>
       }
     }
 
-    return <div className="row no-gutters">
-      {displayedItems.map((image, key) =>
-        <div key={key} className="col-12 col-sm-6 col-md-4 col-xl-3">
-          <ImageCard image={image}/>
-        </div>
-      )}
+    return <div className="table-responsive">
+      <table className="table table-sm table-hover bg-light">
+        <colgroup>
+          <col width="10%"/>
+        </colgroup>
+        <thead>
+        <tr>
+          <th colSpan={2}>{i18n.t('placeholders.name')}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {displayedItems.map((image, key) =>
+          <Card key={key} image={image}/>
+        )}
+        </tbody>
+      </table>
     </div>
 
   }

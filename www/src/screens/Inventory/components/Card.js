@@ -1,9 +1,9 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
-import i18n from '../../../i18n'
 import * as Pages from "../../../router/Pages";
 import {Link} from "react-router-dom";
+import i18n from "../../../i18n";
 import Remove from "../actions/Remove";
 import {createStructuredSelector} from "reselect";
 
@@ -19,30 +19,32 @@ class Card extends PureComponent {
 
     const {inventory} = this.props
 
-    return <div className="card mb-2 mr-2">
-      <div className="card-header px-2 py-1">
+    return <tr>
+      <td>
         <Link
           to={Pages.INVENTORY_EDIT.replace(':id', inventory._id)}
-          className="text-truncate">{inventory.name}</Link>
-      </div>
-      <div className="card-body p-2">
+          className="btn btn-icon btn-success btn-sm mr-1">
+          <i className="fa fa-pencil"/>
+        </Link>
 
+        <button
+          className="btn btn-icon btn-outline-danger btn-sm"
+          onClick={this.remove}>
+          <i className="fa fa-times"/>
+        </button>
+      </td>
+      <td>{inventory.name}</td>
+      <td>
         {inventory.isMenu
-          ? <div className="badge badge-warning mb-2">{i18n.t('inventory.isMenuBadge')}</div>
+          ? <div className="badge badge-warning">{i18n.t('inventory.isMenuBadge')}</div>
           : null}
-
+      </td>
+      <td>
         {inventory.isStatue
-          ? <div className="badge badge-info mb-2">{i18n.t('inventory.isStatueBadge')}</div>
+          ? <div className="badge badge-info">{i18n.t('inventory.isStatueBadge')}</div>
           : null}
-
-        <div>
-          <button
-            className="btn btn-sm btn-outline-danger"
-            onClick={this.remove}>{i18n.t('placeholders.remove')}</button>
-        </div>
-      </div>
-
-    </div>
+      </td>
+    </tr>
   }
 }
 

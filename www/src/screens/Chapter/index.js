@@ -62,10 +62,10 @@ class Chapter extends Component {
 
     if (search) {
 
-      const query = (search || '').toLowerCase()
+      const query = search.toLowerCase()
 
       displayedItems = items.filter(item =>
-        (query && item.name.toLowerCase().indexOf(query) !== -1)
+        item.name.toLowerCase().indexOf(query) !== -1
       )
     } else {
       displayedItems = items
@@ -84,14 +84,23 @@ class Chapter extends Component {
       }
     }
 
-    return <div className="row no-gutters">
-      {displayedItems.map((chapter, key) =>
-        <div key={key} className="col-12 col-sm-6 col-md-4 col-xl-3">
-          <Card chapter={chapter}/>
-        </div>
-      )}
+    return <div className="table-responsive">
+      <table className="table table-sm table-hover bg-light">
+        <colgroup>
+          <col width="10%"/>
+        </colgroup>
+        <thead>
+        <tr>
+          <th colSpan={2}>{i18n.t('placeholders.name')}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {displayedItems.map((chapter, key) =>
+          <Card key={key} chapter={chapter}/>
+        )}
+        </tbody>
+      </table>
     </div>
-
   }
 
   render() {

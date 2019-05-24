@@ -1,13 +1,12 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
-import i18n from '../../../i18n'
 import * as Pages from "../../../router/Pages";
 import {Link} from "react-router-dom";
 import Remove from "../actions/Remove";
 import {createStructuredSelector} from "reselect";
 
-class ImageCard extends PureComponent {
+class Card extends PureComponent {
 
   remove = () => {
     const {image} = this.props
@@ -19,30 +18,35 @@ class ImageCard extends PureComponent {
 
     const {image, locale} = this.props
 
-    const trans = image.translations.find(item => item.locale === locale)
+    const trans = image.translations !== undefined && image.translations
+      ? image.translations.find(item => item.locale === locale)
+      : null
 
-    return <div className="card mb-2 mr-2">
-      <div className="card-header px-2 py-1">
+    return <tr>
+      <td>
         <Link
           to={Pages.IMAGE_EDIT.replace(':id', image._id)}
-          className="text-truncate">{image.name}</Link>
-      </div>
-      <div className="card-body p-2">
-
-        {trans
-          ? <p className="text-muted mb-1">{trans.description}</p>
-          : null}
+          className="btn btn-icon btn-success btn-sm mr-1">
+          <i className="fa fa-pencil"/>
+        </Link>
 
         <button
-          className="btn btn-sm btn-outline-danger"
-          onClick={this.remove}>{i18n.t('placeholders.remove')}</button>
-      </div>
-
-    </div>
+          className="btn btn-icon btn-outline-danger btn-sm"
+          onClick={this.remove}>
+          <i className="fa fa-times"/>
+        </button>
+      </td>
+      <td>
+        <div>{image.name}</div>
+        {trans
+          ? <div className="small text-muted">{trans.text}</div>
+          : null}
+      </td>
+    </tr>
   }
 }
 
-ImageCard.propTypes = {
+Card.propTypes = {
   image: PropTypes.any.isRequired,
   locale: PropTypes.any.isRequired,
 }
@@ -51,4 +55,4 @@ const selectors = createStructuredSelector({
   locale: store => store.App.locale,
 })
 
-export default connect(selectors)(ImageCard);
+export default connect(selectors)(Card);

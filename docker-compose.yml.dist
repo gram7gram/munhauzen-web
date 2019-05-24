@@ -7,18 +7,18 @@ services:
     restart: unless-stopped
     ports:
       - '80:80'
-      - '443:443'
+#      - '443:443'
     networks:
       - backend
     volumes:
       - '/var/run/docker.sock:/tmp/docker.sock:ro'
-      - '/etc/letsencrypt/live/fingertips.com/fullchain.pem:/etc/nginx/certs/fingertips.com.crt'
-      - '/etc/letsencrypt/live/fingertips.com/privkey.pem:/etc/nginx/certs/fingertips.com.key'
+#      - '/etc/letsencrypt/live/fingertips.com/fullchain.pem:/etc/nginx/certs/fingertips.com.crt'
+#      - '/etc/letsencrypt/live/fingertips.com/privkey.pem:/etc/nginx/certs/fingertips.com.key'
 
   api:
     build: ./api/env
     environment:
-      - VIRTUAL_HOST=munhauzen-api.fingertips.com
+      - VIRTUAL_HOST=munhauzen-api.fingertips.cf
     depends_on:
       - db
     networks:
@@ -29,17 +29,15 @@ services:
   www:
     build: ./www/env
     environment:
-      - VIRTUAL_HOST=munhauzen.fingertips.com
+      - VIRTUAL_HOST=munhauzen.fingertips.cf
     networks:
       - backend
     volumes:
       - './www:/var/www'
 
   db:
-    build: mongo:4.1
+    image: mongo:4
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=~
       - MONGO_INITDB_DATABASE=munhauzen
     networks:
       - backend

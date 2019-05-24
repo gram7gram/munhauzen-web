@@ -86,12 +86,25 @@ class Inventory extends Component {
       }
     }
 
-    return <div className="row no-gutters">
-      {displayedItems.map((inventory, key) =>
-        <div key={key} className="col-12 col-sm-6 col-md-4 col-xl-3">
-          <Card inventory={inventory}/>
-        </div>
-      )}
+    return <div className="table-responsive">
+      <table className="table table-sm table-hover bg-light">
+        <colgroup>
+          <col width="10%"/>
+        </colgroup>
+        <thead>
+        <tr>
+          <th colSpan={2}>{i18n.t('placeholders.name')}</th>
+          <th>{i18n.t('inventory_edit.isMenu')}</th>
+          <th>{i18n.t('inventory_edit.isStatue')}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {displayedItems.map((inventory, key) =>
+          <Card key={key} inventory={inventory}/>
+        )}
+        </tbody>
+      </table>
+
     </div>
 
   }

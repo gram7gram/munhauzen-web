@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
-import i18n from '../../../i18n'
 import * as Pages from "../../../router/Pages";
 import {Link} from "react-router-dom";
 import Remove from "../actions/Remove";
@@ -17,38 +16,54 @@ class Card extends PureComponent {
 
   render() {
 
-    const {fail, locale} = this.props
+    const {fail, locale, audio} = this.props
 
-    const trans = fail.translations.find(item => item.locale === locale)
+    const trans = fail.translations !== undefined && fail.translations
+      ? fail.translations.find(item => item.locale === locale)
+      : null
 
-    return <div className="card mb-2 mr-2">
-      <div className="card-header px-2 py-1">
+    const match = fail.audio
+      ? audio.find(item => item._id === fail.audio)
+      : null
+
+    return <tr>
+      <td>
         <Link
           to={Pages.AUDIO_FAILS_EDIT.replace(':id', fail._id)}
-          className="text-truncate">{fail.name}</Link>
-      </div>
-      <div className="card-body p-2">
-
-        {trans
-          ? <p className="text-muted mb-1">{trans.description}</p>
-          : null}
+          className="btn btn-icon btn-success btn-sm mr-1">
+          <i className="fa fa-pencil"/>
+        </Link>
 
         <button
-          className="btn btn-sm btn-outline-danger"
-          onClick={this.remove}>{i18n.t('placeholders.remove')}</button>
-      </div>
-
-    </div>
+          className="btn btn-icon btn-outline-danger btn-sm"
+          onClick={this.remove}>
+          <i className="fa fa-times"/>
+        </button>
+      </td>
+      <td>
+        <div>{fail.name}</div>
+        {trans
+          ? <div className="small text-muted">{trans.text}</div>
+          : null}
+      </td>
+      <td>
+        {match
+          ? <Link to={Pages.AUDIO_EDIT.replace(':id', match._id)}>{match.name}</Link>
+          : '...'}
+      </td>
+    </tr>
   }
 }
 
 Card.propTypes = {
   fail: PropTypes.any.isRequired,
+  audio: PropTypes.any.isRequired,
   locale: PropTypes.any.isRequired,
 }
 
 const selectors = createStructuredSelector({
   locale: store => store.App.locale,
+  audio: store => store.Audio.items,
 })
 
 export default connect(selectors)(Card);

@@ -60,7 +60,8 @@
   "audio_edit": {
     "title": "Редакт. аудио",
     "title_new": "Новое аудио",
-    "duration": "Длительность"
+    "duration": "Длительность, мс",
+    "audio": "Аудио"
   },
   "audio_fail": {
     "title": "Фейлы"

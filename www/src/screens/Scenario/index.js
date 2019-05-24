@@ -162,6 +162,9 @@ class Scenario extends Component {
 
     return <div className="table-responsive">
       <table className="table table-sm table-hover bg-light">
+        <colgroup>
+          <col width="10%"/>
+        </colgroup>
         <thead>
         <tr>
           <th colSpan={2}>{i18n.t('placeholders.name')}</th>

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {createStructuredSelector} from 'reselect'
 import * as Pages from '../../router/Pages'
 import i18n from '../../i18n'
+import FetchAudio from '../Audio/actions/Fetch'
 import Card from './components/Card'
 import {CHANGE_FILTER, FETCH_ITEMS_REQUEST} from './actions'
 
@@ -16,6 +17,10 @@ class AudioFail extends Component {
     })
 
     document.addEventListener("keydown", this.resetIfEsc, false);
+
+    if (this.props.audio.length === 0) {
+      this.props.dispatch(FetchAudio())
+    }
   }
 
   componentWillUnmount() {
@@ -57,12 +62,11 @@ class AudioFail extends Component {
 
       displayedItems = items.filter(item =>
         item.name.toLowerCase().indexOf(query) !== -1
-        || !!item.translations.find(trans => trans.description.toLowerCase().indexOf(query) !== -1)
+        || (item.description && item.description.toLowerCase().indexOf(query) !== -1)
       )
     } else {
       displayedItems = items
     }
-
 
     if (displayedItems.length === 0) {
       if (isLoading) {
@@ -71,18 +75,29 @@ class AudioFail extends Component {
         </div>
       } else {
         return <div className="text-center">
-          <h4>{i18n.t('images.not_found_title')}</h4>
-          <p>{i18n.t('images.not_found_footer')}</p>
+          <h4>{i18n.t('placeholders.not_found_title')}</h4>
+          <p>{i18n.t('imagplaceholderses.not_found_footer')}</p>
         </div>
       }
     }
 
-    return <div className="row no-gutters">
-      {displayedItems.map((fail, key) =>
-        <div key={key} className="col-12 col-sm-6 col-md-4 col-xl-3">
-          <Card fail={fail}/>
-        </div>
-      )}
+    return <div className="table-responsive">
+      <table className="table table-sm table-hover bg-light">
+        <colgroup>
+          <col width="10%"/>
+        </colgroup>
+        <thead>
+        <tr>
+          <th colSpan={2}>{i18n.t('placeholders.name')}</th>
+          <th>{i18n.t('audio_edit.audio')}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {displayedItems.map((fail, key) =>
+          <Card key={key} fail={fail}/>
+        )}
+        </tbody>
+      </table>
     </div>
 
   }
@@ -122,11 +137,13 @@ class AudioFail extends Component {
 }
 
 AudioFail.propTypes = {
-  AudioFail: PropTypes.any.isRequired
+  AudioFail: PropTypes.any.isRequired,
+  audio: PropTypes.any.isRequired,
 }
 
 const selectors = createStructuredSelector({
-  AudioFail: store => store.AudioFail
+  AudioFail: store => store.AudioFail,
+  audio: store => store.Audio.items,
 })
 
 export default connect(selectors)(AudioFail);

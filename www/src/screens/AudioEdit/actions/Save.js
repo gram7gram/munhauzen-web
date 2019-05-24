@@ -8,8 +8,6 @@ const parseBeforeSubmit = model => {
 
   delete data._id
 
-  data.translations = Object.values(data.translations)
-
   return data
 }
 

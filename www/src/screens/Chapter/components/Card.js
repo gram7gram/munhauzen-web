@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
-import i18n from '../../../i18n'
 import * as Pages from "../../../router/Pages";
 import {Link} from "react-router-dom";
 import Remove from "../actions/Remove";
@@ -17,24 +16,33 @@ class Card extends PureComponent {
 
   render() {
 
-    const {chapter} = this.props
+    const {chapter, locale} = this.props
 
-    return <div className="card mb-2 mr-2">
-      <div className="card-header px-2 py-1">
+    const trans = chapter.translations !== undefined && chapter.translations
+      ? chapter.translations.find(item => item.locale === locale)
+      : null
+
+    return <tr>
+      <td>
         <Link
           to={Pages.CHAPTER_EDIT.replace(':id', chapter._id)}
-          className="text-truncate">{chapter.name}</Link>
-      </div>
-      <div className="card-body p-2">
+          className="btn btn-icon btn-success btn-sm mr-1">
+          <i className="fa fa-pencil"/>
+        </Link>
 
-        <div>
-          <button
-            className="btn btn-sm btn-outline-danger"
-            onClick={this.remove}>{i18n.t('placeholders.remove')}</button>
-        </div>
-      </div>
-
-    </div>
+        <button
+          className="btn btn-icon btn-outline-danger btn-sm"
+          onClick={this.remove}>
+          <i className="fa fa-times"/>
+        </button>
+      </td>
+      <td>
+        <div>{chapter.name}</div>
+        {trans
+          ? <div className="small text-muted">{trans.text}</div>
+          : null}
+      </td>
+    </tr>
   }
 }
 

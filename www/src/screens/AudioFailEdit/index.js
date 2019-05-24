@@ -59,13 +59,6 @@ class AudioFailEdit extends Component {
 
   changeString = name => e => this.change(name, e.target.value)
 
-  changeInt = name => e => {
-    let value = parseInt(e.target.value)
-    if (isNaN(value)) value = 0
-
-    this.change(name, value)
-  }
-
   setAudio = selected => {
     this.change('audio', selected ? selected.value : null)
   }
@@ -98,7 +91,7 @@ class AudioFailEdit extends Component {
             <div className="col-12 col-lg-6 text-center text-lg-right">
 
               <Link
-                to={Pages.AUDIO}
+                to={Pages.AUDIO_FAILS}
                 className="btn btn-sm btn-outline-secondary mr-1">
                 {i18n.t('placeholders.cancel')}
               </Link>
@@ -204,17 +197,6 @@ class AudioFailEdit extends Component {
               value={model.description || ''}
               onChange={this.changeString('description')}/>
             {this.getError('description')}
-          </div>
-
-          <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
-                checked={model.isFailDaughter}
-                onChange={this.changeBool('isFailDaughter')}/>
-              &nbsp;{i18n.t('audio_fail_edit.isFailDaughter')}
-            </label>
-            {this.getError('isFailDaughter')}
           </div>
 
           <div className="form-group">
