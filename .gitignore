@@ -1,8 +1,6 @@
 www/node_modules
 api/node_modules
 
-www/build
-
 .DS_Store
 .idea
 

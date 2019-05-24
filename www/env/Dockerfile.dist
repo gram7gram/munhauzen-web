@@ -2,4 +2,4 @@ FROM keymetrics/pm2:10-alpine
 
 WORKDIR /var/www
 
-CMD ["pm2-runtime", "start", "runner.js"]
+CMD ["pm2-runtime", "start", "runner.js", "--watch"]

@@ -4,5 +4,3 @@ git config --global user.email gram7gram@gmail.com && git config --global user.n
 git checkout -b $1
 
 git pull origin $1
-
-cd www && /npm run build:prod
