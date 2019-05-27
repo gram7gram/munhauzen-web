@@ -19,7 +19,7 @@ const schema = new mongoose.Schema({
   },
   icon: {
     type: String,
-    required: true
+    required: false
   },
   translations: {
     type: [Translation],

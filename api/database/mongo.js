@@ -15,6 +15,7 @@ const connect = (host, opts = {}) => {
 
     //opts.useMongoClient = true
     opts.useNewUrlParser = true
+    opts.useFindAndModify = false
 
     mongoose.connect(host, opts);
 }
