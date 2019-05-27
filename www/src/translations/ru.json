@@ -87,7 +87,7 @@
     "file": "Файл",
     "type": "Тип картинки",
     "isAnimation": "Анимация",
-    "isForbidden": "Скрывать в галерее?",
+    "isHiddenFromGallery": "Скрывать в галерее?",
     "isBonus": "Бонус",
     "isSuperBonus": "Супер-бонус",
     "description": "Описание картинки",

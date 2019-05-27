@@ -30,15 +30,15 @@ const ImportService = (function () {
     }
 
     const handlers = {
-      'chapters': this.parseChapters,
-      'pictures': this.parseImage,
-      'audio_scenario': this.parseAudio,
-      'fails_Eng': this.parseAudioFailEn,
-      'fails_Ru': this.parseAudioFailRu,
-      'fails_Ukr': this.parseAudioFailUa,
-      'inventory (items for game)': this.parseGameInventory,
-      'global_inventory (menu)': this.parseMenuInventory,
-      'statue_inventory (statue, arch)': this.parseStatueInventory,
+      'chapters': this.parseChapters.bind(this),
+      'pictures': this.parseImage.bind(this),
+      'audio_scenario': this.parseAudio.bind(this),
+      'fails_Eng': this.parseAudioFailEn.bind(this),
+      'fails_Ru': this.parseAudioFailRu.bind(this),
+      'fails_Ukr': this.parseAudioFailUa.bind(this),
+      'inventory (items for game)': this.parseGameInventory.bind(this),
+      'global_inventory (menu)': this.parseMenuInventory.bind(this),
+      'statue_inventory (statue, arch)': this.parseStatueInventory.bind(this),
     }
 
     let errors = await Promise.all(Object.keys(handlers).map(async name => {
@@ -49,7 +49,9 @@ const ImportService = (function () {
 
         const result = await handler(workbook.Sheets[name])
 
-        const currentErrors = result.filter(e => e && e.message)
+        const currentErrors = result ? result.filter(e => e && e.message) : []
+
+        console.log(name, currentErrors);
 
         if (currentErrors.length > 0) {
 
@@ -343,10 +345,10 @@ const ImportService = (function () {
     const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
       item.Id_picture !== undefined
       && item.file !== undefined
+      && item.type !== undefined
       && item.isanimation !== undefined
       && item.isforbidden !== undefined
       && (item.description_picture_ua !== undefined || item.description_picture_ru !== undefined || item.description_picture_eng !== undefined)
-      && (item.description_statue_ua !== undefined || item.description_statue_ru !== undefined || item.description_statue_eng !== undefined)
     )
 
     if (data.length === 0) return
@@ -384,9 +386,8 @@ const ImportService = (function () {
         file: item.file.trim(),
         type: item.type.trim(),
         isAnimation: item.isanimation.toLowerCase() === 'true',
-        isForbidden: item.isforbidden.toLowerCase() === 'true',
+        isHiddenFromGallery: item.isforbidden.toLowerCase() === 'true',
         translations
-
       }
 
       let entity = await Image.findOne({name: content.name})
@@ -455,18 +456,6 @@ const ImportService = (function () {
     }))
   }
 
-  Service.prototype.parseAudioFailEn = function (sheet) {
-    return this.parseAudioFail(sheet, 'en')
-  }
-
-  Service.prototype.parseAudioFailRu = function (sheet) {
-    return this.parseAudioFail(sheet, 'ru')
-  }
-
-  Service.prototype.parseAudioFailUa = function (sheet) {
-    return this.parseAudioFail(sheet, 'ua')
-  }
-
   /**
    * Header: Id_audio, file, duration_audio, isfailm, isfaild, isopenedfail, isclosedfail, description_audio
    *
@@ -526,6 +515,18 @@ const ImportService = (function () {
 
       }
     }))
+  }
+
+  Service.prototype.parseAudioFailEn = function (sheet) {
+    return this.parseAudioFail(sheet, 'en')
+  }
+
+  Service.prototype.parseAudioFailRu = function (sheet) {
+    return this.parseAudioFail(sheet, 'ru')
+  }
+
+  Service.prototype.parseAudioFailUa = function (sheet) {
+    return this.parseAudioFail(sheet, 'ua')
   }
 
   return new Service();

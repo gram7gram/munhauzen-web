@@ -91,17 +91,17 @@ const isAnimation = (prev = false, action) => {
   }
 }
 
-const isForbidden = (prev = false, action) => {
+const isHiddenFromGallery = (prev = false, action) => {
   switch (action.type) {
     case Actions.CHANGE:
-      if (action.payload.isForbidden !== undefined) {
-        return action.payload.isForbidden
+      if (action.payload.isHiddenFromGallery !== undefined) {
+        return action.payload.isHiddenFromGallery
       }
 
       return prev
     case Actions.SAVE_SUCCESS:
     case Actions.FETCH_ITEM_SUCCESS:
-      return action.payload.isForbidden || false
+      return action.payload.isHiddenFromGallery || false
     case Actions.FETCH_ITEM_BEFORE:
     case Actions.RESET:
       return false
@@ -109,44 +109,6 @@ const isForbidden = (prev = false, action) => {
       return prev
   }
 }
-
-const isBonus = (prev = false, action) => {
-  switch (action.type) {
-    case Actions.CHANGE:
-      if (action.payload.isBonus !== undefined) {
-        return action.payload.isBonus
-      }
-
-      return prev
-    case Actions.SAVE_SUCCESS:
-    case Actions.FETCH_ITEM_SUCCESS:
-      return action.payload.isBonus || false
-    case Actions.FETCH_ITEM_BEFORE:
-    case Actions.RESET:
-      return false
-    default:
-      return prev
-  }
-}
-const isSuperBonus = (prev = false, action) => {
-  switch (action.type) {
-    case Actions.CHANGE:
-      if (action.payload.isSuperBonus !== undefined) {
-        return action.payload.isSuperBonus
-      }
-
-      return prev
-    case Actions.SAVE_SUCCESS:
-    case Actions.FETCH_ITEM_SUCCESS:
-      return action.payload.isSuperBonus || false
-    case Actions.FETCH_ITEM_BEFORE:
-    case Actions.RESET:
-      return false
-    default:
-      return prev
-  }
-}
-
 
 const translations = (prev = {}, action) => {
   switch (action.type) {
@@ -186,8 +148,6 @@ export default combineReducers({
   file,
   type,
   isAnimation,
-  isForbidden,
-  isBonus,
-  isSuperBonus,
+  isHiddenFromGallery,
   translations,
 });

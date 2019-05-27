@@ -34,15 +34,7 @@ const schema = new mongoose.Schema({
     type: Boolean,
     required: false
   },
-  isForbidden: {
-    type: Boolean,
-    required: false
-  },
-  isBonus: {
-    type: Boolean,
-    required: false
-  },
-  isSuperBonus: {
+  isHiddenFromGallery: {
     type: Boolean,
     required: false
   },

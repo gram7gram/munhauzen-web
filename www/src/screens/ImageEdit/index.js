@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
+import Select from 'react-select'
 import PropTypes from 'prop-types'
 import {createStructuredSelector} from 'reselect'
 import i18n from '../../i18n'
@@ -11,9 +12,9 @@ import Fetch from './actions/Fetch'
 import {CHANGE, CHANGE_TRANSLATION, RESET, SET_TRANSLATION_TAB} from "./actions";
 
 const typeOptions = [
-  {value: 'color', label: i18n.t('image_types.color')},
-  {value: 'bonus', label: i18n.t('image_types.bonus')},
-  {value: 'statue', label: i18n.t('image_types.statue')},
+  {value: 'color', label: 'color'},
+  {value: 'bonus', label: 'bonus'},
+  {value: 'statue', label: 'statue'},
 ]
 
 class ImageEdit extends Component {
@@ -65,6 +66,8 @@ class ImageEdit extends Component {
       }
     })
   }
+
+  setType = selected => this.change('type', selected ? selected.value : null)
 
   changeSelect = name => e => this.change(name, e.target.value)
 
@@ -161,15 +164,13 @@ class ImageEdit extends Component {
 
           <div className="form-group">
             <label>{i18n.t('image_edit.type')}</label>
-            <select
-              className="form-control form-control-sm"
-              value={model.type || -1}
-              onChange={this.changeSelect('type')}>
-              <option value={-1}>...</option>
-              {typeOptions.map((type, key) =>
-                <option key={key} value={type.value}>{type.label}</option>
-              )}
-            </select>
+            <Select
+              value={model.type ? {
+                value: model.type,
+                label: model.type
+              } : null}
+              options={typeOptions}
+              onChange={this.setType}/>
             {this.getError('type')}
           </div>
 
@@ -188,33 +189,11 @@ class ImageEdit extends Component {
             <label>
               <input
                 type="checkbox"
-                checked={model.isForbidden}
-                onChange={this.changeBool('isForbidden')}/>
-              &nbsp;{i18n.t('image_edit.isForbidden')}
+                checked={model.isHiddenFromGallery}
+                onChange={this.changeBool('isHiddenFromGallery')}/>
+              &nbsp;{i18n.t('image_edit.isHiddenFromGallery')}
             </label>
-            {this.getError('isForbidden')}
-          </div>
-
-          <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
-                checked={model.isBonus}
-                onChange={this.changeBool('isBonus')}/>
-              &nbsp;{i18n.t('image_edit.isBonus')}
-            </label>
-            {this.getError('isBonus')}
-          </div>
-
-          <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
-                checked={model.isSuperBonus}
-                onChange={this.changeBool('isSuperBonus')}/>
-              &nbsp;{i18n.t('image_edit.isSuperBonus')}
-            </label>
-            {this.getError('isSuperBonus')}
+            {this.getError('isHiddenFromGallery')}
           </div>
 
           <ul className="nav nav-tabs mb-2">
