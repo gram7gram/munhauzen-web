@@ -1,8 +1,16 @@
 const xlsx = require('xlsx');
+
 const Chapter = require('../../database/model/Chapter').Chapter;
 const Inventory = require('../../database/model/Inventory').Inventory;
+const Audio = require('../../database/model/Audio').Audio;
+const AudioFail = require('../../database/model/AudioFail').AudioFail;
+const Image = require('../../database/model/Image').Image;
+
+const audioService = require('./AudioService');
+const audioFailService = require('./AudioFailService');
 const inventoryService = require('./InventoryService');
 const chapterService = require('./ChapterService');
+const imageService = require('./ImageService');
 
 const ImportService = (function () {
 
@@ -23,6 +31,11 @@ const ImportService = (function () {
 
     const handlers = {
       'chapters': this.parseChapters,
+      'pictures': this.parseImage,
+      'audio_scenario': this.parseAudio,
+      'fails_Eng': this.parseAudioFailEn,
+      'fails_Ru': this.parseAudioFailRu,
+      'fails_Ukr': this.parseAudioFailUa,
       'inventory (items for game)': this.parseGameInventory,
       'global_inventory (menu)': this.parseMenuInventory,
       'statue_inventory (statue, arch)': this.parseStatueInventory,
@@ -313,6 +326,202 @@ const ImportService = (function () {
 
         return {
           message: `Инвентарь ${content.name} содержит ошибки`
+        }
+
+      }
+    }))
+  }
+
+  /**
+   * Header: Id_picture, file, type, description_picture_ua, description_picture_ru, description_picture_eng,
+   * description_statue_ua, description_statue_ru, description_statue_eng, isanimation, isforbidden
+   *
+   * @param sheet
+   */
+  Service.prototype.parseImage = function (sheet) {
+
+    const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
+      item.Id_picture !== undefined
+      && item.file !== undefined
+      && item.isanimation !== undefined
+      && item.isforbidden !== undefined
+      && (item.description_picture_ua !== undefined || item.description_picture_ru !== undefined || item.description_picture_eng !== undefined)
+      && (item.description_statue_ua !== undefined || item.description_statue_ru !== undefined || item.description_statue_eng !== undefined)
+    )
+
+    if (data.length === 0) return
+
+    return Promise.all(data.map(async item => {
+
+      const translations = []
+
+      if (item.description_picture_ua) {
+        translations.push({
+          locale: 'ua',
+          description: item.description_picture_ua,
+          statueTitle: item.description_statue_ua,
+        })
+      }
+
+      if (item.description_picture_ru) {
+        translations.push({
+          locale: 'ru',
+          description: item.description_picture_ru,
+          statueTitle: item.description_statue_ru,
+        })
+      }
+
+      if (item.description_picture_eng) {
+        translations.push({
+          locale: 'en',
+          description: item.description_picture_eng,
+          statueTitle: item.description_statue_eng,
+        })
+      }
+
+      const content = {
+        name: item.Id_picture.trim(),
+        file: item.file.trim(),
+        type: item.type.trim(),
+        isAnimation: item.isanimation.toLowerCase() === 'true',
+        isForbidden: item.isforbidden.toLowerCase() === 'true',
+        translations
+
+      }
+
+      let entity = await Image.findOne({name: content.name})
+
+      try {
+
+        if (!entity) {
+          imageService.create(content)
+        } else {
+          imageService.update(entity, content)
+        }
+
+      } catch (e) {
+
+        return {
+          message: `Картинка ${content.name} содержит ошибки`
+        }
+
+      }
+    }))
+  }
+
+  /**
+   * Header: Id_audio, file, duration_audio
+   *
+   * @param sheet
+   */
+  Service.prototype.parseAudio = function (sheet) {
+
+    const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
+      item.Id_audio !== undefined
+      && item.file !== undefined
+      && item.duration_audio !== undefined
+    )
+
+    if (data.length === 0) return
+
+    return Promise.all(data.map(async item => {
+
+      let duration = parseInt(item.duration_audio);
+      if (isNaN(duration)) duration = 0
+
+      const content = {
+        name: item.Id_audio.trim(),
+        file: item.file.trim(),
+        duration,
+      }
+
+      let entity = await Audio.findOne({name: content.name})
+
+      try {
+
+        if (!entity) {
+          audioService.create(content)
+        } else {
+          audioService.update(entity, content)
+        }
+
+      } catch (e) {
+
+        return {
+          message: `Аудио ${content.name} содержит ошибки`
+        }
+
+      }
+    }))
+  }
+
+  Service.prototype.parseAudioFailEn = function (sheet) {
+    return this.parseAudioFail(sheet, 'en')
+  }
+
+  Service.prototype.parseAudioFailRu = function (sheet) {
+    return this.parseAudioFail(sheet, 'ru')
+  }
+
+  Service.prototype.parseAudioFailUa = function (sheet) {
+    return this.parseAudioFail(sheet, 'ua')
+  }
+
+  /**
+   * Header: Id_audio, file, duration_audio, isfailm, isfaild, isopenedfail, isclosedfail, description_audio
+   *
+   * @param sheet
+   * @param locale
+   */
+  Service.prototype.parseAudioFail = function (sheet, locale) {
+
+    const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
+      item.Id_audio !== undefined
+      && item.file !== undefined
+      && item.duration_audio !== undefined
+      && item.isfailm !== undefined
+      && item.isfaild !== undefined
+      && item.isopenedfail !== undefined
+      && item.isclosedfail !== undefined
+      && item.description_audio !== undefined
+    )
+
+    if (data.length === 0) return
+
+    return Promise.all(data.map(async item => {
+
+      let duration = parseInt(item.duration_audio);
+      if (isNaN(duration)) duration = 0
+
+      const content = {
+        name: item.Id_audio.trim(),
+        file: item.file.trim(),
+        duration,
+        audio: null,
+        isFailOpenedOnStart: item.isopenedfail.toLowerCase() === 'true',
+        isFailOpenedOnComplete: item.isclosedfail.toLowerCase() === 'true',
+        isFailDaughter: item.isfaild.toLowerCase() === 'true',
+        isFailMunhauzen: item.isfailm.toLowerCase() === 'true',
+        locale,
+        description: item.description_audio,
+      }
+
+      content.audio = content.name.split('_fail')[0]
+
+      let entity = await AudioFail.findOne({name: content.name})
+
+      try {
+
+        if (!entity) {
+          audioFailService.create(content)
+        } else {
+          audioFailService.update(entity, content)
+        }
+
+      } catch (e) {
+
+        return {
+          message: `Аудио-фейл ${content.name} содержит ошибки`
         }
 
       }

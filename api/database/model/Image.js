@@ -27,7 +27,7 @@ const schema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: [null, 'color', 'bonus', 'statue'],
+    enum: [null, 'default', 'color', 'bonus', 'statue'],
     required: false
   },
   isAnimation: {

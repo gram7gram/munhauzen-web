@@ -78,7 +78,7 @@ class AudioFailEdit extends Component {
     const {model, isLoading, isValid, serverErrors} = this.props.AudioFailEdit
 
     const selectedAudio = model.audio ?
-      this.props.audio.find(item => model.audio === item._id)
+      this.props.audio.find(item => model.audio === item.name)
       : null
 
     return <div className="container my-2 py-3 bg-yellow shadow-sm">

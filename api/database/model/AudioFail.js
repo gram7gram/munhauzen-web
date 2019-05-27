@@ -6,7 +6,7 @@ const schema = new mongoose.Schema({
     required: true
   },
   audio: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: true
   },
   file: {
