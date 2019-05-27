@@ -7,7 +7,7 @@ const router = new express.Router();
 router.get('/chapters', async (req, res) => {
 
   try {
-    const items = await Chapter.find().sort({_id: -1}).lean()
+    const items = await Chapter.find().sort({name: 'asc'}).lean()
 
     res.status(200).json({
       items,

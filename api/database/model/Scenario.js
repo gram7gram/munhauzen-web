@@ -13,7 +13,7 @@ const Translation = new mongoose.Schema({
 
 const Decision = new mongoose.Schema({
   scenario: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: true
   },
   action: {
@@ -23,19 +23,24 @@ const Decision = new mongoose.Schema({
     required: true
   },
   inventoryRequired: {
-    type: [mongoose.Schema.Types.ObjectId],
+    type: [String],
     uppercase: true,
   },
   inventoryAbsent: {
-    type: [mongoose.Schema.Types.ObjectId],
+    type: [String],
     uppercase: true,
   },
 })
 
 const Image = new mongoose.Schema({
   image: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: true
+  },
+  type: {
+    type: String,
+    uppercase: true,
+    required: false
   },
   duration: {
     type: Number,
@@ -52,7 +57,7 @@ const Image = new mongoose.Schema({
 
 const Audio = new mongoose.Schema({
   audio: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: true
   },
   duration: {
@@ -65,10 +70,11 @@ const Audio = new mongoose.Schema({
 const schema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    unique: true,
+    required: true,
   },
   chapter: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: true
   },
   audio: {

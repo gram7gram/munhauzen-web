@@ -5,12 +5,14 @@ const Inventory = require('../../database/model/Inventory').Inventory;
 const Audio = require('../../database/model/Audio').Audio;
 const AudioFail = require('../../database/model/AudioFail').AudioFail;
 const Image = require('../../database/model/Image').Image;
+const Scenario = require('../../database/model/Scenario').Scenario;
 
 const audioService = require('./AudioService');
 const audioFailService = require('./AudioFailService');
 const inventoryService = require('./InventoryService');
 const chapterService = require('./ChapterService');
 const imageService = require('./ImageService');
+const scenarioService = require('./ScenarioService');
 
 const ImportService = (function () {
 
@@ -39,6 +41,7 @@ const ImportService = (function () {
       'inventory (items for game)': this.parseGameInventory.bind(this),
       'global_inventory (menu)': this.parseMenuInventory.bind(this),
       'statue_inventory (statue, arch)': this.parseStatueInventory.bind(this),
+      'scenario_1': this.parseScenario.bind(this),
     }
 
     let errors = await Promise.all(Object.keys(handlers).map(async name => {
@@ -70,6 +73,134 @@ const ImportService = (function () {
       hasErrors: errors.length > 0,
       errors
     }
+  }
+
+  /**
+   * Header: id_option, id_chapter, description_option_eng, id_audio, id_picture, type_pictures,
+   * duration_picture, Interaction, action, id_decisions, inventory_required, inventory_abscent
+   *
+   * @param sheet
+   */
+  Service.prototype.parseScenario = async function (sheet) {
+
+    const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
+      item.Id_option !== undefined
+    )
+
+    if (data.length === 0) return
+
+    let currentScenario, currentAction
+
+    return await Promise.all(data.map(async item => {
+
+      if (item.Id_option) {
+
+        if (currentScenario) {
+          let entity = await Scenario.findOne({name: currentScenario.name})
+
+          try {
+
+            if (!entity) {
+              scenarioService.create(currentScenario)
+            } else {
+              scenarioService.update(entity, currentScenario)
+            }
+
+          } catch (e) {
+
+            return {
+              message: `Глава ${currentScenario.name} содержит ошибки`
+            }
+
+          }
+        }
+
+
+        const translations = []
+
+        if (item.description_option_eng) {
+          translations.push({
+            locale: 'en',
+            description: item.description_option_eng
+          })
+        }
+
+        if (item.description_option_ru) {
+          translations.push({
+            locale: 'ru',
+            description: item.description_option_ru
+          })
+        }
+
+        if (item.description_option_ua) {
+          translations.push({
+            locale: 'ua',
+            description: item.description_option_ua
+          })
+        }
+
+        currentScenario = {
+          name: item.Id_option.trim(),
+          chapter: item.id_chapter.trim(),
+          interaction: item.interaction ? item.interaction.toUpperCase() : null,
+          decision: [],
+          audio: [],
+          images: [],
+          translations
+        }
+      } else {
+
+        if (item.id_picture) {
+
+          const image = {
+            image: item.id_picture.trim(),
+            duration: 0
+          }
+
+          if (item.duration_picture) {
+            let value = parseInt(item.duration_picture)
+            if (value > 0) {
+              image.duration = value
+            }
+          }
+
+          if (item.type_picture) {
+            const type = item.type_picture.trim()
+            if (type !== 'Empty') {
+              image.type = type.toUpperCase()
+            }
+          }
+
+          currentScenario.images.push(image)
+
+        }
+
+        if (item.id_audio) {
+          const audio = {
+            audio: item.id_audio.trim(),
+            duration: 0
+          }
+
+          currentScenario.audio.push(audio)
+        }
+
+        if (item.id_decision) {
+
+          if (item.action) {
+            currentAction = item.action
+          }
+
+          const decision = {
+            scenario: item.id_decision.trim(),
+            action: currentAction
+          }
+
+          currentScenario.decisions.push(decision)
+        }
+
+      }
+
+    }))
   }
 
   /**

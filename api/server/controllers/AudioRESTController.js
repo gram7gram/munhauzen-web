@@ -7,7 +7,7 @@ const router = new express.Router();
 router.get('/audio', async (req, res) => {
 
   try {
-    const items = await Audio.find().sort({_id: -1}).lean()
+    const items = await Audio.find().sort({name: 'asc'}).lean()
 
     res.status(200).json({
       items,
