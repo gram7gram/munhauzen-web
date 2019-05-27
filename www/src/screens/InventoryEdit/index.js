@@ -112,12 +112,12 @@ class InventoryEdit extends Component {
     const currentTranslation = model.statueTranslations !== undefined && model.statueTranslations[translationTab]
       ? model.statueTranslations[translationTab] : null
 
-    const selectedRelatedScenario = model.relatedScenario.length > 0 ?
-      this.props.scenario.filter(item => model.relatedScenario.indexOf(item._id) !== -1)
+    const selectedRelatedScenario = model.relatedScenario.length > 0
+      ? this.props.scenario.filter(item => model.relatedScenario.indexOf(item.name) !== -1)
       : []
 
-    const selectedRelatedInventory = model.relatedInventory.length > 0 ?
-      this.props.inventory.filter(item => model.relatedInventory.indexOf(item._id) !== -1)
+    const selectedRelatedInventory = model.relatedInventory.length > 0
+      ? this.props.inventory.filter(item => model.relatedInventory.indexOf(item.name) !== -1)
       : []
 
     return <div className="container my-2 py-3 bg-yellow shadow-sm">
@@ -172,6 +172,7 @@ class InventoryEdit extends Component {
             <label>{i18n.t('inventory_edit.relatedScenario')}</label>
             <Select
               isMulti={true}
+              isDisabled={this.props.scenario.length === 0}
               onChange={this.setScenario}
               value={selectedRelatedScenario.map(item => ({
                 value: item._id,
@@ -187,6 +188,7 @@ class InventoryEdit extends Component {
             <label>{i18n.t('inventory_edit.relatedInventory')}</label>
             <Select
               isMulti={true}
+              isDisabled={this.props.inventory.length === 0}
               onChange={this.setInventory}
               value={selectedRelatedInventory.map(item => ({
                 value: item._id,

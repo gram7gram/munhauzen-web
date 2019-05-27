@@ -25,6 +25,7 @@ const schema = new mongoose.Schema({
   },
   isStatue: {
     type: Boolean,
+    default: false,
     required: true
   },
   relatedScenario: {

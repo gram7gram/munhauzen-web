@@ -8,7 +8,11 @@ const parseBeforeSubmit = model => {
 
   delete data._id
 
-  data.statueTranslations = Object.values(data.statueTranslations)
+  if (data.isStatue) {
+    data.statueTranslations = Object.values(data.statueTranslations)
+  } else {
+    delete data.statueTranslations
+  }
 
   return data
 }
