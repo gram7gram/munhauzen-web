@@ -64,7 +64,12 @@ class Card extends PureComponent {
 
             {match
               ? <Link to={Pages.IMAGE_EDIT.replace(':id', match._id)}>{match.name}</Link>
-              : <span className="text-danger">{scenarioImage.image}</span>}
+              : null}
+
+            {!match && scenarioImage.image !== 'Last'
+              ? <span className="text-danger">{scenarioImage.image}</span>
+              : <span>{scenarioImage.image}</span>}
+
           </div>
         })}
       </td>
@@ -81,7 +86,11 @@ class Card extends PureComponent {
 
             {match
               ? <Link to={Pages.AUDIO_EDIT.replace(':id', match._id)}>{match.name}</Link>
-              : <span className="text-danger">{scenarioAudio.audio}</span>}
+              : null}
+
+            {!match && scenarioAudio.audio !== 'Last'
+              ? <span className="text-danger">{scenarioAudio.audio}</span>
+              : <span>{scenarioAudio.audio}</span>}
           </div>
         })}
       </td>
