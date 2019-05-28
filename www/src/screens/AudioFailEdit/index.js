@@ -125,11 +125,11 @@ class AudioFailEdit extends Component {
             <Select
               onChange={this.setAudio}
               value={selectedAudio ? {
-                value: selectedAudio._id,
+                value: selectedAudio.name,
                 label: selectedAudio.name
               } : null}
               options={this.props.audio.map(item => ({
-                value: item._id,
+                value: item.name,
                 label: item.name
               }))}/>
           </div>

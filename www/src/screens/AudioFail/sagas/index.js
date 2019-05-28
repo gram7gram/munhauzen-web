@@ -1,16 +1,11 @@
-import {all, put, throttle} from 'redux-saga/effects';
-import Fetch from "../actions/Fetch";
+import {all, fork} from 'redux-saga/effects';
 
-import {FETCH_ITEMS_REQUEST} from "../actions";
-
-function* fetchItems() {
-  yield put(Fetch())
-}
+import Fetch from './Fetch'
+import Notification from './Notification'
 
 export default function* root() {
   yield all([
-
-    throttle(300, FETCH_ITEMS_REQUEST, fetchItems)
-
+    fork(Fetch),
+    fork(Notification),
   ])
 }

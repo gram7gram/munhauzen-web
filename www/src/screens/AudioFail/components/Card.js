@@ -23,7 +23,7 @@ class Card extends PureComponent {
       : null
 
     const match = fail.audio
-      ? audio.find(item => item._id === fail.audio)
+      ? audio.find(item => item.name === fail.audio)
       : null
 
     return <tr>
@@ -49,7 +49,7 @@ class Card extends PureComponent {
       <td>
         {match
           ? <Link to={Pages.AUDIO_EDIT.replace(':id', match._id)}>{match.name}</Link>
-          : '...'}
+          : <span className="text-danger">{fail.audio}</span>}
       </td>
     </tr>
   }

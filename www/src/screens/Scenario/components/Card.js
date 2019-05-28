@@ -49,7 +49,7 @@ class Card extends PureComponent {
       <td>
         {chapter
           ? <Link to={Pages.CHAPTER_EDIT.replace(':id', chapter._id)}>{chapter.name}</Link>
-          : '-'}
+          : <span className="text-danger">{scenario.chapter}</span>}
       </td>
       <td>
         {scenario.images.map((scenarioImage, key) => {
@@ -64,7 +64,7 @@ class Card extends PureComponent {
 
             {match
               ? <Link to={Pages.IMAGE_EDIT.replace(':id', match._id)}>{match.name}</Link>
-              : '...'}
+              : <span className="text-danger">{scenarioImage.image}</span>}
           </div>
         })}
       </td>
@@ -81,7 +81,7 @@ class Card extends PureComponent {
 
             {match
               ? <Link to={Pages.AUDIO_EDIT.replace(':id', match._id)}>{match.name}</Link>
-              : '...'}
+              : <span className="text-danger">{scenarioAudio.audio}</span>}
           </div>
         })}
       </td>
@@ -114,7 +114,9 @@ class Card extends PureComponent {
 
             &nbsp;-&nbsp;
 
-            <Link to={Pages.SCENARIO_EDIT.replace(':id', decision.scenario)}>{name}</Link>
+            {match
+              ? <Link to={Pages.SCENARIO_EDIT.replace(':id', decision.scenario)}>{name}</Link>
+              : <span className="text-danger">{decision.scenario}</span>}
           </div>
         })}
       </td>

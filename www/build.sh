@@ -1,3 +1,5 @@
 ./npm run build:prod
 
-git add build
+chmod 777 -R ./build
+
+git add ./build

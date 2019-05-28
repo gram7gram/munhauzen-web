@@ -67,7 +67,7 @@ class Audio extends Component {
     const {model} = this.props.ScenarioEdit
 
     const audioOptions = this.props.audio.map(item => ({
-      value: item._id,
+      value: item.name,
       label: item.name
     }))
 
@@ -92,7 +92,7 @@ class Audio extends Component {
           {Object.values(model.audio).map((item, key) => {
 
             const selectedAudio = item.audio
-              ? this.props.audio.find(i => item.audio === i._id)
+              ? this.props.audio.find(i => item.audio === i.name)
               : null
 
             return <div key={key} className="card mb-2">
@@ -111,7 +111,7 @@ class Audio extends Component {
                   </div>
                 </div>
               </div>
-              <div className="card-body p-1">
+              <div className="card-body p-2">
 
                 <div className="row">
                   <div className="col-6">
@@ -120,7 +120,7 @@ class Audio extends Component {
                       <Select
                         onChange={this.setAudio(item.cid)}
                         value={selectedAudio ? {
-                          value: selectedAudio._id,
+                          value: selectedAudio.name,
                           label: selectedAudio.name
                         } : null}
                         options={audioOptions}/>

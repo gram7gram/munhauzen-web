@@ -175,11 +175,11 @@ class InventoryEdit extends Component {
               isDisabled={this.props.scenario.length === 0}
               onChange={this.setScenario}
               value={selectedRelatedScenario.map(item => ({
-                value: item._id,
+                value: item.name,
                 label: item.name
               }))}
-              options={this.props.scenario.map(item => ({
-                value: item._id,
+              options={this.name.scenario.map(item => ({
+                value: item.name,
                 label: item.name
               }))}/>
           </div>
@@ -191,11 +191,11 @@ class InventoryEdit extends Component {
               isDisabled={this.props.inventory.length === 0}
               onChange={this.setInventory}
               value={selectedRelatedInventory.map(item => ({
-                value: item._id,
+                value: item.name,
                 label: item.name
               }))}
-              options={this.props.inventory.filter(item => item._id !== model._id).map(item => ({
-                value: item._id,
+              options={this.props.inventory.filter(item => item.name !== model.name).map(item => ({
+                value: item.name,
                 label: item.name
               }))}/>
           </div>

@@ -82,7 +82,7 @@ class Scenario extends Component {
         }
 
         if (item.chapter) {
-          const match = chapters.find(i => i._id === item.chapter)
+          const match = chapters.find(i => i.name === item.chapter)
           if (match) {
 
             searches.push(match.name)
@@ -97,7 +97,7 @@ class Scenario extends Component {
 
           item.images.forEach(i => {
 
-            const match = images.find(j => j._id === i.image)
+            const match = images.find(j => j.name === i.image)
 
             if (match) {
               searches.push(match.name)
@@ -109,7 +109,7 @@ class Scenario extends Component {
 
           item.audio.forEach(i => {
 
-            const match = audio.find(j => j._id === i.audio)
+            const match = audio.find(j => j.name === i.audio)
             if (match) {
               searches.push(match.name)
             }
@@ -120,7 +120,7 @@ class Scenario extends Component {
 
           item.decisions.forEach(i => {
 
-            const match = items.find(j => j._id === i.scenario)
+            const match = items.find(j => j.name === i.scenario)
             if (match) {
               searches.push(match.name)
 
@@ -131,14 +131,14 @@ class Scenario extends Component {
           })
         }
 
-        strings[item._id] = searches
+        strings[item.name] = searches
       })
 
       const matches = Object.keys(strings).filter(id => {
         return !!strings[id].find(s => s.toLowerCase().indexOf(query) !== -1)
       })
 
-      displayedItems = items.filter(i => matches.indexOf(i._id) !== -1)
+      displayedItems = items.filter(i => matches.indexOf(i.name) !== -1)
 
     } else {
       displayedItems = items

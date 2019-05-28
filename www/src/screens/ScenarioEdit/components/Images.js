@@ -92,7 +92,7 @@ class Images extends Component {
           {Object.values(model.images).map((item, key) => {
 
             const selectedImage = item.image
-              ? this.props.images.find(i => item.image === i._id)
+              ? this.props.images.find(i => item.image === i.name)
               : null
 
             return <div key={key} className="card mb-2">
@@ -111,7 +111,7 @@ class Images extends Component {
                   </div>
                 </div>
               </div>
-              <div className="card-body p-1">
+              <div className="card-body p-2">
 
                 <div className="row">
                   <div className="col-6">
@@ -120,7 +120,7 @@ class Images extends Component {
                       <Select
                         onChange={this.setImage(item.cid)}
                         value={selectedImage ? {
-                          value: selectedImage._id,
+                          value: selectedImage.name,
                           label: selectedImage.name
                         } : null}
                         options={imagesOptions}/>

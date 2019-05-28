@@ -24,7 +24,7 @@ const toScenarioLabel = (scenario, locale) => {
   }
 
   return {
-    value: scenario._id,
+    value: scenario.name,
     label
   }
 }
@@ -109,7 +109,7 @@ class Decisions extends Component {
     const {model} = this.props.ScenarioEdit
 
     const inventoryOptions = this.props.inventory.map(item => ({
-      value: item._id,
+      value: item.name,
       label: item.name
     }))
 
@@ -138,15 +138,15 @@ class Decisions extends Component {
           {Object.values(model.decisions).map((decision, key) => {
 
             const selectedInventory = decision.inventoryRequired
-              ? this.props.inventory.filter(item => decision.inventoryRequired.indexOf(item._id) !== -1)
+              ? this.props.inventory.filter(item => decision.inventoryRequired.indexOf(item.name) !== -1)
               : []
 
             const selectedAbsentInventory = decision.inventoryAbsent
-              ? this.props.inventory.filter(item => decision.inventoryAbsent.indexOf(item._id) !== -1)
+              ? this.props.inventory.filter(item => decision.inventoryAbsent.indexOf(item.name) !== -1)
               : []
 
             const selectedScenario = decision.scenario
-              ? this.props.scenario.find(item => decision.scenario === item._id)
+              ? this.props.scenario.find(item => decision.scenario === item.name)
               : null
 
             return <div key={key} className="card mb-2">
@@ -165,7 +165,7 @@ class Decisions extends Component {
                   </div>
                 </div>
               </div>
-              <div className="card-body p-1">
+              <div className="card-body p-2">
 
                 <div className="row">
                   <div className="col-6">
@@ -202,7 +202,7 @@ class Decisions extends Component {
                         isMulti={true}
                         onChange={this.setInventoryRequired(decision.cid)}
                         value={selectedInventory.map(item => ({
-                          value: item._id,
+                          value: item.name,
                           label: item.name
                         }))}
                         options={inventoryOptions}/>
@@ -217,7 +217,7 @@ class Decisions extends Component {
                         isMulti={true}
                         onChange={this.setInventoryAbsent(decision.cid)}
                         value={selectedAbsentInventory.map(item => ({
-                          value: item._id,
+                          value: item.name,
                           label: item.name
                         }))}
                         options={inventoryOptions}/>

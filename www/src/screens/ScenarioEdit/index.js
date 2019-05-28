@@ -125,7 +125,7 @@ class ScenarioEdit extends Component {
     const currentTranslation = model.translations[translationTab] || null
 
     const selectedChapter = model.chapter
-      ? this.props.chapters.find(item => item._id === model.chapter)
+      ? this.props.chapters.find(item => item.name === model.chapter)
       : null
 
     return <div>
@@ -180,11 +180,11 @@ class ScenarioEdit extends Component {
               <Select
                 onChange={this.setChapter}
                 value={selectedChapter ? {
-                  value: selectedChapter._id,
+                  value: selectedChapter.name,
                   label: selectedChapter.name
                 } : null}
                 options={this.props.chapters.map(item => ({
-                  value: item._id,
+                  value: item.name,
                   label: item.name
                 }))}/>
               {this.getError('chapter')}

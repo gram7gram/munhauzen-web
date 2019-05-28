@@ -75,11 +75,6 @@ export default model => {
       ++validator.count
       validator.errors['action_' + item.cid] = i18n.t('validation.required')
     }
-
-    if (!item.inventoryRequired || item.inventoryRequired.length === 0) {
-      ++validator.count
-      validator.errors['inventoryRequired_' + item.cid] = i18n.t('validation.required')
-    }
   })
 
   return validator

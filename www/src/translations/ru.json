@@ -8,6 +8,10 @@
     "images": "Картинки",
     "inventory": "Инвентарь"
   },
+  "notifications": {
+    "success_title": "Сохранено!",
+    "error_title": "Произошла ошибка..."
+  },
   "home": {
     "title": "Барон Мюнхаузен"
   },
