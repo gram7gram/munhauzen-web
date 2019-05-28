@@ -1,5 +1,5 @@
 const {boot, expect, tearDown} = require('../../WebTestCase')
-const inventoryService = require('../../../server/services/InventoryService')
+const inventoryService = require('../../../src/server/services/InventoryService')
 const {cid} = require('../../utils')
 
 describe('InventoryRESTController', () => {

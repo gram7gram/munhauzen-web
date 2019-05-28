@@ -1,5 +1,5 @@
 const {boot, expect, tearDown} = require('../../WebTestCase')
-const scenarioService = require('../../../server/services/ScenarioService')
+const scenarioService = require('../../../src/server/services/ScenarioService')
 const {cid} = require('../../utils')
 
 describe('ScenarioRESTController', () => {

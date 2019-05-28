@@ -17,4 +17,6 @@ docker-compose.yml
 api/env/Dockerfile
 www/env/Dockerfile
 
+api/logs/*.log
+
 .persistency

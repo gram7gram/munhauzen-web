@@ -11,10 +11,11 @@
     "express-fileupload": "^1.1.4",
     "mongoose": "^5.5.9",
     "morgan": "^1.9.1",
+    "winston": "^3.2.1",
     "xlsx": "^0.14.3"
   },
   "scripts": {
-    "start": "babel-node runner.js",
+    "start": "babel-node src/runner.js",
     "test": "mocha --colors --recursive --exit"
   },
   "eslintConfig": {

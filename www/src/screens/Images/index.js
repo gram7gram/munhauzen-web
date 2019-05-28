@@ -33,15 +33,13 @@ class Images extends Component {
 
   resetIfEsc = e => {
 
-    switch (e.keyCode) {
-      case 27:
-        this.props.dispatch({
-          type: CHANGE_FILTER,
-          payload: {
-            search: null
-          }
-        })
-
+    if (e.keyCode === 27) {
+      this.props.dispatch({
+        type: CHANGE_FILTER,
+        payload: {
+          search: null
+        }
+      })
     }
   }
 

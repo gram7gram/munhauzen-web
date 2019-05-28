@@ -7,12 +7,18 @@ const AudioFail = require('../../database/model/AudioFail').AudioFail;
 const Image = require('../../database/model/Image').Image;
 const Scenario = require('../../database/model/Scenario').Scenario;
 
+const logger = require('../../logger');
+
 const audioService = require('./AudioService');
 const audioFailService = require('./AudioFailService');
 const inventoryService = require('./InventoryService');
 const chapterService = require('./ChapterService');
 const imageService = require('./ImageService');
 const scenarioService = require('./ScenarioService');
+
+const aggregate = async function (data, callback) {
+  return await Promise.all(data.map(callback))
+}
 
 const ImportService = (function () {
 
@@ -44,7 +50,14 @@ const ImportService = (function () {
       'scenario_1': this.parseScenario.bind(this),
     }
 
-    let errors = await Promise.all(Object.keys(handlers).map(async name => {
+    await Scenario.deleteMany()
+    await Inventory.deleteMany()
+    await AudioFail.deleteMany()
+    await Audio.deleteMany()
+    await Image.deleteMany()
+    await Chapter.deleteMany()
+
+    let errors = await aggregate(Object.keys(handlers), async name => {
 
       const handler = handlers[name]
 
@@ -53,8 +66,6 @@ const ImportService = (function () {
         const result = await handler(workbook.Sheets[name])
 
         const currentErrors = result ? result.filter(e => e && e.message) : []
-
-        console.log(name, currentErrors);
 
         if (currentErrors.length > 0) {
 
@@ -65,7 +76,7 @@ const ImportService = (function () {
         }
       }
 
-    }))
+    })
 
     errors = errors.filter(e => e && e.sheet)
 
@@ -84,123 +95,217 @@ const ImportService = (function () {
   Service.prototype.parseScenario = async function (sheet) {
 
     const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
-      item.Id_option !== undefined
+      item.id_option !== undefined
+      || item.id_picture !== undefined
+      || item.id_audio !== undefined
+      || item.id_decisions !== undefined
     )
 
     if (data.length === 0) return
 
+    const unique = {}
+
+    logger.error('======')
+    data.forEach(item => {
+      if (item.id_option) {
+        if (unique[item.id_option] === true) {
+          logger.error('Дубликат ' + item.id_option)
+        } else {
+          unique[item.id_option] = true
+        }
+      }
+    })
+
     let currentScenario, currentAction
 
-    return await Promise.all(data.map(async item => {
+    const parseDecision = item => {
 
-      if (item.Id_option) {
+      if (item.action) {
+        currentAction = item.action.trim().toUpperCase()
+      }
+
+      const decision = {
+        scenario: item.id_decisions.trim(),
+        action: currentAction
+      }
+
+      if (decision.scenario.indexOf('a') !== 0) {
+
+        logger.warn('Развитие сценария ' + decision.scenario + ' не начинается на "a"')
+
+        decision.scenario = 'a' + decision.scenario.substr(1)
+      }
+
+      if (!decision.action) {
+
+        logger.warn('Развитие сценария ' + decision.scenario + ' без action')
+
+        decision.action = 'CLICK'
+      }
+
+      return decision
+    }
+
+    const parseAudio = item => {
+      const audio = {
+        audio: item.id_audio.trim(),
+        duration: 0
+      }
+
+      if (audio.audio === 'Z') {
+        audio.audio = 's' + currentScenario.name.substr(1)
+      }
+
+      if (audio.audio !== 'Last') {
+        if (audio.audio.indexOf('s') !== 0) {
+
+          logger.warn('Аудио ' + audio.audio + ' не начинается на "s"')
+
+          audio.audio = 's' + audio.audio.substr(1)
+        }
+      }
+
+      return audio
+    }
+
+    const parseImage = item => {
+      const image = {
+        image: item.id_picture.trim(),
+        duration: 0
+      }
+
+      if (image.image === 'Z') {
+        image.image = 'p' + currentScenario.name.substr(1)
+      }
+
+      if (item.duration_picture) {
+        let value = parseInt(item.duration_picture)
+        if (value > 0) {
+          image.duration = value
+        }
+      }
+
+      if (item.type_picture) {
+        const type = item.type_picture.trim()
+        if (type !== 'Empty') {
+          image.type = type.toUpperCase()
+        }
+      }
+
+      if (image.image !== 'Last') {
+        if (image.image.indexOf('p') !== 0) {
+
+          logger.warn('Картинка ' + image.image + '  не начинается на "p"')
+
+          image.image = 'p' + image.image.substr(1)
+        }
+      }
+
+      return image
+    }
+
+    const parseScenario = item => {
+
+      const translations = []
+
+      if (item.description_option_eng) {
+        translations.push({
+          locale: 'en',
+          text: item.description_option_eng
+        })
+      }
+
+      if (item.description_option_ru) {
+        translations.push({
+          locale: 'ru',
+          text: item.description_option_ru
+        })
+      }
+
+      if (item.description_option_ua) {
+        translations.push({
+          locale: 'ua',
+          text: item.description_option_ua
+        })
+      }
+
+      const scenario = {
+        name: item.id_option.trim(),
+        chapter: item.id_chapter.trim(),
+        decisions: [],
+        audio: [],
+        images: [],
+        translations
+      }
+
+      if (item.interaction) {
+        scenario.interaction = item.interaction.trim().toUpperCase()
+      }
+
+      if (scenario.name.indexOf('a') !== 0) {
+        logger.warn('Сценарий ' + scenario.name + ' не начинается на "a"')
+
+        scenario.name = 'a' + scenario.name.substr(1)
+      }
+
+      if (scenario.name.indexOf(scenario.chapter) !== 0) {
+        logger.warn('Сценарий ' + scenario.name + ' не совпадает с главой ' + scenario.chapter)
+      }
+
+      return scenario
+    }
+
+    const saveScenario = async scenario => {
+
+      try {
+
+        logger.info('saveScenario ' + scenario.name)
+
+        await scenarioService.create(scenario)
+
+      } catch (e) {
+
+        logger.error('saveScenario ' + JSON.stringify(e))
+
+        return {
+          message: `Сценарий ${scenario.name} содержит ошибки`
+        }
+      }
+    }
+
+    const scenarios = {}
+
+    const result1 = await aggregate(data, async item => {
+
+      if (item.id_option) {
 
         if (currentScenario) {
-          let entity = await Scenario.findOne({name: currentScenario.name})
-
-          try {
-
-            if (!entity) {
-              scenarioService.create(currentScenario)
-            } else {
-              scenarioService.update(entity, currentScenario)
-            }
-
-          } catch (e) {
-
-            return {
-              message: `Глава ${currentScenario.name} содержит ошибки`
-            }
-
-          }
+          scenarios[currentScenario.name] = {...currentScenario}
         }
 
-
-        const translations = []
-
-        if (item.description_option_eng) {
-          translations.push({
-            locale: 'en',
-            description: item.description_option_eng
-          })
-        }
-
-        if (item.description_option_ru) {
-          translations.push({
-            locale: 'ru',
-            description: item.description_option_ru
-          })
-        }
-
-        if (item.description_option_ua) {
-          translations.push({
-            locale: 'ua',
-            description: item.description_option_ua
-          })
-        }
-
-        currentScenario = {
-          name: item.Id_option.trim(),
-          chapter: item.id_chapter.trim(),
-          interaction: item.interaction ? item.interaction.toUpperCase() : null,
-          decision: [],
-          audio: [],
-          images: [],
-          translations
-        }
-      } else {
-
-        if (item.id_picture) {
-
-          const image = {
-            image: item.id_picture.trim(),
-            duration: 0
-          }
-
-          if (item.duration_picture) {
-            let value = parseInt(item.duration_picture)
-            if (value > 0) {
-              image.duration = value
-            }
-          }
-
-          if (item.type_picture) {
-            const type = item.type_picture.trim()
-            if (type !== 'Empty') {
-              image.type = type.toUpperCase()
-            }
-          }
-
-          currentScenario.images.push(image)
-
-        }
-
-        if (item.id_audio) {
-          const audio = {
-            audio: item.id_audio.trim(),
-            duration: 0
-          }
-
-          currentScenario.audio.push(audio)
-        }
-
-        if (item.id_decision) {
-
-          if (item.action) {
-            currentAction = item.action
-          }
-
-          const decision = {
-            scenario: item.id_decision.trim(),
-            action: currentAction
-          }
-
-          currentScenario.decisions.push(decision)
-        }
+        currentScenario = parseScenario(item)
 
       }
 
-    }))
+      if (item.id_picture && item.id_picture !== 'Empty' && item.id_picture !== 'XXX') {
+        currentScenario.images.push(parseImage(item))
+      }
+
+      if (item.id_audio && item.id_audio !== 'Empty' && item.id_audio !== 'XXX') {
+        currentScenario.audio.push(parseAudio(item))
+      }
+
+      if (item.id_decisions && item.id_decisions !== 'Empty') {
+        currentScenario.decisions.push(parseDecision(item))
+      }
+
+    })
+
+    const result2 = await aggregate(Object.values(scenarios), async scenario => {
+      await saveScenario(scenario)
+    })
+
+    return result1.concat(result2)
   }
 
   /**
@@ -217,7 +322,7 @@ const ImportService = (function () {
 
     if (data.length === 0) return
 
-    return await Promise.all(data.map(async item => {
+    return await aggregate(data, async item => {
 
       const translations = []
 
@@ -248,15 +353,9 @@ const ImportService = (function () {
         translations
       }
 
-      let entity = await Chapter.findOne({name: chapter.name})
-
       try {
 
-        if (!entity) {
-          chapterService.create(chapter)
-        } else {
-          chapterService.update(entity, chapter)
-        }
+        chapterService.create(chapter)
 
       } catch (e) {
 
@@ -265,7 +364,7 @@ const ImportService = (function () {
         }
 
       }
-    }))
+    })
   }
 
   /**
@@ -273,7 +372,7 @@ const ImportService = (function () {
    *
    * @param sheet
    */
-  Service.prototype.parseGameInventory = function (sheet) {
+  Service.prototype.parseGameInventory = async function (sheet) {
 
     const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
       item.Name !== undefined
@@ -282,7 +381,7 @@ const ImportService = (function () {
 
     if (data.length === 0) return
 
-    return Promise.all(data.map(async item => {
+    return await aggregate(data, async item => {
 
       let relatedScenario
 
@@ -301,15 +400,9 @@ const ImportService = (function () {
         relatedScenario
       }
 
-      let entity = await Inventory.findOne({name: content.name})
-
       try {
 
-        if (!entity) {
-          inventoryService.create(content)
-        } else {
-          inventoryService.update(entity, content)
-        }
+        inventoryService.create(content)
 
       } catch (e) {
 
@@ -318,7 +411,7 @@ const ImportService = (function () {
         }
 
       }
-    }))
+    })
   }
 
   /**
@@ -326,7 +419,7 @@ const ImportService = (function () {
    *
    * @param sheet
    */
-  Service.prototype.parseMenuInventory = function (sheet) {
+  Service.prototype.parseMenuInventory = async function (sheet) {
 
     const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
       item.inventory_global_required !== undefined
@@ -335,7 +428,7 @@ const ImportService = (function () {
 
     if (data.length === 0) return
 
-    return Promise.all(data.map(async item => {
+    return await aggregate(data, async item => {
 
       let relatedScenario
 
@@ -355,15 +448,9 @@ const ImportService = (function () {
         relatedScenario
       }
 
-      let entity = await Inventory.findOne({name: content.name})
-
       try {
 
-        if (!entity) {
-          inventoryService.create(content)
-        } else {
-          inventoryService.update(entity, content)
-        }
+        inventoryService.create(content)
 
       } catch (e) {
 
@@ -372,7 +459,7 @@ const ImportService = (function () {
         }
 
       }
-    }))
+    })
   }
 
   /**
@@ -380,7 +467,7 @@ const ImportService = (function () {
    *
    * @param sheet
    */
-  Service.prototype.parseStatueInventory = function (sheet) {
+  Service.prototype.parseStatueInventory = async function (sheet) {
 
     const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
       item.Name !== undefined
@@ -390,7 +477,7 @@ const ImportService = (function () {
 
     if (data.length === 0) return
 
-    return Promise.all(data.map(async item => {
+    return await aggregate(data, async item => {
 
       let relatedScenario, relatedInventory = [], statueTranslations = []
 
@@ -445,15 +532,9 @@ const ImportService = (function () {
         statueTranslations,
       }
 
-      let entity = await Inventory.findOne({name: content.name})
-
       try {
 
-        if (!entity) {
-          inventoryService.create(content)
-        } else {
-          inventoryService.update(entity, content)
-        }
+        inventoryService.create(content)
 
       } catch (e) {
 
@@ -462,7 +543,7 @@ const ImportService = (function () {
         }
 
       }
-    }))
+    })
   }
 
   /**
@@ -471,7 +552,7 @@ const ImportService = (function () {
    *
    * @param sheet
    */
-  Service.prototype.parseImage = function (sheet) {
+  Service.prototype.parseImage = async function (sheet) {
 
     const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
       item.Id_picture !== undefined
@@ -484,7 +565,7 @@ const ImportService = (function () {
 
     if (data.length === 0) return
 
-    return Promise.all(data.map(async item => {
+    return await aggregate(data, async item => {
 
       const translations = []
 
@@ -521,15 +602,9 @@ const ImportService = (function () {
         translations
       }
 
-      let entity = await Image.findOne({name: content.name})
-
       try {
 
-        if (!entity) {
-          imageService.create(content)
-        } else {
-          imageService.update(entity, content)
-        }
+        imageService.create(content)
 
       } catch (e) {
 
@@ -538,7 +613,7 @@ const ImportService = (function () {
         }
 
       }
-    }))
+    })
   }
 
   /**
@@ -546,7 +621,7 @@ const ImportService = (function () {
    *
    * @param sheet
    */
-  Service.prototype.parseAudio = function (sheet) {
+  Service.prototype.parseAudio = async function (sheet) {
 
     const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
       item.Id_audio !== undefined
@@ -556,7 +631,7 @@ const ImportService = (function () {
 
     if (data.length === 0) return
 
-    return Promise.all(data.map(async item => {
+    return await aggregate(data, async item => {
 
       let duration = parseInt(item.duration_audio);
       if (isNaN(duration)) duration = 0
@@ -567,15 +642,9 @@ const ImportService = (function () {
         duration,
       }
 
-      let entity = await Audio.findOne({name: content.name})
-
       try {
 
-        if (!entity) {
-          audioService.create(content)
-        } else {
-          audioService.update(entity, content)
-        }
+        audioService.create(content)
 
       } catch (e) {
 
@@ -584,7 +653,7 @@ const ImportService = (function () {
         }
 
       }
-    }))
+    })
   }
 
   /**
@@ -593,7 +662,7 @@ const ImportService = (function () {
    * @param sheet
    * @param locale
    */
-  Service.prototype.parseAudioFail = function (sheet, locale) {
+  Service.prototype.parseAudioFail = async function (sheet, locale) {
 
     const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
       item.Id_audio !== undefined
@@ -608,7 +677,7 @@ const ImportService = (function () {
 
     if (data.length === 0) return
 
-    return Promise.all(data.map(async item => {
+    return await aggregate(data, async item => {
 
       let duration = parseInt(item.duration_audio);
       if (isNaN(duration)) duration = 0
@@ -628,15 +697,9 @@ const ImportService = (function () {
 
       content.audio = content.name.split('_fail')[0]
 
-      let entity = await AudioFail.findOne({name: content.name})
-
       try {
 
-        if (!entity) {
-          audioFailService.create(content)
-        } else {
-          audioFailService.update(entity, content)
-        }
+        audioFailService.create(content)
 
       } catch (e) {
 
@@ -645,19 +708,19 @@ const ImportService = (function () {
         }
 
       }
-    }))
+    })
   }
 
-  Service.prototype.parseAudioFailEn = function (sheet) {
-    return this.parseAudioFail(sheet, 'en')
+  Service.prototype.parseAudioFailEn = async function (sheet) {
+    return await this.parseAudioFail(sheet, 'en')
   }
 
-  Service.prototype.parseAudioFailRu = function (sheet) {
-    return this.parseAudioFail(sheet, 'ru')
+  Service.prototype.parseAudioFailRu = async function (sheet) {
+    return await this.parseAudioFail(sheet, 'ru')
   }
 
-  Service.prototype.parseAudioFailUa = function (sheet) {
-    return this.parseAudioFail(sheet, 'ua')
+  Service.prototype.parseAudioFailUa = async function (sheet) {
+    return await this.parseAudioFail(sheet, 'ua')
   }
 
   return new Service();

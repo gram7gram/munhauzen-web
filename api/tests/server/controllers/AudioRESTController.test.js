@@ -1,5 +1,5 @@
 const {boot, expect, tearDown} = require('../../WebTestCase')
-const audioService = require('../../../server/services/AudioService')
+const audioService = require('../../../src/server/services/AudioService')
 const {cid} = require('../../utils')
 
 describe('AudioRESTController', () => {

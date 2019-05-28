@@ -23,7 +23,7 @@ class Card extends PureComponent {
       : null
 
     const chapter = scenario.chapter
-      ? chapters.find(item => item._id === scenario.chapter)
+      ? chapters.find(item => item.name === scenario.chapter)
       : null
 
     return <tr>
@@ -55,7 +55,7 @@ class Card extends PureComponent {
         {scenario.images.map((scenarioImage, key) => {
 
           const match = scenarioImage.image
-            ? images.find(item => item._id === scenarioImage.image)
+            ? images.find(item => item.name === scenarioImage.image)
             : null
 
           return <div key={key}>
@@ -72,7 +72,7 @@ class Card extends PureComponent {
         {scenario.audio.map((scenarioAudio, key) => {
 
           const match = scenarioAudio.audio
-            ? audio.find(item => item._id === scenarioAudio.audio)
+            ? audio.find(item => item.name === scenarioAudio.audio)
             : null
 
           return <div key={key}>
@@ -89,7 +89,7 @@ class Card extends PureComponent {
         {scenario.decisions.map((decision, key) => {
 
           const match = decision.scenario
-            ? scenarioItems.find(item => item._id === decision.scenario)
+            ? scenarioItems.find(item => item.name === decision.scenario)
             : null
 
           let name = '...'

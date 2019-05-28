@@ -5,8 +5,8 @@ require('dotenv').config({path: path.resolve(__dirname + `/../.env`)});
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 
-const db = require('../database/mongo')
-const server = require('../server')
+const db = require('../src/database/mongo')
+const server = require('../src')
 
 chai.use(chaiHttp);
 

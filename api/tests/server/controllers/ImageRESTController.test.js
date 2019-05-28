@@ -1,5 +1,5 @@
 const {boot, expect, tearDown} = require('../../WebTestCase')
-const imageService = require('../../../server/services/ImageService')
+const imageService = require('../../../src/server/services/ImageService')
 const {cid} = require('../../utils')
 
 describe('ImageRESTController', () => {

@@ -1,5 +1,5 @@
 const {boot, expect, tearDown} = require('../../WebTestCase')
-const chaptersService = require('../../../server/services/ChapterService')
+const chaptersService = require('../../../src/server/services/ChapterService')
 const {cid} = require('../../utils')
 
 describe('ChapterRESTController', () => {
