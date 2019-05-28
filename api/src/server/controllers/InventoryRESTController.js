@@ -3,6 +3,7 @@ const inventoryService = require('../services/InventoryService')
 const Inventory = require('../../database/model/Inventory').Inventory;
 const checkId = require('../services/RequestParamsValidator').checkId
 const router = new express.Router();
+const logger = require('../../logger');
 
 router.get('/inventory', async (req, res) => {
 
@@ -14,6 +15,9 @@ router.get('/inventory', async (req, res) => {
       count: items.length
     })
   } catch (e) {
+
+    logger.error(e)
+
     res.status(500).json(e)
   }
 })
@@ -33,6 +37,9 @@ router.get('/inventory/:id', checkId, async (req, res) => {
     res.status(200).json(entity)
 
   } catch (e) {
+
+    logger.error(e)
+
     res.status(500).json(e)
   }
 })
@@ -41,11 +48,14 @@ router.post('/inventory', async (req, res) => {
 
   try {
 
-    const entity = inventoryService.create(req.body)
+    const entity = await inventoryService.create(req.body)
 
     res.status(201).json(entity)
 
   } catch (e) {
+
+    logger.error(e)
+
     res.status(500).json(e)
   }
 })
@@ -61,11 +71,14 @@ router.put('/inventory/:id', checkId, async (req, res) => {
       return
     }
 
-    inventoryService.update(entity, req.body)
+    await inventoryService.update(entity, req.body)
 
     res.status(200).json(entity.toObject())
 
   } catch (e) {
+
+    logger.error(e)
+
     res.status(500).json(e)
   }
 })
@@ -78,6 +91,9 @@ router.delete('/inventory/:id', checkId, async (req, res) => {
     res.status(204).json(null)
 
   } catch (e) {
+
+    logger.error(e)
+
     res.status(500).json(e)
   }
 })

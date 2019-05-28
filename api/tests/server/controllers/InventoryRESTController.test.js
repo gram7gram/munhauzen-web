@@ -12,7 +12,7 @@ describe('InventoryRESTController', () => {
 
   afterEach(tearDown)
 
-  it('GET /api/v1/inventory is successful', (done) => {
+  it('GET /api/v1/inventory is successful', async done => {
 
     app.get('/api/v1/inventory')
       .end((err, res) => {
@@ -25,7 +25,7 @@ describe('InventoryRESTController', () => {
       });
   })
 
-  it('POST /api/v1/inventory is successful', (done) => {
+  it('POST /api/v1/inventory is successful', async done => {
 
     const entity = {
       name: cid(10).toUpperCase(),
@@ -44,9 +44,9 @@ describe('InventoryRESTController', () => {
       });
   })
 
-  it('GET /api/v1/inventory/:id is successful', (done) => {
+  it('GET /api/v1/inventory/:id is successful', async done => {
 
-    const entity = inventoryService.create({
+    const entity = await inventoryService.create({
       name: cid(10).toUpperCase(),
     })
 
@@ -60,9 +60,9 @@ describe('InventoryRESTController', () => {
       });
   })
 
-  it('PUT /api/v1/inventory/:id is successful', (done) => {
+  it('PUT /api/v1/inventory/:id is successful', async done => {
 
-    const entity = inventoryService.create({
+    const entity = await inventoryService.create({
       name: cid(10).toUpperCase(),
     })
 
@@ -82,9 +82,9 @@ describe('InventoryRESTController', () => {
       });
   })
 
-  it('DELETE /api/v1/inventory/:id is successful', (done) => {
+  it('DELETE /api/v1/inventory/:id is successful', async done => {
 
-    const entity = inventoryService.create({
+    const entity = await inventoryService.create({
       name: cid(10).toUpperCase(),
     })
 

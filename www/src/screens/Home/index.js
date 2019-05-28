@@ -26,15 +26,55 @@ class Home extends PureComponent {
     e.target.files = null
   }
 
+  renderErrors() {
+
+    const {serverResult} = this.props.Home
+
+    return <div className="p-2 bg-dark">
+
+      {serverResult.map((result, key) => {
+
+        const hasErrors = result.errors.length > 0
+        const hasWarnings = result.warnings.length > 0
+
+        return <div key={key}>
+
+          <p className={"mb-1"
+          + (!hasWarnings && !hasWarnings ? " text-success" : "")
+          + (hasWarnings ? " text-warning" : "")
+          + (hasErrors ? " text-danger" : "")}>
+
+            {!hasWarnings && !hasErrors ? <i className="fa fa-check"/> : null}
+
+            {hasWarnings ? <i className="fa fa-warning"/> : null}
+
+            {hasErrors ? <i className="fa fa-exclamation"/> : null}
+
+            &nbsp;{result.sheet}
+          </p>
+
+          {hasErrors ? <div className="alert alert-danger p-1">
+            {result.errors.map((e, key) => <div key={key}>{e.message}</div>)}
+          </div> : null}
+
+          {hasWarnings ? <div className="alert alert-warning p-1">
+            {result.warnings.map((e, key) => <div key={key}>{e}</div>)}
+          </div> : null}
+
+        </div>
+      })}
+    </div>
+  }
+
   render() {
 
-    const {isUploading, isDownloading} = this.props.Home
+    const {isUploading, isDownloading, serverResult} = this.props.Home
 
-    return <div className="container my-2 py-3">
+    return <div className="container-fluid my-2 py-3">
       <div className="row">
         <div className="col-8 mx-auto">
           <div className="row">
-            <div className="col-6 text-center">
+            <div className="col-5 text-center">
               <h1 className="my-3">{i18n.t('home.title')}</h1>
 
               <label className={"btn btn-block btn-warning mb-2" + (isUploading ? " disabled" : "")}>
@@ -57,10 +97,14 @@ class Home extends PureComponent {
               </button>
             </div>
 
-            <div className="col-6 text-center">
-              <img src={images[random.int(0, images.length - 1)]}
-                   alt=""
-                   className="img-fluid shadow"/>
+            <div className="col-7">
+
+              {serverResult.length > 0
+                ? this.renderErrors()
+                : <img src={images[random.int(0, images.length - 1)]}
+                       alt=""
+                       className="img-fluid shadow mx-auto"/>
+              }
             </div>
 
           </div>

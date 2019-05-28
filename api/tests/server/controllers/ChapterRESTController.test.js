@@ -12,7 +12,7 @@ describe('ChapterRESTController', () => {
 
   afterEach(tearDown)
 
-  it('GET /api/v1/chapters is successful', (done) => {
+  it('GET /api/v1/chapters is successful', async done => {
 
     app.get('/api/v1/chapters')
       .end((err, res) => {
@@ -25,7 +25,7 @@ describe('ChapterRESTController', () => {
       });
   })
 
-  it('POST /api/v1/chapters is successful', (done) => {
+  it('POST /api/v1/chapters is successful', async done => {
 
     const entity = {
       name: cid(10),
@@ -46,9 +46,9 @@ describe('ChapterRESTController', () => {
       });
   })
 
-  it('GET /api/v1/chapters/:id is successful', (done) => {
+  it('GET /api/v1/chapters/:id is successful', async done => {
 
-    const entity = chaptersService.create({
+    const entity = await chaptersService.create({
       name: cid(10),
       icon: cid(10)
     })
@@ -62,9 +62,9 @@ describe('ChapterRESTController', () => {
       });
   })
 
-  it('PUT /api/v1/chapters/:id is successful', (done) => {
+  it('PUT /api/v1/chapters/:id is successful', async done => {
 
-    const entity = chaptersService.create({
+    const entity = await chaptersService.create({
       name: cid(10),
       icon: cid(20),
     })
@@ -85,9 +85,9 @@ describe('ChapterRESTController', () => {
       });
   })
 
-  it('DELETE /api/v1/chapters/:id is successful', (done) => {
+  it('DELETE /api/v1/chapters/:id is successful', async done => {
 
-    const entity = chaptersService.create({
+    const entity = await chaptersService.create({
       name: cid(10),
       icon: cid(20),
     })

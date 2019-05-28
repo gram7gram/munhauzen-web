@@ -12,7 +12,7 @@ describe('AudioRESTController', () => {
 
   afterEach(tearDown)
 
-  it('GET /api/v1/audio is successful', (done) => {
+  it('GET /api/v1/audio is successful', async done => {
 
     app.get('/api/v1/audio')
       .end((err, res) => {
@@ -25,7 +25,7 @@ describe('AudioRESTController', () => {
       });
   })
 
-  it('POST /api/v1/audio is successful', (done) => {
+  it('POST /api/v1/audio is successful', async done => {
 
     const entity = {
       name: cid(10),
@@ -58,9 +58,9 @@ describe('AudioRESTController', () => {
       });
   })
 
-  it('GET /api/v1/audio/:id is successful', (done) => {
+  it('GET /api/v1/audio/:id is successful', async done => {
 
-    const entity = audioService.create({
+    const entity = await audioService.create({
       name: cid(10),
       file: cid(20),
       translations: [
@@ -85,9 +85,9 @@ describe('AudioRESTController', () => {
       });
   })
 
-  it('PUT /api/v1/audio/:id is successful', (done) => {
+  it('PUT /api/v1/audio/:id is successful', async done => {
 
-    const entity = audioService.create({
+    const entity = await audioService.create({
       name: cid(10),
       file: cid(20),
       translations: [
@@ -118,9 +118,9 @@ describe('AudioRESTController', () => {
       });
   })
 
-  it('DELETE /api/v1/audio/:id is successful', (done) => {
+  it('DELETE /api/v1/audio/:id is successful', async done => {
 
-    const entity = audioService.create({
+    const entity = await audioService.create({
       name: cid(10),
       file: cid(20),
       translations: [

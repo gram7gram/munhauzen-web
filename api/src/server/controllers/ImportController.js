@@ -1,4 +1,5 @@
 const express = require('express');
+const logger = require('../../logger');
 const fileUpload = require('express-fileupload');
 
 const importService = require('../services/ImportService')
@@ -17,14 +18,19 @@ router.post('/import', fileUpload(), async (req, res) => {
 
     const result = await importService.parse(file)
     if (result.hasErrors) {
-      throw result
+      res.status(400).json({
+        result: result.result
+      })
+      return
     }
 
-    res.status(201).json(result)
-
+    res.status(201).json({
+      result: result.result
+    })
   } catch (e) {
 
-    console.log(e);
+    logger.error(e);
+
     res.status(500).json(e)
   }
 })

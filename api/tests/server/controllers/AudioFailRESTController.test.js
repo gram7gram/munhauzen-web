@@ -12,7 +12,7 @@ describe('AudioFailRESTController', () => {
 
   afterEach(tearDown)
 
-  it('GET /api/v1/audio-fails is successful', (done) => {
+  it('GET /api/v1/audio-fails is successful', async done => {
 
     app.get('/api/v1/audio-fails')
       .end((err, res) => {
@@ -25,7 +25,7 @@ describe('AudioFailRESTController', () => {
       });
   })
 
-  it('POST /api/v1/audio-fails is successful', (done) => {
+  it('POST /api/v1/audio-fails is successful', async done => {
 
     const entity = {
       name: cid(10),
@@ -60,9 +60,9 @@ describe('AudioFailRESTController', () => {
       });
   })
 
-  it('GET /api/v1/audio-fails/:id is successful', (done) => {
+  it('GET /api/v1/audio-fails/:id is successful', async done => {
 
-    const entity = audioFailService.create({
+    const entity = await audioFailService.create({
       name: cid(10),
       file: cid(20),
       audio: cid(20),
@@ -88,9 +88,9 @@ describe('AudioFailRESTController', () => {
       });
   })
 
-  it('PUT /api/v1/audio-fails/:id is successful', (done) => {
+  it('PUT /api/v1/audio-fails/:id is successful', async done => {
 
-    const entity = audioFailService.create({
+    const entity = await audioFailService.create({
       name: cid(10),
       file: cid(20),
       audio: cid(20),
@@ -122,9 +122,9 @@ describe('AudioFailRESTController', () => {
       });
   })
 
-  it('DELETE /api/v1/audio-fails/:id is successful', (done) => {
+  it('DELETE /api/v1/audio-fails/:id is successful', async done => {
 
-    const entity = audioFailService.create({
+    const entity = await audioFailService.create({
       name: cid(10),
       file: cid(20),
       audio: cid(20),

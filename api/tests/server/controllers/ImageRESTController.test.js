@@ -12,7 +12,7 @@ describe('ImageRESTController', () => {
 
   afterEach(tearDown)
 
-  it('GET /api/v1/images is successful', (done) => {
+  it('GET /api/v1/images is successful', async done => {
 
     app.get('/api/v1/images')
       .end((err, res) => {
@@ -25,7 +25,7 @@ describe('ImageRESTController', () => {
       });
   })
 
-  it('POST /api/v1/images is successful', (done) => {
+  it('POST /api/v1/images is successful', async done => {
 
     const entity = {
       name: cid(10),
@@ -60,9 +60,9 @@ describe('ImageRESTController', () => {
       });
   })
 
-  it('GET /api/v1/images/:id is successful', (done) => {
+  it('GET /api/v1/images/:id is successful', async done => {
 
-    const entity = imageService.create({
+    const entity = await imageService.create({
       name: cid(10),
       file: cid(20),
       translations: [
@@ -89,9 +89,9 @@ describe('ImageRESTController', () => {
       });
   })
 
-  it('PUT /api/v1/images/:id is successful', (done) => {
+  it('PUT /api/v1/images/:id is successful', async done => {
 
-    const entity = imageService.create({
+    const entity = await imageService.create({
       name: cid(10),
       file: cid(20),
       translations: [
@@ -124,9 +124,9 @@ describe('ImageRESTController', () => {
       });
   })
 
-  it('DELETE /api/v1/images/:id is successful', (done) => {
+  it('DELETE /api/v1/images/:id is successful', async done => {
 
-    const entity = imageService.create({
+    const entity = await imageService.create({
       name: cid(10),
       file: cid(20),
       translations: [

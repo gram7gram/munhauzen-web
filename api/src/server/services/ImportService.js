@@ -31,9 +31,11 @@ const ImportService = (function () {
     try {
       workbook = xlsx.read(file.data.buffer, {type: 'buffer'})
     } catch (e) {
+
+      logger.error(e)
+
       throw {
         message: 'Невозможно прочитать содержимое файла',
-        e
       }
     }
 
@@ -57,32 +59,31 @@ const ImportService = (function () {
     await Image.deleteMany()
     await Chapter.deleteMany()
 
-    let errors = await aggregate(Object.keys(handlers), async name => {
+    let result = await aggregate(Object.keys(handlers), async name => {
 
       const handler = handlers[name]
 
       if (workbook.Sheets[name] !== undefined) {
 
-        const result = await handler(workbook.Sheets[name])
+        const sheetResult = await handler(workbook.Sheets[name])
 
-        const currentErrors = result ? result.filter(e => e && e.message) : []
+        const errors = sheetResult && sheetResult.result ? sheetResult.result.filter(e => e && e.message) : []
+        const warnings = sheetResult && sheetResult.warnings ? sheetResult.warnings : []
 
-        if (currentErrors.length > 0) {
-
-          return {
-            sheet: name,
-            errors: currentErrors
-          }
+        return {
+          sheet: name,
+          warnings,
+          errors
         }
       }
 
     })
 
-    errors = errors.filter(e => e && e.sheet)
+    result = result.filter(e => e && e.sheet)
 
     return {
-      hasErrors: errors.length > 0,
-      errors
+      hasErrors: !!result.find(item => item.errors.lenngth > 0),
+      result
     }
   }
 
@@ -94,18 +95,25 @@ const ImportService = (function () {
    */
   Service.prototype.parseScenario = async function (sheet) {
 
-    const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
+    const json = xlsx.utils.sheet_to_json(sheet)
+
+    const data = json.filter(item =>
       item.id_option !== undefined
       || item.id_picture !== undefined
       || item.id_audio !== undefined
       || item.id_decisions !== undefined
     )
 
+    if (data.length !== json.length) {
+      logger.error('Some rows are invalid in parseScenario')
+    }
+
     if (data.length === 0) return
 
-    const unique = {}
+    const unique = {}, warnings = []
 
-    logger.error('======')
+    logger.info('======')
+
     data.forEach(item => {
       if (item.id_option) {
         if (unique[item.id_option] === true) {
@@ -131,14 +139,14 @@ const ImportService = (function () {
 
       if (decision.scenario.indexOf('a') !== 0) {
 
-        logger.warn('Развитие сценария ' + decision.scenario + ' не начинается на "a"')
+        warnings.push('Развитие сценария ' + decision.scenario + ' не начинается на "a"')
 
         decision.scenario = 'a' + decision.scenario.substr(1)
       }
 
       if (!decision.action) {
 
-        logger.warn('Развитие сценария ' + decision.scenario + ' без action')
+        warnings.push('Развитие сценария ' + decision.scenario + ' без action')
 
         decision.action = 'CLICK'
       }
@@ -159,7 +167,7 @@ const ImportService = (function () {
       if (audio.audio !== 'Last') {
         if (audio.audio.indexOf('s') !== 0) {
 
-          logger.warn('Аудио ' + audio.audio + ' не начинается на "s"')
+          warnings.push('Аудио ' + audio.audio + ' не начинается на "s"')
 
           audio.audio = 's' + audio.audio.substr(1)
         }
@@ -195,7 +203,7 @@ const ImportService = (function () {
       if (image.image !== 'Last') {
         if (image.image.indexOf('p') !== 0) {
 
-          logger.warn('Картинка ' + image.image + '  не начинается на "p"')
+          warnings.push('Картинка ' + image.image + '  не начинается на "p"')
 
           image.image = 'p' + image.image.substr(1)
         }
@@ -243,13 +251,13 @@ const ImportService = (function () {
       }
 
       if (scenario.name.indexOf('a') !== 0) {
-        logger.warn('Сценарий ' + scenario.name + ' не начинается на "a"')
+        warnings.push('Сценарий ' + scenario.name + ' не начинается на "a"')
 
         scenario.name = 'a' + scenario.name.substr(1)
       }
 
       if (scenario.name.indexOf(scenario.chapter) !== 0) {
-        logger.warn('Сценарий ' + scenario.name + ' не совпадает с главой ' + scenario.chapter)
+        warnings.push('Сценарий ' + scenario.name + ' не совпадает с главой ' + scenario.chapter)
       }
 
       return scenario
@@ -259,13 +267,11 @@ const ImportService = (function () {
 
       try {
 
-        logger.info('saveScenario ' + scenario.name)
-
         await scenarioService.create(scenario)
 
       } catch (e) {
 
-        logger.error('saveScenario ' + JSON.stringify(e))
+        logger.error(e)
 
         return {
           message: `Сценарий ${scenario.name} содержит ошибки`
@@ -275,7 +281,7 @@ const ImportService = (function () {
 
     const scenarios = {}
 
-    const result1 = await aggregate(data, async item => {
+    data.forEach(item => {
 
       if (item.id_option) {
 
@@ -284,7 +290,6 @@ const ImportService = (function () {
         }
 
         currentScenario = parseScenario(item)
-
       }
 
       if (item.id_picture && item.id_picture !== 'Empty' && item.id_picture !== 'XXX') {
@@ -301,11 +306,14 @@ const ImportService = (function () {
 
     })
 
-    const result2 = await aggregate(Object.values(scenarios), async scenario => {
+    const result = await aggregate(Object.values(scenarios), async scenario => {
       await saveScenario(scenario)
     })
 
-    return result1.concat(result2)
+    return {
+      result,
+      warnings
+    }
   }
 
   /**
@@ -315,14 +323,20 @@ const ImportService = (function () {
    */
   Service.prototype.parseChapters = async function (sheet) {
 
-    const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
+    const json = xlsx.utils.sheet_to_json(sheet)
+
+    const data = json.filter(item =>
       item.chapter_id !== undefined
       && (item.description_chapter_eng !== undefined || item.description_chapter_ru !== undefined || item.description_chapter_ua !== undefined)
     )
 
+    if (data.length !== json.length) {
+      logger.error('Some rows are invalid in parseChapters')
+    }
+
     if (data.length === 0) return
 
-    return await aggregate(data, async item => {
+    const result = await aggregate(data, async item => {
 
       const translations = []
 
@@ -348,16 +362,18 @@ const ImportService = (function () {
       }
 
       const chapter = {
-        name: item.chapter_id,
-        icon: item.icon_chapter || null,
+        name: item.chapter_id.trim(),
+        icon: item.icon_chapter ? item.icon_chapter.trim() : null,
         translations
       }
 
       try {
 
-        chapterService.create(chapter)
+        await chapterService.create(chapter)
 
       } catch (e) {
+
+        logger.error(e)
 
         return {
           message: `Глава ${chapter.name} содержит ошибки`
@@ -365,6 +381,11 @@ const ImportService = (function () {
 
       }
     })
+
+    return {
+      result,
+      warnings: []
+    }
   }
 
   /**
@@ -373,15 +394,20 @@ const ImportService = (function () {
    * @param sheet
    */
   Service.prototype.parseGameInventory = async function (sheet) {
+    const json = xlsx.utils.sheet_to_json(sheet)
 
-    const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
+    const data = json.filter(item =>
       item.Name !== undefined
       && item.Related_option !== undefined
     )
 
+    if (data.length !== json.length) {
+      logger.error('Some rows are invalid in parseGameInventory')
+    }
+
     if (data.length === 0) return
 
-    return await aggregate(data, async item => {
+    const result = await aggregate(data, async item => {
 
       let relatedScenario
 
@@ -401,10 +427,17 @@ const ImportService = (function () {
       }
 
       try {
+        const entity = await Inventory.findOne({name: content.name})
 
-        inventoryService.create(content)
+        if (entity) {
+          await inventoryService.update(entity, content)
+        } else {
+          await inventoryService.create(content)
+        }
 
       } catch (e) {
+
+        logger.error(e)
 
         return {
           message: `Инвентарь ${content.name} содержит ошибки`
@@ -412,6 +445,11 @@ const ImportService = (function () {
 
       }
     })
+
+    return {
+      result,
+      warnings: []
+    }
   }
 
   /**
@@ -421,14 +459,20 @@ const ImportService = (function () {
    */
   Service.prototype.parseMenuInventory = async function (sheet) {
 
-    const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
+    const json = xlsx.utils.sheet_to_json(sheet)
+
+    const data = json.filter(item =>
       item.inventory_global_required !== undefined
       && item.Related_option !== undefined
     )
 
+    if (data.length !== json.length) {
+      logger.error('Some rows are invalid in parseMenuInventory')
+    }
+
     if (data.length === 0) return
 
-    return await aggregate(data, async item => {
+    const result = await aggregate(data, async item => {
 
       let relatedScenario
 
@@ -450,9 +494,17 @@ const ImportService = (function () {
 
       try {
 
-        inventoryService.create(content)
+        const entity = await Inventory.findOne({name: content.name})
+
+        if (entity) {
+          await inventoryService.update(entity, content)
+        } else {
+          await inventoryService.create(content)
+        }
 
       } catch (e) {
+
+        logger.error(e)
 
         return {
           message: `Инвентарь ${content.name} содержит ошибки`
@@ -460,6 +512,11 @@ const ImportService = (function () {
 
       }
     })
+
+    return {
+      result,
+      warnings: []
+    }
   }
 
   /**
@@ -469,30 +526,37 @@ const ImportService = (function () {
    */
   Service.prototype.parseStatueInventory = async function (sheet) {
 
-    const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
+    const json = xlsx.utils.sheet_to_json(sheet)
+
+    const data = json.filter(item =>
       item.Name !== undefined
-      && item.Related_options !== undefined
       && (item.Description_Eng !== undefined || item.Description_Ua !== undefined || item.Description_Ru !== undefined)
     )
 
+    if (data.length !== json.length) {
+      logger.error('Some rows are invalid in parseStatueInventory')
+    }
+
     if (data.length === 0) return
 
-    return await aggregate(data, async item => {
+    const result = await aggregate(data, async item => {
 
-      let relatedScenario, relatedInventory = [], statueTranslations = []
+      let relatedScenario = [], relatedInventory = [], statueTranslations = []
 
-      if (item.Related_options.indexOf(' or ') !== 1) {
+      if (item.Related_options) {
+        if (item.Related_options.indexOf(' or ') !== 1) {
 
-        relatedScenario = item.Related_options.split(' or ')
-          .map(item => item.trim())
+          relatedScenario = item.Related_options.split(' or ')
+            .map(item => item.trim())
 
-          .filter(item => !!item && item !== 'Empty')
-      } else {
+            .filter(item => !!item && item !== 'Empty')
+        } else {
 
-        relatedScenario = item.Related_options.split(',')
-          .map(item => item.trim())
-          .filter(item => !!item && item !== 'Empty')
+          relatedScenario = item.Related_options.split(',')
+            .map(item => item.trim())
+            .filter(item => !!item && item !== 'Empty')
 
+        }
       }
 
       if (item.Related_inventory) {
@@ -534,9 +598,11 @@ const ImportService = (function () {
 
       try {
 
-        inventoryService.create(content)
+        await inventoryService.create(content)
 
       } catch (e) {
+
+        logger.error(e)
 
         return {
           message: `Инвентарь ${content.name} содержит ошибки`
@@ -544,6 +610,11 @@ const ImportService = (function () {
 
       }
     })
+
+    return {
+      result,
+      warnings: []
+    }
   }
 
   /**
@@ -554,7 +625,9 @@ const ImportService = (function () {
    */
   Service.prototype.parseImage = async function (sheet) {
 
-    const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
+    const json = xlsx.utils.sheet_to_json(sheet)
+
+    const data = json.filter(item =>
       item.Id_picture !== undefined
       && item.file !== undefined
       && item.type !== undefined
@@ -563,9 +636,13 @@ const ImportService = (function () {
       && (item.description_picture_ua !== undefined || item.description_picture_ru !== undefined || item.description_picture_eng !== undefined)
     )
 
+    if (data.length !== json.length) {
+      logger.error('Some rows are invalid in parseImage')
+    }
+
     if (data.length === 0) return
 
-    return await aggregate(data, async item => {
+    const result = await aggregate(data, async item => {
 
       const translations = []
 
@@ -604,9 +681,11 @@ const ImportService = (function () {
 
       try {
 
-        imageService.create(content)
+        await imageService.create(content)
 
       } catch (e) {
+
+        logger.error(e)
 
         return {
           message: `Картинка ${content.name} содержит ошибки`
@@ -614,6 +693,11 @@ const ImportService = (function () {
 
       }
     })
+
+    return {
+      result,
+      warnings: []
+    }
   }
 
   /**
@@ -623,15 +707,21 @@ const ImportService = (function () {
    */
   Service.prototype.parseAudio = async function (sheet) {
 
-    const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
+    const json = xlsx.utils.sheet_to_json(sheet)
+
+    const data = json.filter(item =>
       item.Id_audio !== undefined
       && item.file !== undefined
       && item.duration_audio !== undefined
     )
 
+    if (data.length !== json.length) {
+      logger.error('Some rows are invalid in parseAudio')
+    }
+
     if (data.length === 0) return
 
-    return await aggregate(data, async item => {
+    const result = await aggregate(data, async item => {
 
       let duration = parseInt(item.duration_audio);
       if (isNaN(duration)) duration = 0
@@ -644,9 +734,11 @@ const ImportService = (function () {
 
       try {
 
-        audioService.create(content)
+        await audioService.create(content)
 
       } catch (e) {
+
+        logger.error(e)
 
         return {
           message: `Аудио ${content.name} содержит ошибки`
@@ -654,6 +746,11 @@ const ImportService = (function () {
 
       }
     })
+
+    return {
+      result,
+      warnings: []
+    }
   }
 
   /**
@@ -664,7 +761,9 @@ const ImportService = (function () {
    */
   Service.prototype.parseAudioFail = async function (sheet, locale) {
 
-    const data = xlsx.utils.sheet_to_json(sheet).filter(item =>
+    const json = xlsx.utils.sheet_to_json(sheet)
+
+    const data = json.filter(item =>
       item.Id_audio !== undefined
       && item.file !== undefined
       && item.duration_audio !== undefined
@@ -675,9 +774,13 @@ const ImportService = (function () {
       && item.description_audio !== undefined
     )
 
+    if (data.length !== json.length) {
+      logger.error('Some rows are invalid in parseAudioFail')
+    }
+
     if (data.length === 0) return
 
-    return await aggregate(data, async item => {
+    const result = await aggregate(data, async item => {
 
       let duration = parseInt(item.duration_audio);
       if (isNaN(duration)) duration = 0
@@ -699,9 +802,11 @@ const ImportService = (function () {
 
       try {
 
-        audioFailService.create(content)
+        await audioFailService.create(content)
 
       } catch (e) {
+
+        logger.error(e)
 
         return {
           message: `Аудио-фейл ${content.name} содержит ошибки`
@@ -709,6 +814,11 @@ const ImportService = (function () {
 
       }
     })
+
+    return {
+      result,
+      warnings: []
+    }
   }
 
   Service.prototype.parseAudioFailEn = async function (sheet) {

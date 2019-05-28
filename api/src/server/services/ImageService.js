@@ -4,16 +4,16 @@ const ImageService = (function () {
 
   function Service() {}
 
-  Service.prototype.create = function (content) {
+  Service.prototype.create = async function (content) {
 
     const entity = new Image()
 
-    this.update(entity, content)
+    await this.update(entity, content)
 
     return entity.toObject()
   }
 
-  Service.prototype.update = function (entity, content) {
+  Service.prototype.update = async function (entity, content) {
 
     entity.set(content)
 
@@ -26,7 +26,7 @@ const ImageService = (function () {
       }
     }
 
-    entity.save()
+    await entity.save()
   }
 
   return new Service();

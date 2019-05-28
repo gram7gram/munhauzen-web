@@ -3,6 +3,7 @@ const chapterService = require('../services/ChapterService')
 const Chapter = require('../../database/model/Chapter').Chapter;
 const checkId = require('../services/RequestParamsValidator').checkId
 const router = new express.Router();
+const logger = require('../../logger');
 
 router.get('/chapters', async (req, res) => {
 
@@ -14,6 +15,9 @@ router.get('/chapters', async (req, res) => {
       count: items.length
     })
   } catch (e) {
+
+    logger.error(e)
+
     res.status(500).json(e)
   }
 })
@@ -33,6 +37,9 @@ router.get('/chapters/:id', checkId, async (req, res) => {
     res.status(200).json(entity)
 
   } catch (e) {
+
+    logger.error(e)
+
     res.status(500).json(e)
   }
 })
@@ -41,11 +48,14 @@ router.post('/chapters', async (req, res) => {
 
   try {
 
-    const entity = chapterService.create(req.body)
+    const entity = await chapterService.create(req.body)
 
     res.status(201).json(entity)
 
   } catch (e) {
+
+    logger.error(e)
+
     res.status(500).json(e)
   }
 })
@@ -61,11 +71,14 @@ router.put('/chapters/:id', checkId, async (req, res) => {
       return
     }
 
-    chapterService.update(entity, req.body)
+    await chapterService.update(entity, req.body)
 
     res.status(200).json(entity.toObject())
 
   } catch (e) {
+
+    logger.error(e)
+
     res.status(500).json(e)
   }
 })
@@ -78,6 +91,9 @@ router.delete('/chapters/:id', checkId, async (req, res) => {
     res.status(204).json(null)
 
   } catch (e) {
+
+    logger.error(e)
+
     res.status(500).json(e)
   }
 })

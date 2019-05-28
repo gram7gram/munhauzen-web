@@ -62,7 +62,7 @@ describe('ScenarioRESTController', () => {
 
   afterEach(tearDown)
 
-  it('GET /api/v1/scenario is successful', (done) => {
+  it('GET /api/v1/scenario is successful', async done => {
 
     app.get('/api/v1/scenario')
       .end((err, res) => {
@@ -75,7 +75,7 @@ describe('ScenarioRESTController', () => {
       });
   })
 
-  it('POST /api/v1/scenario is successful', (done) => {
+  it('POST /api/v1/scenario is successful', async done => {
 
     app.post('/api/v1/scenario')
       .type('application/json')
@@ -89,9 +89,9 @@ describe('ScenarioRESTController', () => {
       });
   })
 
-  it('GET /api/v1/scenario/:id is successful', (done) => {
+  it('GET /api/v1/scenario/:id is successful', async done => {
 
-    const entity = scenarioService.create(dummy)
+    const entity = await scenarioService.create(dummy)
 
     app.get(`/api/v1/scenario/${entity._id}`)
       .end((err, res) => {
@@ -102,9 +102,9 @@ describe('ScenarioRESTController', () => {
       });
   })
 
-  it('PUT /api/v1/scenario/:id is successful', (done) => {
+  it('PUT /api/v1/scenario/:id is successful', async done => {
 
-    const entity = scenarioService.create(dummy)
+    const entity = await scenarioService.create(dummy)
 
     const changes = {
       inventoryAdd: cid(12).toUpperCase()
@@ -122,9 +122,9 @@ describe('ScenarioRESTController', () => {
       });
   })
 
-  it('DELETE /api/v1/scenario/:id is successful', (done) => {
+  it('DELETE /api/v1/scenario/:id is successful', async done => {
 
-    const entity = scenarioService.create(dummy)
+    const entity = await scenarioService.create(dummy)
 
     app.del(`/api/v1/scenario/${entity._id}`)
       .end((err, res) => {
