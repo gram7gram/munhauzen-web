@@ -23,7 +23,7 @@ class Home extends PureComponent {
 
     this.props.dispatch(Upload(file))
 
-    e.target.files = null
+    e.target.value = null
   }
 
   renderErrors() {

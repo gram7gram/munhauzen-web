@@ -9,13 +9,6 @@ const Scenario = require('../../database/model/Scenario').Scenario;
 
 const logger = require('../../logger');
 
-const audioService = require('./AudioService');
-const audioFailService = require('./AudioFailService');
-const inventoryService = require('./InventoryService');
-const chapterService = require('./ChapterService');
-const imageService = require('./ImageService');
-const scenarioService = require('./ScenarioService');
-
 const aggregate = async function (data, callback) {
   return await Promise.all(data.map(callback))
 }
@@ -110,19 +103,7 @@ const ImportService = (function () {
 
     if (data.length === 0) return
 
-    const unique = {}, warnings = []
-
-    logger.info('======')
-
-    data.forEach(item => {
-      if (item.id_option) {
-        if (unique[item.id_option] === true) {
-          logger.error('Дубликат ' + item.id_option)
-        } else {
-          unique[item.id_option] = true
-        }
-      }
-    })
+    const warnings = [], scenarios = {}
 
     let currentScenario, currentAction
 
@@ -263,23 +244,29 @@ const ImportService = (function () {
       return scenario
     }
 
-    const saveScenario = async scenario => {
+    const saveScenario = async content => {
 
       try {
 
-        await scenarioService.create(scenario)
+        await Scenario.findOneAndUpdate({name: content.name}, content, {
+          upsert: true, new: true, runValidators: true
+        })
 
       } catch (e) {
 
         logger.error(e)
 
+        if (e && e.code === 11000) {
+          return {
+            message: `Сценарий ${content.name} уже существует`
+          }
+        }
+
         return {
-          message: `Сценарий ${scenario.name} содержит ошибки`
+          message: `Сценарий ${content.name} содержит ошибки`
         }
       }
     }
-
-    const scenarios = {}
 
     data.forEach(item => {
 
@@ -361,7 +348,7 @@ const ImportService = (function () {
         })
       }
 
-      const chapter = {
+      const content = {
         name: item.chapter_id.trim(),
         icon: item.icon_chapter ? item.icon_chapter.trim() : null,
         translations
@@ -369,14 +356,22 @@ const ImportService = (function () {
 
       try {
 
-        await chapterService.create(chapter)
+        await Chapter.findOneAndUpdate({name: content.name}, content, {
+          upsert: true, new: true, runValidators: true
+        })
 
       } catch (e) {
 
         logger.error(e)
 
+        if (e && e.code === 11000) {
+          return {
+            message: `Глава ${content.name} уже существует`
+          }
+        }
+
         return {
-          message: `Глава ${chapter.name} содержит ошибки`
+          message: `Глава ${content.name} содержит ошибки`
         }
 
       }
@@ -427,17 +422,20 @@ const ImportService = (function () {
       }
 
       try {
-        const entity = await Inventory.findOne({name: content.name})
 
-        if (entity) {
-          await inventoryService.update(entity, content)
-        } else {
-          await inventoryService.create(content)
-        }
+        await Inventory.findOneAndUpdate({name: content.name, isMenu: true}, content, {
+          upsert: true, new: true, runValidators: true
+        })
 
       } catch (e) {
 
         logger.error(e)
+
+        if (e && e.code === 11000) {
+          return {
+            message: `Инвентарь ${content.name} уже существует`
+          }
+        }
 
         return {
           message: `Инвентарь ${content.name} содержит ошибки`
@@ -494,17 +492,19 @@ const ImportService = (function () {
 
       try {
 
-        const entity = await Inventory.findOne({name: content.name})
-
-        if (entity) {
-          await inventoryService.update(entity, content)
-        } else {
-          await inventoryService.create(content)
-        }
+        await Inventory.findOneAndUpdate({name: content.name}, content, {
+          upsert: true, new: true, runValidators: true
+        })
 
       } catch (e) {
 
         logger.error(e)
+
+        if (e && e.code === 11000) {
+          return {
+            message: `Инвентарь ${content.name} уже существует`
+          }
+        }
 
         return {
           message: `Инвентарь ${content.name} содержит ошибки`
@@ -598,11 +598,19 @@ const ImportService = (function () {
 
       try {
 
-        await inventoryService.create(content)
+        await Inventory.findOneAndUpdate({name: content.name}, content, {
+          upsert: true, new: true, runValidators: true
+        })
 
       } catch (e) {
 
         logger.error(e)
+
+        if (e && e.code === 11000) {
+          return {
+            message: `Инвентарь ${content.name} уже существует`
+          }
+        }
 
         return {
           message: `Инвентарь ${content.name} содержит ошибки`
@@ -681,11 +689,19 @@ const ImportService = (function () {
 
       try {
 
-        await imageService.create(content)
+        await Image.findOneAndUpdate({name: content.name}, content, {
+          upsert: true, new: true, runValidators: true
+        })
 
       } catch (e) {
 
         logger.error(e)
+
+        if (e && e.code === 11000) {
+          return {
+            message: `Картинка ${content.name} уже существует`
+          }
+        }
 
         return {
           message: `Картинка ${content.name} содержит ошибки`
@@ -734,11 +750,19 @@ const ImportService = (function () {
 
       try {
 
-        await audioService.create(content)
+        await Audio.findOneAndUpdate({name: content.name}, content, {
+          upsert: true, new: true, runValidators: true
+        })
 
       } catch (e) {
 
         logger.error(e)
+
+        if (e && e.code === 11000) {
+          return {
+            message: `Аудио ${content.name} уже существует`
+          }
+        }
 
         return {
           message: `Аудио ${content.name} содержит ошибки`
@@ -802,11 +826,19 @@ const ImportService = (function () {
 
       try {
 
-        await audioFailService.create(content)
+        await AudioFail.findOneAndUpdate({name: content.name}, content, {
+          upsert: true, new: true, runValidators: true
+        })
 
       } catch (e) {
 
         logger.error(e)
+
+        if (e && e.code === 11000) {
+          return {
+            message: `Аудио-фейл ${content.name} уже существует`
+          }
+        }
 
         return {
           message: `Аудио-фейл ${content.name} содержит ошибки`

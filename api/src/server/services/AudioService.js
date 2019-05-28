@@ -17,7 +17,7 @@ const AudioService = (function () {
 
     entity.set(content)
 
-    const validator = entity.validateSync();
+    const validator = await entity.validate();
     if (validator) {
       throw {
         code: 400,
