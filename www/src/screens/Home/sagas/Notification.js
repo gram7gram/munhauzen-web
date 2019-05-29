@@ -4,7 +4,7 @@ import i18n from '../../../i18n'
 import * as Actions from '../actions'
 
 function alertSuccess() {
-  toastr.success(i18n.t('notifications.success_title'))
+  toastr.success(i18n.t('placeholders.success'))
 }
 
 function alertError() {
