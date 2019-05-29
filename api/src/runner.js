@@ -1,6 +1,8 @@
 const logger = require('./logger')
 const parameters = require('../parameters')
 
+logger.info(`Starting app in ${process.env.NODE_ENV} environment...`)
+
 process.on('unhandledRejection', (reason, p) => {
   logger.error(
     "Unhandled Rejection at:\r\n"

@@ -3,10 +3,12 @@ const env = process.env.NODE_ENV || 'production'
 const config = {
   development: {
     port: 80,
+    host: 'http://0.0.0.0:20000',
     mongoHost: 'mongodb://db/munhauzen',
   },
   production: {
     port: 80,
+    host: 'http://munhauzen-api.fingertips.cf',
     mongoHost: 'mongodb://db/munhauzen',
   }
 }

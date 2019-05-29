@@ -106,6 +106,8 @@
     "loading": "Загрузка...",
     "import_file": "Импортировать",
     "export_file": "Экспортировать",
+    "import_file_in_progress": "Обработка файла...",
+    "export_file_in_progress": "Создание архива...",
     "name": "Название",
     "file": "Файл",
     "description": "Описание",

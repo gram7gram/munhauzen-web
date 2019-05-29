@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import random from 'random';
 import {createStructuredSelector} from "reselect";
 import i18n from "../../i18n";
+import parameters from "../../parameters";
 
 import Upload from "./actions/Upload";
 import Download from "./actions/Download";
@@ -36,11 +37,11 @@ class Home extends PureComponent {
 
   renderErrors() {
 
-    const {serverResult} = this.props.Home
+    const {uploadResult} = this.props.Home
 
     return <div className="p-2 bg-dark">
 
-      {serverResult.map((result, key) => {
+      {uploadResult.map((result, key) => {
 
         const hasErrors = result.errors.length > 0
         const hasWarnings = result.warnings.length > 0
@@ -76,7 +77,7 @@ class Home extends PureComponent {
 
   render() {
 
-    const {isUploading, isDownloading, serverResult} = this.props.Home
+    const {isUploading, isDownloading, uploadResult} = this.props.Home
 
     return <div className="container-fluid my-2 py-3">
       <div className="row">
@@ -90,7 +91,7 @@ class Home extends PureComponent {
 
                   <label className={"btn btn-block btn-warning mb-2" + (isUploading ? " disabled" : "")}>
                     <i className={isUploading ? "fa fa-spin fa-circle-o-notch" : "fa fa-upload"}/>
-                    &nbsp;{i18n.t('placeholders.import_file')}
+                    &nbsp;{!isUploading ? i18n.t('placeholders.import_file') : i18n.t('placeholders.import_file_in_progress')}
 
                     <input type="file"
                            disabled={isUploading}
@@ -106,7 +107,7 @@ class Home extends PureComponent {
                           disabled={isDownloading}
                           onClick={this.download}>
                     <i className={isDownloading ? "fa fa-spin fa-circle-o-notch" : "fa fa-download"}/>
-                    &nbsp;{i18n.t('placeholders.export_file')}
+                    &nbsp;{!isDownloading ? i18n.t('placeholders.export_file') : i18n.t('placeholders.export_file_in_progress')}
                   </button>
                 </div>
               </div>
@@ -114,15 +115,15 @@ class Home extends PureComponent {
               <div className="row">
                 <div className="col-6">
 
-                  <a href="/">
-                    <img src={gplay} alt="Get it on Google Play" className="img-fluid" rel="nofollow"/>
+                  <a href={parameters.gplayLink} rel="nofollow">
+                    <img src={gplay} alt="Get it on Google Play" className="img-fluid"/>
                   </a>
 
                 </div>
                 <div className="col-6">
 
-                  <a href="/">
-                    <img src={apPStore} alt="Get it on App Store" className="img-fluid" rel="nofollow"/>
+                  <a href={parameters.appStoreLink} rel="nofollow">
+                    <img src={apPStore} alt="Get it on App Store" className="img-fluid"/>
                   </a>
                 </div>
               </div>
@@ -130,7 +131,7 @@ class Home extends PureComponent {
 
             <div className="col-7">
 
-              {serverResult.length > 0
+              {uploadResult && uploadResult.length > 0
                 ? this.renderErrors()
                 : <img src={images[random.int(0, images.length - 1)]}
                        alt="Random image"
