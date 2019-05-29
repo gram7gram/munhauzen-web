@@ -4,6 +4,4 @@ WORKDIR /var/www
 
 ENV NODE_ENV=production
 
-RUN npm i --silent
-
 CMD ["pm2-runtime", "start", "ecosystem.config.js"]
