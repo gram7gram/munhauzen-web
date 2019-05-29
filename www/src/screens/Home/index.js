@@ -6,10 +6,14 @@ import {createStructuredSelector} from "reselect";
 import i18n from "../../i18n";
 
 import Upload from "./actions/Upload";
+import Download from "./actions/Download";
 
 import img1 from "../../assets/images/Жене.jpg";
 import img2 from "../../assets/images/Космос.jpg";
 import img3 from "../../assets/images/Лопата_Рішуче.jpg";
+
+import gplay from "../../assets/images/gplay.png";
+import apPStore from "../../assets/images/app-store.png";
 
 const images = [
   img1, img2, img3
@@ -24,6 +28,10 @@ class Home extends PureComponent {
     this.props.dispatch(Upload(file))
 
     e.target.value = null
+  }
+
+  download = () => {
+    this.props.dispatch(Download())
   }
 
   renderErrors() {
@@ -75,26 +83,49 @@ class Home extends PureComponent {
         <div className="col-8 mx-auto">
           <div className="row">
             <div className="col-5 text-center">
-              <h1 className="my-3">{i18n.t('home.title')}</h1>
+              <h1 className="my-4">{i18n.t('home.title')}</h1>
 
-              <label className={"btn btn-block btn-warning mb-2" + (isUploading ? " disabled" : "")}>
-                <i className={isUploading ? "fa fa-spin fa-circle-o-notch" : "fa fa-upload"}/>
-                &nbsp;{i18n.t('placeholders.import_file')}
+              <div className="row mb-4">
+                <div className="col-12">
 
-                <input type="file"
-                       disabled={isUploading}
-                       onChange={this.upload}
-                       className="d-none"
-                       accept={'application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}
-                       min={1}
-                       max={1}/>
+                  <label className={"btn btn-block btn-warning mb-2" + (isUploading ? " disabled" : "")}>
+                    <i className={isUploading ? "fa fa-spin fa-circle-o-notch" : "fa fa-upload"}/>
+                    &nbsp;{i18n.t('placeholders.import_file')}
 
-              </label>
+                    <input type="file"
+                           disabled={isUploading}
+                           onChange={this.upload}
+                           className="d-none"
+                           accept={'application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}
+                           min={1}
+                           max={1}/>
 
-              <button className="btn btn-block btn-success mb-2" disabled={isDownloading}>
-                <i className={isDownloading ? "fa fa-spin fa-circle-o-notch" : "fa fa-download"}/>
-                &nbsp;{i18n.t('placeholders.export_file')}
-              </button>
+                  </label>
+
+                  <button className="btn btn-block btn-success mb-2"
+                          disabled={isDownloading}
+                          onClick={this.download}>
+                    <i className={isDownloading ? "fa fa-spin fa-circle-o-notch" : "fa fa-download"}/>
+                    &nbsp;{i18n.t('placeholders.export_file')}
+                  </button>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-6">
+
+                  <a href="/">
+                    <img src={gplay} alt="Get it on Google Play" className="img-fluid" rel="nofollow"/>
+                  </a>
+
+                </div>
+                <div className="col-6">
+
+                  <a href="/">
+                    <img src={apPStore} alt="Get it on App Store" className="img-fluid" rel="nofollow"/>
+                  </a>
+                </div>
+              </div>
             </div>
 
             <div className="col-7">
@@ -102,7 +133,7 @@ class Home extends PureComponent {
               {serverResult.length > 0
                 ? this.renderErrors()
                 : <img src={images[random.int(0, images.length - 1)]}
-                       alt=""
+                       alt="Random image"
                        className="img-fluid shadow mx-auto"/>
               }
             </div>

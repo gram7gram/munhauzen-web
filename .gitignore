@@ -6,12 +6,11 @@ api/node_modules
 
 npm-debug.log*
 
-www/.env
-api/.env
 www/package-lock.json
 api/package-lock.json
 
 www/src/parameters.js
+api/src/parameters.js
 
 docker-compose.yml
 api/env/Dockerfile
@@ -20,3 +19,5 @@ www/env/Dockerfile
 api/logs/*.log
 
 .persistency
+
+api/public/downloads/*.zip

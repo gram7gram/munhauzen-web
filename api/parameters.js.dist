@@ -1,0 +1,14 @@
+const env = process.env.NODE_ENV || 'production'
+
+const config = {
+  development: {
+    port: 80,
+    mongoHost: 'mongodb://db/munhauzen',
+  },
+  production: {
+    port: 80,
+    mongoHost: 'mongodb://db/munhauzen',
+  }
+}
+
+module.exports = config[env]

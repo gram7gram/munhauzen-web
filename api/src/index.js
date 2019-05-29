@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path')
 const cors = require('cors')
 
 const AudioFailsRESTController = require('./server/controllers/AudioFailsRESTController');
@@ -9,6 +10,7 @@ const ScenarioRESTController = require('./server/controllers/ScenarioRESTControl
 const InventoryRESTController = require('./server/controllers/InventoryRESTController');
 const ChapterRESTController = require('./server/controllers/ChapterRESTController');
 const ImportController = require('./server/controllers/ImportController');
+const ExportController = require('./server/controllers/ExportController');
 
 const ErrorLogger = require('./server/services/ErrorLogger');
 
@@ -24,6 +26,9 @@ app.use('/api/v1', ScenarioRESTController);
 app.use('/api/v1', InventoryRESTController);
 app.use('/api/v1', ChapterRESTController);
 app.use('/api/v1', ImportController);
+app.use('/api/v1', ExportController);
+
+app.use(express.static(path.resolve(__dirname, `../public`)))
 
 app.all('*', (req, res) => {
   res.status(404).json({

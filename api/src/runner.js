@@ -1,5 +1,5 @@
-const path = require('path')
 const logger = require('./logger')
+const parameters = require('../parameters')
 
 process.on('unhandledRejection', (reason, p) => {
   logger.error(
@@ -9,16 +9,12 @@ process.on('unhandledRejection', (reason, p) => {
   )
 })
 
-require('dotenv').config({
-  path: path.resolve(__dirname, `../.env`)
-})
-
 const db = require('./database/mongo');
 
 db.connect()
 
 const server = require('./index');
 
-server.listen(process.env.PORT, () => {
+server.listen(parameters.port, () => {
   logger.info('Server started')
 })
