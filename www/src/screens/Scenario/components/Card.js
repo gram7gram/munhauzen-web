@@ -51,6 +51,7 @@ class Card extends PureComponent {
           ? <Link to={Pages.CHAPTER_EDIT.replace(':id', chapter._id)}>{chapter.name}</Link>
           : <span className="text-danger">{scenario.chapter}</span>}
       </td>
+      <td>{scenario.interaction || ''}</td>
       <td>
         {scenario.images.map((scenarioImage, key) => {
 
@@ -59,16 +60,15 @@ class Card extends PureComponent {
             : null
 
           return <div key={key}>
-            #{key + 1}
-            &nbsp;
+            {key + 1}.&nbsp;
 
             {match
-              ? <Link to={Pages.IMAGE_EDIT.replace(':id', match._id)}>{match.name}</Link>
-              : null}
-
-            {!match && scenarioImage.image !== 'Last'
-              ? <span className="text-danger">{scenarioImage.image}</span>
-              : <span>{scenarioImage.image}</span>}
+              ? (
+                match.isReserved
+                  ? <span>{match.name}</span>
+                  : <Link to={Pages.IMAGE_EDIT.replace(':id', match._id)}>{match.name}</Link>
+              )
+              : <span className="text-danger">{scenarioImage.image}</span>}
 
           </div>
         })}
@@ -81,8 +81,7 @@ class Card extends PureComponent {
             : null
 
           return <div key={key}>
-            #{key + 1}
-            &nbsp;
+            {key + 1}.&nbsp;
 
             {match
               ? <Link to={Pages.AUDIO_EDIT.replace(':id', match._id)}>{match.name}</Link>
@@ -94,6 +93,7 @@ class Card extends PureComponent {
           </div>
         })}
       </td>
+      <td>{scenario.action}</td>
       <td>
         {scenario.decisions.map((decision, key) => {
 
@@ -115,13 +115,7 @@ class Card extends PureComponent {
           }
 
           return <div key={key}>
-
-            #{key + 1}
-            &nbsp;
-
-            {decision.action}
-
-            &nbsp;-&nbsp;
+            {key + 1}.&nbsp;
 
             {match
               ? <Link to={Pages.SCENARIO_EDIT.replace(':id', decision.scenario)}>{name}</Link>

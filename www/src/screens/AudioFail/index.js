@@ -60,6 +60,7 @@ class AudioFail extends Component {
 
       displayedItems = items.filter(item =>
         item.name.toLowerCase().indexOf(query) !== -1
+        || (item.locale && item.locale.toLowerCase().indexOf(query) !== -1)
         || (item.description && item.description.toLowerCase().indexOf(query) !== -1)
       )
     } else {
@@ -88,6 +89,7 @@ class AudioFail extends Component {
         <tr>
           <th colSpan={2}>{i18n.t('placeholders.name')}</th>
           <th>{i18n.t('audio_edit.audio')}</th>
+          <th>{i18n.t('audio_fail_edit.locale')}</th>
         </tr>
         </thead>
         <tbody>

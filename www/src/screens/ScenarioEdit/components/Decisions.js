@@ -7,11 +7,6 @@ import {createStructuredSelector} from 'reselect'
 import i18n from '../../../i18n'
 import {ADD_DECISION, CHANGE_DECISION, REMOVE_DECISION} from "../actions";
 
-const actionOptions = [
-  {value: 'CLICK', label: 'CLICK'},
-  {value: 'GOTO', label: 'GOTO'},
-]
-
 const toScenarioLabel = (scenario, locale) => {
 
   let label = scenario.name
@@ -48,16 +43,6 @@ class Decisions extends Component {
       cid,
       payload: {
         inventoryAbsent: selected.map(item => item.value)
-      }
-    })
-  }
-
-  setDecisionAction = cid => selected => {
-    this.props.dispatch({
-      type: CHANGE_DECISION,
-      cid,
-      payload: {
-        action: selected ? selected.value : null
       }
     })
   }
@@ -178,20 +163,6 @@ class Decisions extends Component {
                           : null}
                         options={scenarioOptions}/>
                       {this.getError('scenario_' + decision.cid)}
-                    </div>
-                  </div>
-
-                  <div className="col-6">
-                    <div className="form-group">
-                      <label>{i18n.t('scenario_edit.action')}</label>
-                      <Select
-                        onChange={this.setDecisionAction(decision.cid)}
-                        value={decision.action ? {
-                          value: decision.action,
-                          label: decision.action
-                        } : null}
-                        options={actionOptions}/>
-                      {this.getError('action_' + decision.cid)}
                     </div>
                   </div>
 

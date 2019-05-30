@@ -18,10 +18,6 @@ class Card extends PureComponent {
 
     const {fail, locale, audio} = this.props
 
-    const trans = fail.translations !== undefined && fail.translations
-      ? fail.translations.find(item => item.locale === locale)
-      : null
-
     const match = fail.audio
       ? audio.find(item => item.name === fail.audio)
       : null
@@ -42,15 +38,14 @@ class Card extends PureComponent {
       </td>
       <td>
         <div>{fail.name}</div>
-        {trans
-          ? <div className="small text-muted">{trans.text}</div>
-          : null}
+        <div className="small text-muted">{fail.description}</div>
       </td>
       <td>
         {match
           ? <Link to={Pages.AUDIO_EDIT.replace(':id', match._id)}>{match.name}</Link>
           : <span className="text-danger">{fail.audio}</span>}
       </td>
+      <td>{fail.locale}</td>
     </tr>
   }
 }

@@ -31,6 +31,8 @@
     "chapter": "Глава",
     "scenario": "Сценарий",
     "action": "Действие",
+    "interaction": "Фишка",
+    "audio_not_found_placeholder": "(не существует)",
     "inventoryRequired": "Инвентарь, что обязательно должен игрок иметь",
     "inventoryAbsent": "Инвентарь, что обязательно игрок не должен иметь"
   },
@@ -82,7 +84,8 @@
     "audio": "Аудио для текущего фейла"
   },
   "images": {
-    "title": "Картинки"
+    "title": "Картинки",
+    "isReserved": "Заблокировано"
   },
   "image_edit": {
     "title": "Редакт. картинки",

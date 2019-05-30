@@ -13,31 +13,26 @@ const params = {
 
 const connect = (host, opts = {}) => {
 
-  //opts.useMongoClient = true
   opts.useNewUrlParser = true
   opts.useFindAndModify = false
 
-  mongoose.connect(host, opts);
+  mongoose.connect(host, opts).catch(e => {
+    logger.error(e)
+  })
 }
-
-mongoose.connection.on('connecting', () => {
-
-  //console.log(`Establishing connection with mongo database @ ${host}`);
-
-});
 
 mongoose.connection.on('connected', () => {
 
   logger.info(`Connected with mongo database @ ${host}`);
 
-});
+})
 
 mongoose.connection.on('error', (err) => {
 
   logger.error(`Error with mongo database @ ${host}`);
   logger.error(err.stack);
 
-});
+})
 
 mongoose.connection.on('disconnected', () => {
 
@@ -53,6 +48,8 @@ module.exports = {
     connect(host, params)
   },
   disconnect: (done) => {
-    mongoose.disconnect(done);
+    mongoose.disconnect(done).catch(e => {
+      logger.error(e)
+    });
   },
 };

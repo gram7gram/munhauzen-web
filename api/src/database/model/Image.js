@@ -22,12 +22,16 @@ const schema = new mongoose.Schema({
   },
   file: {
     type: String,
-    unique: false,
     required: true
   },
   type: {
     type: String,
     enum: [null, 'default', 'color', 'bonus', 'statue'],
+    required: false
+  },
+  isReserved: {
+    type: Boolean,
+    default: false,
     required: false
   },
   isAnimation: {
@@ -38,9 +42,12 @@ const schema = new mongoose.Schema({
     type: Boolean,
     required: false
   },
-  translations: [
-    Translation
-  ],
+  translations: {
+    type: [
+      Translation
+    ],
+    required: false
+  },
 })
 
 const Image = mongoose.model('Image', schema)

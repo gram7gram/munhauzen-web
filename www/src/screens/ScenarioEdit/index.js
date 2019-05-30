@@ -20,6 +20,11 @@ import Decisions from "./components/Decisions";
 import Audio from "./components/Audio";
 import Images from "./components/Images";
 
+const actionOptions = [
+  {value: 'CLICK', label: 'CLICK'},
+  {value: 'GOTO', label: 'GOTO'},
+]
+
 class ScenarioEdit extends Component {
 
   componentDidMount() {
@@ -88,6 +93,10 @@ class ScenarioEdit extends Component {
         [key]: value
       }
     })
+  }
+
+  setAction = selected => {
+    this.change('action', selected ? selected.value : null)
   }
 
   setChapter = selected => {
@@ -188,6 +197,18 @@ class ScenarioEdit extends Component {
                   label: item.name
                 }))}/>
               {this.getError('chapter')}
+            </div>
+
+            <div className="form-group">
+              <label>{i18n.t('scenario_edit.action')}</label>
+              <Select
+                onChange={this.setAction}
+                value={model.action ? {
+                  value: model.action,
+                  label: model.action
+                } : null}
+                options={actionOptions}/>
+              {this.getError('action')}
             </div>
 
             <ul className="nav nav-tabs mb-2">

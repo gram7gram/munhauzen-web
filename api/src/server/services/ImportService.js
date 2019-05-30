@@ -7,6 +7,8 @@ const AudioFail = require('../../database/model/AudioFail').AudioFail;
 const Image = require('../../database/model/Image').Image;
 const Scenario = require('../../database/model/Scenario').Scenario;
 
+const imageService = require('../services/ImageService')
+
 const logger = require('../../logger');
 
 const aggregate = async function (data, callback) {
@@ -74,6 +76,8 @@ const ImportService = (function () {
 
     result = result.filter(e => e && e.sheet)
 
+    await imageService.restoreDefaults()
+
     return {
       hasErrors: !!result.find(item => item.errors.lenngth > 0),
       result
@@ -105,17 +109,28 @@ const ImportService = (function () {
 
     const warnings = [], scenarios = {}
 
-    let currentScenario, currentAction
+    let currentScenario
 
     const parseDecision = item => {
 
-      if (item.action) {
-        currentAction = item.action.trim().toUpperCase()
-      }
-
       const decision = {
         scenario: item.id_decisions.trim(),
-        action: currentAction
+        inventoryRequired: [],
+        inventoryAbsent: [],
+      }
+
+      if (decision.inventory_required !== undefined) {
+        decision.inventoryRequired = decision.inventory_required.trim().toUpperCase()
+          .split(',')
+          .map(item => item.trim())
+          .filter(item => !!item)
+      }
+
+      if (decision.inventory_abscent !== undefined) {
+        decision.inventoryAbsent = decision.inventory_abscent.trim().toUpperCase()
+          .split(',')
+          .map(item => item.trim())
+          .filter(item => !!item)
       }
 
       if (decision.scenario.indexOf('a') !== 0) {
@@ -123,13 +138,6 @@ const ImportService = (function () {
         warnings.push('Развитие сценария ' + decision.scenario + ' не начинается на "a"')
 
         decision.scenario = 'a' + decision.scenario.substr(1)
-      }
-
-      if (!decision.action) {
-
-        warnings.push('Развитие сценария ' + decision.scenario + ' без action')
-
-        decision.action = 'CLICK'
       }
 
       return decision
@@ -221,14 +229,15 @@ const ImportService = (function () {
       const scenario = {
         name: item.id_option.trim(),
         chapter: item.id_chapter.trim(),
+        action: item.action.trim().toUpperCase(),
         decisions: [],
         audio: [],
         images: [],
         translations
       }
 
-      if (item.interaction) {
-        scenario.interaction = item.interaction.trim().toUpperCase()
+      if (item.Interaction) {
+        scenario.interaction = item.Interaction.trim().toUpperCase()
       }
 
       if (scenario.name.indexOf('a') !== 0) {

@@ -167,8 +167,10 @@ class Scenario extends Component {
         <tr>
           <th colSpan={2}>{i18n.t('placeholders.name')}</th>
           <th>{i18n.t('scenario_edit.chapter')}</th>
+          <th>{i18n.t('scenario_edit.interaction')}</th>
           <th>{i18n.t('scenario_edit.images')}</th>
           <th>{i18n.t('scenario_edit.audio')}</th>
+          <th>{i18n.t('scenario_edit.action')}</th>
           <th>{i18n.t('scenario_edit.decisions')}</th>
         </tr>
         </thead>

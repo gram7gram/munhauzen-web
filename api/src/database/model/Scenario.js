@@ -16,12 +16,6 @@ const Decision = new mongoose.Schema({
     type: String,
     required: true
   },
-  action: {
-    type: String,
-    enum: ["CLICK", "GOTO"],
-    uppercase: true,
-    required: true
-  },
   inventoryRequired: {
     type: [String],
     uppercase: true,
@@ -76,6 +70,17 @@ const schema = new mongoose.Schema({
   chapter: {
     type: String,
     required: true
+  },
+  action: {
+    type: String,
+    enum: ["CLICK", "GOTO"],
+    uppercase: true,
+    required: true
+  },
+  interaction: {
+    type: String,
+    uppercase: true,
+    required: false
   },
   audio: {
     type: [Audio],

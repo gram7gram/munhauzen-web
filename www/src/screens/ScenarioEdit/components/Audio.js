@@ -91,9 +91,21 @@ class Audio extends Component {
 
           {Object.values(model.audio).map((item, key) => {
 
-            const selectedAudio = item.audio
-              ? this.props.audio.find(i => item.audio === i.name)
-              : null
+            let selectedAudio = null
+            if (item.audio) {
+              const match = this.props.audio.find(i => item.audio === i.name)
+              if (match) {
+                selectedAudio = {
+                  value: match.name,
+                  label: match.name
+                }
+              } else {
+                selectedAudio = {
+                  value: item.audio,
+                  label: item.audio + ' ' + i18n.t('scenario_edit.audio_not_found_placeholder'),
+                }
+              }
+            }
 
             return <div key={key} className="card mb-2">
 
@@ -119,10 +131,7 @@ class Audio extends Component {
                       <label>{i18n.t('scenario_edit.audio')}</label>
                       <Select
                         onChange={this.setAudio(item.cid)}
-                        value={selectedAudio ? {
-                          value: selectedAudio.name,
-                          label: selectedAudio.name
-                        } : null}
+                        value={selectedAudio}
                         options={audioOptions}/>
                       {this.getError('audio_' + item.cid)}
                     </div>

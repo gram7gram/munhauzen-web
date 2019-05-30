@@ -18,6 +18,11 @@ export default model => {
     validator.errors.chapter = i18n.t('validation.required')
   }
 
+  if (!model.action) {
+    ++validator.count
+    validator.errors.action = i18n.t('validation.required')
+  }
+
   const trans = Object.values(model.translations)
   if (trans.length === 0) {
     ++validator.count
@@ -69,11 +74,6 @@ export default model => {
     if (!item.scenario) {
       ++validator.count
       validator.errors['scenario_' + item.cid] = i18n.t('validation.required')
-    }
-
-    if (!item.action) {
-      ++validator.count
-      validator.errors['action_' + item.cid] = i18n.t('validation.required')
     }
   })
 

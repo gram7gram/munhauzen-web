@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
 import * as Pages from "../../../router/Pages";
 import {Link} from "react-router-dom";
+import i18n from "../../../i18n";
 import Remove from "../actions/Remove";
 import {createStructuredSelector} from "reselect";
 
@@ -23,18 +24,22 @@ class Card extends PureComponent {
       : null
 
     return <tr>
-      <td>
-        <Link
+      <td className="text-center">
+        {!image.isReserved ? <Link
           to={Pages.IMAGE_EDIT.replace(':id', image._id)}
           className="btn btn-icon btn-success btn-sm mr-1">
           <i className="fa fa-pencil"/>
-        </Link>
+        </Link> : null}
 
-        <button
+        {!image.isReserved ? <button
           className="btn btn-icon btn-outline-danger btn-sm"
           onClick={this.remove}>
           <i className="fa fa-times"/>
-        </button>
+        </button> : null}
+
+        {image.isReserved
+          ? <small className="text-secondary">{i18n.t('images.isReserved')}</small>
+          : null}
       </td>
       <td>
         <div>{image.name}</div>

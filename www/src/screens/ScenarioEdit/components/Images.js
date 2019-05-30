@@ -91,9 +91,22 @@ class Images extends Component {
 
           {Object.values(model.images).map((item, key) => {
 
-            const selectedImage = item.image
-              ? this.props.images.find(i => item.image === i.name)
-              : null
+            let selectedImage = null
+            if (item.image) {
+              const match = this.props.images.find(i => item.image === i.name)
+              if (match) {
+                selectedImage = {
+                  value: match.name,
+                  label: match.name
+                }
+              } else {
+                selectedImage = {
+                  value: item.image,
+                  label: item.image + ' ' + i18n.t('scenario_edit.audio_not_found_placeholder'),
+                  disabled: true,
+                }
+              }
+            }
 
             return <div key={key} className="card mb-2">
 
@@ -119,10 +132,7 @@ class Images extends Component {
                       <label>{i18n.t('scenario_edit.image')}</label>
                       <Select
                         onChange={this.setImage(item.cid)}
-                        value={selectedImage ? {
-                          value: selectedImage.name,
-                          label: selectedImage.name
-                        } : null}
+                        value={selectedImage}
                         options={imagesOptions}/>
                       {this.getError('image_' + item.cid)}
                     </div>

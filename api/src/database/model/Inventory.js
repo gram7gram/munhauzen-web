@@ -18,6 +18,11 @@ const schema = new mongoose.Schema({
     uppercase: true,
     required: true
   },
+  isGlobal: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
   isMenu: {
     type: Boolean,
     required: false,
@@ -30,7 +35,7 @@ const schema = new mongoose.Schema({
   },
   relatedScenario: {
     type: [String],
-    required: true
+    required: false
   },
   relatedInventory: {
     type: [String],

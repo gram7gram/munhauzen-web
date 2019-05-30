@@ -26,7 +26,7 @@ router.get('/images/:id', checkId, async (req, res) => {
 
   try {
 
-    const entity = await Image.findById(req.params.id).lean()
+    const entity = await Image.findOne({_id: req.params.id, isReserved: false}).lean()
     if (!entity) {
       res.status(404).json({
         message: 'not found',
@@ -63,7 +63,7 @@ router.post('/images', async (req, res) => {
 router.put('/images/:id', checkId, async (req, res) => {
   try {
 
-    const entity = await Image.findById(req.params.id)
+    const entity = await Image.findOne({_id: req.params.id, isReserved: false}).lean()
     if (!entity) {
       res.status(404).json({
         message: 'not found'
@@ -86,7 +86,7 @@ router.put('/images/:id', checkId, async (req, res) => {
 router.delete('/images/:id', checkId, async (req, res) => {
   try {
 
-    await Image.deleteOne({_id: req.params.id})
+    await Image.deleteOne({_id: req.params.id, isReserved: false})
 
     res.status(204).json(null)
 
