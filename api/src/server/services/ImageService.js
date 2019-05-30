@@ -13,7 +13,7 @@ const ImageService = (function () {
         isReserved: true
       }
 
-      await Image.findOneAndUpdate({name: content.name, isReserved: content.isReserved}, content, {
+      await Image.findOneAndUpdate({name: content.name}, content, {
         upsert: true, new: true, runValidators: false
       })
 
