@@ -28,7 +28,7 @@ export default id => (dispatch) => {
 
       dispatch({
         type: FETCH_ITEM_FAILURE,
-        payload: e.message
+        payload: e.response.data
       })
     })
 }

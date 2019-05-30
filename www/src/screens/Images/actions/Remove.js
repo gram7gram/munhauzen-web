@@ -31,7 +31,7 @@ export default (model, callback) => (dispatch) => {
 
       dispatch({
         type: Actions.REMOVE_ITEM_FAILURE,
-        payload: e.message
+        payload: e.response.data
       })
     })
 }

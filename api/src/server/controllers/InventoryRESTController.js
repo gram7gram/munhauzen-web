@@ -18,7 +18,10 @@ router.get('/inventory', async (req, res) => {
 
     logger.error(e)
 
-    res.status(500).json(e)
+    res.status(e.code > 400 ? e.code : 500).json({
+      ...e,
+      message: e.message || 'Ошибка...'
+    })
   }
 })
 
@@ -40,7 +43,10 @@ router.get('/inventory/:id', checkId, async (req, res) => {
 
     logger.error(e)
 
-    res.status(500).json(e)
+    res.status(e.code > 400 ? e.code : 500).json({
+      ...e,
+      message: e.message || 'Ошибка...'
+    })
   }
 })
 
@@ -56,7 +62,10 @@ router.post('/inventory', async (req, res) => {
 
     logger.error(e)
 
-    res.status(500).json(e)
+    res.status(e.code > 400 ? e.code : 500).json({
+      ...e,
+      message: e.message || 'Ошибка...'
+    })
   }
 })
 
@@ -79,7 +88,10 @@ router.put('/inventory/:id', checkId, async (req, res) => {
 
     logger.error(e)
 
-    res.status(500).json(e)
+    res.status(e.code > 400 ? e.code : 500).json({
+      ...e,
+      message: e.message || 'Ошибка...'
+    })
   }
 })
 
@@ -94,7 +106,10 @@ router.delete('/inventory/:id', checkId, async (req, res) => {
 
     logger.error(e)
 
-    res.status(500).json(e)
+    res.status(e.code > 400 ? e.code : 500).json({
+      ...e,
+      message: e.message || 'Ошибка...'
+    })
   }
 })
 

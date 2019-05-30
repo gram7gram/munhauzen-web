@@ -31,7 +31,10 @@ router.post('/import', fileUpload(), async (req, res) => {
 
     logger.error(e);
 
-    res.status(500).json(e)
+    res.status(e.code > 400 ? e.code : 500).json({
+      ...e,
+      message: e.message || 'Ошибка...'
+    })
   }
 })
 

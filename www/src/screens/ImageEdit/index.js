@@ -69,8 +69,6 @@ class ImageEdit extends Component {
 
   setType = selected => this.change('type', selected ? selected.value : null)
 
-  changeSelect = name => e => this.change(name, e.target.value)
-
   changeBool = name => e => this.change(name, e.target.checked)
 
   changeString = name => e => this.change(name, e.target.value)

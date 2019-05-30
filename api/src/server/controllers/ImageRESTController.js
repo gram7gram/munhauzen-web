@@ -18,7 +18,10 @@ router.get('/images', async (req, res) => {
 
     logger.error(e)
 
-    res.status(500).json(e)
+    res.status(e.code > 400 ? e.code : 500).json({
+      ...e,
+      message: e.message || 'Ошибка...'
+    })
   }
 })
 
@@ -26,7 +29,7 @@ router.get('/images/:id', checkId, async (req, res) => {
 
   try {
 
-    const entity = await Image.findOne({_id: req.params.id, isReserved: false}).lean()
+    const entity = await Image.findOne({_id: req.params.id, isReserved: {$ne: true}}).lean()
     if (!entity) {
       res.status(404).json({
         message: 'not found',
@@ -40,7 +43,10 @@ router.get('/images/:id', checkId, async (req, res) => {
 
     logger.error(e)
 
-    res.status(500).json(e)
+    res.status(e.code > 400 ? e.code : 500).json({
+      ...e,
+      message: e.message || 'Ошибка...'
+    })
   }
 })
 
@@ -56,7 +62,10 @@ router.post('/images', async (req, res) => {
 
     logger.error(e)
 
-    res.status(500).json(e)
+    res.status(e.code > 400 ? e.code : 500).json({
+      ...e,
+      message: e.message || 'Ошибка...'
+    })
   }
 })
 
@@ -79,7 +88,10 @@ router.put('/images/:id', checkId, async (req, res) => {
 
     logger.error(e)
 
-    res.status(500).json(e)
+    res.status(e.code > 400 ? e.code : 500).json({
+      ...e,
+      message: e.message || 'Ошибка...'
+    })
   }
 })
 
@@ -94,7 +106,10 @@ router.delete('/images/:id', checkId, async (req, res) => {
 
     logger.error(e)
 
-    res.status(500).json(e)
+    res.status(e.code > 400 ? e.code : 500).json({
+      ...e,
+      message: e.message || 'Ошибка...'
+    })
   }
 })
 

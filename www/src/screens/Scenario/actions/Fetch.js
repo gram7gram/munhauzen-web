@@ -30,7 +30,7 @@ export default filters => (dispatch) => {
 
       dispatch({
         type: FETCH_ITEMS_FAILURE,
-        payload: e.message
+        payload: e.response.data
       })
     })
 }
