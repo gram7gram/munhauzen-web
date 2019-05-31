@@ -103,6 +103,8 @@ class ScenarioEdit extends Component {
     this.change('chapter', selected ? selected.value : null)
   }
 
+  changeBool = name => e => this.change(name, e.target.checked)
+
   changeString = name => e => this.change(name, e.target.value)
 
   changeLocaleString = name => e => {
@@ -174,14 +176,34 @@ class ScenarioEdit extends Component {
 
           <div className="col-12">
 
-            <div className="form-group">
-              <label>{i18n.t('placeholders.name')}</label>
-              <input
-                type="text"
-                className="form-control form-control-sm"
-                value={model.name || ''}
-                onChange={this.changeString('name')}/>
-              {this.getError('name')}
+            <div className="row">
+              <div className="col-8">
+
+                <div className="form-group">
+                  <label>{i18n.t('placeholders.name')}</label>
+                  <input
+                    type="text"
+                    className="form-control form-control-sm"
+                    value={model.name || ''}
+                    onChange={this.changeString('name')}/>
+                  {this.getError('name')}
+                </div>
+
+              </div>
+              <div className="col-4">
+
+                <div className="form-group">
+                  <label className=" mt-4">
+                    <input
+                      type="checkbox"
+                      checked={model.isBegin}
+                      onChange={this.changeBool('isBegin')}/>
+                    &nbsp;{i18n.t('scenario_edit.isBegin')}
+                  </label>
+                  {this.getError('isBegin')}
+                </div>
+
+              </div>
             </div>
 
             <div className="form-group">

@@ -32,6 +32,7 @@
     "scenario": "Сценарий",
     "action": "Действие",
     "interaction": "Фишка",
+    "isBegin": "Стартовый сценарий игры",
     "audio_not_found_placeholder": "(не существует)",
     "inventoryRequired": "Инвентарь, что обязательно должен игрок иметь",
     "inventoryAbsent": "Инвентарь, что обязательно игрок не должен иметь"

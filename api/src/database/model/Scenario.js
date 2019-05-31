@@ -69,13 +69,21 @@ const schema = new mongoose.Schema({
   },
   chapter: {
     type: String,
-    required: true
+    required: false
+  },
+  isBegin: {
+    type: Boolean,
+    required: false
+  },
+  isReserved: {
+    type: Boolean,
+    required: false
   },
   action: {
     type: String,
     enum: ["CLICK", "GOTO"],
     uppercase: true,
-    required: true
+    required: false
   },
   interaction: {
     type: String,
@@ -92,11 +100,11 @@ const schema = new mongoose.Schema({
   },
   decisions: {
     type: [Decision],
-    required: true
+    required: false
   },
   translations: {
     type: [Translation],
-    required: true
+    required: false
   },
 })
 

@@ -62,7 +62,7 @@ const ExportService = (function () {
   }
 
   Service.prototype.prepareScenario = async function () {
-    const items = await Scenario.find().sort({name: 'asc'}).lean()
+    const items = await Scenario.find({isReserved: {$ne: true}}).sort({name: 'asc'}).lean()
 
     return JSON.stringify(items)
   }
@@ -74,7 +74,7 @@ const ExportService = (function () {
   }
 
   Service.prototype.prepareImages = async function () {
-    const items = await Image.find().sort({name: 'asc'}).lean()
+    const items = await Image.find({isReserved: {$ne: true}}).sort({name: 'asc'}).lean()
 
     return JSON.stringify(items)
   }

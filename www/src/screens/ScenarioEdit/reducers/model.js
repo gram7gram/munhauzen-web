@@ -54,6 +54,25 @@ const action = (prev = null, action) => {
   }
 }
 
+const isBegin = (prev = false, action) => {
+  switch (action.type) {
+    case Actions.CHANGE:
+      if (action.payload.isBegin !== undefined) {
+        return action.payload.isBegin
+      }
+
+      return prev
+    case Actions.SAVE_SUCCESS:
+    case Actions.FETCH_ITEM_SUCCESS:
+      return action.payload.isBegin || false
+    case Actions.FETCH_ITEM_BEFORE:
+    case Actions.RESET:
+      return false
+    default:
+      return prev
+  }
+}
+
 const chapter = (prev = null, action) => {
   switch (action.type) {
     case Actions.CHANGE:
@@ -271,6 +290,7 @@ const decisions = (prev = {}, action) => {
 
 export default combineReducers({
   _id,
+  isBegin,
   name,
   chapter,
   action,

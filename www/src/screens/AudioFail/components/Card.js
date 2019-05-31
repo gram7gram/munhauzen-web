@@ -16,7 +16,7 @@ class Card extends PureComponent {
 
   render() {
 
-    const {fail, locale, audio} = this.props
+    const {fail, audio} = this.props
 
     const match = fail.audio
       ? audio.find(item => item.name === fail.audio)
@@ -53,11 +53,9 @@ class Card extends PureComponent {
 Card.propTypes = {
   fail: PropTypes.any.isRequired,
   audio: PropTypes.any.isRequired,
-  locale: PropTypes.any.isRequired,
 }
 
 const selectors = createStructuredSelector({
-  locale: store => store.App.locale,
   audio: store => store.Audio.items,
 })
 

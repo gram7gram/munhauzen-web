@@ -8,6 +8,10 @@ const parseBeforeSubmit = model => {
 
   delete data._id
 
+  if (!data.isBegin) {
+    delete data.isBegin
+  }
+
   data.decisions = Object.values(data.decisions)
   data.images = Object.values(data.images)
   data.audio = Object.values(data.audio)

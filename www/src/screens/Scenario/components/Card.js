@@ -5,6 +5,7 @@ import * as Pages from "../../../router/Pages";
 import {Link} from "react-router-dom";
 import Remove from "../actions/Remove";
 import {createStructuredSelector} from "reselect";
+import i18n from "../../../i18n";
 
 class Card extends PureComponent {
 
@@ -28,20 +29,30 @@ class Card extends PureComponent {
 
     return <tr>
       <td>
-        <Link
+        {!scenario.isReserved ? <Link
           to={Pages.SCENARIO_EDIT.replace(':id', scenario._id)}
           className="btn btn-icon btn-success btn-sm mr-1">
           <i className="fa fa-pencil"/>
-        </Link>
+        </Link> : null}
 
-        <button
+        {!scenario.isReserved ? <button
           className="btn btn-icon btn-outline-danger btn-sm"
           onClick={this.remove}>
           <i className="fa fa-times"/>
-        </button>
+        </button> : null}
+
+        {scenario.isReserved
+          ? <small className="text-secondary">{i18n.t('images.isReserved')}</small>
+          : null}
       </td>
       <td>
-        <div>{scenario.name}</div>
+        <div>
+          {scenario.name}&nbsp;
+
+          {scenario.isBegin
+            ? <span className="badge badge-success">{i18n.t('scenario_edit.isBegin')}</span>
+            : null}
+        </div>
         {trans
           ? <div className="small text-muted">{trans.text}</div>
           : null}
@@ -53,75 +64,81 @@ class Card extends PureComponent {
       </td>
       <td>{scenario.interaction || ''}</td>
       <td>
-        {scenario.images.map((scenarioImage, key) => {
+        {scenario.images
+          ? scenario.images.map((scenarioImage, key) => {
 
-          const match = scenarioImage.image
-            ? images.find(item => item.name === scenarioImage.image)
-            : null
+            const match = scenarioImage.image
+              ? images.find(item => item.name === scenarioImage.image)
+              : null
 
-          return <div key={key}>
-            {key + 1}.&nbsp;
+            return <div key={key}>
+              {key + 1}.&nbsp;
 
-            {match
-              ? (
-                match.isReserved
-                  ? <span>{match.name}</span>
-                  : <Link to={Pages.IMAGE_EDIT.replace(':id', match._id)}>{match.name}</Link>
-              )
-              : <span className="text-danger">{scenarioImage.image}</span>}
+              {match
+                ? (
+                  match.isReserved
+                    ? <span>{match.name}</span>
+                    : <Link to={Pages.IMAGE_EDIT.replace(':id', match._id)}>{match.name}</Link>
+                )
+                : <span className="text-danger">{scenarioImage.image}</span>}
 
-          </div>
-        })}
+            </div>
+          })
+          : null}
       </td>
       <td>
-        {scenario.audio.map((scenarioAudio, key) => {
+        {scenario.audio
+          ? scenario.audio.map((scenarioAudio, key) => {
 
-          const match = scenarioAudio.audio
-            ? audio.find(item => item.name === scenarioAudio.audio)
-            : null
+            const match = scenarioAudio.audio
+              ? audio.find(item => item.name === scenarioAudio.audio)
+              : null
 
-          return <div key={key}>
-            {key + 1}.&nbsp;
+            return <div key={key}>
+              {key + 1}.&nbsp;
 
-            {match
-              ? <Link to={Pages.AUDIO_EDIT.replace(':id', match._id)}>{match.name}</Link>
-              : null}
+              {match
+                ? <Link to={Pages.AUDIO_EDIT.replace(':id', match._id)}>{match.name}</Link>
+                : null}
 
-            {!match && scenarioAudio.audio !== 'Last'
-              ? <span className="text-danger">{scenarioAudio.audio}</span>
-              : <span>{scenarioAudio.audio}</span>}
-          </div>
-        })}
+              {!match && scenarioAudio.audio !== 'Last'
+                ? <span className="text-danger">{scenarioAudio.audio}</span>
+                : <span>{scenarioAudio.audio}</span>}
+            </div>
+          })
+          : null}
       </td>
-      <td>{scenario.action}</td>
+      <td>{scenario.action || ''}</td>
       <td>
-        {scenario.decisions.map((decision, key) => {
+        {scenario.decisions
+          ? scenario.decisions.map((decision, key) => {
 
-          const match = decision.scenario
-            ? scenarioItems.find(item => item.name === decision.scenario)
-            : null
+            const match = decision.scenario
+              ? scenarioItems.find(item => item.name === decision.scenario)
+              : null
 
-          let name = '...'
-          if (match) {
+            let name = '...'
+            if (match) {
 
-            name = match.name
+              name = match.name
 
-            if (match.translations !== undefined) {
-              const trans = match.translations.find(trans => trans.locale === locale)
-              if (trans) {
-                name += ' ' + trans.text
+              if (match.translations !== undefined) {
+                const trans = match.translations.find(trans => trans.locale === locale)
+                if (trans) {
+                  name += ' ' + trans.text
+                }
               }
             }
-          }
 
-          return <div key={key}>
-            {key + 1}.&nbsp;
+            return <div key={key}>
+              {key + 1}.&nbsp;
 
-            {match
-              ? <Link to={Pages.SCENARIO_EDIT.replace(':id', decision.scenario)}>{name}</Link>
-              : <span className="text-danger">{decision.scenario}</span>}
-          </div>
-        })}
+              {match
+                ? <Link to={Pages.SCENARIO_EDIT.replace(':id', decision.scenario)}>{name}</Link>
+                : <span className="text-danger">{decision.scenario}</span>}
+            </div>
+          })
+          : null}
       </td>
     </tr>
   }

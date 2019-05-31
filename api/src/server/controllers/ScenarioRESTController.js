@@ -8,7 +8,7 @@ const logger = require('../../logger');
 router.get('/scenario', async (req, res) => {
 
   try {
-    const items = await Scenario.find().sort({name: 'asc'}).lean()
+    const items = await Scenario.find().sort({isReserved: 'desc', isBegin: 'desc', name: 'asc'}).lean()
 
     res.status(200).json({
       items,
@@ -29,7 +29,7 @@ router.get('/scenario/:id', checkId, async (req, res) => {
 
   try {
 
-    const entity = await Scenario.findById(req.params.id).lean()
+    const entity = await Scenario.findOne({_id: req.params.id, isReserved: {$ne: true}}).lean()
     if (!entity) {
       res.status(404).json({
         message: 'not found',
@@ -72,7 +72,7 @@ router.post('/scenario', async (req, res) => {
 router.put('/scenario/:id', checkId, async (req, res) => {
   try {
 
-    const entity = await Scenario.findById(req.params.id)
+    const entity = await Scenario.findOne({_id: req.params.id, isReserved: {$ne: true}})
     if (!entity) {
       res.status(404).json({
         message: 'not found'
@@ -98,7 +98,7 @@ router.put('/scenario/:id', checkId, async (req, res) => {
 router.delete('/scenario/:id', checkId, async (req, res) => {
   try {
 
-    await Scenario.deleteOne({_id: req.params.id})
+    await Scenario.deleteOne({_id: req.params.id, isReserved: {$ne: true}})
 
     res.status(204).json(null)
 

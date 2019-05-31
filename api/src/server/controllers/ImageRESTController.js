@@ -8,7 +8,7 @@ const logger = require('../../logger');
 router.get('/images', async (req, res) => {
 
   try {
-    const items = await Image.find().sort({name: 'asc'}).lean()
+    const items = await Image.find().sort({isReserved: 'desc', name: 'asc'}).lean()
 
     res.status(200).json({
       items,
@@ -72,7 +72,7 @@ router.post('/images', async (req, res) => {
 router.put('/images/:id', checkId, async (req, res) => {
   try {
 
-    const entity = await Image.findOne({_id: req.params.id, isReserved: false}).lean()
+    const entity = await Image.findOne({_id: req.params.id, isReserved: {$ne: true}})
     if (!entity) {
       res.status(404).json({
         message: 'not found'
@@ -98,7 +98,7 @@ router.put('/images/:id', checkId, async (req, res) => {
 router.delete('/images/:id', checkId, async (req, res) => {
   try {
 
-    await Image.deleteOne({_id: req.params.id, isReserved: false})
+    await Image.deleteOne({_id: req.params.id, isReserved: {$ne: true}})
 
     res.status(204).json(null)
 

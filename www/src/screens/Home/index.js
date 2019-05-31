@@ -116,14 +116,16 @@ class Home extends PureComponent {
                 <div className="col-6">
 
                   <a href={parameters.gplayLink} rel="nofollow">
-                    <img src={gplay} alt="Get it on Google Play" className="img-fluid"/>
+                    <img src={gplay} className="img-fluid"
+                         alt=""/>
                   </a>
 
                 </div>
                 <div className="col-6">
 
                   <a href={parameters.appStoreLink} rel="nofollow">
-                    <img src={apPStore} alt="Get it on App Store" className="img-fluid"/>
+                    <img src={apPStore} className="img-fluid"
+                         alt=""/>
                   </a>
                 </div>
               </div>
@@ -134,7 +136,7 @@ class Home extends PureComponent {
               {uploadResult && uploadResult.length > 0
                 ? this.renderErrors()
                 : <img src={images[random.int(0, images.length - 1)]}
-                       alt="Random image"
+                       alt=""
                        className="img-fluid shadow mx-auto"/>
               }
             </div>

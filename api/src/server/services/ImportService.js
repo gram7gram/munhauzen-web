@@ -8,6 +8,7 @@ const Image = require('../../database/model/Image').Image;
 const Scenario = require('../../database/model/Scenario').Scenario;
 
 const imageService = require('../services/ImageService')
+const scenarioService = require('../services/ScenarioService')
 
 const logger = require('../../logger');
 
@@ -77,6 +78,8 @@ const ImportService = (function () {
     result = result.filter(e => e && e.sheet)
 
     await imageService.restoreDefaults()
+
+    await scenarioService.restoreDefaults()
 
     return {
       hasErrors: !!result.find(item => item.errors.lenngth > 0),

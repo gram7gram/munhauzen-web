@@ -33,8 +33,6 @@ const ImageService = (function () {
 
   Service.prototype.update = async function (entity, content) {
 
-    content.isReserved = ['Last'].indexOf(content.name) !== -1
-
     entity.set(content)
 
     const validator = await entity.validate();
