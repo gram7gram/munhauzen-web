@@ -193,11 +193,13 @@ const ImportService = (function () {
       }
 
       if (image.image !== 'Last') {
-        if (image.image.indexOf('p') !== 0) {
+        if (image.image.indexOf('inter') !== 0) { //ignore inter_
+          if (image.image.indexOf('p') !== 0) {
 
-          warnings.push('Картинка ' + image.image + '  не начинается на "p"')
+            warnings.push('Картинка ' + image.image + '  не начинается на "p"')
 
-          image.image = 'p' + image.image.substr(1)
+            image.image = 'p' + image.image.substr(1)
+          }
         }
       }
 
@@ -247,10 +249,6 @@ const ImportService = (function () {
         warnings.push('Сценарий ' + scenario.name + ' не начинается на "a"')
 
         scenario.name = 'a' + scenario.name.substr(1)
-      }
-
-      if (scenario.name.indexOf(scenario.chapter) !== 0) {
-        warnings.push('Сценарий ' + scenario.name + ' не совпадает с главой ' + scenario.chapter)
       }
 
       return scenario
