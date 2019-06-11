@@ -46,6 +46,8 @@ const ImportService = (function () {
       'global_inventory (menu)': this.parseMenuInventory.bind(this),
       'statue_inventory (statue, arch)': this.parseStatueInventory.bind(this),
       'scenario_1': this.parseScenario.bind(this),
+      // 'scenario_2': this.parseScenario.bind(this),
+      // 'scenario_3': this.parseScenario.bind(this),
     }
 
     await Scenario.deleteMany()

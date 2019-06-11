@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors')
@@ -25,8 +26,9 @@ app.use('/api/v1', ScenarioRESTController);
 app.use('/api/v1', InventoryRESTController);
 app.use('/api/v1', ChapterRESTController);
 app.use('/api/v1', ImportController);
+app.use('/api/v1', ExportController);
 
-app.use(ExportController);
+app.use(express.static(path.resolve(__dirname, `../public`)))
 
 app.all('*', (req, res) => {
   res.status(404).json({
