@@ -26,7 +26,6 @@ const schema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: [null, 'default', 'color', 'bonus', 'statue'],
     required: false
   },
   isReserved: {
