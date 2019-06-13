@@ -234,9 +234,9 @@ const ImportService = (function () {
       }
 
       const scenario = {
-        name: item.id_option.trim(),
-        chapter: item.id_chapter.trim(),
-        action: item.action.trim().toUpperCase(),
+        name: item.id_option ? item.id_option.trim() : null,
+        chapter: item.id_chapter ? item.id_chapter.trim() : null,
+        action: item.action ? item.action.trim().toUpperCase() : null,
         decisions: [],
         audio: [],
         images: [],
@@ -291,16 +291,19 @@ const ImportService = (function () {
         currentScenario = parseScenario(item)
       }
 
-      if (item.id_picture && item.id_picture !== 'Empty' && item.id_picture !== 'XXX') {
-        currentScenario.images.push(parseImage(item))
-      }
+      if (currentScenario) {
 
-      if (item.id_audio && item.id_audio !== 'Empty' && item.id_audio !== 'XXX') {
-        currentScenario.audio.push(parseAudio(item))
-      }
+        if (item.id_picture && item.id_picture !== 'Empty' && item.id_picture !== 'XXX') {
+          currentScenario.images.push(parseImage(item))
+        }
 
-      if (item.id_decisions && item.id_decisions !== 'Empty') {
-        currentScenario.decisions.push(parseDecision(item))
+        if (item.id_audio && item.id_audio !== 'Empty' && item.id_audio !== 'XXX') {
+          currentScenario.audio.push(parseAudio(item))
+        }
+
+        if (item.id_decisions && item.id_decisions !== 'Empty') {
+          currentScenario.decisions.push(parseDecision(item))
+        }
       }
 
     })

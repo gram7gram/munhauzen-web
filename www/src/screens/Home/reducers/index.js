@@ -34,12 +34,6 @@ const uploadResult = (prev = null, action) => {
 
     case Action.UPLOAD_FAILURE:
 
-      if (action.payload.message !== undefined) {
-        return [
-          action.payload.message
-        ]
-      }
-
       if (action.payload.result !== undefined) {
         return action.payload.result
       }

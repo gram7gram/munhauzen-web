@@ -43,8 +43,8 @@ class Home extends PureComponent {
 
       {uploadResult.map((result, key) => {
 
-        const hasErrors = result.errors.length > 0
-        const hasWarnings = result.warnings.length > 0
+        const hasErrors = result.errors && result.errors.length > 0
+        const hasWarnings = result.warnings && result.warnings.length > 0
 
         return <div key={key}>
 
