@@ -55,7 +55,7 @@ class Images extends Component {
 
       displayedItems = items.filter(item =>
         item.name.toLowerCase().indexOf(query) !== -1
-        || !!item.translations.find(trans => trans.description.toLowerCase().indexOf(query) !== -1)
+        || (item.translations && !!item.translations.find(trans => trans.description.toLowerCase().indexOf(query) !== -1))
       )
     } else {
       displayedItems = items

@@ -5,7 +5,7 @@ const fileUpload = require('express-fileupload');
 const importService = require('../services/ImportService')
 const router = new express.Router();
 
-router.post('/import', fileUpload(), async (req, res) => {
+router.post('/import', fileUpload({}), async (req, res) => {
 
   try {
 

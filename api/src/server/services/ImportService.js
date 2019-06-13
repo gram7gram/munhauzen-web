@@ -45,9 +45,6 @@ const ImportService = (function () {
       'inventory (items for game)': this.parseGameInventory.bind(this),
       'global_inventory (menu)': this.parseMenuInventory.bind(this),
       'statue_inventory (statue, arch)': this.parseStatueInventory.bind(this),
-      'scenario_1': this.parseScenario.bind(this),
-      // 'scenario_2': this.parseScenario.bind(this),
-      // 'scenario_3': this.parseScenario.bind(this),
     }
 
     await Scenario.deleteMany()
@@ -79,6 +76,34 @@ const ImportService = (function () {
 
     result = result.filter(e => e && e.sheet)
 
+    const scenarioHandlers = {
+      'scenario_1': this.parseScenario.bind(this),
+      // 'scenario_2': this.parseScenario.bind(this),
+      // 'scenario_3': this.parseScenario.bind(this),
+    }
+
+    const scenarioResult = await aggregate(Object.keys(scenarioHandlers), async name => {
+
+      const handler = scenarioHandlers[name]
+
+      if (workbook.Sheets[name] !== undefined) {
+
+        const sheetResult = await handler(workbook.Sheets[name])
+
+        const errors = sheetResult && sheetResult.result ? sheetResult.result.filter(e => e && e.message) : []
+        const warnings = sheetResult && sheetResult.warnings ? sheetResult.warnings : []
+
+        return {
+          sheet: name,
+          warnings,
+          errors
+        }
+      }
+
+    })
+
+    result = result.concat(scenarioResult.filter(e => e && e.sheet))
+
     await imageService.restoreDefaults()
 
     await scenarioService.restoreDefaults()
@@ -107,6 +132,9 @@ const ImportService = (function () {
     )
 
     if (data.length === 0) return
+
+    const audios = await Audio.find().lean()
+    const images = await Image.find().lean()
 
     const warnings = [], scenarios = {}
 
@@ -161,6 +189,13 @@ const ImportService = (function () {
 
           audio.audio = 's' + audio.audio.substr(1)
         }
+
+        const match = audios.find(item => item.name === audio.audio)
+        if (!match) {
+          warnings.push('Аудио ' + audio.audio + ' не существует')
+        } else if (match.duration > 0) {
+          audio.duration = match.duration
+        }
       }
 
       return audio
@@ -197,6 +232,11 @@ const ImportService = (function () {
             warnings.push('Картинка ' + image.image + '  не начинается на "p"')
 
             image.image = 'p' + image.image.substr(1)
+          }
+
+          const match = images.find(item => item.name === image.image)
+          if (!match) {
+            warnings.push('Картинка ' + image.image + ' не существует')
           }
         }
       }
