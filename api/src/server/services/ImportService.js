@@ -212,9 +212,13 @@ const ImportService = (function () {
       }
 
       if (item.duration_picture) {
-        let value = parseInt(item.duration_picture)
-        if (value > 0) {
-          image.duration = value
+        if (item.duration_picture === 'R') {
+          image.isR = true
+        } else {
+          let value = parseInt(item.duration_picture)
+          if (value > 0) {
+            image.duration = value
+          }
         }
       }
 
@@ -344,6 +348,25 @@ const ImportService = (function () {
         if (item.id_decisions && item.id_decisions !== 'Empty') {
           currentScenario.decisions.push(parseDecision(item))
         }
+      }
+
+    })
+
+    Object.values(scenarios).forEach(scenario => {
+
+      if (scenario.audio) {
+        scenario.duration = scenario.audio.reduce((sum, audio) => sum + audio.duration, 0)
+
+        if (scenario.images) {
+
+          const rImage = scenario.images.find(item => item.isR)
+          if (rImage) {
+            const durationWithoutR = scenario.images.filter(item => !item.isR).reduce((sum, audio) => sum + audio.duration, 0)
+
+            rImage.duration = scenario.duration - durationWithoutR
+          }
+        }
+
       }
 
     })
