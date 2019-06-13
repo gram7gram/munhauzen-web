@@ -115,7 +115,7 @@ const ImportService = (function () {
     const parseDecision = item => {
 
       const decision = {
-        scenario: item.id_decisions.trim(),
+        scenario: item.id_decisions ? item.id_decisions.trim() : null,
         inventoryRequired: [],
         inventoryAbsent: [],
       }
@@ -146,7 +146,7 @@ const ImportService = (function () {
 
     const parseAudio = item => {
       const audio = {
-        audio: item.id_audio.trim(),
+        audio: item.id_audio ? item.id_audio.trim() : null,
         duration: 0
       }
 
@@ -168,7 +168,7 @@ const ImportService = (function () {
 
     const parseImage = item => {
       const image = {
-        image: item.id_picture.trim(),
+        image: item.id_picture ? item.id_picture.trim() : null,
         duration: 0
       }
 
@@ -586,7 +586,7 @@ const ImportService = (function () {
       }
 
       const content = {
-        name: item.Name.trim().toUpperCase(),
+        name: item.Name ? item.Name.trim().toUpperCase() : null,
         isStatue: true,
         relatedScenario,
         relatedInventory,
@@ -668,12 +668,21 @@ const ImportService = (function () {
       }
 
       const content = {
-        name: item.Id_picture.trim(),
-        file: item.file.trim(),
-        type: item.type.trim(),
-        isAnimation: item.isanimation.toLowerCase() === 'true',
-        isHiddenFromGallery: item.isforbidden.toLowerCase() === 'true',
+        name: item.Id_picture ? item.Id_picture.trim() : null,
+        file: item.file ? item.file.trim() : null,
         translations
+      }
+
+      if (item.type) {
+        content.type = item.type.trim()
+      }
+
+      if (item.isanimation) {
+        content.isAnimation = item.isanimation.toLowerCase() === 'true'
+      }
+
+      if (item.isforbidden) {
+        content.isHiddenFromGallery = item.isforbidden.toLowerCase() === 'true'
       }
 
       try {
@@ -728,8 +737,8 @@ const ImportService = (function () {
       if (isNaN(duration)) duration = 0
 
       const content = {
-        name: item.Id_audio.trim(),
-        file: item.file.trim(),
+        name: item.Id_audio ? item.Id_audio.trim() : null,
+        file: item.file ? item.file.trim() : null,
         duration,
       }
 
@@ -791,8 +800,8 @@ const ImportService = (function () {
       if (isNaN(duration)) duration = 0
 
       const content = {
-        name: item.Id_audio.trim(),
-        file: item.file.trim(),
+        name: item.Id_audio ? item.Id_audio.trim() : null,
+        file: item.file ? item.file.trim() : null,
         duration,
         audio: null,
         isFailOpenedOnStart: item.isopenedfail.toLowerCase() === 'true',
