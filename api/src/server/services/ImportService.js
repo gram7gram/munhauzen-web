@@ -289,6 +289,10 @@ const ImportService = (function () {
         }
 
         currentScenario = parseScenario(item)
+
+        if (currentScenario.name === 'a1_intro') {
+          currentScenario.isBegin = true
+        }
       }
 
       if (currentScenario) {
