@@ -106,10 +106,6 @@ const ImportService = (function () {
       || item.id_decisions !== undefined
     )
 
-    if (data.length !== json.length) {
-      logger.error('Some rows are invalid in parseScenario')
-    }
-
     if (data.length === 0) return
 
     const warnings = [], scenarios = {}
@@ -333,12 +329,7 @@ const ImportService = (function () {
 
     const data = json.filter(item =>
       item.chapter_id !== undefined
-      && (item.description_chapter_eng !== undefined || item.description_chapter_ru !== undefined || item.description_chapter_ua !== undefined)
     )
-
-    if (data.length !== json.length) {
-      logger.error('Some rows are invalid in parseChapters')
-    }
 
     if (data.length === 0) return
 
@@ -415,10 +406,6 @@ const ImportService = (function () {
       && item.Related_option !== undefined
     )
 
-    if (data.length !== json.length) {
-      logger.error('Some rows are invalid in parseGameInventory')
-    }
-
     if (data.length === 0) return
 
     const result = await aggregate(data, async item => {
@@ -483,10 +470,6 @@ const ImportService = (function () {
       && item.Related_option !== undefined
     )
 
-    if (data.length !== json.length) {
-      logger.error('Some rows are invalid in parseMenuInventory')
-    }
-
     if (data.length === 0) return
 
     const result = await aggregate(data, async item => {
@@ -549,12 +532,7 @@ const ImportService = (function () {
 
     const data = json.filter(item =>
       item.Name !== undefined
-      && (item.Description_Eng !== undefined || item.Description_Ua !== undefined || item.Description_Ru !== undefined)
     )
-
-    if (data.length !== json.length) {
-      logger.error('Some rows are invalid in parseStatueInventory')
-    }
 
     if (data.length === 0) return
 
@@ -657,15 +635,7 @@ const ImportService = (function () {
     const data = json.filter(item =>
       item.Id_picture !== undefined
       && item.file !== undefined
-      && item.type !== undefined
-      && item.isanimation !== undefined
-      && item.isforbidden !== undefined
-      && (item.description_picture_ua !== undefined || item.description_picture_ru !== undefined || item.description_picture_eng !== undefined)
     )
-
-    if (data.length !== json.length) {
-      logger.error('Some rows are invalid in parseImage')
-    }
 
     if (data.length === 0) return
 
@@ -750,10 +720,6 @@ const ImportService = (function () {
       && item.duration_audio !== undefined
     )
 
-    if (data.length !== json.length) {
-      logger.error('Some rows are invalid in parseAudio')
-    }
-
     if (data.length === 0) return
 
     const result = await aggregate(data, async item => {
@@ -816,10 +782,6 @@ const ImportService = (function () {
       && item.isclosedfail !== undefined
       && item.description_audio !== undefined
     )
-
-    if (data.length !== json.length) {
-      logger.error('Some rows are invalid in parseAudioFail')
-    }
 
     if (data.length === 0) return
 
