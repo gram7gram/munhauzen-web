@@ -71,17 +71,21 @@ class Card extends PureComponent {
               ? images.find(item => item.name === scenarioImage.image)
               : null
 
+            let content
+            if (match) {
+              if (match.isReserved) {
+                content = <span>{match.name}</span>
+              } else {
+                content = <Link to={Pages.IMAGE_EDIT.replace(':id', match._id)}>{match.name}</Link>
+              }
+            } else {
+              content = <span className="text-danger">{scenarioImage.image}</span>
+            }
+
             return <div key={key}>
               {key + 1}.&nbsp;
 
-              {match
-                ? (
-                  match.isReserved
-                    ? <span>{match.name}</span>
-                    : <Link to={Pages.IMAGE_EDIT.replace(':id', match._id)}>{match.name}</Link>
-                )
-                : <span className="text-danger">{scenarioImage.image}</span>}
-
+              {content}
             </div>
           })
           : null}
@@ -94,16 +98,19 @@ class Card extends PureComponent {
               ? audio.find(item => item.name === scenarioAudio.audio)
               : null
 
+            let content
+            if (match) {
+              content = <Link to={Pages.AUDIO_EDIT.replace(':id', match._id)}>{match.name}</Link>
+            } else if (scenarioAudio.audio !== 'Last') {
+              content = <span className="text-danger">{scenarioAudio.audio}</span>
+            } else {
+              content = <span>{scenarioAudio.audio}</span>
+            }
+
             return <div key={key}>
               {key + 1}.&nbsp;
 
-              {match
-                ? <Link to={Pages.AUDIO_EDIT.replace(':id', match._id)}>{match.name}</Link>
-                : null}
-
-              {!match && scenarioAudio.audio !== 'Last'
-                ? <span className="text-danger">{scenarioAudio.audio}</span>
-                : <span>{scenarioAudio.audio}</span>}
+              {content}
             </div>
           })
           : null}
