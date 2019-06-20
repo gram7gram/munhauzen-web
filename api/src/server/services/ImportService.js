@@ -466,28 +466,30 @@ const ImportService = (function () {
 
     const data = json.filter(item =>
       item.Name !== undefined
-      && item.Related_option !== undefined
     )
 
     if (data.length === 0) return
 
     const result = await aggregate(data, async item => {
 
-      let relatedScenario
-
-      if (item.Related_option.indexOf(' or ') !== 1) {
-        relatedScenario = item.Related_option.split(' or ')
-          .map(item => item.trim())
-          .filter(item => !!item && item !== 'Empty')
-      } else {
-        relatedScenario = item.Related_option.split(',')
-          .map(item => item.trim())
-          .filter(item => !!item && item !== 'Empty')
-      }
-
       const content = {
         name: item.Name.trim().toUpperCase(),
-        relatedScenario
+      }
+
+      if (item.Related_option) {
+        let relatedScenario
+
+        if (item.Related_option.indexOf(' or ') !== 1) {
+          relatedScenario = item.Related_option.split(' or ')
+            .map(item => item.trim())
+            .filter(item => !!item && item !== 'Empty')
+        } else {
+          relatedScenario = item.Related_option.split(',')
+            .map(item => item.trim())
+            .filter(item => !!item && item !== 'Empty')
+        }
+
+        content.relatedScenario = relatedScenario
       }
 
       try {
@@ -530,29 +532,31 @@ const ImportService = (function () {
 
     const data = json.filter(item =>
       item.inventory_global_required !== undefined
-      && item.Related_option !== undefined
     )
 
     if (data.length === 0) return
 
     const result = await aggregate(data, async item => {
 
-      let relatedScenario
-
-      if (item.Related_option.indexOf(' or ') !== 1) {
-        relatedScenario = item.Related_option.split(' or ')
-          .map(item => item.trim())
-          .filter(item => !!item && item !== 'Empty')
-      } else {
-        relatedScenario = item.Related_option.split(',')
-          .map(item => item.trim())
-          .filter(item => !!item && item !== 'Empty')
-      }
-
       const content = {
         name: item.inventory_global_required.trim().toUpperCase(),
         isMenu: true,
-        relatedScenario
+      }
+
+      if (item.Related_option) {
+        let relatedScenario
+
+        if (item.Related_option.indexOf(' or ') !== 1) {
+          relatedScenario = item.Related_option.split(' or ')
+            .map(item => item.trim())
+            .filter(item => !!item && item !== 'Empty')
+        } else {
+          relatedScenario = item.Related_option.split(',')
+            .map(item => item.trim())
+            .filter(item => !!item && item !== 'Empty')
+        }
+
+        content.relatedScenario = relatedScenario
       }
 
       try {
