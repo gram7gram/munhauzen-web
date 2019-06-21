@@ -17,6 +17,11 @@ export default model => {
     validator.errors.icon = i18n.t('validation.required')
   }
 
+  if (model.number < 0) {
+    ++validator.count
+    validator.errors.number = i18n.t('validation.required')
+  }
+
   const trans = Object.values(model.translations)
 
   if (trans.length === 0) {

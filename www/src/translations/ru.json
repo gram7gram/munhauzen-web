@@ -107,6 +107,7 @@
     "statue": "Достижение"
   },
   "placeholders": {
+    "order": "Порядок",
     "loading": "Загрузка...",
     "import_file": "Импортировать",
     "export_file": "Экспортировать",

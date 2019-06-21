@@ -8,7 +8,7 @@ const logger = require('../../logger');
 router.get('/chapters', async (req, res) => {
 
   try {
-    const items = await Chapter.find().sort({name: 'asc'}).lean()
+    const items = await Chapter.find().sort({number: 'asc'}).lean()
 
     res.status(200).json({
       items,

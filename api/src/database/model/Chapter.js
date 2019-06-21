@@ -21,6 +21,11 @@ const schema = new mongoose.Schema({
     type: String,
     required: false
   },
+  number: {
+    type: Number,
+    min: 0,
+    required: false
+  },
   translations: {
     type: [Translation],
     required: true

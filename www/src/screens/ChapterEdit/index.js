@@ -61,6 +61,13 @@ class ChapterEdit extends Component {
 
   changeString = name => e => this.change(name, e.target.value)
 
+  changeInt = name => e => {
+    let value = parseInt(e.target.value)
+    if (isNaN(value) || value < 0) value = 0
+
+    this.change(name, value)
+  }
+
   changeLocaleString = name => e => {
     const {translationTab} = this.props.ChapterEdit
 
@@ -146,6 +153,18 @@ class ChapterEdit extends Component {
               value={model.icon || ''}
               onChange={this.changeString('icon')}/>
             {this.getError('icon')}
+          </div>
+
+          <div className="form-group">
+            <label>{i18n.t('placeholders.order')}</label>
+            <input
+              type="number"
+              min={0}
+              step={1}
+              className="form-control form-control-sm"
+              value={model.number}
+              onChange={this.changeInt('number')}/>
+            {this.getError('number')}
           </div>
 
           <ul className="nav nav-tabs mb-2">

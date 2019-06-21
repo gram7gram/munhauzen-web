@@ -34,6 +34,27 @@ const name = (prev = null, action) => {
   }
 }
 
+const number = (prev = null, action) => {
+  switch (action.type) {
+    case Actions.CHANGE:
+      if (action.payload.number !== undefined) {
+        return action.payload.number
+      }
+
+      return prev
+    case Actions.SAVE_SUCCESS:
+    case Actions.FETCH_ITEM_SUCCESS:
+      if (action.payload.number !== undefined)
+        return action.payload.number
+      return null
+    case Actions.FETCH_ITEM_BEFORE:
+    case Actions.RESET:
+      return null
+    default:
+      return prev
+  }
+}
+
 const icon = (prev = null, action) => {
   switch (action.type) {
     case Actions.CHANGE:
@@ -88,6 +109,7 @@ const translations = (prev = {}, action) => {
 export default combineReducers({
   _id,
   name,
+  number,
   icon,
   translations
 });

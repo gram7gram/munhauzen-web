@@ -396,6 +396,8 @@ const ImportService = (function () {
 
     if (data.length === 0) return
 
+    const warnings = []
+
     const result = await aggregate(data, async item => {
 
       const translations = []
@@ -427,6 +429,15 @@ const ImportService = (function () {
         translations
       }
 
+      if (item.chapter_number !== undefined) {
+        const number = parseInt(item.chapter_number)
+        if (isNaN(number) || number < 0) {
+          warnings.push(`У главы ${content.name} неправильный номер`)
+        } else {
+          content.number = number
+        }
+      }
+
       try {
 
         await Chapter.findOneAndUpdate({name: content.name}, content, {
@@ -452,7 +463,7 @@ const ImportService = (function () {
 
     return {
       result,
-      warnings: []
+      warnings
     }
   }
 

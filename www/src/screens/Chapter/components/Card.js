@@ -36,6 +36,7 @@ class Card extends PureComponent {
           <i className="fa fa-times"/>
         </button>
       </td>
+      <td>{chapter.number}</td>
       <td>
         <div>{chapter.name}</div>
         {trans
