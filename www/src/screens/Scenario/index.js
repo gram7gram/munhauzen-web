@@ -77,6 +77,8 @@ class Scenario extends Component {
 
         if (item.name) searches.push(item.name)
 
+        if (item.interaction) searches.push(item.interaction)
+
         if (item.translations !== undefined) {
           searches = searches.concat(item.translations.map(i => i.text))
         }
