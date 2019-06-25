@@ -92,6 +92,25 @@ const chapter = (prev = null, action) => {
   }
 }
 
+const interaction = (prev = null, action) => {
+  switch (action.type) {
+    case Actions.CHANGE:
+      if (action.payload.interaction !== undefined) {
+        return action.payload.interaction
+      }
+
+      return prev
+    case Actions.SAVE_SUCCESS:
+    case Actions.FETCH_ITEM_SUCCESS:
+      return action.payload.interaction || null
+    case Actions.FETCH_ITEM_BEFORE:
+    case Actions.RESET:
+      return null
+    default:
+      return prev
+  }
+}
+
 const translations = (prev = {}, action) => {
   switch (action.type) {
     case Actions.CHANGE_TRANSLATION:
@@ -293,6 +312,7 @@ export default combineReducers({
   isBegin,
   name,
   chapter,
+  interaction,
   action,
   audio,
   images,

@@ -233,6 +233,16 @@ class ScenarioEdit extends Component {
               {this.getError('action')}
             </div>
 
+            <div className="form-group">
+              <label>{i18n.t('scenario_edit.interaction')}</label>
+              <input
+                type="text"
+                className="form-control form-control-sm"
+                value={model.interaction || ''}
+                onChange={this.changeString('interaction')}/>
+              {this.getError('interaction')}
+            </div>
+
             <ul className="nav nav-tabs mb-2">
               {locales.map((locale, key) =>
                 <li key={key} className="nav-item" onClick={this.setTab(locale)}>
