@@ -429,6 +429,10 @@ const ImportService = (function () {
         translations
       }
 
+      if (item.chapter_audio !== undefined) {
+        content.chapterAudio = item.chapter_audio.trim()
+      }
+
       if (item.chapter_number !== undefined) {
         const number = parseInt(item.chapter_number)
         if (isNaN(number) || number < 0) {

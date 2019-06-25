@@ -17,6 +17,11 @@ export default model => {
     validator.errors.icon = i18n.t('validation.required')
   }
 
+  if (!model.chapterAudio) {
+    ++validator.count
+    validator.errors.chapterAudio = i18n.t('validation.required')
+  }
+
   if (model.number < 0) {
     ++validator.count
     validator.errors.number = i18n.t('validation.required')

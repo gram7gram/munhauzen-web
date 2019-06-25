@@ -156,6 +156,16 @@ class ChapterEdit extends Component {
           </div>
 
           <div className="form-group">
+            <label>{i18n.t('chapter_edit.chapterAudio')}</label>
+            <input
+              type="text"
+              className="form-control form-control-sm"
+              value={model.chapterAudio || ''}
+              onChange={this.changeString('chapterAudio')}/>
+            {this.getError('chapterAudio')}
+          </div>
+
+          <div className="form-group">
             <label>{i18n.t('placeholders.order')}</label>
             <input
               type="number"

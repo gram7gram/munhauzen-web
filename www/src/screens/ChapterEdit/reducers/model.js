@@ -55,6 +55,27 @@ const number = (prev = null, action) => {
   }
 }
 
+const chapterAudio = (prev = null, action) => {
+  switch (action.type) {
+    case Actions.CHANGE:
+      if (action.payload.chapterAudio !== undefined) {
+        return action.payload.chapterAudio
+      }
+
+      return prev
+    case Actions.SAVE_SUCCESS:
+    case Actions.FETCH_ITEM_SUCCESS:
+      if (action.payload.chapterAudio !== undefined)
+        return action.payload.chapterAudio
+      return null
+    case Actions.FETCH_ITEM_BEFORE:
+    case Actions.RESET:
+      return null
+    default:
+      return prev
+  }
+}
+
 const icon = (prev = null, action) => {
   switch (action.type) {
     case Actions.CHANGE:
@@ -110,6 +131,7 @@ export default combineReducers({
   _id,
   name,
   number,
+  chapterAudio,
   icon,
   translations
 });
