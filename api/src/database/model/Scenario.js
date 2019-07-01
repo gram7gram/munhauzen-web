@@ -12,6 +12,10 @@ const Translation = new mongoose.Schema({
 })
 
 const Decision = new mongoose.Schema({
+  order: {
+    type: Number,
+    required: false
+  },
   scenario: {
     type: String,
     required: true

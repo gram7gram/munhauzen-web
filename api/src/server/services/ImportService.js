@@ -116,7 +116,7 @@ const ImportService = (function () {
 
   /**
    * Header: id_option, id_chapter, description_option_eng, id_audio, id_picture, type_pictures,
-   * duration_picture, Interaction, action, id_decisions, inventory_required, inventory_abscent
+   * duration_picture, Interaction, action, id_decisions, decision_order, inventory_required, inventory_abscent
    *
    * @param sheet
    */
@@ -143,20 +143,28 @@ const ImportService = (function () {
     const parseDecision = item => {
 
       const decision = {
+        order: 0,
         scenario: item.id_decisions ? item.id_decisions.trim() : null,
         inventoryRequired: [],
         inventoryAbsent: [],
       }
 
-      if (decision.inventory_required !== undefined) {
-        decision.inventoryRequired = decision.inventory_required.trim().toUpperCase()
+      if (item.decision_order !== undefined) {
+        let value = parseInt(item.decision_order)
+        if (isNaN(value)) value = 0
+
+        decision.order = value
+      }
+
+      if (item.inventory_required !== undefined) {
+        decision.inventoryRequired = item.inventory_required.trim().toUpperCase()
           .split(',')
           .map(item => item.trim())
           .filter(item => !!item)
       }
 
-      if (decision.inventory_abscent !== undefined) {
-        decision.inventoryAbsent = decision.inventory_abscent.trim().toUpperCase()
+      if (item.inventory_abscent !== undefined) {
+        decision.inventoryAbsent = item.inventory_abscent.trim().toUpperCase()
           .split(',')
           .map(item => item.trim())
           .filter(item => !!item)

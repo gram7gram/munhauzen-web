@@ -47,6 +47,16 @@ class Decisions extends Component {
     })
   }
 
+  setOrder = (cid, order) => () => {
+    this.props.dispatch({
+      type: CHANGE_DECISION,
+      cid,
+      payload: {
+        order
+      }
+    })
+  }
+
   setScenario = cid => selected => {
     this.props.dispatch({
       type: CHANGE_DECISION,
@@ -66,11 +76,27 @@ class Decisions extends Component {
     })
   }
 
+  getDecision = () => {
+    const {model} = this.props.ScenarioEdit
+
+    return Object.values(model.decisions).sort((a, b) => {
+      if (a.order > b.order) return 1
+      if (a.order < b.order) return -1
+      return 0
+    })
+  }
+
   addDecision = () => {
+
+    const decisions = this.getDecision();
+
+    const latest = decisions[decisions.length - 1]
+
     this.props.dispatch({
       type: ADD_DECISION,
       payload: {
         cid: uuid(),
+        order: latest.order + 1,
         scenario: null,
         action: null,
         inventoryRequired: [],
@@ -99,8 +125,8 @@ class Decisions extends Component {
     }))
 
     const scenarioOptions = this.props.scenario
-      .filter(i => i._id !== model._id)
-      .map(item => toScenarioLabel(item, locale))
+    .filter(i => i._id !== model._id)
+    .map(item => toScenarioLabel(item, locale))
 
     return <div className="container my-2 py-3 bg-yellow shadow-sm">
 
@@ -120,7 +146,7 @@ class Decisions extends Component {
       <div className="row">
         <div className="col-10 mx-auto">
 
-          {Object.values(model.decisions).map((decision, key) => {
+          {this.getDecision().map((decision, key) => {
 
             const selectedInventory = decision.inventoryRequired
               ? this.props.inventory.filter(item => decision.inventoryRequired.indexOf(item.name) !== -1)
@@ -139,9 +165,20 @@ class Decisions extends Component {
               <div className="card-header px-2 py-1">
                 <div className="row">
                   <div className="col-6">
-                    <h4 className="mb-0">#{key + 1}</h4>
+                    <h4 className="mb-0">#{decision.order > 0 ? Math.max(1, decision.order) : '-'}
+                    &nbsp;{selectedScenario ? selectedScenario.name : ''}</h4>
                   </div>
                   <div className="col-6 text-right">
+                    <button
+                      className="btn btn-sm btn-outline-secondary mr-1"
+                      onClick={this.setOrder(decision.cid, decision.order - 1)}>
+                      <i className="fa fa-arrow-up"/>
+                    </button>
+                    <button
+                      className="btn btn-sm btn-outline-secondary mr-1"
+                      onClick={this.setOrder(decision.cid, decision.order + 1)}>
+                      <i className="fa fa-arrow-down"/>
+                    </button>
                     <button
                       className="btn btn-sm btn-outline-danger"
                       onClick={this.removeDecision(decision.cid)}>

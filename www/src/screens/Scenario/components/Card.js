@@ -118,7 +118,11 @@ class Card extends PureComponent {
       <td>{scenario.action || ''}</td>
       <td>
         {scenario.decisions
-          ? scenario.decisions.map((decision, key) => {
+          ? scenario.decisions.sort((a, b) => {
+            if (a.order > b.order) return 1
+            if (a.order < b.order) return -1
+            return 0
+          }).map((decision, key) => {
 
             const match = decision.scenario
               ? scenarioItems.find(item => item.name === decision.scenario)
