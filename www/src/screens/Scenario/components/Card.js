@@ -28,7 +28,7 @@ class Card extends PureComponent {
       : null
 
     return <tr>
-      <td>
+      <td width="15%">
         {!scenario.isReserved ? <Link
           to={Pages.SCENARIO_EDIT.replace(':id', scenario._id)}
           className="btn btn-icon btn-success btn-sm mr-1">

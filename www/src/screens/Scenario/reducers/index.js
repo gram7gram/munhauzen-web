@@ -38,8 +38,23 @@ const search = (prev = null, action) => {
   }
 }
 
+const part = (prev = null, action) => {
+  switch (action.type) {
+    case Actions.CHANGE_FILTER:
+      if (action.payload.part !== undefined)
+        return action.payload.part
+
+      return prev
+    case Actions.RESET:
+      return null
+    default:
+      return prev
+  }
+}
+
 export default combineReducers({
   isLoading,
   search,
+  part,
   items,
 });

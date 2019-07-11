@@ -77,8 +77,8 @@ const ImportService = (function () {
     result = result.filter(e => e && e.sheet)
 
     const scenarioHandlers = {
-      'scenario_1': this.parseScenario.bind(this),
-      'scenario_2': this.parseScenario.bind(this),
+      'scenario_1': this.parseScenario.bind(this, 'scenario_1'),
+      'scenario_2': this.parseScenario.bind(this, 'scenario_2'),
       // 'scenario_3': this.parseScenario.bind(this),
     }
 
@@ -118,9 +118,10 @@ const ImportService = (function () {
    * Header: id_option, id_chapter, description_option_eng, id_audio, id_picture, type_pictures,
    * duration_picture, Interaction, action, id_decisions, decision_order, inventory_required, inventory_abscent
    *
+   * @param source
    * @param sheet
    */
-  Service.prototype.parseScenario = async function (sheet) {
+  Service.prototype.parseScenario = async function (source, sheet) {
 
     const json = xlsx.utils.sheet_to_json(sheet)
 
@@ -237,6 +238,13 @@ const ImportService = (function () {
         }
       }
 
+      if (item.transition_picture) {
+        const type = item.transition_picture.trim()
+        if (type !== 'Empty') {
+          image.transition = type.toUpperCase()
+        }
+      }
+
       if (image.image !== 'Last') {
         if (image.image.indexOf('inter') !== 0) { //ignore inter_
           if (image.image.indexOf('p') !== 0) {
@@ -288,7 +296,8 @@ const ImportService = (function () {
         decisions: [],
         audio: [],
         images: [],
-        translations
+        translations,
+        source
       }
 
       if (item.Interaction) {

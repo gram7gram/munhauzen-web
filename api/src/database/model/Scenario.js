@@ -47,7 +47,6 @@ const Image = new mongoose.Schema({
   },
   transition: {
     type: String,
-    enum: ["FADE_IN"],
     uppercase: true,
     required: false
   },
@@ -87,6 +86,10 @@ const schema = new mongoose.Schema({
     type: String,
     enum: ["CLICK", "GOTO"],
     uppercase: true,
+    required: false
+  },
+  source: {
+    type: String,
     required: false
   },
   interaction: {

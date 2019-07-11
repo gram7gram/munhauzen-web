@@ -77,11 +77,13 @@ class Audio extends Component {
     return <div className="table-responsive">
       <table className="table table-sm table-hover bg-light">
         <colgroup>
-          <col width="10%"/>
+          <col width="15%"/>
+          <col width="70%"/>
         </colgroup>
         <thead>
         <tr>
           <th colSpan={2}>{i18n.t('placeholders.name')}</th>
+          <th className="text-right">{i18n.t('audio_edit.duration')}</th>
         </tr>
         </thead>
         <tbody>

@@ -5,8 +5,7 @@ const config = {
     apiHost: 'http://0.0.0.0:20000',
   },
   production: {
-    apiHost: 'http://185.227.111.144:20001',
-//    apiHost: 'http://munhauzen-api.fingertips.cf',
+    apiHost: 'http://munhauzen-api.fingertips.cf',
   }
 }
 

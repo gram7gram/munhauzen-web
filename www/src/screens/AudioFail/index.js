@@ -83,7 +83,7 @@ class AudioFail extends Component {
     return <div className="table-responsive">
       <table className="table table-sm table-hover bg-light">
         <colgroup>
-          <col width="10%"/>
+          <col width="15%"/>
         </colgroup>
         <thead>
         <tr>

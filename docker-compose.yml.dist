@@ -19,6 +19,7 @@ services:
 
   api:
     build: ./api/env
+    restart: unless-stopped
     environment:
       - HTTPS_METHOD=nohttps
       - VIRTUAL_HOST=munhauzen-api.fingertips.cf
@@ -31,6 +32,7 @@ services:
 
   www:
     build: ./www/env
+    restart: unless-stopped
     environment:
       - HTTPS_METHOD=nohttps
       - VIRTUAL_HOST=munhauzen.fingertips.cf,fingertips.cf,www.fingertips.cf
@@ -41,6 +43,7 @@ services:
 
   db:
     image: mongo:4
+    restart: unless-stopped
     environment:
       - MONGO_INITDB_DATABASE=munhauzen
     networks:

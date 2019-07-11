@@ -33,6 +33,7 @@ class Card extends PureComponent {
         </button>
       </td>
       <td>{audio.name}</td>
+      <td className="text-right">{audio.duration}</td>
     </tr>
   }
 }

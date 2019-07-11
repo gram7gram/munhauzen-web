@@ -46,6 +46,15 @@ class Scenario extends Component {
     })
   }
 
+  setPart = value => () => {
+    this.props.dispatch({
+      type: CHANGE_FILTER,
+      payload: {
+        part: value
+      }
+    })
+  }
+
   resetIfEsc = e => {
 
     if (e.keyCode === 27) {
@@ -61,7 +70,7 @@ class Scenario extends Component {
   renderContent() {
 
     const {images, audio, chapters} = this.props
-    const {isLoading, items, search} = this.props.Scenario
+    const {isLoading, items, search, part} = this.props.Scenario
 
     let displayedItems
 
@@ -146,6 +155,9 @@ class Scenario extends Component {
       displayedItems = items
     }
 
+    if (part) {
+      displayedItems = displayedItems.filter(item => item.source === part)
+    }
 
     if (displayedItems.length === 0) {
       if (isLoading) {
@@ -162,9 +174,6 @@ class Scenario extends Component {
 
     return <div className="table-responsive">
       <table className="table table-sm table-hover bg-light">
-        <colgroup>
-          <col width="10%"/>
-        </colgroup>
         <thead>
         <tr>
           <th colSpan={2}>{i18n.t('placeholders.name')}</th>
@@ -189,27 +198,59 @@ class Scenario extends Component {
 
   render() {
 
-    const {search} = this.props.Scenario
+    const {search, part} = this.props.Scenario
 
     return <div className="container my-2 py-3 bg-yellow shadow-sm">
       <div className="row">
         <div className="col-12">
           <h1 className="text-center">{i18n.t('scenario.title')}</h1>
 
-          <div className="row">
+          <div className="row mb-2">
             <div className="col-auto">
               <Link to={Pages.SCENARIO_CREATE}
                     className="btn btn-sm btn-success">{i18n.t('placeholders.new')}</Link>
             </div>
             <div className="col-auto">
-              <div className="input-group input-group-sm mb-2">
+              <div className="form-inline">
+                <div className="form-group mr-2">
 
-                <input type="text"
-                       className="form-control"
-                       value={search || ''}
-                       placeholder={i18n.t('placeholders.search')}
-                       onChange={this.changeFilterString('search')}/>
+                  <input type="text"
+                         className="form-control form-control-sm"
+                         value={search || ''}
+                         placeholder={i18n.t('placeholders.search')}
+                         onChange={this.changeFilterString('search')}/>
 
+                </div>
+                <div className="form-group mr-2">
+
+                  <label>
+                    <input type="radio"
+                           checked={part === 'scenario_1'}
+                           onChange={this.setPart('scenario_1')}/>
+                    &nbsp;{i18n.t('scenario.part_1')}
+                  </label>
+
+                </div>
+                <div className="form-group mr-2">
+
+                  <label>
+                    <input type="radio"
+                           checked={part === 'scenario_2'}
+                           onChange={this.setPart('scenario_2')}/>
+                    &nbsp;{i18n.t('scenario.part_2')}
+                  </label>
+
+                </div>
+                <div className="form-group mr-2">
+
+                  <label>
+                    <input type="radio"
+                           checked={part === 'scenario_3'}
+                           onChange={this.setPart('scenario_3')}/>
+                    &nbsp;{i18n.t('scenario.part_3')}
+                  </label>
+
+                </div>
               </div>
             </div>
           </div>
