@@ -11,6 +11,7 @@ const InventoryRESTController = require('./server/controllers/InventoryRESTContr
 const ChapterRESTController = require('./server/controllers/ChapterRESTController');
 const ImportController = require('./server/controllers/ImportController');
 const ExportController = require('./server/controllers/ExportController');
+const ExpansionRESTController = require('./server/controllers/ExpansionRESTController');
 
 const ErrorLogger = require('./server/services/ErrorLogger');
 
@@ -27,6 +28,7 @@ app.use('/api/v1', InventoryRESTController);
 app.use('/api/v1', ChapterRESTController);
 app.use('/api/v1', ImportController);
 app.use('/api/v1', ExportController);
+app.use('/api/v1', ExpansionRESTController);
 
 app.use(express.static(path.resolve(__dirname, `../public`)))
 

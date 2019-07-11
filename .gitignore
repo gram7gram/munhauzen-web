@@ -21,6 +21,6 @@ api/logs/*.log
 .persistency
 
 api/public/downloads/*.zip
-api/public/expansions/*.obb
+api/public/expansions/*
 
 backups
