@@ -9,11 +9,6 @@ fi
 
 VERSION="${VERSION}-en-phone-hdpi"
 
-if [[ -d "api/public/expansions/${VERSION}" ]]; then
-	echo "Missing specified version!"
-	exit
-fi
-
 ssh root@munhauzen.fingertips.cf "mkdir -p /var/www/munhauzen-web/api/public/expansions/${VERSION}"
 
 scp api/public/expansions/${VERSION}/* \
