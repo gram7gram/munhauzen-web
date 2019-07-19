@@ -768,7 +768,7 @@ const ImportService = (function () {
 
       const content = {
         name: item.Id_picture ? item.Id_picture.trim() : null,
-        file: item.file ? item.file.trim() : null,
+        file: item.file ? "images/" + item.file.trim() : null,
         translations
       }
 
@@ -837,7 +837,7 @@ const ImportService = (function () {
 
       const content = {
         name: item.Id_audio ? item.Id_audio.trim() : null,
-        file: item.file ? item.file.trim() : null,
+        file: item.file ? "audio/" + item.file.trim() : null,
         duration,
       }
 
