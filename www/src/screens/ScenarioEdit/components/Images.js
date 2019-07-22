@@ -33,6 +33,19 @@ class Images extends Component {
     })
   }
 
+  changeString = (cid, key) => e => {
+
+    let value = e.target.value
+
+    this.props.dispatch({
+      type: CHANGE_IMAGE,
+      cid,
+      payload: {
+        [key]: value
+      }
+    })
+  }
+
   removeImage = cid => () => {
     this.props.dispatch({
       type: REMOVE_IMAGE,
@@ -127,7 +140,7 @@ class Images extends Component {
               <div className="card-body p-2">
 
                 <div className="row">
-                  <div className="col-6">
+                  <div className="col-4">
                     <div className="form-group">
                       <label>{i18n.t('scenario_edit.image')}</label>
                       <Select
@@ -138,16 +151,30 @@ class Images extends Component {
                     </div>
                   </div>
 
-                  <div className="form-group">
-                    <label>{i18n.t('scenario_edit.duration')}</label>
-                    <input
-                      type="number"
-                      min={0}
-                      step={1}
-                      className="form-control form-control-sm"
-                      value={item.duration || ''}
-                      onChange={this.changeInt(item.cid, 'duration')}/>
-                    {this.getError('duration_' + item.cid)}
+                  <div className="col-4">
+                    <div className="form-group">
+                      <label>{i18n.t('scenario_edit.duration')}</label>
+                      <input
+                        type="number"
+                        min={0}
+                        step={1}
+                        className="form-control form-control-sm"
+                        value={item.duration || ''}
+                        onChange={this.changeInt(item.cid, 'duration')}/>
+                      {this.getError('duration_' + item.cid)}
+                    </div>
+                  </div>
+
+                  <div className="col-4">
+                    <div className="form-group">
+                      <label>{i18n.t('scenario_edit.image_transition')}</label>
+                      <input
+                        type="text"
+                        className="form-control form-control-sm"
+                        value={item.transition || ''}
+                        onChange={this.changeString(item.cid, 'transition')}/>
+                      {this.getError('transition_' + item.cid)}
+                    </div>
                   </div>
 
                 </div>
