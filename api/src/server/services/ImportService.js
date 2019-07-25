@@ -79,7 +79,7 @@ const ImportService = (function () {
     const scenarioHandlers = {
       'scenario_1': this.parseScenario.bind(this, 'scenario_1'),
       'scenario_2': this.parseScenario.bind(this, 'scenario_2'),
-      // 'scenario_3': this.parseScenario.bind(this),
+      'scenario_3': this.parseScenario.bind(this, 'scenario_3'),
     }
 
     const scenarioResult = await aggregate(Object.keys(scenarioHandlers), async name => {
