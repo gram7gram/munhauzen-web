@@ -1,1 +1,72 @@
-{"version":1,"locale":"en","device":"phone","dpi":"hdpi","size":712996638,"parts":{"count":10,"items":[{"size":50403560,"part":3,"checksum":"475ac660d3b4c23facbd16fdf2964d3e","path":"/expansions/1-en-phone-hdpi/part3.zip"},{"size":50191517,"part":4,"checksum":"98db4c2cdd8c03bafe9ce87284564f16","path":"/expansions/1-en-phone-hdpi/part4.zip"},{"size":60165710,"part":5,"checksum":"f86d0c49989aab4864cfdc380ce491cd","path":"/expansions/1-en-phone-hdpi/part5.zip"},{"size":62613071,"part":8,"checksum":"afd83ec00ae103f0b47620ad93e43baa","path":"/expansions/1-en-phone-hdpi/part8.zip"},{"size":75616194,"part":10,"checksum":"637652a632be02fc4757a3704c08bb74","path":"/expansions/1-en-phone-hdpi/part10.zip"},{"size":76315141,"part":7,"checksum":"481e64483ebb1e473ca4e7dfb78f1984","path":"/expansions/1-en-phone-hdpi/part7.zip"},{"size":78630355,"part":6,"checksum":"ce3cddefee597d9d08544c8ac10df9f0","path":"/expansions/1-en-phone-hdpi/part6.zip"},{"size":78895897,"part":9,"checksum":"151eb6e4c3814b3b73256d62e91c088b","path":"/expansions/1-en-phone-hdpi/part9.zip"},{"size":86331455,"part":1,"checksum":"8ab90ce1e5b9c18f571318f5d8183051","path":"/expansions/1-en-phone-hdpi/part1.zip"},{"size":93833738,"part":2,"checksum":"7b362650055181310be84dcb5d4b815e","path":"/expansions/1-en-phone-hdpi/part2.zip"}]}}
+{
+  "version": 1,
+  "locale": "en",
+  "device": "phone",
+  "dpi": "hdpi",
+  "size": 937964157,
+  "parts": {
+    "count": 10,
+    "items": [
+      {
+        "size": 104303528,
+        "part": 1,
+        "checksum": "976c3f5b3c1da4232a0fbee14d5b3b80",
+        "path": "/expansions/1-en-phone-hdpi/part1.zip"
+      },
+      {
+        "size": 125770815,
+        "part": 2,
+        "checksum": "dcdf083d8bc2d6fb5d92b859ef336426",
+        "path": "/expansions/1-en-phone-hdpi/part2.zip"
+      },
+      {
+        "size": 71292871,
+        "part": 3,
+        "checksum": "93726e47545365429031bb6e140a38e4",
+        "path": "/expansions/1-en-phone-hdpi/part3.zip"
+      },
+      {
+        "size": 77819854,
+        "part": 4,
+        "checksum": "66f04fee52fc2e77843adb64df4a5ae5",
+        "path": "/expansions/1-en-phone-hdpi/part4.zip"
+      },
+      {
+        "size": 66211109,
+        "part": 5,
+        "checksum": "e9634db5bb03164c6149b719cf5c14fe",
+        "path": "/expansions/1-en-phone-hdpi/part5.zip"
+      },
+      {
+        "size": 110558712,
+        "part": 6,
+        "checksum": "708653b6debe8d476ff99ed3da1725a1",
+        "path": "/expansions/1-en-phone-hdpi/part6.zip"
+      },
+      {
+        "size": 101422420,
+        "part": 7,
+        "checksum": "09ab20d5890aa75d28c5af4f83dfb16a",
+        "path": "/expansions/1-en-phone-hdpi/part7.zip"
+      },
+      {
+        "size": 84346061,
+        "part": 8,
+        "checksum": "b31d27419828fe9494969444041108bc",
+        "path": "/expansions/1-en-phone-hdpi/part8.zip"
+      },
+      {
+        "size": 99804283,
+        "part": 9,
+        "checksum": "7859fdb5a3d321bee5e1ed9d6d911a50",
+        "path": "/expansions/1-en-phone-hdpi/part9.zip"
+      },
+      {
+        "size": 96434504,
+        "part": 10,
+        "checksum": "09cb097cf2e2a44e7af585ad98801fcf",
+        "path": "/expansions/1-en-phone-hdpi/part10.zip"
+      }
+    ]
+  }
+}
