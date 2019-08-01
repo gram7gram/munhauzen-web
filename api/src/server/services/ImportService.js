@@ -442,7 +442,7 @@ const ImportService = (function () {
 
       const content = {
         name: item.chapter_id.trim(),
-        icon: item.icon_chapter ? item.icon_chapter.trim() : null,
+        icon: item.icon_chapter ? "chapter/" + item.icon_chapter.trim() : null,
         translations
       }
 
