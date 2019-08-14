@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-ssh root@munhauzen.fingertips.cf "cd /var/www/munhauzen-web && bash update.sh master"
+SERVER=185.227.111.144
+
+ssh root@${SERVER} "cd /var/www/munhauzen-web && bash update.sh master"

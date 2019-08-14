@@ -723,7 +723,7 @@ const ImportService = (function () {
 
   /**
    * Header: Id_picture, file, type, description_picture_ua, description_picture_ru, description_picture_eng,
-   * description_statue_ua, description_statue_ru, description_statue_eng, isanimation, isforbidden
+   * description_statue_ua, description_statue_ru, description_statue_eng, isanimation, isforbidden, iscolor, isbonus
    *
    * @param sheet
    */
@@ -767,21 +767,29 @@ const ImportService = (function () {
       }
 
       const content = {
-        name: item.Id_picture ? item.Id_picture.trim() : null,
-        file: item.file ? "images/" + item.file.trim() : null,
+        name: item.Id_picture.trim(),
+        file: "images/" + item.file.trim(),
         translations
       }
 
-      if (item.type) {
-        content.type = item.type.trim()
+      if (item.iscolor) {
+        if (item.iscolor.trim().toLowerCase() === 'true') {
+          content.type = "color"
+        }
+      }
+
+      if (item.isbonus) {
+        if (item.isbonus.trim().toLowerCase() === 'true') {
+          content.type = "bonus"
+        }
       }
 
       if (item.isanimation) {
-        content.isAnimation = item.isanimation.toLowerCase() === 'true'
+        content.isAnimation = item.isanimation.trim().toLowerCase() === 'true'
       }
 
       if (item.isforbidden) {
-        content.isHiddenFromGallery = item.isforbidden.toLowerCase() === 'true'
+        content.isHiddenFromGallery = item.isforbidden.trim().toLowerCase() === 'true'
       }
 
       try {

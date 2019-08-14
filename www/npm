@@ -1,7 +1,9 @@
+#!/usr/bin/env bash
+
 cd ..
 
 docker-compose up -d
 
-docker-compose exec www npm rebuild node-sass
+#docker-compose exec www npm rebuild node-sass
 
 docker-compose exec www npm "$@"

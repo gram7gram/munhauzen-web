@@ -12,6 +12,12 @@ import './styles/index.scss';
 
 const rootElement = document.getElementById('root');
 
-render(<Provider store={store}>
-  {createRouter()}
-</Provider>, rootElement);
+try {
+  render(<Provider store={store}>
+    {createRouter()}
+  </Provider>, rootElement);
+} catch (e) {
+  console.error(e)
+
+  window.location.reload()
+}
