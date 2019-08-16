@@ -51,9 +51,10 @@
   "inventory_edit": {
     "title": "Редакт. инвентарь",
     "title_new": "Новый инвентарь",
-    "statueDescription": "Описание статуетки",
+    "statueDescription": "Описание статуетки в галерее",
     "relatedScenario": "Сценарии, при которых происходит получение инвентаря",
     "relatedInventory": "Набор инвентаря, при котором происходит получение инвентаря",
+    "statueImage": "Картинка статуетки",
     "isStatue": "Статуетка",
     "isMenu": "Меню"
   },
@@ -103,8 +104,8 @@
     "isHiddenFromGallery": "Скрывать в галерее?",
     "isBonus": "Бонус",
     "isSuperBonus": "Супер-бонус",
-    "description": "Описание картинки",
-    "statueTitle": "Описание статуетки"
+    "relatedStatue": "Статуетка в галерее",
+    "description": "Описание картинки в галерее"
   },
   "image_types": {
     "color": "Заливка",

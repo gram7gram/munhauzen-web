@@ -41,11 +41,17 @@ const schema = new mongoose.Schema({
     type: [String],
     required: false
   },
+  relatedImages: {
+    type: [String],
+    required: false
+  },
+  statueImage: {
+    type: String,
+    required: false
+  },
   statueTranslations: {
     type: [StatueTranslation],
-    required: function () {
-      return this.isStatue === true
-    }
+    required: false
   }
 
 })

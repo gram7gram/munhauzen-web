@@ -9,10 +9,6 @@ const Translation = new mongoose.Schema({
     type: String,
     required: true
   },
-  statueTitle: {
-    type: String,
-    required: false
-  },
 })
 
 const schema = new mongoose.Schema({
@@ -41,10 +37,12 @@ const schema = new mongoose.Schema({
     type: Boolean,
     required: false
   },
+  relatedStatue: {
+    type: String,
+    required: false
+  },
   translations: {
-    type: [
-      Translation
-    ],
+    type: [Translation],
     required: false
   },
 })

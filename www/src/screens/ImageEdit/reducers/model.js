@@ -72,20 +72,20 @@ const type = (prev = null, action) => {
   }
 }
 
-const isAnimation = (prev = false, action) => {
+const relatedStatue = (prev = null, action) => {
   switch (action.type) {
     case Actions.CHANGE:
-      if (action.payload.isAnimation !== undefined) {
-        return action.payload.isAnimation
+      if (action.payload.relatedStatue !== undefined) {
+        return action.payload.relatedStatue
       }
 
       return prev
     case Actions.SAVE_SUCCESS:
     case Actions.FETCH_ITEM_SUCCESS:
-      return action.payload.isAnimation || false
+      return action.payload.relatedStatue || null
     case Actions.FETCH_ITEM_BEFORE:
     case Actions.RESET:
-      return false
+      return null
     default:
       return prev
   }
@@ -147,7 +147,7 @@ export default combineReducers({
   name,
   file,
   type,
-  isAnimation,
   isHiddenFromGallery,
   translations,
+  relatedStatue,
 });

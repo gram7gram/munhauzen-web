@@ -9,6 +9,7 @@ import * as Pages from '../../router/Pages'
 import Save from './actions/Save'
 import Remove from './actions/Remove'
 import Fetch from './actions/Fetch'
+import FetchInventory from '../Inventory/actions/Fetch'
 import {CHANGE, CHANGE_TRANSLATION, RESET, SET_TRANSLATION_TAB} from "./actions";
 
 const typeOptions = [
@@ -22,10 +23,14 @@ class ImageEdit extends Component {
   componentDidMount() {
 
     const {id} = this.props.match.params
-    const {locale} = this.props
+    const {locale, Inventory} = this.props
 
     if (id) {
       this.props.dispatch(Fetch(id))
+    }
+
+    if (!Inventory.isLoading && Inventory.items.length === 0) {
+      this.props.dispatch(FetchInventory())
     }
 
     this.setTab(locale)()
@@ -69,6 +74,8 @@ class ImageEdit extends Component {
 
   setType = selected => this.change('type', selected ? selected.value : null)
 
+  setRelatedStatue = selected => this.change('relatedStatue', selected ? selected.value : null)
+
   changeBool = name => e => this.change(name, e.target.checked)
 
   changeString = name => e => this.change(name, e.target.value)
@@ -96,10 +103,15 @@ class ImageEdit extends Component {
 
   render() {
 
-    const {locales} = this.props
+    const {locales, Inventory} = this.props
     const {model, translationTab, isLoading, isValid, serverErrors} = this.props.ImageEdit
 
     const currentTranslation = model.translations[translationTab] || null
+
+    const statueOptions = Inventory.items.filter(item => item.isStatue).map(item => ({
+      value: item.name,
+      label: item.name
+    }))
 
     return <div className="container my-2 py-3 bg-yellow shadow-sm">
       <div className="row">
@@ -176,17 +188,6 @@ class ImageEdit extends Component {
             <label>
               <input
                 type="checkbox"
-                checked={model.isAnimation}
-                onChange={this.changeBool('isAnimation')}/>
-              &nbsp;{i18n.t('image_edit.isAnimation')}
-            </label>
-            {this.getError('isAnimation')}
-          </div>
-
-          <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
                 checked={model.isHiddenFromGallery}
                 onChange={this.changeBool('isHiddenFromGallery')}/>
               &nbsp;{i18n.t('image_edit.isHiddenFromGallery')}
@@ -194,31 +195,37 @@ class ImageEdit extends Component {
             {this.getError('isHiddenFromGallery')}
           </div>
 
-          <ul className="nav nav-tabs mb-2">
-            {locales.map((locale, key) =>
-              <li key={key} className="nav-item" onClick={this.setTab(locale)}>
-                <span className={"nav-link" + (translationTab === locale ? " active" : '')}>{locale}</span>
-              </li>
-            )}
-          </ul>
+          {!model.isHiddenFromGallery ? <div>
+            <ul className="nav nav-tabs mb-2">
+              {locales.map((locale, key) =>
+                <li key={key} className="nav-item" onClick={this.setTab(locale)}>
+                  <span className={"nav-link" + (translationTab === locale ? " active" : '')}>{locale}</span>
+                </li>
+              )}
+            </ul>
 
-          <div className="form-group">
-            <label>{i18n.t('image_edit.description')}</label>
-            <textarea
-              className="form-control form-control-sm"
-              value={currentTranslation && currentTranslation.description ? currentTranslation.description : ''}
-              onChange={this.changeLocaleString('description')}/>
-            {this.getError('description_' + translationTab)}
-          </div>
+            {model.type === 'statue'
+              ? <div className="form-group">
+                <label>{i18n.t('image_edit.relatedStatue')}</label>
+                <Select
+                  value={model.relatedStatue ? {
+                    value: model.relatedStatue,
+                    label: model.relatedStatue
+                  } : null}
+                  options={statueOptions}
+                  onChange={this.setRelatedStatue}/>
+                {this.getError('relatedStatue')}
+              </div> : null}
 
-          <div className="form-group">
-            <label>{i18n.t('image_edit.statueTitle')}</label>
-            <textarea
-              className="form-control form-control-sm"
-              value={currentTranslation && currentTranslation.statueTitle ? currentTranslation.statueTitle : ''}
-              onChange={this.changeLocaleString('statueTitle')}/>
-            {this.getError('statueTitle_' + translationTab)}
-          </div>
+            <div className="form-group">
+              <label>{i18n.t('image_edit.description')}</label>
+              <textarea
+                className="form-control form-control-sm"
+                value={currentTranslation && currentTranslation.description ? currentTranslation.description : ''}
+                onChange={this.changeLocaleString('description')}/>
+              {this.getError('description_' + translationTab)}
+            </div>
+          </div> : null}
 
 
         </div>
@@ -235,6 +242,7 @@ ImageEdit.propTypes = {
 }
 
 const selectors = createStructuredSelector({
+  Inventory: store => store.Inventory,
   ImageEdit: store => store.ImageEdit,
   locale: store => store.App.locale,
   locales: store => store.App.locales,

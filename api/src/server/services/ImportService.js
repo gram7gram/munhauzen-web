@@ -746,7 +746,6 @@ const ImportService = (function () {
         translations.push({
           locale: 'ua',
           description: item.description_picture_ua,
-          statueTitle: item.description_statue_ua,
         })
       }
 
@@ -754,7 +753,6 @@ const ImportService = (function () {
         translations.push({
           locale: 'ru',
           description: item.description_picture_ru,
-          statueTitle: item.description_statue_ru,
         })
       }
 
@@ -762,7 +760,6 @@ const ImportService = (function () {
         translations.push({
           locale: 'en',
           description: item.description_picture_eng,
-          statueTitle: item.description_statue_eng,
         })
       }
 

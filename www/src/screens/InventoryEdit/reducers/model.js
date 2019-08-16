@@ -142,6 +142,25 @@ const statueTranslations = (prev = {}, action) => {
   }
 }
 
+const statueImage = (prev = null, action) => {
+  switch (action.type) {
+    case Actions.CHANGE:
+      if (action.payload.statueImage !== undefined) {
+        return action.payload.statueImage
+      }
+
+      return prev
+    case Actions.SAVE_SUCCESS:
+    case Actions.FETCH_ITEM_SUCCESS:
+      return action.payload.statueImage || null
+    case Actions.FETCH_ITEM_BEFORE:
+    case Actions.RESET:
+      return null
+    default:
+      return prev
+  }
+}
+
 export default combineReducers({
   _id,
   name,
@@ -150,4 +169,5 @@ export default combineReducers({
   statueTranslations,
   relatedInventory,
   relatedScenario,
+  statueImage,
 });

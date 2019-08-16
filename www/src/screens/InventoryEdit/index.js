@@ -178,7 +178,7 @@ class InventoryEdit extends Component {
                 value: item.name,
                 label: item.name
               }))}
-              options={this.name.scenario.map(item => ({
+              options={this.props.scenario.map(item => ({
                 value: item.name,
                 label: item.name
               }))}/>
@@ -223,6 +223,17 @@ class InventoryEdit extends Component {
           </div>
 
           {model.isStatue ? <div>
+
+            <div className="form-group">
+              <label>{i18n.t('inventory_edit.statueImage')}</label>
+              <input
+                type="text"
+                className="form-control form-control-sm"
+                value={model.statueImage || ''}
+                onChange={this.changeString('statueImage')}/>
+              {this.getError('statueImage')}
+            </div>
+
             <ul className="nav nav-tabs mb-2">
               {locales.map((locale, key) =>
                 <li key={key} className="nav-item" onClick={this.setTab(locale)}>
