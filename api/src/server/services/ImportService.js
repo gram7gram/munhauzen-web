@@ -787,6 +787,7 @@ const ImportService = (function () {
 
       if (item.related_statue) {
         content.relatedStatue = item.related_statue.trim().toUpperCase()
+        content.type = "statue"
       }
 
       if (item.isforbidden) {
