@@ -723,7 +723,7 @@ const ImportService = (function () {
 
   /**
    * Header: Id_picture, file, type, description_picture_ua, description_picture_ru, description_picture_eng,
-   * description_statue_ua, description_statue_ru, description_statue_eng, isanimation, isforbidden, iscolor, isbonus
+   * related_statue, isanimation, isforbidden, iscolor, isbonus
    *
    * @param sheet
    */
@@ -783,6 +783,10 @@ const ImportService = (function () {
 
       if (item.isanimation) {
         content.isAnimation = item.isanimation.trim().toLowerCase() === 'true'
+      }
+
+      if (item.related_statue) {
+        content.relatedStatue = item.related_statue.trim().toUpperCase()
       }
 
       if (item.isforbidden) {
