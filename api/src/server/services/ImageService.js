@@ -10,6 +10,7 @@ const ImageService = (function () {
 
       const content = {
         name: 'Last',
+        isHiddenFromGallery: true,
         isReserved: true
       }
 

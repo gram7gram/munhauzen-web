@@ -17,7 +17,15 @@ class Card extends PureComponent {
 
   render() {
 
-    const {inventory} = this.props
+    const {inventory, locale} = this.props
+
+    let trans = null
+    if (inventory.statueTranslations !== undefined && inventory.statueTranslations) {
+      trans = inventory.statueTranslations.find(item => item.locale === locale);
+      if (!trans) {
+        trans = inventory.statueTranslations[0]
+      }
+    }
 
     return <tr>
       <td>
@@ -33,13 +41,16 @@ class Card extends PureComponent {
           <i className="fa fa-times"/>
         </button>
       </td>
-      <td>{inventory.name}</td>
+      <td>
+        <div>{inventory.name}</div>
+        {trans
+          ? <div className="small text-muted">{trans.description}</div>
+          : null}
+      </td>
       <td>
         {inventory.isMenu
           ? <div className="badge badge-warning">{i18n.t('inventory.isMenuBadge')}</div>
           : null}
-      </td>
-      <td>
         {inventory.isStatue
           ? <div className="badge badge-info">{i18n.t('inventory.isStatueBadge')}</div>
           : null}

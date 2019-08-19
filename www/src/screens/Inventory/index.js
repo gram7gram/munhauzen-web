@@ -92,8 +92,7 @@ class Inventory extends Component {
         <thead>
         <tr>
           <th colSpan={2}>{i18n.t('placeholders.name')}</th>
-          <th>{i18n.t('inventory_edit.isMenu')}</th>
-          <th>{i18n.t('inventory_edit.isStatue')}</th>
+          <th>{i18n.t('placeholders.type')}</th>
         </tr>
         </thead>
         <tbody>

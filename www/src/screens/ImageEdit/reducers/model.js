@@ -91,6 +91,25 @@ const relatedStatue = (prev = null, action) => {
   }
 }
 
+const relatedScenario = (prev = null, action) => {
+  switch (action.type) {
+    case Actions.CHANGE:
+      if (action.payload.relatedScenario !== undefined) {
+        return action.payload.relatedScenario
+      }
+
+      return prev
+    case Actions.SAVE_SUCCESS:
+    case Actions.FETCH_ITEM_SUCCESS:
+      return action.payload.relatedScenario || null
+    case Actions.FETCH_ITEM_BEFORE:
+    case Actions.RESET:
+      return null
+    default:
+      return prev
+  }
+}
+
 const isHiddenFromGallery = (prev = false, action) => {
   switch (action.type) {
     case Actions.CHANGE:
@@ -150,4 +169,5 @@ export default combineReducers({
   isHiddenFromGallery,
   translations,
   relatedStatue,
+  relatedScenario,
 });

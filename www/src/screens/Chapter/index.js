@@ -86,12 +86,11 @@ class Chapter extends Component {
       <table className="table table-sm table-hover bg-light">
         <colgroup>
           <col width="15%"/>
-          <col width="15%"/>
         </colgroup>
         <thead>
         <tr>
-          <th colSpan={2}>{i18n.t('placeholders.order')}</th>
-          <th>{i18n.t('placeholders.name')}</th>
+          <th colSpan={2}>{i18n.t('placeholders.name')}</th>
+          <th>{i18n.t('placeholders.order')}</th>
         </tr>
         </thead>
         <tbody>

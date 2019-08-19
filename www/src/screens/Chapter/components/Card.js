@@ -18,9 +18,13 @@ class Card extends PureComponent {
 
     const {chapter, locale} = this.props
 
-    const trans = chapter.translations !== undefined && chapter.translations
-      ? chapter.translations.find(item => item.locale === locale)
-      : null
+    let trans = null
+    if (chapter.translations !== undefined && chapter.translations) {
+      trans = chapter.translations.find(item => item.locale === locale);
+      if (!trans) {
+        trans = chapter.translations[0]
+      }
+    }
 
     return <tr>
       <td>
@@ -36,13 +40,13 @@ class Card extends PureComponent {
           <i className="fa fa-times"/>
         </button>
       </td>
-      <td>{chapter.number}</td>
       <td>
         <div>{chapter.name}</div>
         {trans
           ? <div className="small text-muted">{trans.description}</div>
           : null}
       </td>
+      <td>{chapter.number}</td>
     </tr>
   }
 }

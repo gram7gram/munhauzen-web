@@ -92,6 +92,10 @@
   },
   "images": {
     "title": "Картинки",
+    "type_color": "Цветная",
+    "type_bonus": "Бонус",
+    "type_statue": "Достижение",
+    "isHiddenFromGallery": "Галерея",
     "isReserved": "Заблокировано"
   },
   "image_edit": {
@@ -104,6 +108,7 @@
     "isHiddenFromGallery": "Скрывать в галерее?",
     "isBonus": "Бонус",
     "isSuperBonus": "Супер-бонус",
+    "relatedScenario": "Сценарий для открытия картинки-бонуса",
     "relatedStatue": "Статуетка в галерее",
     "description": "Описание картинки в галерее"
   },
@@ -122,6 +127,7 @@
     "success": "Успешно!",
     "name": "Название",
     "file": "Файл",
+    "type": "Тип",
     "description": "Описание",
     "not_found_title": "Ничего не найдено",
     "not_found_footer": "Попробуйте изменить поисковый запрос",

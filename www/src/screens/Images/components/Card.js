@@ -19,9 +19,13 @@ class Card extends PureComponent {
 
     const {image, locale} = this.props
 
-    const trans = image.translations !== undefined && image.translations
-      ? image.translations.find(item => item.locale === locale)
-      : null
+    let trans = null
+    if (image.translations !== undefined && image.translations) {
+      trans = image.translations.find(item => item.locale === locale);
+      if (!trans) {
+        trans = image.translations[0]
+      }
+    }
 
     return <tr>
       <td className="text-center">
@@ -44,8 +48,24 @@ class Card extends PureComponent {
       <td>
         <div>{image.name}</div>
         {trans
-          ? <div className="small text-muted">{trans.text}</div>
+          ? <div className="small text-muted">{trans.description}</div>
           : null}
+      </td>
+      <td>
+        {image.type === 'statue'
+          ? <div className="badge badge-success">{i18n.t('images.type_statue')}</div>
+          : null}
+        {image.type === 'bonus'
+          ? <div className="badge badge-warning">{i18n.t('images.type_bonus')}</div>
+          : null}
+        {image.type === 'color'
+          ? <div className="badge badge-primary">{i18n.t('images.type_color')}</div>
+          : null}
+      </td>
+      <td>
+        <i className={"fa " + (image.isHiddenFromGallery
+          ? "fa-times text-danger"
+          : "fa-check text-success")}/>
       </td>
     </tr>
   }

@@ -82,6 +82,8 @@ class Images extends Component {
         <thead>
         <tr>
           <th colSpan={2}>{i18n.t('placeholders.name')}</th>
+          <th>{i18n.t('placeholders.type')}</th>
+          <th>{i18n.t('images.isHiddenFromGallery')}</th>
         </tr>
         </thead>
         <tbody>

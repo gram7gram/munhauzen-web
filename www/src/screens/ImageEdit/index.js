@@ -10,6 +10,7 @@ import Save from './actions/Save'
 import Remove from './actions/Remove'
 import Fetch from './actions/Fetch'
 import FetchInventory from '../Inventory/actions/Fetch'
+import FetchScenario from '../Scenario/actions/Fetch'
 import {CHANGE, CHANGE_TRANSLATION, RESET, SET_TRANSLATION_TAB} from "./actions";
 
 const typeOptions = [
@@ -23,7 +24,7 @@ class ImageEdit extends Component {
   componentDidMount() {
 
     const {id} = this.props.match.params
-    const {locale, Inventory} = this.props
+    const {locale, Inventory, Scenario} = this.props
 
     if (id) {
       this.props.dispatch(Fetch(id))
@@ -31,6 +32,10 @@ class ImageEdit extends Component {
 
     if (!Inventory.isLoading && Inventory.items.length === 0) {
       this.props.dispatch(FetchInventory())
+    }
+
+    if (!Scenario.isLoading && Scenario.items.length === 0) {
+      this.props.dispatch(FetchScenario())
     }
 
     this.setTab(locale)()
@@ -76,6 +81,8 @@ class ImageEdit extends Component {
 
   setRelatedStatue = selected => this.change('relatedStatue', selected ? selected.value : null)
 
+  setRelatedScenario = selected => this.change('relatedScenario', selected ? selected.value : null)
+
   changeBool = name => e => this.change(name, e.target.checked)
 
   changeString = name => e => this.change(name, e.target.value)
@@ -103,12 +110,17 @@ class ImageEdit extends Component {
 
   render() {
 
-    const {locales, Inventory} = this.props
+    const {locales, Inventory, Scenario} = this.props
     const {model, translationTab, isLoading, isValid, serverErrors} = this.props.ImageEdit
 
     const currentTranslation = model.translations[translationTab] || null
 
     const statueOptions = Inventory.items.filter(item => item.isStatue).map(item => ({
+      value: item.name,
+      label: item.name
+    }))
+
+    const scenarioOptions = Scenario.items.map(item => ({
       value: item.name,
       label: item.name
     }))
@@ -184,6 +196,19 @@ class ImageEdit extends Component {
             {this.getError('type')}
           </div>
 
+          {model.type === 'bonus'
+            ? <div className="form-group">
+              <label>{i18n.t('image_edit.relatedScenario')}</label>
+              <Select
+                value={model.relatedScenario ? {
+                  value: model.relatedScenario,
+                  label: model.relatedScenario
+                } : null}
+                options={scenarioOptions}
+                onChange={this.setRelatedScenario}/>
+              {this.getError('relatedScenario')}
+            </div> : null}
+
           <div className="form-group">
             <label>
               <input
@@ -236,6 +261,8 @@ class ImageEdit extends Component {
 
 ImageEdit.propTypes = {
   ImageEdit: PropTypes.any.isRequired,
+  Scenario: PropTypes.any.isRequired,
+  Inventory: PropTypes.any.isRequired,
   match: PropTypes.any.isRequired,
   locale: PropTypes.any.isRequired,
   locales: PropTypes.any.isRequired,
@@ -243,6 +270,7 @@ ImageEdit.propTypes = {
 
 const selectors = createStructuredSelector({
   Inventory: store => store.Inventory,
+  Scenario: store => store.Scenario,
   ImageEdit: store => store.ImageEdit,
   locale: store => store.App.locale,
   locales: store => store.App.locales,
