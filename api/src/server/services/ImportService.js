@@ -621,7 +621,7 @@ const ImportService = (function () {
   }
 
   /**
-   * Header: Name, Related_option, Related_inventory, Description_Eng, Description_Ua, Description_Ru
+   * Header: Name, Related_option, Related_inventory, Description_Eng, Description_Ua, Description_Ru, statue_image
    *
    * @param sheet
    */
@@ -690,6 +690,10 @@ const ImportService = (function () {
         relatedScenario,
         relatedInventory,
         statueTranslations,
+      }
+
+      if (item.statue_image) {
+        content.statueImage = 'gallery/' + item.statue_image.trim();
       }
 
       try {
