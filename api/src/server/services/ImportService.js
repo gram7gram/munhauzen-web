@@ -631,6 +631,7 @@ const ImportService = (function () {
 
     const data = json.filter(item =>
       item.Name !== undefined
+      && item.statue_image !== undefined
     )
 
     if (data.length === 0) return
@@ -685,15 +686,12 @@ const ImportService = (function () {
       }
 
       const content = {
-        name: item.Name ? item.Name.trim().toUpperCase() : null,
+        name: item.Name.trim().toUpperCase(),
+        statueImage: 'gallery/' + item.statue_image.trim(),
         isStatue: true,
         relatedScenario,
         relatedInventory,
         statueTranslations,
-      }
-
-      if (item.statue_image) {
-        content.statueImage = 'gallery/' + item.statue_image.trim();
       }
 
       try {
@@ -727,7 +725,7 @@ const ImportService = (function () {
 
   /**
    * Header: Id_picture, file, type, description_picture_ua, description_picture_ru, description_picture_eng,
-   * related_statue, isanimation, isforbidden, iscolor, isbonus
+   * related_statue, isanimation, isforbidden, iscolor, isbonus, isstatue, related_option
    *
    * @param sheet
    */
@@ -785,13 +783,22 @@ const ImportService = (function () {
         }
       }
 
+      if (item.isstatue) {
+        if (item.isstatue.trim().toLowerCase() === 'true') {
+          content.type = "statue"
+        }
+      }
+
       if (item.isanimation) {
         content.isAnimation = item.isanimation.trim().toLowerCase() === 'true'
       }
 
       if (item.related_statue) {
         content.relatedStatue = item.related_statue.trim().toUpperCase()
-        content.type = "statue"
+      }
+
+      if (item.related_option) {
+        content.relatedScenario = item.related_option.trim()
       }
 
       if (item.isforbidden) {

@@ -41,6 +41,10 @@ const schema = new mongoose.Schema({
     type: String,
     required: false
   },
+  relatedScenario: {
+    type: String,
+    required: false
+  },
   translations: {
     type: [Translation],
     required: false
