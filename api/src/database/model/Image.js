@@ -20,6 +20,10 @@ const schema = new mongoose.Schema({
     type: String,
     required: true
   },
+  order: {
+    type: Number,
+    required: true
+  },
   type: {
     type: String,
     required: false

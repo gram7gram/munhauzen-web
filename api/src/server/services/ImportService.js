@@ -740,7 +740,7 @@ const ImportService = (function () {
 
     if (data.length === 0) return
 
-    const result = await aggregate(data, async item => {
+    const result = await aggregate(data, async (item, i) => {
 
       const translations = []
 
@@ -768,6 +768,7 @@ const ImportService = (function () {
       const content = {
         name: item.Id_picture.trim(),
         file: "images/" + item.file.trim(),
+        order: i,
         translations
       }
 

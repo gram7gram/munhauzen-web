@@ -74,7 +74,7 @@ const ExportService = (function () {
   }
 
   Service.prototype.prepareImages = async function () {
-    const items = await Image.find({isReserved: {$ne: true}}).sort({name: 'asc'}).lean()
+    const items = await Image.find({isReserved: {$ne: true}}).sort({order: 'asc', name: 'asc'}).lean()
 
     return JSON.stringify(items)
   }
