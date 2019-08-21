@@ -409,6 +409,7 @@ const ImportService = (function () {
 
     const data = json.filter(item =>
       item.chapter_id !== undefined
+      && item.icon_chapter !== undefined
     )
 
     if (data.length === 0) return
@@ -442,7 +443,7 @@ const ImportService = (function () {
 
       const content = {
         name: item.chapter_id.trim(),
-        icon: item.icon_chapter ? "chapter/" + item.icon_chapter.trim() : null,
+        icon: "chapter/" + item.icon_chapter.trim(),
         translations
       }
 
