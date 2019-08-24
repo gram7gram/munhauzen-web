@@ -922,14 +922,13 @@ const ImportService = (function () {
       if (isNaN(duration)) duration = 0
 
       const content = {
-        name: item.Id_audio ? item.Id_audio.trim() : null,
-        file: item.file ? item.file.trim() : null,
+        name: item.Id_audio.trim(),
+        file: "audio/" + item.file.trim(),
         duration,
-        audio: null,
-        isFailOpenedOnStart: item.isopenedfail.toLowerCase() === 'true',
-        isFailOpenedOnComplete: item.isclosedfail.toLowerCase() === 'true',
-        isFailDaughter: item.isfaild.toLowerCase() === 'true',
-        isFailMunhauzen: item.isfailm.toLowerCase() === 'true',
+        isFailOpenedOnStart: item.isopenedfail.trim().toLowerCase() === 'true',
+        isFailOpenedOnComplete: item.isclosedfail.trim().toLowerCase() === 'true',
+        isFailDaughter: item.isfaild.trim().toLowerCase() === 'true',
+        isFailMunhauzen: item.isfailm.trim().toLowerCase() === 'true',
         locale,
         description: item.description_audio,
       }
