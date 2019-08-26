@@ -916,7 +916,7 @@ const ImportService = (function () {
 
     if (data.length === 0) return
 
-    const result = await aggregate(data, async item => {
+    const result = await aggregate(data, async (item, i) => {
 
       let duration = parseInt(item.duration_audio);
       if (isNaN(duration)) duration = 0
@@ -931,6 +931,7 @@ const ImportService = (function () {
         isFailMunhauzen: item.isfailm.trim().toLowerCase() === 'true',
         locale,
         description: item.description_audio,
+        order: i,
       }
 
       content.audio = content.name.split('_fail')[0]

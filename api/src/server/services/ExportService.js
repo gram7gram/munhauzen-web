@@ -88,7 +88,7 @@ const ExportService = (function () {
   }
 
   Service.prototype.prepareAudioFails = async function () {
-    const items = await AudioFail.find().sort({name: 'asc'}).lean()
+    const items = await AudioFail.find().sort({order: 'asc', name: 'asc'}).lean()
 
     return items
   }

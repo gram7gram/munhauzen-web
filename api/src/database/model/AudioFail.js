@@ -14,6 +14,10 @@ const schema = new mongoose.Schema({
     unique: false,
     required: true
   },
+  order: {
+    type: Number,
+    required: true
+  },
   isFailMunhauzen: {
     type: Boolean,
     default: false,
