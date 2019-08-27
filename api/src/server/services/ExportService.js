@@ -100,7 +100,7 @@ const ExportService = (function () {
   }
 
   Service.prototype.prepareScenario = async function () {
-    const items = await Scenario.find({isReserved: {$ne: true}}).sort({name: 'asc'}).lean()
+    const items = await Scenario.find().sort({name: 'asc'}).lean()
 
     return items
   }
