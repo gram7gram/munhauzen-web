@@ -10,22 +10,7 @@ const ScenarioService = (function () {
     try {
 
       const content = {
-        name: 'VICTORY',
-        isReserved: true
-      }
-
-      await Scenario.findOneAndUpdate({name: content.name}, content, {
-        upsert: true, new: true, runValidators: false
-      })
-
-    } catch (e) {
-      logger.error(e);
-    }
-
-    try {
-
-      const content = {
-        name: 'DEFEAT',
+        name: 'aVictory',
         isReserved: true
       }
 
