@@ -383,7 +383,7 @@ const ImportService = (function () {
               rImage.duration = duration - durationWithoutR
 
               if (rImage.duration < 0) {
-                warnings.push(`Неправильно указана длительность "R" в сценарие ${scenario.name} и картинке ${rImage.name}`)
+                warnings.push(`Неправильно указана длительность "R" в сценарие ${scenario.name} и картинке ${rImage.image}`)
               }
 
               delete rImage.isR
