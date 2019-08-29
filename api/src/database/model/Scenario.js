@@ -42,7 +42,6 @@ const Image = new mongoose.Schema({
   },
   duration: {
     type: Number,
-    min: 0,
     required: true
   },
   transition: {
@@ -59,7 +58,6 @@ const Audio = new mongoose.Schema({
   },
   duration: {
     type: Number,
-    min: 0,
     required: true
   }
 })

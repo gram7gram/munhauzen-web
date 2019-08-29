@@ -97,7 +97,6 @@ const ImportService = (function () {
           sheet: name,
           warnings,
           errors,
-          raw: sheetResult
         }
       }
 
@@ -398,7 +397,10 @@ const ImportService = (function () {
       await saveScenario(scenario)
     })
 
+    const a16_d = await Scenario.findOne({name: 'a16_d'}).lean()
+
     return {
+      a16_d,
       result,
       warnings
     }
