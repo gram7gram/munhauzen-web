@@ -96,7 +96,8 @@ const ImportService = (function () {
         return {
           sheet: name,
           warnings,
-          errors
+          errors,
+          raw: sheetResult
         }
       }
 
@@ -371,17 +372,22 @@ const ImportService = (function () {
 
     Object.values(scenarios).forEach(scenario => {
 
-      if (scenario.audio) {
-        scenario.duration = scenario.audio.reduce((sum, audio) => sum + audio.duration, 0)
+      if (scenario.audio && scenario.audio.length > 0) {
+        const duration = scenario.audio.reduce((sum, audio) => sum + audio.duration, 0)
 
-        if (scenario.images) {
+        if (duration > 0) {
+          if (scenario.images && scenario.images.length > 0) {
+            const rImage = scenario.images.find(item => item.isR)
+            if (rImage) {
+              const durationWithoutR = scenario.images.filter(item => !item.isR).reduce((sum, audio) => sum + audio.duration, 0)
 
-          const rImage = scenario.images.find(item => item.isR)
-          if (rImage) {
-            const durationWithoutR = scenario.images.filter(item => !item.isR).reduce((sum, audio) => sum + audio.duration, 0)
+              rImage.duration = duration - durationWithoutR
 
-            rImage.duration = scenario.duration - durationWithoutR
+              delete rImage.isR
+            }
           }
+        } else {
+          warnings.push(`Не указана длительность аудио в сценарие ${scenario.name}`)
         }
 
       }
