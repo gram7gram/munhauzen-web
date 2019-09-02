@@ -1,1 +1,72 @@
-{"version":1,"locale":"en","device":"phone","dpi":"hdpi","size":17021693,"parts":{"count":1,"items":[{"size":17021693,"part":1,"checksum":"b0c049e23451e0da0debe043acac9809","path":"/expansions/1-en-phone-hdpi/part1.zip"}]}}
+{
+  "version": 1,
+  "locale": "en",
+  "device": "phone",
+  "dpi": "hdpi",
+  "size": 958808916,
+  "parts": {
+    "count": 10,
+    "items": [
+      {
+        "size": 101951027,
+        "part": 1,
+        "checksum": "ea4f65ad6b961e07bd76a66edb1c249a",
+        "path": "/expansions/1-en-phone-hdpi/part1.zip"
+      },
+      {
+        "size": 104824442,
+        "part": 2,
+        "checksum": "27b710fec1ca092a0180a37ada56fc2f",
+        "path": "/expansions/1-en-phone-hdpi/part2.zip"
+      },
+      {
+        "size": 67870912,
+        "part": 3,
+        "checksum": "3a70e0b08106dba1bab6d36503c9727a",
+        "path": "/expansions/1-en-phone-hdpi/part3.zip"
+      },
+      {
+        "size": 88899516,
+        "part": 4,
+        "checksum": "322e3596b77b731ad70ceb6c4bcb6fcc",
+        "path": "/expansions/1-en-phone-hdpi/part4.zip"
+      },
+      {
+        "size": 91760546,
+        "part": 5,
+        "checksum": "26d79d27f9bc3d61c44655d72c8e0c2e",
+        "path": "/expansions/1-en-phone-hdpi/part5.zip"
+      },
+      {
+        "size": 98781015,
+        "part": 6,
+        "checksum": "9d1d5f6162fc2f3d2b0b44b12d396c6e",
+        "path": "/expansions/1-en-phone-hdpi/part6.zip"
+      },
+      {
+        "size": 105613401,
+        "part": 7,
+        "checksum": "050a268676ca46e78d714fe6c0aa61e4",
+        "path": "/expansions/1-en-phone-hdpi/part7.zip"
+      },
+      {
+        "size": 111740056,
+        "part": 8,
+        "checksum": "7aa184d382f11fce98eadd00e4a14173",
+        "path": "/expansions/1-en-phone-hdpi/part8.zip"
+      },
+      {
+        "size": 96784699,
+        "part": 9,
+        "checksum": "ed867aa832c7c8ab4e49bc4b39c227bd",
+        "path": "/expansions/1-en-phone-hdpi/part9.zip"
+      },
+      {
+        "size": 90583302,
+        "part": 10,
+        "checksum": "f030fed4afe8403fb636ca5bdfaece12",
+        "path": "/expansions/1-en-phone-hdpi/part10.zip"
+      }
+    ]
+  }
+}
