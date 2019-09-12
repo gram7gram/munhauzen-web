@@ -6,23 +6,20 @@ const host = require('../../../parameters').host;
 const expansions = {
   1: {
     en: {
-      phone: {
-        hdpi: {
-          getExpansion: () => require('../resources/1-en-phone-hdpi-expansion.json')
-        }
+      hdpi: {
+        getExpansion: () => require('../resources/1-en-hdpi-expansion.json')
+      },
+      mdpi: {
+        getExpansion: () => require('../resources/1-en-mdpi-expansion.json')
+      },
+      ldpi: {
+        getExpansion: () => require('../resources/1-en-ldpi-expansion.json')
       }
     }
   }
 }
 
-router.get('/expansions/:version/:locale/:device/:dpi', (req, res, next) => {
-
-  if (['phone', 'tablet'].indexOf(req.params.device) === -1) {
-    res.status(400).json({
-      message: 'Invalid `device` in request',
-    })
-    return
-  }
+router.get('/expansions/:version/:locale/:dpi', (req, res, next) => {
 
   if (['en', 'ua', 'ru'].indexOf(req.params.locale) === -1) {
     res.status(400).json({
@@ -31,7 +28,7 @@ router.get('/expansions/:version/:locale/:device/:dpi', (req, res, next) => {
     return
   }
 
-  if (['mdpi', 'hdpi', 'xhdpi'].indexOf(req.params.dpi) === -1) {
+  if (['mdpi', 'hdpi', 'ldpi'].indexOf(req.params.dpi) === -1) {
     res.status(400).json({
       message: 'Invalid `dpi` in request',
     })
@@ -51,25 +48,24 @@ router.get('/expansions/:version/:locale/:device/:dpi', (req, res, next) => {
 
   try {
 
-    const {device, dpi, locale} = req.params
+    const {dpi, locale} = req.params
     const version = parseInt(req.params.version)
 
-    if (typeof expansions[version][locale][device][dpi] !== "undefined") {
-
-      const expansion = expansions[version][locale][device][dpi].getExpansion()
-
-      expansion.parts.items = expansion.parts.items.map(item => ({
-        ...item,
-        url: host + item.path
-      }))
-
-      res.status(200).json(expansion)
+    if (typeof expansions[version][locale][dpi] === "undefined") {
+      throw {
+        code: 404,
+        message: 'Не найдено'
+      }
     }
 
-    throw {
-      code: 404,
-      message: 'Не найдено'
-    }
+    const expansion = expansions[version][locale][dpi].getExpansion()
+
+    expansion.parts.items = expansion.parts.items.map(item => ({
+      ...item,
+      url: host + item.path
+    }))
+
+    res.status(200).json(expansion)
 
   } catch (e) {
 
