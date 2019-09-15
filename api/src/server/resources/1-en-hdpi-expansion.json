@@ -1,1 +1,77 @@
-{"version":1,"locale":"en","dpi":"hdpi","size":1088461384,"parts":{"count":10,"items":[{"size":123320685,"part":1,"checksum":"","path":"/expansions/1-en-hdpi/part1.zip"},{"size":117528465,"part":2,"checksum":"","path":"/expansions/1-en-hdpi/part2.zip"},{"size":80706065,"part":3,"checksum":"","path":"/expansions/1-en-hdpi/part3.zip"},{"size":101848605,"part":4,"checksum":"","path":"/expansions/1-en-hdpi/part4.zip"},{"size":100804689,"part":5,"checksum":"","path":"/expansions/1-en-hdpi/part5.zip"},{"size":114470258,"part":6,"checksum":"","path":"/expansions/1-en-hdpi/part6.zip"},{"size":117787855,"part":7,"checksum":"","path":"/expansions/1-en-hdpi/part7.zip"},{"size":118459452,"part":8,"checksum":"","path":"/expansions/1-en-hdpi/part8.zip"},{"size":114921252,"part":9,"checksum":"","path":"/expansions/1-en-hdpi/part9.zip"},{"size":98614058,"part":10,"checksum":"","path":"/expansions/1-en-hdpi/part10.zip"}]}}
+{
+  "version": 1,
+  "locale": "en",
+  "dpi": "hdpi",
+  "size": 1088461384,
+  "parts": {
+    "count": 11,
+    "items": [
+      {
+        "size": 123320685,
+        "part": 1,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi/part1.zip"
+      },
+      {
+        "size": 117528465,
+        "part": 2,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi/part2.zip"
+      },
+      {
+        "size": 80706065,
+        "part": 3,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi/part3.zip"
+      },
+      {
+        "size": 101848605,
+        "part": 4,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi/part4.zip"
+      },
+      {
+        "size": 100804689,
+        "part": 5,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi/part5.zip"
+      },
+      {
+        "size": 114470258,
+        "part": 6,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi/part6.zip"
+      },
+      {
+        "size": 117787855,
+        "part": 7,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi/part7.zip"
+      },
+      {
+        "size": 118459452,
+        "part": 8,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi/part8.zip"
+      },
+      {
+        "size": 114921252,
+        "part": 9,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi/part9.zip"
+      },
+      {
+        "size": 98614058,
+        "part": 10,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi/part10.zip"
+      },
+      {
+        "size": 98614058,
+        "part": 11,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi/part11.zip"
+      }
+    ]
+  }
+}
