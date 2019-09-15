@@ -11,9 +11,6 @@ const expansions = {
       },
       mdpi: {
         getExpansion: () => require('../resources/1-en-mdpi-expansion.json')
-      },
-      ldpi: {
-        getExpansion: () => require('../resources/1-en-ldpi-expansion.json')
       }
     }
   }
@@ -28,7 +25,7 @@ router.get('/expansions/:version/:locale/:dpi', (req, res, next) => {
     return
   }
 
-  if (['mdpi', 'hdpi', 'ldpi'].indexOf(req.params.dpi) === -1) {
+  if (['mdpi', 'hdpi'].indexOf(req.params.dpi) === -1) {
     res.status(400).json({
       message: 'Invalid `dpi` in request',
     })
