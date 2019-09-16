@@ -2,13 +2,13 @@ const express = require('express');
 const imageService = require('../services/ImageService')
 const Image = require('../../database/model/Image').Image;
 const checkId = require('../services/RequestParamsValidator').checkId
-const router = new express.Router();
+const router = new express.Router({mergeParams: true});
 const logger = require('../../logger');
 
 router.get('/images', async (req, res) => {
 
   try {
-    const items = await Image.find().sort({isReserved: 'desc', name: 'asc'}).lean()
+    const items = await Image.find({locale: req.params.locale}).sort({isReserved: 'desc', name: 'asc'}).lean()
 
     res.status(200).json({
       items,

@@ -1,4 +1,4 @@
-www/node_modules
+admin/node_modules
 api/node_modules
 
 .DS_Store
@@ -6,10 +6,10 @@ api/node_modules
 
 npm-debug.log*
 
-www/package-lock.json
+admin/package-lock.json
 api/package-lock.json
 
-www/src/parameters.js
+admin/src/parameters.js
 api/parameters.js
 
 docker-compose.yml

@@ -5,13 +5,14 @@ const ScenarioService = (function () {
 
   function Service() {}
 
-  Service.prototype.restoreDefaults = async function () {
+  Service.prototype.restoreDefaults = async function (locale) {
 
     try {
 
       const content = {
         name: 'aVictory',
-        isReserved: true
+        isReserved: true,
+        locale
       }
 
       await Scenario.findOneAndUpdate({name: content.name}, content, {

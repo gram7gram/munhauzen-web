@@ -30,18 +30,8 @@ describe('ImageRESTController', () => {
     const entity = {
       name: cid(10),
       file: cid(20),
-      translations: [
-        {
-          locale: 'ru',
-          description: cid(30),
-          statusTitle: cid(5)
-        },
-        {
-          locale: 'ua',
-          description: cid(30),
-          statusTitle: cid(5)
-        }
-      ]
+      locale: 'ru',
+      description: cid(30),
     }
 
     app.post('/api/v1/images')
@@ -53,8 +43,8 @@ describe('ImageRESTController', () => {
         expect(res.body._id).not.to.equal(undefined)
         expect(res.body.name).to.equal(entity.name)
         expect(res.body.file).to.equal(entity.file)
-        expect(res.body.translations).not.to.equal(undefined)
-        expect(res.body.translations.length).to.equal(2)
+        expect(res.body.locale).to.equal(entity.locale)
+        expect(res.body.description).to.equal(entity.description)
 
         done();
       });
@@ -65,18 +55,8 @@ describe('ImageRESTController', () => {
     const entity = await imageService.create({
       name: cid(10),
       file: cid(20),
-      translations: [
-        {
-          locale: 'ru',
-          description: cid(30),
-          statusTitle: cid(5)
-        },
-        {
-          locale: 'ua',
-          description: cid(30),
-          statusTitle: cid(5)
-        }
-      ]
+      locale: 'ru',
+      description: cid(30),
     })
 
 
@@ -94,18 +74,8 @@ describe('ImageRESTController', () => {
     const entity = await imageService.create({
       name: cid(10),
       file: cid(20),
-      translations: [
-        {
-          locale: 'ru',
-          description: cid(30),
-          statusTitle: cid(5)
-        },
-        {
-          locale: 'ua',
-          description: cid(30),
-          statusTitle: cid(5)
-        }
-      ]
+      locale: 'ru',
+      description: cid(30),
     })
 
     const changes = {
@@ -129,18 +99,8 @@ describe('ImageRESTController', () => {
     const entity = await imageService.create({
       name: cid(10),
       file: cid(20),
-      translations: [
-        {
-          locale: 'ru',
-          description: cid(30),
-          statusTitle: cid(5)
-        },
-        {
-          locale: 'ua',
-          description: cid(30),
-          statusTitle: cid(5)
-        }
-      ]
+      locale: 'ru',
+      description: cid(30),
     })
 
     app.del(`/api/v1/images/${entity._id}`)

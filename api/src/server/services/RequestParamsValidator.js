@@ -11,6 +11,19 @@ const checkId = (req, res, next) => {
   next()
 }
 
+const checkLocale = (req, res, next) => {
+
+  if (['en', 'ru', 'ua'].indexOf(req.params.locale) === -1) {
+    res.status(400).json({
+      message: 'Invalid `locale` in request',
+    })
+    return
+  }
+
+  next()
+}
+
 module.exports = {
-  checkId
+  checkId,
+  checkLocale,
 }

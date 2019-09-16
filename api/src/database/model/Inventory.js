@@ -1,16 +1,5 @@
 const mongoose = require('mongoose');
 
-const StatueTranslation = new mongoose.Schema({
-  locale: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-})
-
 const schema = new mongoose.Schema({
   name: {
     type: String,
@@ -45,10 +34,14 @@ const schema = new mongoose.Schema({
     type: String,
     required: false
   },
-  statueTranslations: {
-    type: [StatueTranslation],
-    required: false
-  }
+  locale: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
 
 })
 

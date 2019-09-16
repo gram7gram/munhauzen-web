@@ -1,16 +1,5 @@
 const mongoose = require('mongoose');
 
-const Translation = new mongoose.Schema({
-  locale: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-})
-
 const schema = new mongoose.Schema({
   name: {
     type: String,
@@ -30,10 +19,14 @@ const schema = new mongoose.Schema({
     min: 0,
     required: false
   },
-  translations: {
-    type: [Translation],
+  locale: {
+    type: String,
     required: true
-  }
+  },
+  description: {
+    type: String,
+    required: true
+  },
 })
 
 const Chapter = mongoose.model('Chapter', schema)

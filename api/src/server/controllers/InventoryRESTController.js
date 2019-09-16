@@ -2,13 +2,13 @@ const express = require('express');
 const inventoryService = require('../services/InventoryService')
 const Inventory = require('../../database/model/Inventory').Inventory;
 const checkId = require('../services/RequestParamsValidator').checkId
-const router = new express.Router();
+const router = new express.Router({mergeParams: true});
 const logger = require('../../logger');
 
 router.get('/inventory', async (req, res) => {
 
   try {
-    const items = await Inventory.find().sort({name: 'asc'}).lean()
+    const items = await Inventory.find({locale: req.params.locale}).sort({name: 'asc'}).lean()
 
     res.status(200).json({
       items,

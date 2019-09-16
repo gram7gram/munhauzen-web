@@ -3,11 +3,13 @@ const logger = require('../../logger');
 const fileUpload = require('express-fileupload');
 
 const importService = require('../services/ImportService')
-const router = new express.Router();
+const router = new express.Router({mergeParams: true});
 
 router.post('/import', fileUpload({}), async (req, res) => {
 
   try {
+
+    const locale = req.params.locale
 
     const file = req.files.import
     if (!file) {
@@ -16,7 +18,7 @@ router.post('/import', fileUpload({}), async (req, res) => {
       }
     }
 
-    const result = await importService.parse(file)
+    const result = await importService.parse(file, locale)
     if (result.hasErrors) {
       res.status(400).json({
         result: result.result

@@ -4,14 +4,15 @@ const ImageService = (function () {
 
   function Service() {}
 
-  Service.prototype.restoreDefaults = async function () {
+  Service.prototype.restoreDefaults = async function (locale) {
 
     try {
 
       const content = {
         name: 'Last',
         isHiddenFromGallery: true,
-        isReserved: true
+        isReserved: true,
+        locale
       }
 
       await Image.findOneAndUpdate({name: content.name}, content, {

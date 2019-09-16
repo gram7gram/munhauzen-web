@@ -1,5 +1,5 @@
 const express = require('express');
-const router = new express.Router();
+const router = new express.Router({mergeParams: true});
 const logger = require('../../logger');
 const host = require('../../../parameters').host;
 

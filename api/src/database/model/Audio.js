@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
+  locale: {
+    type: String,
+    required: true
+  },
   name: {
     type: String,
     required: true

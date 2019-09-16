@@ -2,13 +2,13 @@ const express = require('express');
 const chapterService = require('../services/ChapterService')
 const Chapter = require('../../database/model/Chapter').Chapter;
 const checkId = require('../services/RequestParamsValidator').checkId
-const router = new express.Router();
+const router = new express.Router({mergeParams: true});
 const logger = require('../../logger');
 
 router.get('/chapters', async (req, res) => {
 
   try {
-    const items = await Chapter.find().sort({number: 'asc'}).lean()
+    const items = await Chapter.find({locale: req.params.locale}).sort({number: 'asc'}).lean()
 
     res.status(200).json({
       items,

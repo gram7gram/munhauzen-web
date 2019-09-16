@@ -31,16 +31,8 @@ describe('AudioFailRESTController', () => {
       name: cid(10),
       file: cid(20),
       audio: cid(20),
-      translations: [
-        {
-          locale: 'ru',
-          description: cid(30),
-        },
-        {
-          locale: 'ua',
-          description: cid(30),
-        }
-      ]
+      locale: 'ru',
+      description: cid(30),
     }
 
     app.post('/api/v1/audio-fails')
@@ -53,8 +45,8 @@ describe('AudioFailRESTController', () => {
         expect(res.body.audio).to.equal(entity.audio)
         expect(res.body.name).to.equal(entity.name)
         expect(res.body.file).to.equal(entity.file)
-        expect(res.body.translations).not.to.equal(undefined)
-        expect(res.body.translations.length).to.equal(2)
+        expect(res.body.locale).to.equal(entity.locale)
+        expect(res.body.description).to.equal(entity.description)
 
         done();
       });
@@ -66,16 +58,8 @@ describe('AudioFailRESTController', () => {
       name: cid(10),
       file: cid(20),
       audio: cid(20),
-      translations: [
-        {
-          locale: 'ru',
-          description: cid(30),
-        },
-        {
-          locale: 'ua',
-          description: cid(30),
-        }
-      ]
+      locale: 'ru',
+      description: cid(30),
     })
 
 
@@ -94,16 +78,8 @@ describe('AudioFailRESTController', () => {
       name: cid(10),
       file: cid(20),
       audio: cid(20),
-      translations: [
-        {
-          locale: 'ru',
-          description: cid(30),
-        },
-        {
-          locale: 'ua',
-          description: cid(30),
-        }
-      ]
+      locale: 'ru',
+      description: cid(30),
     })
 
     const changes = {
@@ -128,16 +104,8 @@ describe('AudioFailRESTController', () => {
       name: cid(10),
       file: cid(20),
       audio: cid(20),
-      translations: [
-        {
-          locale: 'ru',
-          description: cid(30),
-        },
-        {
-          locale: 'ua',
-          description: cid(30),
-        }
-      ]
+      locale: 'ru',
+      description: cid(30),
     })
 
     app.del(`/api/v1/audio-fails/${entity._id}`)

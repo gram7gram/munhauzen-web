@@ -2,13 +2,15 @@ const express = require('express');
 const scenarioService = require('../services/ScenarioService')
 const Scenario = require('../../database/model/Scenario').Scenario;
 const checkId = require('../services/RequestParamsValidator').checkId
-const router = new express.Router();
+const router = new express.Router({mergeParams: true});
 const logger = require('../../logger');
 
 router.get('/scenario', async (req, res) => {
 
   try {
-    const items = await Scenario.find().sort({isReserved: 'desc', isBegin: 'desc', name: 'asc'}).lean()
+    const items = await Scenario.find({locale: req.params.locale})
+      .sort({isReserved: 'desc', isBegin: 'desc', name: 'asc'})
+      .lean()
 
     res.status(200).json({
       items,

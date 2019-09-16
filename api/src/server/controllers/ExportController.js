@@ -2,13 +2,13 @@ const express = require('express');
 const logger = require('../../logger');
 
 const service = require('../services/ExportService')
-const router = new express.Router();
+const router = new express.Router({mergeParams: true});
 
 router.get('/export', async (req, res) => {
 
   try {
 
-    const result = await service.generateArchive()
+    const result = await service.generateArchive(req.params.locale)
 
     res.status(200).json(result)
 

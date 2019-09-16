@@ -2,13 +2,13 @@ const express = require('express');
 const audioFailService = require('../services/AudioFailService')
 const AudioFail = require('../../database/model/AudioFail').AudioFail;
 const checkId = require('../services/RequestParamsValidator').checkId
-const router = new express.Router();
+const router = new express.Router({mergeParams: true});
 const logger = require('../../logger');
 
 router.get('/audio-fails', async (req, res) => {
 
   try {
-    const items = await AudioFail.find().sort({name: 'asc'}).lean()
+    const items = await AudioFail.find({locale: req.params.locale}).sort({name: 'asc'}).lean()
 
     res.status(200).json({
       items,

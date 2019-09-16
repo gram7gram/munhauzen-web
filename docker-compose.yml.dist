@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
     environment:
       - HTTPS_METHOD=nohttps
-      - VIRTUAL_HOST=munhauzen-api.fingertips.cf
+      - VIRTUAL_HOST=munchauzen-api.fingertips.cf
     depends_on:
       - db
     networks:
@@ -30,16 +30,16 @@ services:
     volumes:
       - './api:/var/www'
 
-  www:
-    build: ./www/env
+  admin:
+    build: ./admin/env
     restart: unless-stopped
     environment:
       - HTTPS_METHOD=nohttps
-      - VIRTUAL_HOST=munhauzen.fingertips.cf,fingertips.cf,www.fingertips.cf
+      - VIRTUAL_HOST=munchauzen.fingertips.cf,fingertips.cf,www.fingertips.cf
     networks:
       - backend
     volumes:
-      - './www:/var/www'
+      - './admin:/var/www'
 
   db:
     image: mongo:4

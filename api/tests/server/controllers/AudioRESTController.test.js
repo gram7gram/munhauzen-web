@@ -30,16 +30,8 @@ describe('AudioRESTController', () => {
     const entity = {
       name: cid(10),
       file: cid(20),
-      translations: [
-        {
-          locale: 'ru',
-          description: cid(30),
-        },
-        {
-          locale: 'ua',
-          description: cid(30),
-        }
-      ]
+      locale: 'ru',
+      duration: 50000,
     }
 
     app.post('/api/v1/audio')
@@ -51,8 +43,8 @@ describe('AudioRESTController', () => {
         expect(res.body._id).not.to.equal(undefined)
         expect(res.body.name).to.equal(entity.name)
         expect(res.body.file).to.equal(entity.file)
-        expect(res.body.translations).not.to.equal(undefined)
-        expect(res.body.translations.length).to.equal(2)
+        expect(res.body.locale).to.equal(entity.locale)
+        expect(res.body.duration).to.equal(entity.duration)
 
         done();
       });
@@ -63,16 +55,8 @@ describe('AudioRESTController', () => {
     const entity = await audioService.create({
       name: cid(10),
       file: cid(20),
-      translations: [
-        {
-          locale: 'ru',
-          description: cid(30),
-        },
-        {
-          locale: 'ua',
-          description: cid(30),
-        }
-      ]
+      locale: 'ru',
+      duration: 50000
     })
 
 
@@ -90,16 +74,8 @@ describe('AudioRESTController', () => {
     const entity = await audioService.create({
       name: cid(10),
       file: cid(20),
-      translations: [
-        {
-          locale: 'ru',
-          description: cid(30),
-        },
-        {
-          locale: 'ua',
-          description: cid(30),
-        }
-      ]
+      locale: 'ru',
+      duration: 50000
     })
 
     const changes = {
@@ -123,16 +99,8 @@ describe('AudioRESTController', () => {
     const entity = await audioService.create({
       name: cid(10),
       file: cid(20),
-      translations: [
-        {
-          locale: 'ru',
-          description: cid(30),
-        },
-        {
-          locale: 'ua',
-          description: cid(30),
-        }
-      ]
+      locale: 'ru',
+      duration: 50000
     })
 
     app.del(`/api/v1/audio/${entity._id}`)

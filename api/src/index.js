@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors')
+const checkLocale = require('./server/services/RequestParamsValidator').checkLocale
 
 const AudioFailsRESTController = require('./server/controllers/AudioFailsRESTController');
 const AudioRESTController = require('./server/controllers/AudioRESTController');
@@ -20,15 +21,15 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/api/v1', AudioFailsRESTController);
-app.use('/api/v1', AudioRESTController);
-app.use('/api/v1', ImageRESTController);
-app.use('/api/v1', ScenarioRESTController);
-app.use('/api/v1', InventoryRESTController);
-app.use('/api/v1', ChapterRESTController);
-app.use('/api/v1', ImportController);
-app.use('/api/v1', ExportController);
-app.use('/api/v1', ExpansionRESTController);
+app.use('/api/v1/:locale', checkLocale, AudioFailsRESTController);
+app.use('/api/v1/:locale', checkLocale, AudioRESTController);
+app.use('/api/v1/:locale', checkLocale, ImageRESTController);
+app.use('/api/v1/:locale', checkLocale, ScenarioRESTController);
+app.use('/api/v1/:locale', checkLocale, InventoryRESTController);
+app.use('/api/v1/:locale', checkLocale, ChapterRESTController);
+app.use('/api/v1/:locale', checkLocale, ImportController);
+app.use('/api/v1/:locale', checkLocale, ExportController);
+app.use('/api/v1/:locale', checkLocale, ExpansionRESTController);
 
 app.use(express.static(path.resolve(__dirname, `../public`)))
 

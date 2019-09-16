@@ -5,11 +5,23 @@ const config = {
     port: 80,
     host: 'http://0.0.0.0:20000',
     mongoHost: 'mongodb://db/munhauzen',
+    secret: '****',
+    users: {
+      admin: {
+        password: '****'
+      }
+    }
   },
   production: {
     port: 80,
     host: 'http://munhauzen-api.fingertips.cf',
     mongoHost: 'mongodb://db/munhauzen',
+    secret: '****',
+    users: {
+      admin: {
+        password: '****'
+      }
+    }
   }
 }
 

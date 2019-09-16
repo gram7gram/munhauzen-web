@@ -7,10 +7,8 @@ describe('ScenarioRESTController', () => {
   const dummy = {
     "name": cid(10),
     "chapter": cid(10),
-    "translations": [
-      {"locale": 'ua', "text": cid(10)},
-      {"locale": 'ru', "text": cid(10)},
-    ],
+    "locale": 'ua',
+    "text": cid(10),
     "inventoryAdd": cid(10).toUpperCase(),
     "images": [
       {
