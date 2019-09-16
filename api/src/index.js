@@ -21,6 +21,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+//Admin API
 app.use('/api/v1/:locale', checkLocale, AudioFailsRESTController);
 app.use('/api/v1/:locale', checkLocale, AudioRESTController);
 app.use('/api/v1/:locale', checkLocale, ImageRESTController);
@@ -28,8 +29,10 @@ app.use('/api/v1/:locale', checkLocale, ScenarioRESTController);
 app.use('/api/v1/:locale', checkLocale, InventoryRESTController);
 app.use('/api/v1/:locale', checkLocale, ChapterRESTController);
 app.use('/api/v1/:locale', checkLocale, ImportController);
-app.use('/api/v1/:locale', checkLocale, ExportController);
 app.use('/api/v1/:locale', checkLocale, ExpansionRESTController);
+
+//Public API
+app.use('/api/v1/:locale', checkLocale, ExportController);
 
 app.use(express.static(path.resolve(__dirname, `../public`)))
 
