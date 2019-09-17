@@ -2,9 +2,9 @@
   "version": 1,
   "locale": "en",
   "dpi": "mdpi",
-  "size": 995913353,
+  "size": 1089224091,
   "parts": {
-    "count": 11,
+    "count": 13,
     "items": [
       {
         "size": 110918927,
@@ -71,6 +71,13 @@
         "part": 11,
         "checksum": "",
         "path": "/expansions/1-en-mdpi/part11.zip"
+      },
+      {
+        "isPatch": true,
+        "size": 2093366,
+        "part": 13,
+        "checksum": "",
+        "path": "/expansions/1-en-mdpi/part13.zip"
       }
     ]
   }
