@@ -515,6 +515,7 @@ const parseGameInventory = async function (locale, sheet) {
 
     const content = {
       name: item.Name.trim().toUpperCase(),
+      locale,
     }
 
     if (item.Related_option) {
@@ -583,6 +584,7 @@ const parseMenuInventory = async function (locale, sheet) {
 
     const content = {
       name: item.inventory_global_required.trim().toUpperCase(),
+      locale,
       isMenu: true,
     }
 
