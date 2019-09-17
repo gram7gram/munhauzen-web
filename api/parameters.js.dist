@@ -14,7 +14,7 @@ const config = {
   },
   production: {
     port: 80,
-    host: 'http://munchauzen-api.fingertips.cf',
+    host: 'http://munchausen-api.fingertips.cf',
     mongoHost: 'mongodb://db/munhauzen',
     secret: '****',
     users: {

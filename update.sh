@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 git config --global user.email gram7gram@gmail.com && git config --global user.name Gram
 
