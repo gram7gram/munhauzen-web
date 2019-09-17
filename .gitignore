@@ -14,7 +14,7 @@ api/parameters.js
 
 docker-compose.yml
 api/env/Dockerfile
-www/env/Dockerfile
+admin/env/Dockerfile
 
 api/logs/*.log
 admin/logs/*.log
