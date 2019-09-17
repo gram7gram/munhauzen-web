@@ -1,5 +1,7 @@
 export const HOME = '/:locale';
 
+export const LOGIN = '/:locale/login';
+
 export const IMAGES = '/:locale/images';
 export const IMAGE_CREATE = '/:locale/images/new';
 export const IMAGE_EDIT = '/:locale/images/:id';

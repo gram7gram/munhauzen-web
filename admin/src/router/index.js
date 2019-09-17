@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 
 import * as Pages from './Pages';
 
@@ -18,46 +18,84 @@ import Scenario from '../screens/Scenario';
 import ScenarioEdit from '../screens/ScenarioEdit';
 import Chapter from '../screens/Chapter';
 import ChapterEdit from '../screens/ChapterEdit';
+import Login from '../screens/Login';
+import Loading from '../screens/Loading';
 
-export function createRouter() {
-  return <BrowserRouter>
+export function createRouter(store) {
+
+  const InitialRoute = ({component: Component, ...rest}) => {
+
+    const appState = store.getState().App
+
+    if (appState.isLoadingVisible) {
+      return <Route {...rest} render={() => (
+        <Loading/>
+      )}/>
+    }
+
+    return <Route {...rest} render={(props) => (
+      <Component {...props}/>
+    )}/>
+  }
+
+  const PrivateRoute = ({component: Component, ...rest}) => {
+
+    const appState = store.getState().App
+
+    if (appState.isLoadingVisible) {
+      return <Route {...rest} render={() => (
+        <Loading/>
+      )}/>
+    }
+
+    if (appState.isAuthenticated === true) {
+      return <Route {...rest} render={(props) => (
+        <Component {...props}/>
+      )}/>
+    }
+
+    return <Redirect to={Pages.LOGIN.replace(':locale', appState.locale)}/>
+  }
+
+  return <div>
 
     <Navigation/>
 
     <Switch>
+      <InitialRoute exact path={Pages.LOGIN} component={Login}/>
 
-      <Route exact path={Pages.HOME} component={Home}/>
+      <PrivateRoute exact path={Pages.HOME} component={Home}/>
 
-      <Route exact path={Pages.CHAPTERS} component={Chapter}/>
-      <Route exact path={Pages.CHAPTER_CREATE} component={ChapterEdit}/>
-      <Route path={Pages.CHAPTER_EDIT} component={ChapterEdit}/>
+      <PrivateRoute exact path={Pages.CHAPTERS} component={Chapter}/>
+      <PrivateRoute exact path={Pages.CHAPTER_CREATE} component={ChapterEdit}/>
+      <PrivateRoute path={Pages.CHAPTER_EDIT} component={ChapterEdit}/>
 
-      <Route exact path={Pages.AUDIO_FAILS} component={AudioFail}/>
-      <Route exact path={Pages.AUDIO_FAILS_CREATE} component={AudioFailEdit}/>
-      <Route path={Pages.AUDIO_FAILS_EDIT} component={AudioFailEdit}/>
+      <PrivateRoute exact path={Pages.AUDIO_FAILS} component={AudioFail}/>
+      <PrivateRoute exact path={Pages.AUDIO_FAILS_CREATE} component={AudioFailEdit}/>
+      <PrivateRoute path={Pages.AUDIO_FAILS_EDIT} component={AudioFailEdit}/>
 
-      <Route exact path={Pages.AUDIO} component={Audio}/>
-      <Route exact path={Pages.AUDIO_CREATE} component={AudioEdit}/>
-      <Route path={Pages.AUDIO_EDIT} component={AudioEdit}/>
+      <PrivateRoute exact path={Pages.AUDIO} component={Audio}/>
+      <PrivateRoute exact path={Pages.AUDIO_CREATE} component={AudioEdit}/>
+      <PrivateRoute path={Pages.AUDIO_EDIT} component={AudioEdit}/>
 
-      <Route exact path={Pages.AUDIO} component={Audio}/>
-      <Route exact path={Pages.AUDIO_CREATE} component={AudioEdit}/>
-      <Route path={Pages.AUDIO_EDIT} component={AudioEdit}/>
+      <PrivateRoute exact path={Pages.AUDIO} component={Audio}/>
+      <PrivateRoute exact path={Pages.AUDIO_CREATE} component={AudioEdit}/>
+      <PrivateRoute path={Pages.AUDIO_EDIT} component={AudioEdit}/>
 
-      <Route exact path={Pages.INVENTORY} component={Inventory}/>
-      <Route exact path={Pages.INVENTORY_CREATE} component={InventoryEdit}/>
-      <Route path={Pages.INVENTORY_EDIT} component={InventoryEdit}/>
+      <PrivateRoute exact path={Pages.INVENTORY} component={Inventory}/>
+      <PrivateRoute exact path={Pages.INVENTORY_CREATE} component={InventoryEdit}/>
+      <PrivateRoute path={Pages.INVENTORY_EDIT} component={InventoryEdit}/>
 
-      <Route exact path={Pages.SCENARIO} component={Scenario}/>
-      <Route exact path={Pages.SCENARIO_CREATE} component={ScenarioEdit}/>
-      <Route path={Pages.SCENARIO_EDIT} component={ScenarioEdit}/>
+      <PrivateRoute exact path={Pages.SCENARIO} component={Scenario}/>
+      <PrivateRoute exact path={Pages.SCENARIO_CREATE} component={ScenarioEdit}/>
+      <PrivateRoute path={Pages.SCENARIO_EDIT} component={ScenarioEdit}/>
 
-      <Route exact path={Pages.IMAGES} component={Images}/>
-      <Route exact path={Pages.IMAGE_CREATE} component={ImageEdit}/>
-      <Route path={Pages.IMAGE_EDIT} component={ImageEdit}/>
+      <PrivateRoute exact path={Pages.IMAGES} component={Images}/>
+      <PrivateRoute exact path={Pages.IMAGE_CREATE} component={ImageEdit}/>
+      <PrivateRoute path={Pages.IMAGE_EDIT} component={ImageEdit}/>
 
       <Redirect path="*" to={Pages.HOME.replace(':locale', 'en')}/>
 
     </Switch>
-  </BrowserRouter>
+  </div>
 }

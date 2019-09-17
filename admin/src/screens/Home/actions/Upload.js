@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../../utils/request'
 import * as Actions from '../actions'
 import parameters from "../../../parameters";
 
@@ -13,7 +13,7 @@ export default file => (dispatch, getState) => {
   const data = new FormData()
   data.append('import', file)
 
-  axios.post(`${parameters.apiHost}/api/v1/${locale}/import`, data)
+  axios(getState()).post(`${parameters.apiHost}/api/v1/${locale}/import`, data)
     .then(({data}) => {
 
       dispatch({

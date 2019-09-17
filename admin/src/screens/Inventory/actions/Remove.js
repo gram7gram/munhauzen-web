@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../../utils/request'
 import * as Actions from '../actions'
 import parameters from "../../../parameters";
 
@@ -13,7 +13,7 @@ export default (model, callback) => (dispatch, getState) => {
     }
   })
 
-  axios.delete(`${parameters.apiHost}/api/v1/${locale}/inventory/${model._id}`)
+  axios(getState()).delete(`${parameters.apiHost}/api/v1/${locale}/inventory/${model._id}`)
     .then(() => {
 
       dispatch({

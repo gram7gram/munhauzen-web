@@ -13,10 +13,12 @@ import AudioFail from './screens/AudioFail/sagas';
 import AudioFailEdit from './screens/AudioFailEdit/sagas';
 import Chapter from './screens/Chapter/sagas';
 import ChapterEdit from './screens/ChapterEdit/sagas';
+import Login from './screens/Login/sagas';
 
 export default function* root() {
   yield all([
     fork(Home),
+    fork(Login),
     fork(Images),
     fork(ImageEdit),
     fork(AudioFail),

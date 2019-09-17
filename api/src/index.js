@@ -13,32 +13,35 @@ const ChapterRESTController = require('./server/controllers/ChapterRESTControlle
 const ImportController = require('./server/controllers/ImportController');
 const ExportController = require('./server/controllers/ExportController');
 const ExpansionRESTController = require('./server/controllers/ExpansionRESTController');
+const LoginController = require('./server/controllers/LoginController');
 
 const ErrorLogger = require('./server/services/ErrorLogger');
+const isAdmin = require('./server/services/AuthService').isAdmin;
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
 
-//Admin API
-app.use('/api/v1/:locale', checkLocale, AudioFailsRESTController);
-app.use('/api/v1/:locale', checkLocale, AudioRESTController);
-app.use('/api/v1/:locale', checkLocale, ImageRESTController);
-app.use('/api/v1/:locale', checkLocale, ScenarioRESTController);
-app.use('/api/v1/:locale', checkLocale, InventoryRESTController);
-app.use('/api/v1/:locale', checkLocale, ChapterRESTController);
-app.use('/api/v1/:locale', checkLocale, ImportController);
-app.use('/api/v1/:locale', checkLocale, ExpansionRESTController);
-
 //Public API
+app.use('/api/v1/:locale', checkLocale, ExpansionRESTController);
 app.use('/api/v1/:locale', checkLocale, ExportController);
+app.use('/api/v1/:locale', checkLocale, LoginController);
+
+//Admin API
+app.use('/api/v1/:locale', checkLocale, isAdmin, AudioFailsRESTController);
+app.use('/api/v1/:locale', checkLocale, isAdmin, AudioRESTController);
+app.use('/api/v1/:locale', checkLocale, isAdmin, ImageRESTController);
+app.use('/api/v1/:locale', checkLocale, isAdmin, ScenarioRESTController);
+app.use('/api/v1/:locale', checkLocale, isAdmin, InventoryRESTController);
+app.use('/api/v1/:locale', checkLocale, isAdmin, ChapterRESTController);
+app.use('/api/v1/:locale', checkLocale, isAdmin, ImportController);
 
 app.use(express.static(path.resolve(__dirname, `../public`)))
 
 app.all('*', (req, res) => {
   res.status(404).json({
-    message: 'not found'
+    message: 'no route found'
   })
 });
 

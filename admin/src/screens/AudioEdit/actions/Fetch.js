@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../../utils/request'
 import {FETCH_ITEM_BEFORE, FETCH_ITEM_FAILURE, FETCH_ITEM_SUCCESS,} from '../actions'
 import parameters from "../../../parameters";
 
@@ -13,7 +13,7 @@ export default id => (dispatch, getState) => {
     }
   })
 
-  axios.get(`${parameters.apiHost}/api/v1/${locale}/audio/${id}`)
+  axios(getState()).get(`${parameters.apiHost}/api/v1/${locale}/audio/${id}`)
     .then(({data}) => {
 
       dispatch({

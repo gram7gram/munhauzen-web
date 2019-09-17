@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../../utils/request'
 import {FETCH_ITEMS_BEFORE, FETCH_ITEMS_FAILURE, FETCH_ITEMS_SUCCESS,} from '../actions'
 import parameters from '../../../parameters'
 
@@ -15,7 +15,7 @@ export default filters => (dispatch, getState) => {
     }
   })
 
-  axios.get(`${parameters.apiHost}/api/v1/${locale}/scenario` + (query.length > 0 ? '?' + query.join('&') : ''))
+  axios(getState()).get(`${parameters.apiHost}/api/v1/${locale}/scenario` + (query.length > 0 ? '?' + query.join('&') : ''))
     .then(({data}) => {
 
       dispatch({

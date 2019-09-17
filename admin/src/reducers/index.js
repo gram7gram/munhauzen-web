@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux';
+import {connectRouter} from 'connected-react-router'
 
 import App from './App';
 import Home from '../screens/Home/reducers';
@@ -14,9 +15,12 @@ import Scenario from '../screens/Scenario/reducers';
 import ScenarioEdit from '../screens/ScenarioEdit/reducers';
 import Chapter from '../screens/Chapter/reducers';
 import ChapterEdit from '../screens/ChapterEdit/reducers';
+import Login from '../screens/Login/reducers';
 
-export default combineReducers({
+const createRootReducer = (history) => combineReducers({
+  router: connectRouter(history),
   App,
+  Login,
   Home,
   Images,
   ImageEdit,
@@ -31,3 +35,5 @@ export default combineReducers({
   Chapter,
   ChapterEdit,
 });
+
+export default createRootReducer

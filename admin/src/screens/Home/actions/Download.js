@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../../utils/request'
 import * as Actions from '../actions'
 import parameters from "../../../parameters";
 
@@ -10,7 +10,7 @@ export default () => (dispatch, getState) => {
     type: Actions.DOWNLOAD_BEFORE,
   })
 
-  axios.get(`${parameters.apiHost}/api/v1/${locale}/export`)
+  axios(getState()).get(`${parameters.apiHost}/api/v1/${locale}/export`)
     .then(({data}) => {
 
       dispatch({

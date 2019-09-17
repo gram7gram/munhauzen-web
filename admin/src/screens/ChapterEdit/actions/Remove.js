@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../../utils/request'
 import * as Actions from '../actions'
 import parameters from "../../../parameters";
 
@@ -10,7 +10,7 @@ export default (model, callback) => (dispatch, getState) => {
     type: Actions.REMOVE_ITEM_BEFORE,
   })
 
-  axios.delete(`${parameters.apiHost}/api/v1/${locale}/chapters/${model._id}`)
+  axios(getState()).delete(`${parameters.apiHost}/api/v1/${locale}/chapters/${model._id}`)
     .then(() => {
 
       dispatch({

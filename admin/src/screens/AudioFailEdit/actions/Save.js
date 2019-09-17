@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../../utils/request'
 import * as Actions from '../actions'
 import parameters from "../../../parameters";
 
@@ -23,9 +23,9 @@ export default model => (dispatch, getState) => {
 
   let promise
   if (model._id) {
-    promise = axios.put(`${parameters.apiHost}/api/v1/${locale}/audio-fails/${model._id}`, data)
+    promise = axios(getState()).put(`${parameters.apiHost}/api/v1/${locale}/audio-fails/${model._id}`, data)
   } else {
-    promise = axios.post(`${parameters.apiHost}/api/v1/${locale}/audio-fails`, data)
+    promise = axios(getState()).post(`${parameters.apiHost}/api/v1/${locale}/audio-fails`, data)
   }
 
   promise

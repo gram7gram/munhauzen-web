@@ -3,8 +3,9 @@ import {render} from 'react-dom';
 
 import {Provider} from 'react-redux';
 
-import store from './store';
+import configureStore, {history} from './store';
 
+import {ConnectedRouter} from 'connected-react-router'
 import {createRouter} from './router';
 
 import 'font-awesome/css/font-awesome.min.css';
@@ -13,9 +14,16 @@ import './styles/index.scss';
 const rootElement = document.getElementById('root');
 
 try {
-  render(<Provider store={store}>
-    {createRouter()}
-  </Provider>, rootElement);
+  const store = configureStore()
+
+  const App = <Provider store={store}>
+    <ConnectedRouter history={history}>
+      {createRouter(store)}
+    </ConnectedRouter>
+  </Provider>
+
+  render(App, rootElement);
+
 } catch (e) {
   console.error(e)
 

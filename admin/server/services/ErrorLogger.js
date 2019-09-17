@@ -1,8 +1,9 @@
 
+const logger = require('../logger')
+
 module.exports = (err, req, res, next) => {
 
-  //logger.log('error', {'status': status, 'message': message, 'stack': stack, 'raw': raw});
+  logger.error(err);
 
   next(err);
-
 }

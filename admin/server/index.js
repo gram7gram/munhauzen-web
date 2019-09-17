@@ -3,7 +3,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 
 const IndexController = require('./controllers/IndexController');
+const LoginController = require('./controllers/LoginController');
+
 const ErrorLogger = require('./services/ErrorLogger');
+const checkLocale = require('./services/RequestParamsValidator').checkLocale;
 
 const app = express();
 
@@ -16,15 +19,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/:locale', (req, res, next) => {
-
-  if (['en', 'ru', 'ua'].indexOf(req.params.locale) === -1) {
-    res.redirect('/en')
-    return
-  }
-
-  next()
-}, IndexController)
+app.use('/:locale', checkLocale, LoginController)
+app.use('/:locale', checkLocale, IndexController)
 
 app.use(express.static(path.resolve(__dirname, '../build')))
 

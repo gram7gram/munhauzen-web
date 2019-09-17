@@ -20,8 +20,10 @@ class Navigation extends PureComponent {
 
   render() {
 
-    const {locale} = this.props
+    const {locale, isAuthenticated} = this.props
     const {pathname} = this.props.location
+
+    if (!isAuthenticated) return null
 
     let pathnameWithoutLocale = ''
     if (pathname.indexOf('/en') === 0 || pathname.indexOf('/ru') === 0 || pathname.indexOf('/ua') === 0) {
@@ -35,7 +37,7 @@ class Navigation extends PureComponent {
           <ul className="nav justify-content-center py-1">
             {nav.map((item, key) => {
 
-              const url =  item.value.replace(':locale', locale)
+              const url = item.value.replace(':locale', locale)
 
               return <li key={key} className="nav-item">
                 <Link
@@ -62,11 +64,13 @@ class Navigation extends PureComponent {
 }
 
 Navigation.propTypes = {
-  locale: PropTypes.string.isRequired
+  locale: PropTypes.string.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
 }
 
 const selectors = createStructuredSelector({
-  locale: store => store.App.locale
+  locale: store => store.App.locale,
+  isAuthenticated: store => store.App.isAuthenticated,
 })
 
 export default withRouter(
