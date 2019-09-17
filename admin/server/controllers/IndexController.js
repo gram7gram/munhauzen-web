@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
-const Router = new express.Router({mergeParams: true});
+
+const router = new express.Router({mergeParams: true});
 
 const routes = [
   '',
@@ -26,14 +27,14 @@ const routes = [
 
 const index = (req, res) => {
 
-  const indexFile = path.resolve(__dirname + '../../../build/index.html')
+  const indexFile = path.resolve(__dirname, '../../build/index.html')
 
-  res.status(200).sendFile(indexFile);
+  res.sendFile(indexFile);
 }
 
 routes.forEach(route => {
-  Router.get(route, index);
+  router.get(route, index);
 })
 
-module.exports = Router;
+module.exports = router;
 

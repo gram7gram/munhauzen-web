@@ -23,6 +23,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use(express.static(path.resolve(__dirname, `../public`)))
+
 //Public API
 app.use('/api/v1', LoginController);
 app.use('/api/v1/:locale', checkLocale, ExpansionRESTController);
@@ -37,11 +39,9 @@ app.use('/api/v1/:locale', checkLocale, isAdmin, InventoryRESTController);
 app.use('/api/v1/:locale', checkLocale, isAdmin, ChapterRESTController);
 app.use('/api/v1/:locale', checkLocale, isAdmin, ImportController);
 
-app.use(express.static(path.resolve(__dirname, `../public`)))
-
 app.all('*', (req, res) => {
   res.status(404).json({
-    message: 'no route found'
+    message: 'No route found'
   })
 });
 
