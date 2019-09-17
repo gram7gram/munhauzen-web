@@ -17,6 +17,12 @@ class Login extends Component {
     }))
   }
 
+  checkIfEnter = e => {
+    if (e.key === 'Enter') {
+      this.loginCheck()
+    }
+  }
+
   change = (key, value) => {
     this.props.dispatch({
       type: CHANGE,
@@ -47,6 +53,7 @@ class Login extends Component {
             <input className="form-control form-control-lg text-center"
                    type="password"
                    placeholder="*******"
+                   onKeyPress={this.checkIfEnter}
                    onChange={this.changeString('password')}
                    value={password || ''}/>
 

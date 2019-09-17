@@ -14,16 +14,15 @@ app.use(cookieParser())
 
 app.use(express.static(path.resolve(__dirname, '../build')))
 
-app.use((req, res, next) => {
+app.use(LoginController)
+
+app.use('/:locale', checkLocale, (req, res, next) => {
 
   res.cookie('locale', req.params.locale || 'en');
 
   next();
-});
 
-app.use(LoginController)
-
-app.use('/:locale', checkLocale, IndexController)
+}, IndexController)
 
 app.use('*', (req, res) => {
   res.status(404).send('Page not found')
