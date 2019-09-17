@@ -16,14 +16,7 @@ const expansions = {
   }
 }
 
-router.get('/expansions/:version/:locale/:dpi', (req, res, next) => {
-
-  if (['en', 'ua', 'ru'].indexOf(req.params.locale) === -1) {
-    res.status(400).json({
-      message: 'Invalid `locale` in request',
-    })
-    return
-  }
+router.get('/expansions/:version/:dpi', (req, res, next) => {
 
   if (['mdpi', 'hdpi'].indexOf(req.params.dpi) === -1) {
     res.status(400).json({

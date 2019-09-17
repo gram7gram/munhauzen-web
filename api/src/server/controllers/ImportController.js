@@ -3,6 +3,8 @@ const logger = require('../../logger');
 const fileUpload = require('express-fileupload');
 
 const importService = require('../services/ImportService')
+const exportService = require('../services/ExportService')
+
 const router = new express.Router({mergeParams: true});
 
 router.post('/import', fileUpload({}), async (req, res) => {
@@ -25,6 +27,8 @@ router.post('/import', fileUpload({}), async (req, res) => {
       })
       return
     }
+
+    await exportService.generateArchive(req.params.locale)
 
     res.status(201).json({
       result: result.result

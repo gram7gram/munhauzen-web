@@ -13,118 +13,68 @@ const Inventory = require('../../database/model/Inventory').Inventory;
 
 const publicDir = path.resolve(__dirname, '../../../public')
 
-const ExportService = (function () {
+const generateArchive = async function (locale) {
 
-  function Service() {
+  const archive = archiver('zip', {
+    zlib: {level: 5}
+  });
+
+  archive.on('error', function (err) {
+
+    logger.error(err)
+
+    throw err;
+  })
+
+  const audio = await Audio.find({locale}).sort({name: 'asc'}).lean()
+  if (audio.length === 0) {
+    throw 'Missing audio'
   }
 
-  Service.prototype.generateArchive = async function () {
-
-    const archive = archiver('zip', {
-      zlib: {level: 5}
-    });
-
-    archive.on('error', function (err) {
-
-      logger.error(err)
-
-      throw err;
-    })
-
-    const audio = await this.prepareAudio()
-    if (audio.length === 0) {
-      throw 'Missing audio'
-    }
-
-    const fails = await this.prepareAudioFails()
-    if (fails.length === 0) {
-      throw 'Missing fails'
-    }
-
-    const chapters = await this.prepareChapters()
-    if (chapters.length === 0) {
-      throw 'Missing chapters'
-    }
-
-    const scenario = await this.prepareScenario()
-    if (scenario.length === 0) {
-      throw 'Missing scenario'
-    }
-
-    const inventory = await this.prepareInventory()
-    if (inventory.length === 0) {
-      throw 'Missing inventory'
-    }
-
-    const images = await this.prepareImages()
-    if (images.length === 0) {
-      throw 'Missing images'
-    }
-
-    archive.append(JSON.stringify(audio), {name: 'audio.json'})
-    archive.append(JSON.stringify(fails), {name: 'audio-fails.json'})
-    archive.append(JSON.stringify(chapters), {name: 'chapters.json'})
-    archive.append(JSON.stringify(scenario), {name: 'scenario.json'})
-    archive.append(JSON.stringify(inventory), {name: 'inventory.json'})
-    archive.append(JSON.stringify(images), {name: 'images.json'})
-
-    const fileName = `/downloads/game-${parameters.version}.zip`
-
-    archive.pipe(fs.createWriteStream(publicDir + fileName));
-
-    await archive.finalize();
-
-    return {
-      url: parameters.host + fileName,
-      summary: {
-        audio: audio.length,
-        fails: fails.length,
-        chapters: chapters.length,
-        scenario: scenario.length,
-        inventory: inventory.length,
-        images: images.length,
-      }
-    }
+  const fails = await AudioFail.find({locale}).sort({order: 'asc', name: 'asc'}).lean()
+  if (fails.length === 0) {
+    throw 'Missing fails'
   }
 
-  Service.prototype.prepareAudioFails = async function () {
-    const items = await AudioFail.find().sort({order: 'asc', name: 'asc'}).lean()
-
-    return items
+  const chapters = await Chapter.find({locale}).sort({name: 'asc'}).lean()
+  if (chapters.length === 0) {
+    throw 'Missing chapters'
   }
 
-  Service.prototype.prepareChapters = async function () {
-    const items = await Chapter.find().sort({name: 'asc'}).lean()
-
-    return items
+  const scenario = await Scenario.find({locale}).sort({name: 'asc'}).lean()
+  if (scenario.length === 0) {
+    throw 'Missing scenario'
   }
 
-  Service.prototype.prepareScenario = async function () {
-    const items = await Scenario.find().sort({name: 'asc'}).lean()
-
-    return items
+  const inventory = await Inventory.find({locale}).sort({name: 'asc'}).lean()
+  if (inventory.length === 0) {
+    throw 'Missing inventory'
   }
 
-  Service.prototype.prepareInventory = async function () {
-    const items = await Inventory.find().sort({name: 'asc'}).lean()
-
-    return items
+  const images = await Image.find({locale, isReserved: {$ne: true}}).sort({order: 'asc', name: 'asc'}).lean()
+  if (images.length === 0) {
+    throw 'Missing images'
   }
 
-  Service.prototype.prepareImages = async function () {
-    const items = await Image.find({isReserved: {$ne: true}}).sort({order: 'asc', name: 'asc'}).lean()
+  archive.append(JSON.stringify(audio), {name: 'audio.json'})
+  archive.append(JSON.stringify(fails), {name: 'audio-fails.json'})
+  archive.append(JSON.stringify(chapters), {name: 'chapters.json'})
+  archive.append(JSON.stringify(scenario), {name: 'scenario.json'})
+  archive.append(JSON.stringify(inventory), {name: 'inventory.json'})
+  archive.append(JSON.stringify(images), {name: 'images.json'})
 
-    return items
+  const fileName = `/downloads/game-${locale}-${parameters.version}.zip`
+
+  archive.pipe(fs.createWriteStream(publicDir + fileName));
+
+  await archive.finalize();
+
+  return {
+    url: parameters.host + fileName,
   }
+}
 
-  Service.prototype.prepareAudio = async function () {
-    const items = await Audio.find().sort({name: 'asc'}).lean()
-
-    return items
-  }
-
-  return new Service();
-})()
-
-module.exports = ExportService;
+module.exports = {
+  generateArchive
+};
 

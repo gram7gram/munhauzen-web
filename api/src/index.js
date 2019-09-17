@@ -11,7 +11,6 @@ const ScenarioRESTController = require('./server/controllers/ScenarioRESTControl
 const InventoryRESTController = require('./server/controllers/InventoryRESTController');
 const ChapterRESTController = require('./server/controllers/ChapterRESTController');
 const ImportController = require('./server/controllers/ImportController');
-const ExportController = require('./server/controllers/ExportController');
 const ExpansionRESTController = require('./server/controllers/ExpansionRESTController');
 const LoginController = require('./server/controllers/LoginController');
 
@@ -28,7 +27,6 @@ app.use(express.static(path.resolve(__dirname, `../public`)))
 //Public API
 app.use('/api/v1', LoginController);
 app.use('/api/v1/:locale', checkLocale, ExpansionRESTController);
-app.use('/api/v1/:locale', checkLocale, ExportController);
 
 //Admin API
 app.use('/api/v1/:locale', checkLocale, isAdmin, AudioFailsRESTController);
