@@ -28,7 +28,7 @@ if (!token) {
 
 let locale = Cookies.get('locale')
 
-const locales = ['ru', 'en', 'ua']
+const locales = ['en', 'ru', 'ua']
 
 if (locales.indexOf(locale) === -1) {
   locale = 'en'

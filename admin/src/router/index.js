@@ -54,7 +54,7 @@ export function createRouter(store) {
       )}/>
     }
 
-    return <Redirect to={Pages.LOGIN.replace(':locale', appState.locale)}/>
+    return <Redirect to={Pages.LOGIN}/>
   }
 
   return <div>

@@ -5,6 +5,7 @@ import * as Pages from '../router/Pages'
 import i18n from "../i18n";
 import {createStructuredSelector} from "reselect";
 import {connect} from "react-redux";
+import Logout from "../screens/Login/actions/Logout";
 
 const nav = [
   {value: Pages.HOME, label: i18n.t('navigation.home')},
@@ -18,9 +19,13 @@ const nav = [
 
 class Navigation extends PureComponent {
 
+  logout = () => {
+    this.props.dispatch(Logout())
+  }
+
   render() {
 
-    const {locale, isAuthenticated} = this.props
+    const {locale, locales, isAuthenticated} = this.props
     const {pathname} = this.props.location
 
     if (!isAuthenticated) return null
@@ -46,15 +51,22 @@ class Navigation extends PureComponent {
               </li>
             })}
 
+            {locales.map((item, i) => {
+
+              const url = '/' + item + pathnameWithoutLocale;
+
+              return <li key={i} className={"nav-item" + (i === 0 ? " border-left border-dark" : "")}>
+                <a className={"nav-link" + (locale === item ? " active" : "")}
+                   href={url}>{item}</a>
+              </li>
+            })}
+
             <li className="nav-item border-left border-dark">
-              <a className="nav-link" href={'/en' + pathnameWithoutLocale}>en</a>
+              <a className="nav-link"
+                 onClick={this.logout}
+                 href='#logout'>{i18n.t('logout.action')}</a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href={'/ru' + pathnameWithoutLocale}>ru</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href={'/ua' + pathnameWithoutLocale}>ua</a>
-            </li>
+
           </ul>
 
         </div>
@@ -65,11 +77,13 @@ class Navigation extends PureComponent {
 
 Navigation.propTypes = {
   locale: PropTypes.string.isRequired,
+  locales: PropTypes.any.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
 }
 
 const selectors = createStructuredSelector({
   locale: store => store.App.locale,
+  locales: store => store.App.locales,
   isAuthenticated: store => store.App.isAuthenticated,
 })
 

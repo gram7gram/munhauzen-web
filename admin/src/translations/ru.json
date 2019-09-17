@@ -15,8 +15,12 @@
   "home": {
     "title": "Барон Мюнхаузен"
   },
+  "logout": {
+    "action": "Выход"
+  },
   "login": {
     "title": "Логин",
+    "error_msg": "Не знаю тебя. Не впущу",
     "action": "Войти"
   },
   "scenario": {

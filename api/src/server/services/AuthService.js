@@ -6,7 +6,9 @@ const isAdmin = (req, res, next) => {
 
   const token = req.headers["authorization"];
   if (!token) {
-    res.status(401).send("Missing authorization header");
+    res.status(401).json({
+      message: "Missing authorization header"
+    });
     return
   }
 
@@ -25,7 +27,9 @@ const isAdmin = (req, res, next) => {
   } catch (e) {
     logger.error(e)
 
-    res.status(401).send("Not authorized");
+    res.status(401).json({
+      message: "Not authorized"
+    })
   }
 }
 
@@ -35,6 +39,10 @@ const generateAuthToken = content => {
 
 const verifyToken = token => {
   return jwt.verify(token, params.secret);
+}
+
+const discardToken = token => {
+  return jwt.unsign(token, params.secret);
 }
 
 module.exports = {

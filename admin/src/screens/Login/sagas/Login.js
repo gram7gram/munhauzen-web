@@ -16,9 +16,7 @@ function* removeToken() {
 
   localStorage.removeItem('token')
 
-  const locale = yield select(store => store.App.locale)
-
-  yield put(replace(Pages.LOGIN.replace(':locale', locale)))
+  yield put(replace(Pages.LOGIN))
 }
 
 export default function* sagas() {

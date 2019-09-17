@@ -7,7 +7,6 @@ import i18n from "../../i18n";
 import parameters from "../../parameters";
 
 import Upload from "./actions/Upload";
-import Download from "./actions/Download";
 
 import img1 from "../../assets/images/Жене.jpg";
 import img2 from "../../assets/images/Космос.jpg";
@@ -29,10 +28,6 @@ class Home extends PureComponent {
     this.props.dispatch(Upload(file))
 
     e.target.value = null
-  }
-
-  download = () => {
-    this.props.dispatch(Download())
   }
 
   renderErrors() {
@@ -77,16 +72,18 @@ class Home extends PureComponent {
 
   render() {
 
-    const {isUploading, isDownloading, uploadResult} = this.props.Home
+    const {locale} = this.props
+    const {isUploading, uploadResult} = this.props.Home
 
     return <div className="container-fluid my-2 py-3">
       <div className="row">
         <div className="col-8 mx-auto">
           <div className="row">
             <div className="col-5 text-center">
-              <h1 className="my-4">{i18n.t('home.title')}</h1>
+              <h1>{i18n.t('home.title')}</h1>
+              <h1>[ {locale} ]</h1>
 
-              <div className="row mb-4">
+              <div className="row my-4">
                 <div className="col-12">
 
                   <label className={"btn btn-block btn-warning mb-2" + (isUploading ? " disabled" : "")}>
@@ -102,13 +99,6 @@ class Home extends PureComponent {
                            max={1}/>
 
                   </label>
-
-                  <button className="btn btn-block btn-success mb-2"
-                          disabled={isDownloading}
-                          onClick={this.download}>
-                    <i className={isDownloading ? "fa fa-spin fa-circle-o-notch" : "fa fa-download"}/>
-                    &nbsp;{!isDownloading ? i18n.t('placeholders.export_file') : i18n.t('placeholders.export_file_in_progress')}
-                  </button>
                 </div>
               </div>
 
@@ -149,11 +139,13 @@ class Home extends PureComponent {
 }
 
 Home.propTypes = {
-  Home: PropTypes.any.isRequired
+  Home: PropTypes.any.isRequired,
+  locale: PropTypes.any.isRequired,
 }
 
 const selectors = createStructuredSelector({
-  Home: store => store.Home
+  Home: store => store.Home,
+  locale: store => store.App.locale,
 })
 
 export default connect(selectors)(Home);

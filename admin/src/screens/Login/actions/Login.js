@@ -4,13 +4,11 @@ import parameters from "../../../parameters";
 
 export default data => (dispatch, getState) => {
 
-  const locale = getState().App.locale
-
   dispatch({
     type: Actions.LOGIN_CHECK_BEFORE,
   })
 
-  axios(getState()).post(`${parameters.apiHost}/api/v1/${locale}/login`, data)
+  axios(getState()).post(`${parameters.apiHost}/api/v1/login`, data)
     .then(({data}) => {
 
       dispatch({

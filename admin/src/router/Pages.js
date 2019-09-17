@@ -1,6 +1,6 @@
 export const HOME = '/:locale';
 
-export const LOGIN = '/:locale/login';
+export const LOGIN = '/login';
 
 export const IMAGES = '/:locale/images';
 export const IMAGE_CREATE = '/:locale/images/new';

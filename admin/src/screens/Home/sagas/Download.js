@@ -1,16 +1,16 @@
-import {all, takeLatest} from 'redux-saga/effects'
-import downloadFile from '../../../utils/downloadFile'
+import {all, takeLatest, put} from 'redux-saga/effects'
 import * as Actions from '../actions'
+import Download from '../actions/Download'
 
-function download({payload}) {
-  downloadFile(payload.url)
+function* startDownload() {
+  yield put(Download())
 }
 
 export default function* sagas() {
   yield all([
 
     takeLatest([
-      Actions.DOWNLOAD_SUCCESS,
-    ], download)
+      Actions.UPLOAD_SUCCESS,
+    ], startDownload)
   ])
 }

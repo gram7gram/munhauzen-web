@@ -30,9 +30,9 @@ class Login extends Component {
 
   render() {
 
-    const {password, isLoading} = this.props.Login
+    const {password, isLoading, isError} = this.props.Login
 
-    return <div className="container">
+    return <div className="container my-5">
 
       <div className="row">
         <div className="col-10 col-sm-6 col-lg-4 mx-auto my-4">
@@ -49,14 +49,16 @@ class Login extends Component {
                    placeholder="*******"
                    onChange={this.changeString('password')}
                    value={password || ''}/>
+
+            {isError ? <div className="text-center text-danger">{i18n.t('login.error_msg')}</div> : null}
           </div>
 
-            <button className="btn btn-success btn-lg btn-block"
-                    onClick={this.loginCheck}
-                    disabled={isLoading || !password}>
-              <i className={"fa " + (isLoading ? "fa-spin fa-circle-o-notch" : "fa-lock")}/>
-              &nbsp;{i18n.t('login.action')}
-            </button>
+          <button className="btn btn-success btn-lg btn-block"
+                  onClick={this.loginCheck}
+                  disabled={isLoading || !password}>
+            <i className={"fa " + (isLoading ? "fa-spin fa-circle-o-notch" : "fa-lock")}/>
+            &nbsp;{i18n.t('login.action')}
+          </button>
 
 
         </div>

@@ -24,9 +24,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //Public API
+app.use('/api/v1', LoginController);
 app.use('/api/v1/:locale', checkLocale, ExpansionRESTController);
 app.use('/api/v1/:locale', checkLocale, ExportController);
-app.use('/api/v1/:locale', checkLocale, LoginController);
 
 //Admin API
 app.use('/api/v1/:locale', checkLocale, isAdmin, AudioFailsRESTController);

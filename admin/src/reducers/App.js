@@ -15,6 +15,7 @@ const isAuthenticated = (prev = false, action) => {
   switch (action.type) {
     case LoginActions.LOGIN_CHECK_SUCCESS:
       return true
+    case LoginActions.LOGOUT:
     case LoginActions.LOGIN_CHECK_BEFORE:
     case LoginActions.LOGIN_CHECK_FAILURE:
       return false
@@ -31,6 +32,7 @@ const token = (prev = null, action) => {
       }
 
       return prev
+    case LoginActions.LOGOUT:
     case LoginActions.LOGIN_CHECK_FAILURE:
       return null
     default:

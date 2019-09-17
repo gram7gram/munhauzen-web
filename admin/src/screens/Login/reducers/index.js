@@ -14,6 +14,19 @@ const isLoading = (prev = false, action) => {
   }
 }
 
+const isError = (prev = false, action) => {
+  switch (action.type) {
+    case Actions.RESET:
+    case Actions.LOGIN_CHECK_SUCCESS:
+    case Actions.LOGIN_CHECK_BEFORE:
+      return false
+    case Actions.LOGIN_CHECK_FAILURE:
+      return true
+    default:
+      return prev
+  }
+}
+
 const password = (prev = null, action) => {
   switch (action.type) {
     case Actions.CHANGE:
@@ -32,5 +45,6 @@ const password = (prev = null, action) => {
 
 export default combineReducers({
   isLoading,
+  isError,
   password,
 });
