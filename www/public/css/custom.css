@@ -1,0 +1,164 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("/fonts/Roboto/Roboto-Regular.ttf"), url("/fonts/Roboto/Roboto-RegularItalic.ttf"), url("/fonts/Roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: "MarckScript";
+    src: url("/fonts/Marck_Script/MarckScript-Regular.ttf");
+}
+
+.painting-text {
+    background: url('/assets/Elements_web/paper.png') no-repeat center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    position: relative;
+    margin: 0 auto;
+    margin-top: -33px;
+}
+
+.version-card {
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+
+.version-card .version-card-text > p{
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 21px;
+    color: white
+}
+
+.version-card .version-card-header {
+    background: url('/assets/paper_bg.jpg') repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.version-card .version-card-body {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.painting img {
+    max-height: 250px;
+}
+
+.decor-img {
+    height: 20px
+}
+
+.color-accent {
+    color: #29230C;
+}
+
+.color-primary {
+    color: #AE9C68;
+}
+
+.color-primary-light {
+    color: #D4BB77;
+}
+
+.color-yellow {
+    color: #EAE86A;
+}
+
+.bg-color-accent {
+    background: #29230C;
+}
+
+.bg-color-primary {
+    background: #AE9C68;
+}
+
+.bg-color-primary-light {
+    background: #D4BB77;
+}
+
+.bg-color-yellow {
+    background: #EAE86A;
+}
+
+.font-roboto {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.font-markscript {
+    font-family: MarckScript, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.dropdown-menu {
+    min-width: initial !important;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+#langDropdown {
+    width: 75px;
+    text-align: center;
+}
+
+
+.animation-spin-10s {
+    animation-name: spin;
+    animation-duration: 10000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.animation-spin-14s {
+    animation-name: spin;
+    animation-duration: 14000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+.reveal.slide .slides > section, .reveal.slide .slides > section > section {
+    min-height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 0 !important;
+}
+
+.reveal.slide .slides > section.align-slide-content-center,
+.reveal.slide .slides > section.align-slide-content-center > section {
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+section > h1, section > h2 {
+    position: absolute !important;
+    top: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    text-align: center !important;
+}
+.print-pdf .reveal.slide .slides > section, .print-pdf .reveal.slide .slides > section > section {
+    min-height: 770px !important;
+    position: relative !important;
+}
