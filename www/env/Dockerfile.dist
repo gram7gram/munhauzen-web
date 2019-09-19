@@ -2,4 +2,6 @@ FROM php:7.2-cli
 
 WORKDIR /var/www
 
+EXPOSE 80
+
 CMD [ "php", "-t", "./public", "-S", "0.0.0.0:80" ]
