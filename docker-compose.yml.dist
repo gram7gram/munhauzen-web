@@ -17,14 +17,23 @@ services:
 #      - '/etc/letsencrypt/live/fingertips.com/fullchain.pem:/etc/nginx/certs/fingertips.com.crt'
 #      - '/etc/letsencrypt/live/fingertips.com/privkey.pem:/etc/nginx/certs/fingertips.com.key'
 
+  www:
+    build: ./www/env
+    restart: unless-stopped
+    environment:
+      - HTTPS_METHOD=nohttps
+      - VIRTUAL_HOST=fingertips.cf,www.fingertips.cf
+    networks:
+      - backend
+    volumes:
+      - './www:/var/www'
+
   api:
     build: ./api/env
     restart: unless-stopped
     environment:
       - HTTPS_METHOD=nohttps
       - VIRTUAL_HOST=munchausen-api.fingertips.cf
-    depends_on:
-      - db
     networks:
       - backend
     volumes:
@@ -35,7 +44,7 @@ services:
     restart: unless-stopped
     environment:
       - HTTPS_METHOD=nohttps
-      - VIRTUAL_HOST=munchausen.fingertips.cf,fingertips.cf,www.fingertips.cf
+      - VIRTUAL_HOST=munchausen.fingertips.cf
     networks:
       - backend
     volumes:
@@ -50,7 +59,7 @@ services:
       - backend
     volumes:
       - '.:/var/www'
-      - '.persistency/monogo/data:/data/db'
+      - '.persistency/mongo/data:/data/db'
 
 networks:
   backend:
