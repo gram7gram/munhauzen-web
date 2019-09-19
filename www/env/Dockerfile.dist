@@ -1,5 +1,5 @@
-FROM node:11-alpine
+FROM php:7.2-cli
 
-WORKDIR /var/www/public
+WORKDIR /var/www
 
-CMD [ "npm", "start"]
+CMD [ "php", "-t", "./public", "-S", "0.0.0.0:80" ]
