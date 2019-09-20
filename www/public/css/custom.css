@@ -8,6 +8,14 @@
     src: url("/fonts/Marck_Script/MarckScript-Regular.ttf");
 }
 
+body {
+    background: url('/assets/Elements_web/background_1.jpg') no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 .painting-text {
     background: url('/assets/Elements_web/paper.png') no-repeat center;
     -webkit-background-size: contain;
@@ -25,7 +33,7 @@
     background: none;
 }
 
-.version-card .version-card-text > p{
+.version-card .version-card-text > p {
     font-weight: bold;
     font-size: 14px;
     line-height: 21px;
@@ -71,19 +79,19 @@
 }
 
 .bg-color-accent {
-    background: #29230C;
+    background-color: #29230C;
 }
 
 .bg-color-primary {
-    background: #AE9C68;
+    background-color: #AE9C68;
 }
 
 .bg-color-primary-light {
-    background: #D4BB77;
+    background-color: #D4BB77;
 }
 
 .bg-color-yellow {
-    background: #EAE86A;
+    background-color: #EAE86A;
 }
 
 .font-roboto {
@@ -128,10 +136,10 @@
 
 @keyframes spin {
     from {
-        transform:rotate(0deg);
+        transform: rotate(0deg);
     }
     to {
-        transform:rotate(360deg);
+        transform: rotate(360deg);
     }
 }
 
@@ -158,6 +166,7 @@ section > h1, section > h2 {
     right: 0 !important;
     text-align: center !important;
 }
+
 .print-pdf .reveal.slide .slides > section, .print-pdf .reveal.slide .slides > section > section {
     min-height: 770px !important;
     position: relative !important;

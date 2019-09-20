@@ -41,17 +41,34 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
 
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/reveal.css">
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css"
+          href="/vendor/carousel-3d/jquery.carousel-3d.default.css"/>
 
     <link rel="stylesheet" type="text/css"
-          href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+          href="/css/reset.css">
+    <link rel="stylesheet" type="text/css"
+          href="/css/reveal.css">
+    <link rel="stylesheet" type="text/css"
+          href="/css/custom.css?v=1">
 
 </head>
 <body class="color-accent bg-color-yellow">
 
-<nav class="navbar fixed-top navbar-expand">
+<div id="loading" class="text-center">
+
+    <div style="position: fixed;top: 50%;width:100%;transform: translate(0,-50%)">
+
+        <img src="/assets/inter_hare_ground.png" alt="" class="img-fluid animation-spin-10s"
+             style="width: 240px;">
+    </div>
+    <div style="position: fixed;top: 50%;width:100%;transform: translate(0,-50%)">
+        <img src="/assets/inter_hare_butterflies.png" alt="" class="img-fluid animation-spin-14s"
+             style="width: 240px;">
+    </div>
+
+</div>
+
+<nav id="navigation" class="navbar fixed-top navbar-expand d-none">
     <div class="container-fluid p-0">
         <div class="row no-gutters w-100">
             <div class="col-3">
@@ -100,7 +117,10 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link py-0" href="#">
-                            <img src="/assets/sound.png"
+                            <img id="navigation-volume"
+                                 src="/assets/sound.png"
+                                 data-on="/assets/sound.png"
+                                 data-off="/assets/sound_off.png"
                                  style="height: 48px"
                                  alt="Toggle sound"
                                  class="img-fluid">
@@ -112,28 +132,17 @@
     </div>
 </nav>
 
-
-<div class="reveal">
+<div id="main-content" class="reveal">
     <div class="slides">
 
         <section data-background-image="/assets/Elements_web/background_1.jpg">
-
-            <img data-src="/assets/lv_dog.png" alt="" class="img-fluid"
-                 style="position:fixed;top:120px;right:120px;transform: rotate(26.71deg);width:150px;">
 
             <div class="container">
                 <div class="row w-100 my-5">
                     <div class="col-12">
 
-                        <img data-src="/assets/lv_hat.png" alt="" class="img-fluid p-2"
-                             style="width:150px;">
-
                         <h2 class="h1 font-markscript">Our guests have already come, let’s start!</h2>
 
-                    </div>
-
-                    <div class="col-12 col-md-8 mx-auto">
-                        <img data-src="/assets/painting2.png" alt="" class="img-fluid">
                     </div>
 
                 </div>
@@ -251,49 +260,70 @@
                              class="img-fluid"
                              style="transform: rotate(180deg)"/>
                     </div>
-                    <div class="col-10">
-                        <div id="actors-carousel">
-                            <div class="d-block">
-                                <img class="img-fluid py-1 px-3 painting"
-                                     data-src="/assets/Elements_web/Персонажи Сайт/an_munchausen.gif"
+                    <div class="col-10 w-100">
+                        <div id="actors-carousel" data-carousel-3d>
+                            <div class="slide">
+                                <img class="painting img-fluid"
+                                     data-src="/assets/characters/an_munchausen-0.png"
+                                     data-first-frame="/assets/characters/an_munchausen-0.png"
+                                     data-animation="/assets/characters/an_munchausen.gif"
+                                     data-audio="/assets/characters/media/s_munchausen_1.wav,/assets/characters/media/s_munchausen_2.wav,/assets/characters/media/s_munchausen_3.wav"
                                      alt="">
-                                <div class="painting-text font-markscript w-50 p-4">Munchausen</div>
+                                <h5 class="h5 painting-text font-markscript w-50 p-4">Munchausen</h5>
                             </div>
-                            <div class="d-block">
-                                <img class="img-fluid py-1 px-3 painting"
-                                     data-src="/assets/Elements_web/Персонажи Сайт/an_daughter.gif"
+                            <div class="slide">
+                                <img class="painting img-fluid"
+                                     data-src="/assets/characters/an_daughter-0.png"
+                                     data-first-frame="/assets/characters/an_daughter-0.png"
+                                     data-animation="/assets/characters/an_daughter.gif"
+                                     data-audio="/assets/characters/media/s_daughter_1.wav,/assets/characters/media/s_daughter_2.wav,/assets/characters/media/s_daughter_3.wav"
                                      alt="">
-                                <div class="painting-text font-markscript w-50 p-4">Daughter</div>
+                                <h5 class="h5 painting-text font-markscript w-50 p-4">Daughter</h5>
                             </div>
-                            <div class="d-block">
-                                <img class="img-fluid py-1 px-3 painting"
-                                     data-src="/assets/Elements_web/Персонажи Сайт/an_nemo.gif"
+                            <div class="slide">
+                                <img class="painting img-fluid"
+                                     data-src="/assets/characters/an_nemo-0.png"
+                                     data-first-frame="/assets/characters/an_nemo-0.png"
+                                     data-animation="/assets/characters/an_nemo.gif"
+                                     data-audio="/assets/characters/media/s_nemo_1.wav,/assets/characters/media/s_nemo_2.wav,/assets/characters/media/s_nemo_3.wav"
                                      alt="">
-                                <div class="painting-text font-markscript w-50 p-4">Nemo</div>
+                                <h5 class="h5 painting-text font-markscript w-50 p-4">Nemo</h5>
                             </div>
-                            <div class="d-block">
-                                <img class="img-fluid py-1 px-3 painting"
-                                     data-src="/assets/Elements_web/Персонажи Сайт/an_list_1.gif"
+                            <div class="slide">
+                                <img class="painting img-fluid"
+                                     data-src="/assets/characters/an_list_1-0.png"
+                                     data-first-frame="/assets/characters/an_list_1-0.png"
+                                     data-animation="/assets/characters/an_list_1.gif"
+                                     data-audio="/assets/characters/media/s_list_1_1.wav,/assets/characters/media/s_list_1_2.wav,/assets/characters/media/s_list_1_3.wav"
                                      alt="">
-                                <div class="painting-text font-markscript w-50 p-4">List 1</div>
+                                <p class="h5 painting-text font-markscript w-50 p-4">List 1</p>
                             </div>
-                            <div class="d-block">
-                                <img class="img-fluid py-1 px-3 painting"
-                                     data-src="/assets/Elements_web/Персонажи Сайт/an_list_2.gif"
+                            <div class="slide">
+                                <img class="painting img-fluid"
+                                     data-src="/assets/characters/an_list_2-0.png"
+                                     data-first-frame="/assets/characters/an_list_2-0.png"
+                                     data-animation="/assets/characters/an_list_2.gif"
+                                     data-audio="/assets/characters/media/s_list_2_1.wav,/assets/characters/media/s_list_2_2.wav,/assets/characters/media/s_list_2_3.wav"
                                      alt="">
-                                <div class="painting-text font-markscript w-50 p-4">List 2</div>
+                                <h5 class="h5 painting-text font-markscript w-50 p-4">List 2</h5>
                             </div>
-                            <div class="d-block">
-                                <img class="img-fluid py-1 px-3 painting"
-                                     data-src="/assets/Elements_web/Персонажи Сайт/an_list_3.gif"
+                            <div class="slide">
+                                <img class="painting img-fluid"
+                                     data-src="/assets/characters/an_list_3-0.png"
+                                     data-first-frame="/assets/characters/an_list_3-0.png"
+                                     data-animation="/assets/characters/an_list_3.gif"
+                                     data-audio="/assets/characters/media/s_list_3_1.wav,/assets/characters/media/s_list_3_2.wav,/assets/characters/media/s_list_3_3.wav"
                                      alt="">
-                                <div class="painting-text font-markscript w-50 p-4">List 3</div>
+                                <h5 class="h5 painting-text font-markscript w-50 p-4">List 3</h5>
                             </div>
-                            <div class="d-block">
-                                <img class="img-fluid py-1 px-3 painting"
-                                     data-src="/assets/Elements_web/Персонажи Сайт/an_nephew.gif"
+                            <div class="slide">
+                                <img class="painting img-fluid"
+                                     data-src="/assets/characters/an_nephew-0.png"
+                                     data-first-frame="/assets/characters/an_nephew-0.png"
+                                     data-animation="/assets/characters/an_nephew.gif"
+                                     data-audio="/assets/characters/media/s_nephew_1.wav,/assets/characters/media/s_nephew_2.wav,/assets/characters/media/s_nephew_3.wav"
                                      alt="">
-                                <div class="painting-text font-markscript w-50 p-4">Nephew</div>
+                                <h5 class="h5 painting-text font-markscript w-50 p-4">Nephew</h5>
                             </div>
                         </div>
                     </div>
@@ -396,7 +426,7 @@
                  style="position: fixed;right: 0;bottom: 0;width: 30%;">
 
             <img data-src="/assets/Elements_web/без ваувау.png" alt="" class="img-fluid"
-                 style="width: 100%;max-width: 600px;position: fixed;top: 40%;left: 50%;transform: translate(-50%, -50%);">
+                 style="width: 100%;max-width: 400px;position: fixed;top: 40%;left: 50%;transform: translate(-50%, -50%);">
 
             <div style="position: fixed;bottom: -300px;left: 0;width: 100%; text-align: center;">
                 <img data-src="/assets/Elements_web/земелька_чб.png" alt="" class="img-fluid animation-spin-10s"
@@ -448,6 +478,7 @@
     </div>
 </div>
 
+<!--Start Required dependencies-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -457,53 +488,20 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+<!--End Required dependencies-->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<!--START Carousel 3D-->
+<script type="text/javascript" src="/vendor/carousel-3d/jquery.resize.js"></script>
+<script type="text/javascript" src="/vendor/carousel-3d/jquery.waitforimages.min.js"></script>
+<script type="text/javascript" src="/vendor/carousel-3d/modernizr.js"></script>
+<script type="text/javascript" src="/vendor/carousel-3d/jquery.carousel-3d.min.js"></script>
+<!--END Carousel 3D-->
 
-<script src="/js/reveal.js"></script>
+<!--START Reveal-->
+<script type="text/javascript" src="/js/reveal.js"></script>
+<!--END Reveal-->
 
-<script>
-  Reveal.initialize({
-    center: false,
-    fragments: false,
-    controls: false,
-    transition: 'slide',
-    controlsTutorial: false,
-    overview: false,
-    help: false,
-    history: true,
-    mouseWheel: true,
+<script type="text/javascript" src="/js/index.js?v=2"></script>
 
-    width: "100%",
-    height: "100%",
-    margin: 0,
-    minScale: 1,
-    maxScale: 1
-
-  });
-
-  $(function () {
-
-    var carousel = $('#actors-carousel');
-
-    $('#actors-carousel-prev').on('click', function () {
-      carousel.slick('slickPrev')
-    })
-
-    $('#actors-carousel-next').on('click', function () {
-      carousel.slick('slickNext')
-    })
-
-    carousel.slick({
-      dots: false,
-      arrows: false,
-      infinite: true,
-      adaptiveHeight: true,
-      centerMode: true,
-      slidesToShow: 3,
-      slidesToScroll: 1
-    })
-  })
-</script>
 </body>
 </html>
