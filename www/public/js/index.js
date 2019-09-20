@@ -1,123 +1,153 @@
-function startReveal() {
-  try {
-    Reveal.addEventListener('ready', function () {
-      $('#loading').addClass('d-none')
-      $('#navigation').removeClass('d-none')
+(function () {
+
+  var progressBar
+  var currentAudio
+  var isAudioEnabled = true
+
+  function startLoading() {
+    progressBar = new ProgressBar.Line('#loading-bar', {
+      easing: 'easeInOut',
+      duration: 500,
+      strokeWidth: 1,
+      color: '#29230C',
+      trailWidth: 1,
+      trailColor: '#AE9C68',
+      svgStyle: {width: '100%', height: '100%', 'stroke-linecap': "round"}
     });
-  } catch (e) {
-    console.log(e)
+
+    progressBar.animate(0.9);
   }
 
-  try {
-    Reveal.initialize({
-      center: false,
-      fragments: false,
-      controls: false,
-      transition: 'slide',
-      controlsTutorial: false,
-      overview: false,
-      help: false,
-      history: true,
-      mouseWheel: true,
+  function startReveal() {
+    try {
 
-      width: "100%",
-      height: "100%",
-      margin: 0,
-      minScale: 1,
-      maxScale: 1
+      Reveal.addEventListener('slidechanged', function (e) {
+        var index = Reveal.getSlides().indexOf(e.currentSlide)
 
-    });
-  } catch (e) {
-    console.error(e)
-  }
-}
+        console.log('slidechanged', index)
 
-function startCarousel() {
-  try {
-    var volumeBtn = $('#navigation-volume');
-    var carousel = $('#actors-carousel');
-    var slides = carousel.find('.slide')
-    var currentAudio
-
-    var isAudioEnabled = true
-
-    volumeBtn.on('click', function (e) {
-      e.preventDefault();
-
-      isAudioEnabled = !isAudioEnabled
-
-      if (!isAudioEnabled) {
-        if (currentAudio) {
-          currentAudio.pause()
-          currentAudio = null
-        }
-      }
-
-      volumeBtn.attr('src', isAudioEnabled
-        ? volumeBtn.attr('data-on')
-        : volumeBtn.attr('data-off')
-      )
-
-    })
-
-    function playAudioForSlide(url) {
-
-      try {
-
-        if (currentAudio) {
-          currentAudio.pause()
-          currentAudio = null
+        if (index === 3) {
+          startCarousel()
         }
 
-        if (!url) {
-          throw 'Missing url'
-        }
+      });
 
-        if (!isAudioEnabled) return
+      Reveal.addEventListener('ready', function () {
 
-        currentAudio = new Audio(url)
-        currentAudio.play()
-      } catch (e) {
-        console.error(e)
-      }
+        progressBar.animate(1);
+
+        $('#loading').addClass('d-none')
+        $('#navigation').removeClass('d-none')
+      });
+
+      Reveal.initialize({
+        center: false,
+        fragments: false,
+        controls: true,
+        transition: 'slide',
+        controlsTutorial: true,
+        overview: false,
+        help: true,
+        history: true,
+        mouseWheel: true,
+
+        width: "100%",
+        height: "100%",
+        margin: 0,
+        minScale: 1,
+        maxScale: 1
+
+      });
+    } catch (e) {
+      console.error(e)
     }
+  }
 
-    $('#actors-carousel-prev').on('click', function () {
-      carousel.Carousel3d('prev')
-    })
+  function startCarousel() {
+    console.log('startCarousel')
 
-    $('#actors-carousel-next').on('click', function () {
-      carousel.Carousel3d('next')
-    })
+    try {
+      var volumeBtn = $('#navigation-volume');
+      var carousel = $('#actors-carousel');
+      var slides = carousel.find('.slide')
 
-    carousel.on('select', function (e, index) {
+      volumeBtn.on('click', function (e) {
+        e.preventDefault();
 
+        isAudioEnabled = !isAudioEnabled
 
-      for (var i = 0; i < slides.length; i++) {
-        var img = $(slides[i]).find('img')
+        if (!isAudioEnabled) {
+          if (currentAudio) {
+            currentAudio.pause()
+            currentAudio = null
+          }
+        }
 
-        img.attr('src', img.attr('data-first-frame'))
+        volumeBtn.attr('src', isAudioEnabled
+          ? volumeBtn.attr('data-on')
+          : volumeBtn.attr('data-off')
+        )
+
+      })
+
+      function playAudioForSlide(url) {
+
+        try {
+
+          if (currentAudio) {
+            currentAudio.pause()
+            currentAudio = null
+          }
+
+          if (!url) {
+            throw 'Missing url'
+          }
+
+          if (!isAudioEnabled) return
+
+          currentAudio = new Audio(url)
+          currentAudio.play()
+        } catch (e) {
+          console.error(e)
+        }
       }
 
-      var currentImg = $(slides[index]).find('img')
+      $('#actors-carousel-prev').on('click', function () {
+        carousel.Carousel3d('prev')
+      })
 
-      currentImg.attr('src', currentImg.attr('data-animation'))
+      $('#actors-carousel-next').on('click', function () {
+        carousel.Carousel3d('next')
+      })
 
-      var audio = currentImg.attr('data-audio').split(',')
+      carousel.on('select', function (e, index) {
 
-      var randomIndex = Math.floor(Math.random() * audio.length);
+        for (var i = 0; i < slides.length; i++) {
+          var img = $(slides[i]).find('img')
 
-      playAudioForSlide(audio[randomIndex])
-    });
-  } catch (e) {
-    console.error(e)
+          img.attr('src', img.attr('data-first-frame'))
+        }
+
+        var currentImg = $(slides[index]).find('img')
+
+        currentImg.attr('src', currentImg.attr('data-animation'))
+
+        var audio = currentImg.attr('data-audio').split(',')
+
+        var randomIndex = Math.floor(Math.random() * audio.length);
+
+        playAudioForSlide(audio[randomIndex])
+      });
+    } catch (e) {
+      console.error(e)
+    }
   }
-}
 
-$(function () {
+  $(function () {
 
-  startReveal();
+    startLoading();
 
-  startCarousel();
+    startReveal();
 
-})
+  })
+})()
