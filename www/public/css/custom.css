@@ -186,6 +186,13 @@ section > h1, section > h2 {
     position: relative !important;
 }
 
+
+
+#wau-container {
+    position: fixed;
+    text-align: center;
+}
+
 @media (max-width: 320px) {
 
     .decor-img {
@@ -208,6 +215,12 @@ section > h1, section > h2 {
         max-height: 225px;
     }
 
+    #wau-container {
+        bottom: -40%;
+        left: -25%;
+        width: 150%;
+    }
+
 }
 
 /*// Extra small devices (portrait phones, less than 576px)*/
@@ -227,6 +240,12 @@ section > h1, section > h2 {
 
     .reveal-slide-3 img {
         max-height: 250px;
+    }
+
+    #wau-container {
+        bottom: -40%;
+        left: -25%;
+        width: 150%;
     }
 }
 
@@ -248,6 +267,12 @@ section > h1, section > h2 {
     .reveal-slide-3 img {
         max-height: 275px;
     }
+
+    #wau-container {
+        bottom: -40%;
+        left: -25%;
+        width: 150%;
+    }
 }
 
 /*// Medium devices (tablets, 768px and up)*/
@@ -267,6 +292,12 @@ section > h1, section > h2 {
 
     .reveal-slide-3 img {
         max-height: 300px;
+    }
+
+    #wau-container {
+        bottom: -40%;
+        left: 0;
+        width: 100%;
     }
 }
 
@@ -288,6 +319,12 @@ section > h1, section > h2 {
     .reveal-slide-3 img {
         max-height: 325px;
     }
+
+    #wau-container {
+        bottom: -40%;
+        left: 0;
+        width: 100%;
+    }
 }
 
 /*// Extra large devices (large desktops, 1200px and up)*/
@@ -306,5 +343,11 @@ section > h1, section > h2 {
 
     .reveal-slide-3 img {
         max-height: 350px;
+    }
+
+    #wau-container {
+        bottom: -25%;
+        left: 0;
+        width: 100%;
     }
 }
