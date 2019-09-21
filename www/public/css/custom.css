@@ -9,11 +9,21 @@
 }
 
 .body-bg-light {
-    background: url('/assets/Elements_web/background_1.jpg') repeat center;
+    background: url('/assets/Elements_web/background_1.jpg') no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
 }
 
 .body-bg-dark {
-    background: url('/assets/Elements_web/background_2.jpg') repeat center;
+    background: url('/assets/Elements_web/background_2.jpg') no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
 }
 
 #loading * {
