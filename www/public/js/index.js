@@ -30,6 +30,14 @@
     progressBar = null
   }
 
+  function startWauAnimation() {
+    var img = $('#wau-animation')
+
+    if (img.is(':visible')) {
+      img.attr('src', img.attr('data-animation'))
+    }
+  }
+
   function startReveal() {
     try {
 
@@ -42,8 +50,13 @@
 
         console.log('slidechanged', index)
 
-        if (index === 3) {
-          startCarousel()
+        switch (index) {
+          case 3:
+            startCarousel();
+            break;
+          case 5:
+            startWauAnimation();
+            break;
         }
 
         Reveal.configure({controls: !Reveal.isLastSlide()});
