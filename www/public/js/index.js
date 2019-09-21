@@ -18,6 +18,16 @@
     progressBar.animate(0.9);
   }
 
+  function stopLoading() {
+
+    if (!progressBar) return
+
+    progressBar.animate(1);
+
+    progressBar.destroy()
+    progressBar = null
+  }
+
   function startReveal() {
     try {
 
@@ -34,7 +44,7 @@
 
       Reveal.addEventListener('ready', function () {
 
-        progressBar.animate(1);
+        stopLoading()
 
         $('#loading').addClass('d-none')
         $('#navigation').removeClass('d-none')
@@ -105,8 +115,15 @@
 
           if (!isAudioEnabled) return
 
+          console.log('playAudioForSlide', url);
+
           currentAudio = new Audio(url)
-          currentAudio.play()
+          var playPromise = currentAudio.play();
+          if (playPromise !== null) {
+            playPromise.catch(() => {
+              currentAudio.play();
+            })
+          }
         } catch (e) {
           console.error(e)
         }
