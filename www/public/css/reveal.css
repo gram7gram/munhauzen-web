@@ -321,9 +321,6 @@ body {
     .reveal .controls .navigate-down.highlight {
       -webkit-animation: bounce-down 2s 50 both ease-out;
               animation: bounce-down 2s 50 both ease-out; }
-  .reveal .controls[data-controls-back-arrows="faded"] .navigate-left.enabled,
-  .reveal .controls[data-controls-back-arrows="faded"] .navigate-up.enabled {
-    opacity: 0.3; }
     .reveal .controls[data-controls-back-arrows="faded"] .navigate-left.enabled:hover,
     .reveal .controls[data-controls-back-arrows="faded"] .navigate-up.enabled:hover {
       opacity: 1; }

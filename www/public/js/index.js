@@ -9,7 +9,7 @@
   function startLoading() {
     progressBar = new ProgressBar.Line('#loading-bar', {
       easing: 'easeInOut',
-      duration: 500,
+      duration: 1500,
       strokeWidth: 1,
       color: '#29230C',
       trailWidth: 1,
@@ -18,13 +18,13 @@
     });
 
     progressBar.animate(0.9);
+
+    setTimeout(startReveal, 1500)
   }
 
   function stopLoading() {
 
     if (!progressBar) return
-
-    progressBar.animate(1);
 
     progressBar.destroy()
     progressBar = null
@@ -32,6 +32,10 @@
 
   function startReveal() {
     try {
+
+      var loading = $('#loading')
+
+      loading.find('div').addClass('move-left-and-fade-out')
 
       Reveal.addEventListener('slidechanged', function (e) {
         var index = Reveal.getSlides().indexOf(e.currentSlide)
@@ -48,10 +52,9 @@
 
       Reveal.addEventListener('ready', function () {
 
-        stopLoading()
+        progressBar.animate(1);
 
-        $('#loading').addClass('d-none')
-        $('#navigation').removeClass('d-none')
+        $(document.body).toggleClass('body-bg-light body-bg-dark')
       });
 
       Reveal.initialize({
@@ -59,6 +62,7 @@
         fragments: false,
         controls: true,
         transition: 'slide',
+        backgroundTransition: 'none', //none/fade/slide/convex/concave/zoom
         controlsTutorial: true,
         overview: false,
         help: true,
@@ -72,6 +76,15 @@
         maxScale: 1
 
       });
+
+      setTimeout(function () {
+
+        loading.remove()
+
+        stopLoading()
+
+      }, 1500)
+
     } catch (e) {
       console.error(e)
     }
@@ -144,7 +157,11 @@
         carousel.Carousel3d('next')
       })
 
-      carousel.on('select', function (e, index) {
+      function onChange(e, index) {
+
+        console.log('carousel', index)
+
+        var isAnimation = true
 
         for (var i = 0; i < slides.length; i++) {
           var img = $(slides[i]).find('img')
@@ -156,12 +173,33 @@
 
         currentImg.attr('src', currentImg.attr('data-animation'))
 
-        var audio = currentImg.attr('data-audio').split(',')
 
+        //Play audio
+        var audio = currentImg.attr('data-audio').split(',')
         var randomIndex = Math.floor(Math.random() * audio.length);
 
         playAudioForSlide(audio[randomIndex])
-      });
+
+
+        //Start animation changer
+        clearInterval(animationInterval)
+        animationInterval = setInterval(function () {
+
+          isAnimation = !isAnimation
+
+          if (isAnimation) {
+            currentImg.attr('src', currentImg.attr('data-animation'))
+          } else {
+            currentImg.attr('src', currentImg.attr('data-first-frame'))
+          }
+
+        }, 5000)
+      }
+
+      var animationInterval = 0
+      carousel.on('select', onChange);
+
+      onChange(null, 0)
 
       isCarouselEnabled = true
 
@@ -212,8 +250,6 @@
   $(function () {
 
     startLoading();
-
-    startReveal();
 
     setLinksBasedOnPlatform();
 

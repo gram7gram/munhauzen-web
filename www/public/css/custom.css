@@ -8,12 +8,22 @@
     src: url("/fonts/Marck_Script/MarckScript-Regular.ttf");
 }
 
-body {
-    background: url('/assets/Elements_web/background_1.jpg') no-repeat center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+.body-bg-light {
+    background: url('/assets/Elements_web/background_1.jpg') repeat center;
+}
+
+.body-bg-dark {
+    background: url('/assets/Elements_web/background_2.jpg') repeat center;
+}
+
+#loading * {
+    z-index: 900;
+}
+
+.move-left-and-fade-out {
+    transition: left 1.5s, opacity 1.5s;
+    left: -50% !important;
+    opacity: 0;
 }
 
 .painting-text {

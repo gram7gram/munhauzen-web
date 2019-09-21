@@ -21,7 +21,6 @@
     <link rel="alternate" hreflang="ru" href="http://www.fingertips.com/ru">
     <link rel="alternate" hreflang="uk" href="http://www.fingertips.com/ua">
 
-
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png"/>
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114.png"/>
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72x72.png"/>
@@ -36,42 +35,36 @@
     <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"/>
     <link rel="icon" type="image/png" href="/favicon-128.png" sizes="128x128"/>
 
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css"
-          href="/vendor/carousel-3d/jquery.carousel-3d.default.css?v=1"/>
-
-    <link rel="stylesheet" type="text/css"
-          href="/css/reset.css">
-    <link rel="stylesheet" type="text/css"
-          href="/css/reveal.css">
-    <link rel="stylesheet" type="text/css"
-          href="/css/custom.css?v=3">
+    <link rel="stylesheet" type="text/css" href="/vendor/carousel-3d/jquery.carousel-3d.default.css?v=1"/>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/reveal.css?v=1">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css?v=4">
 
 </head>
-<body class="color-accent bg-color-yellow">
+<body class="color-accent bg-color-yellow body-bg-light">
 
 <div id="loading" class="text-center">
 
-    <div style="position: fixed;top: 50%;width:100%;transform: translate(0,-50%)">
+    <div style="position: fixed;top: 50%;left: 0;width:100%;transform: translate(0,-50%)">
 
         <img src="/assets/inter_hare_ground.png" alt="" class="img-fluid animation-spin-10s"
              style="width: 240px;">
     </div>
-    <div style="position: fixed;top: 50%;width:100%;transform: translate(0,-50%)">
+    <div style="position: fixed;top: 50%;left: 0;width:100%;transform: translate(0,-50%)">
         <img src="/assets/inter_hare_butterflies.png" alt="" class="img-fluid animation-spin-14s"
              style="width: 240px;">
     </div>
-
-    <div id="loading-bar"
-         style="position: fixed;top: 75%;left:50%;transform: translate(-50%,-50%);width: 240px;height: 5px;"></div>
+    <div style="position: fixed;top: 75%;left: 0;width:100%;transform: translate(0,-50%)">
+        <div id="loading-bar" style="width: 240px;height: 5px;margin: 0 auto"></div>
+    </div>
 
 </div>
 
-<nav id="navigation" class="d-none">
+<nav id="navigation">
     <div class="navbar fixed-top navbar-expand">
         <div class="container-fluid p-0">
             <div class="row no-gutters w-100">
@@ -140,7 +133,10 @@
 <div id="main-content" class="reveal">
     <div class="slides">
 
-        <section data-background-image="/assets/Elements_web/background_1.jpg" class="reveal-slide-1">
+        <section data-background-image="/assets/Elements_web/background_1.jpg"
+                 data-background-size="300px"
+                 data-background-repeat="repeat"
+                 class="reveal-slide-1">
 
             <div class="container-fluid">
                 <div class="row my-5">
@@ -155,6 +151,8 @@
         </section>
 
         <section data-background-image="/assets/Elements_web/background_2.jpg"
+                 data-background-size="300px"
+                 data-background-repeat="repeat"
                  class="reveal-slide-2 align-slide-content-center">
             <div class="container">
                 <div class="row align-items-center">
@@ -184,6 +182,8 @@
         </section>
 
         <section data-background-image="/assets/Elements_web/background_2.jpg"
+                 data-background-size="300px"
+                 data-background-repeat="repeat"
                  class="reveal-slide-3 align-slide-content-center">
             <div class="container">
                 <div class="row mb-3">
@@ -240,6 +240,8 @@
         </section>
 
         <section data-background-image="/assets/Elements_web/background_2.jpg"
+                 data-background-size="300px"
+                 data-background-repeat="repeat"
                  class="reveal-slide-4 align-slide-content-center">
             <div class="container">
                 <div class="row mb-5">
@@ -297,7 +299,7 @@
                                              data-animation="/assets/characters/an_nemo.gif"
                                              data-audio="/assets/characters/media/s_nemo_1.wav,/assets/characters/media/s_nemo_2.wav,/assets/characters/media/s_nemo_3.wav"
                                              alt="">
-                                        <h5 class="h5 painting-text font-markscript w-50 p-4">Nemo</h5>
+                                        <h5 class="h5 painting-text font-markscript w-50 p-4">Captain Nemo</h5>
                                     </div>
                                     <div class="slide">
                                         <img class="painting img-fluid"
@@ -306,7 +308,7 @@
                                              data-animation="/assets/characters/an_list_1.gif"
                                              data-audio="/assets/characters/media/s_list_1_1.wav,/assets/characters/media/s_list_1_2.wav,/assets/characters/media/s_list_1_3.wav"
                                              alt="">
-                                        <p class="h5 painting-text font-markscript w-50 p-4">List 1</p>
+                                        <p class="h5 painting-text font-markscript w-50 p-4">First guest</p>
                                     </div>
                                     <div class="slide">
                                         <img class="painting img-fluid"
@@ -315,7 +317,7 @@
                                              data-animation="/assets/characters/an_list_2.gif"
                                              data-audio="/assets/characters/media/s_list_2_1.wav,/assets/characters/media/s_list_2_2.wav,/assets/characters/media/s_list_2_3.wav"
                                              alt="">
-                                        <h5 class="h5 painting-text font-markscript w-50 p-4">List 2</h5>
+                                        <h5 class="h5 painting-text font-markscript w-50 p-4">Second guest</h5>
                                     </div>
                                     <div class="slide">
                                         <img class="painting img-fluid"
@@ -324,7 +326,7 @@
                                              data-animation="/assets/characters/an_list_3.gif"
                                              data-audio="/assets/characters/media/s_list_3_1.wav,/assets/characters/media/s_list_3_2.wav,/assets/characters/media/s_list_3_3.wav"
                                              alt="">
-                                        <h5 class="h5 painting-text font-markscript w-50 p-4">List 3</h5>
+                                        <h5 class="h5 painting-text font-markscript w-50 p-4">Third guest</h5>
                                     </div>
                                     <div class="slide">
                                         <img class="painting img-fluid"
@@ -349,6 +351,8 @@
         </section>
 
         <section data-background-image="/assets/Elements_web/background_2.jpg"
+                 data-background-size="300px"
+                 data-background-repeat="repeat"
                  class="reveal-slide-5 align-slide-content-center">
             <div class="container">
 
@@ -499,7 +503,10 @@
             </div>
         </section>
 
-        <section data-background-image="/assets/Elements_web/background_1.jpg" class="reveal-slide-6">
+        <section data-background-image="/assets/Elements_web/background_1.jpg"
+                 data-background-size="300px"
+                 data-background-repeat="repeat"
+                 class="reveal-slide-6">
 
             <img data-src="/assets/Elements_web/Мюнхаузен_подозрительній_цвет_гамма.png" alt=""
                  class="img-fluid d-none d-md-block"
