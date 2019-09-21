@@ -175,3 +175,126 @@ section > h1, section > h2 {
     min-height: 770px !important;
     position: relative !important;
 }
+
+@media (max-width: 320px) {
+
+    .decor-img {
+        height: 15px
+    }
+
+    .reveal-slide-1 .h1,
+    .reveal-slide-2 .h1,
+    .reveal-slide-6 .h1,
+    .reveal-slide-4 .h1,
+    .reveal-slide-3 .h1 {
+        font-size: 1.2rem;
+    }
+
+    .reveal-slide-2 img {
+        max-height: 250px;
+    }
+
+    .reveal-slide-3 img {
+        max-height: 225px;
+    }
+
+}
+
+/*// Extra small devices (portrait phones, less than 576px)*/
+@media (min-width: 321px) and (max-width: 576px) {
+
+    .reveal-slide-1 .h1,
+    .reveal-slide-2 .h1,
+    .reveal-slide-6 .h1,
+    .reveal-slide-4 .h1,
+    .reveal-slide-3 .h1 {
+        font-size: 1.4rem;
+    }
+
+    .reveal-slide-2 img {
+        max-height: 350px;
+    }
+
+    .reveal-slide-3 img {
+        max-height: 250px;
+    }
+}
+
+/*// Small devices (landscape phones, 576px and up)*/
+@media (min-width: 577px) and (max-width: 768px) {
+
+    .reveal-slide-1 .h1,
+    .reveal-slide-2 .h1,
+    .reveal-slide-6 .h1,
+    .reveal-slide-4 .h1,
+    .reveal-slide-3 .h1 {
+        font-size: 1.75rem;
+    }
+
+    .reveal-slide-2 img {
+        max-height: 400px;
+    }
+
+    .reveal-slide-3 img {
+        max-height: 275px;
+    }
+}
+
+/*// Medium devices (tablets, 768px and up)*/
+@media (min-width: 769px) and (max-width: 992px) {
+
+    .reveal-slide-1 .h1,
+    .reveal-slide-2 .h1,
+    .reveal-slide-6 .h1,
+    .reveal-slide-4 .h1,
+    .reveal-slide-3 .h1 {
+        font-size: 1.75rem;
+    }
+
+    .reveal-slide-2 img {
+        max-height: 400px;
+    }
+
+    .reveal-slide-3 img {
+        max-height: 300px;
+    }
+}
+
+/*// Large devices (desktops, 992px and up)*/
+@media (min-width: 993px) and (max-width: 1200px) {
+
+    .reveal-slide-1 .h1,
+    .reveal-slide-2 .h1,
+    .reveal-slide-6 .h1,
+    .reveal-slide-4 .h1,
+    .reveal-slide-3 .h1 {
+        font-size: 2rem;
+    }
+
+    .reveal-slide-2 img {
+        max-height: 600px;
+    }
+
+    .reveal-slide-3 img {
+        max-height: 325px;
+    }
+}
+
+/*// Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1201px) {
+
+    .reveal-slide-1 .h1,
+    .reveal-slide-3 .h1,
+    .reveal-slide-6 .h1,
+    .reveal-slide-4 .h1 {
+        font-size: 2rem;
+    }
+
+    .reveal-slide-2 img {
+        max-height: 600px;
+    }
+
+    .reveal-slide-3 img {
+        max-height: 350px;
+    }
+}

@@ -3,6 +3,8 @@
   var progressBar
   var currentAudio
   var isAudioEnabled = true
+  var isCarouselEnabled = false
+  var isAndroid
 
   function startLoading() {
     progressBar = new ProgressBar.Line('#loading-bar', {
@@ -40,6 +42,8 @@
           startCarousel()
         }
 
+        Reveal.configure({controls: !Reveal.isLastSlide()});
+
       });
 
       Reveal.addEventListener('ready', function () {
@@ -74,6 +78,9 @@
   }
 
   function startCarousel() {
+
+    if (isCarouselEnabled) return
+
     console.log('startCarousel')
 
     try {
@@ -155,9 +162,51 @@
 
         playAudioForSlide(audio[randomIndex])
       });
+
+      isCarouselEnabled = true
+
     } catch (e) {
       console.error(e)
+
+      isCarouselEnabled = false
     }
+  }
+
+  function setLinksBasedOnPlatform() {
+
+    var os = getMobileOperatingSystem()
+
+    isAndroid = os === 'Android'
+
+    var links = $('.mobile-link')
+
+    for (var i = 0; i < links.length; i++) {
+      var link = $(links[i])
+
+      link.attr('href', isAndroid
+        ? link.attr('data-appstore')
+        : link.attr('data-googleplay'))
+    }
+  }
+
+  function getMobileOperatingSystem() {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+      return "Windows Phone";
+    }
+
+    if (/android/i.test(userAgent)) {
+      return "Android";
+    }
+
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      return "iOS";
+    }
+
+    return "unknown";
   }
 
   $(function () {
@@ -165,6 +214,8 @@
     startLoading();
 
     startReveal();
+
+    setLinksBasedOnPlatform();
 
   })
 })()
