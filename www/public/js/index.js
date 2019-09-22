@@ -318,6 +318,7 @@
     configureSlide1()
     configureSlide2()
     configureSlide3()
+    configureSlide4()
     configureSlide5()
     configureSlide6()
   }
@@ -363,6 +364,25 @@
 
   }
 
+  function configureSlide4() {
+
+    var carousel = $('#slide-4-carousel')
+
+    var height
+    if (xs) {
+      height = screenHeight * 0.3
+    } else if (sm) {
+      height = screenHeight * 0.4
+    } else if (lg) {
+      height = screenHeight * 0.35
+    } else {
+      height = screenWidth * 0.25
+    }
+
+    carousel.css({height: height, width: height * 2})
+
+  }
+
   function configureSlide5() {
 
     var img1Mobile = $('#slide-5-img-1-mobile')
@@ -399,6 +419,10 @@
     } else if (lg) {
       width = screenWidth * 0.4
     } else {
+      width = screenWidth * 0.4
+    }
+
+    if ((xs || sm || md) && isOrientationLandscape) {
       width = screenWidth * 0.4
     }
 
