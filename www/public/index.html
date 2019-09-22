@@ -42,7 +42,7 @@
     <link rel="stylesheet" type="text/css" href="/vendor/carousel-3d/jquery.carousel-3d.default.css?v=1"/>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/reveal.css?v=1">
-    <link rel="stylesheet" type="text/css" href="/css/custom.css?v=9">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css?v=1">
 
 </head>
 <body class="color-accent bg-color-yellow body-bg-light">
@@ -133,10 +133,16 @@
 <div id="main-content" class="reveal">
     <div class="slides">
 
-        <section data-background-video=""
-                 data-background-video-land="/assets/trailer.mp4"
-                 data-background-video-port="/assets/trailer.mp4"
+        <section data-background-image="/assets/trailer-0.jpg"
                  class="reveal-slide-1">
+
+            <video id="slide-1-video"
+                   class="bg-color-yellow"
+                   data-src=""
+                   data-autoplay
+                   style="position: absolute;top:0;left:0"
+                   data-src-land="/assets/trailer.mp4"
+                   data-src-port="/assets/trailer.mp4"></video>
 
             <div class="container-fluid">
                 <div class="row my-5">
@@ -704,7 +710,7 @@
 <script type="text/javascript" src="/js/progressbar.min.js"></script>
 <!--END Progress bar-->
 
-<script type="text/javascript" src="/js/index.js?v=8"></script>
+<script type="text/javascript" src="/js/index.js?v=1"></script>
 
 </body>
 </html>

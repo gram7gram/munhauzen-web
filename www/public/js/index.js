@@ -74,6 +74,9 @@
         console.log('slidechanged', index)
 
         switch (index) {
+          case 1:
+            startVideo();
+            break;
           case 3:
             startCarousel();
             break;
@@ -290,6 +293,22 @@
     return "unknown";
   }
 
+  function startVideo() {
+
+    try {
+      var el = document.getElementById('#slide-1-video')
+
+      var playPromise = el.play();
+      if (playPromise !== null) {
+        playPromise.catch(() => {
+          el.play();
+        })
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   $(function () {
 
     setLinksBasedOnPlatform();
@@ -322,13 +341,21 @@
 
   function configureSlide1() {
 
-    var slide1 = $('.reveal-slide-1')
+    var slide1 = $('#slide-1-video')
 
     if (isOrientationLandscape) {
-      slide1.attr('data-background-video', slide1.attr('data-background-video-land'))
+      slide1.attr('data-src', slide1.attr('data-src-land'))
     } else {
-      slide1.attr('data-background-video', slide1.attr('data-background-video-port'))
+      slide1.attr('data-src', slide1.attr('data-src-port'))
     }
+
+    slide1.css({
+      width: screenWidth,
+      height: screenHeight
+    })
+
+    slide1.attr('width', screenWidth)
+    slide1.attr('height', screenHeight)
   }
 
   function configureSlide2() {
