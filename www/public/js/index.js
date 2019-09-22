@@ -88,8 +88,6 @@
             break;
         }
 
-        Reveal.configure({controls: !Reveal.isLastSlide()});
-
       });
 
       Reveal.addEventListener('ready', function () {
