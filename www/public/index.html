@@ -42,7 +42,7 @@
     <link rel="stylesheet" type="text/css" href="/vendor/carousel-3d/jquery.carousel-3d.default.css?v=1"/>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/reveal.css?v=1">
-    <link rel="stylesheet" type="text/css" href="/css/custom.css?v=7">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css?v=8">
 
 </head>
 <body class="color-accent bg-color-yellow body-bg-light">
@@ -54,6 +54,7 @@
              data-animation="/assets/loading.gif"
              alt=""
              class="img-fluid"
+             onload="onLoadingGifLoadedCallback()"
              id="loading-gif"
              style="width: 300px;">
     </div>
@@ -150,253 +151,348 @@
             </div>
         </section>
 
-        <section data-background-image="/assets/Elements_web/background_2.jpg"
+        <section data-background-image="/assets/Elements_web/background_2.jpg" class="reveal-slide-2">
 
+            <div class="d-none d-lg-block">
+                <table class="p-0 my-0 mx-5 border-0">
+                    <tbody>
+                    <tr style="height:100vh">
+                        <td style="vertical-align: middle;overflow: hidden; width: 50%">
+                            <img data-src="/assets/painting1.png"
+                                 id="slide-2-img-desktop"
+                                 alt=""
+                                 class="img-fluid p-2 slide-1-img"/>
+                        </td>
+                        <td style="vertical-align: middle;overflow: hidden; width: 50%">
 
-                 class="reveal-slide-2 align-slide-content-center">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-12 col-lg-6 order-last order-lg-first">
-                        <img data-src="/assets/painting1.png"
-                             alt=""
-                             class="img-fluid p-2 slide-1-img">
-                    </div>
-                    <div class="col-12 col-lg-6 order-first order-lg-last text-center">
+                            <img data-src="/assets/ramka_2.png"
+                                 alt=""
+                                 class="img-fluid decor-img"/>
 
-                        <img data-src="/assets/ramka_2.png"
-                             alt=""
-                             class="img-fluid decor-img">
+                            <p class="h1 font-markscript my-1 px-3">“Oh, that Munchausen!” is an interactive audiobook
+                                game in
+                                which you play the role of a
+                                granddaughter and help grandfather Baron remember and tell all his adventures!
+                                Get ready and listen!</p>
 
-                        <p class="h1 font-markscript my-3">“Oh, that Munchausen!” is an interactive audiobook game in
-                            which you play the role of a
-                            granddaughter and help grandfather Baron remember and tell all his adventures!
-                            Get ready and listen!</p>
-
-                        <img data-src="/assets/ramka_2.png"
-                             style="transform: rotate(180deg);"
-                             alt=""
-                             class="img-fluid decor-img">
-                    </div>
-                </div>
+                            <img data-src="/assets/ramka_2.png"
+                                 style="transform: rotate(180deg);"
+                                 alt=""
+                                 class="img-fluid decor-img"/>
+                        </td>
+                    </tr>
+                </table>
             </div>
+
+            <div class="d-block d-lg-none">
+                <table class="p-0 m-0 border-0">
+                    <tbody>
+                    <tr class="slide-2-title">
+                        <td style="vertical-align: bottom;overflow: hidden">
+
+                            <img data-src="/assets/ramka_2.png"
+                                 alt=""
+                                 class="img-fluid decor-img"/>
+
+                            <p class="h1 font-markscript my-1 px-3">“Oh, that Munchausen!” is an interactive audiobook
+                                game in
+                                which you play the role of a
+                                granddaughter and help grandfather Baron remember and tell all his adventures!
+                                Get ready and listen!</p>
+
+                            <img data-src="/assets/ramka_2.png"
+                                 style="transform: rotate(180deg);"
+                                 alt=""
+                                 class="img-fluid decor-img"/>
+                        </td>
+                    </tr>
+                    <tr style="height:50vh">
+                        <td style="vertical-align: top;overflow: hidden">
+                            <img data-src="/assets/painting1.png"
+                                 id="slide-2-img-mobile"
+                                 alt=""
+                                 class="img-fluid p-2 slide-1-img"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </section>
 
         <section data-background-image="/assets/Elements_web/background_2.jpg"
-
-
                  class="reveal-slide-3 align-slide-content-center">
-            <div class="container">
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <img data-src="/assets/ramka_2.png"
-                             alt=""
-                             class="img-fluid decor-img">
 
-                        <p class="h1 font-markscript my-3">All incredible adventures of Baron Munchausen, comic plot
-                            twists, puzzles and quests, over 250 colorful
-                            illustrations and funny animations will surprise and bring you a laugh and a smile!</p>
+            <div class="d-none d-lg-block">
+                <table class="p-0 my-0 mx-5 border-0">
+                    <tbody>
+                    <tr style="height:40vh">
+                        <td style="width: 100%;vertical-align: middle">
+                            <img data-src="/assets/ramka_2.png"
+                                 alt=""
+                                 class="img-fluid decor-img">
 
-                        <img data-src="/assets/ramka_2.png"
-                             style="transform: rotate(180deg);"
-                             alt=""
-                             class="img-fluid decor-img">
+                            <p class="h1 font-markscript my-1 px-3">All incredible adventures of Baron Munchausen, comic
+                                plot
+                                twists, puzzles and quests, over 250 colorful
+                                illustrations and funny animations will surprise and bring you a laugh and a smile!</p>
 
-                    </div>
-                </div>
-                <div class="row no-gutters">
-                    <div class="col-12 col-md-10 col-lg-8 mx-auto">
-                        <div class="row">
-                            <div class="col-md-4 d-none d-md-block text-center px-1">
-                                <img data-src="/assets/Скрин 1.jpg"
-                                     alt=""
-                                     class="img-fluid shadow">
+                            <img data-src="/assets/ramka_2.png"
+                                 style="transform: rotate(180deg);"
+                                 alt=""
+                                 class="img-fluid decor-img">
+                        </td>
+                    </tr>
+                    <tr style="height:60vh">
+                        <td style="width: 100%;vertical-align: top;text-align: center">
+                            <div class="container-fluid">
+                                <div class="row no-gutters">
+                                    <div class="col-12 col-md-10 col-lg-8 mx-auto">
+                                        <div class="row">
+                                            <div class="col-md-4 d-none d-md-block text-center px-1">
+                                                <img data-src="/assets/Скрин 1.jpg"
+                                                     id="slide-3-img-1-desktop"
+                                                     alt=""
+                                                     class="img-fluid my-shadow">
 
-                                <p class="h1 font-markscript m-0">
-                                    Listen<br/>69 chapters!
-                                </p>
+                                                <p class="h1 font-markscript m-0">
+                                                    Listen<br/>69 chapters!
+                                                </p>
+                                            </div>
+                                            <div class="col-5 offset-1 offset-md-0 col-md-4 text-center px-1">
+                                                <img data-src="/assets/Скрин 3.jpg"
+                                                     id="slide-3-img-2-desktop"
+                                                     alt=""
+                                                     class="img-fluid my-shadow">
+
+                                                <p class="h1 font-markscript m-0">
+                                                    Make<br/>decisions!
+                                                </p>
+                                            </div>
+                                            <div class="col-5 col-md-4 text-center px-1">
+                                                <img data-src="/assets/Скрин 2.jpg"
+                                                     id="slide-3-img-3-desktop"
+                                                     alt=""
+                                                     class="img-fluid my-shadow">
+
+                                                <p class="h1 font-markscript m-0">
+                                                    And enjoy the<br/>consequences!
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-5 offset-1 offset-md-0 col-md-4 text-center px-1">
-                                <img data-src="/assets/Скрин 3.jpg"
-                                     alt=""
-                                     class="img-fluid shadow">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
 
-                                <p class="h1 font-markscript m-0">
-                                    Make<br/>decisions!
-                                </p>
-                            </div>
-                            <div class="col-5 col-md-4 text-center px-1">
-                                <img data-src="/assets/Скрин 2.jpg"
-                                     alt=""
-                                     class="img-fluid shadow">
+            <div class="d-block d-lg-none">
+                <table class="p-0 m-0 border-0">
+                    <tbody>
+                    <tr style="height:55vh">
+                        <td colspan="2" style="width: 100%;vertical-align: middle">
+                            <img data-src="/assets/ramka_2.png"
+                                 alt=""
+                                 class="img-fluid decor-img">
 
-                                <p class="h1 font-markscript m-0">
-                                    And enjoy the<br/>consequences!
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            <p class="h1 font-markscript my-1 px-3">All incredible adventures of Baron Munchausen, comic
+                                plot
+                                twists, puzzles and quests, over 250 colorful
+                                illustrations and funny animations will surprise and bring you a laugh and a smile!</p>
+
+                            <img data-src="/assets/ramka_2.png"
+                                 style="transform: rotate(180deg);"
+                                 alt=""
+                                 class="img-fluid decor-img">
+                        </td>
+                    </tr>
+                    <tr style="height:45vh">
+                        <td style="width: 50%;vertical-align: top;text-align: right">
+                            <img data-src="/assets/Скрин 3.jpg"
+                                 id="slide-3-img-1-mobile"
+                                 alt=""
+                                 class="img-fluid my-shadow mx-2">
+                        </td>
+                        <td style="width: 50%;vertical-align: top;text-align: left">
+                            <img data-src="/assets/Скрин 2.jpg"
+                                 id="slide-3-img-2-mobile"
+                                 alt=""
+                                 class="img-fluid my-shadow mx-2">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
         <section data-background-image="/assets/Elements_web/background_2.jpg"
+                 class="reveal-slide-4">
 
+            <table class="p-0 m-0 border-0 w-100">
+                <tbody>
+                <tr class="slide-3-title">
+                    <td style="width: 100%;vertical-align: bottom">
+                        <div class="mb-3">
+                            <img data-src="/assets/ramka_2.png"
+                                 alt=""
+                                 class="img-fluid decor-img">
 
-                 class="reveal-slide-4 align-slide-content-center">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-12">
-                        <img data-src="/assets/ramka_2.png"
-                             alt=""
-                             class="img-fluid decor-img">
+                            <p class="h1 font-markscript my-1 px-3">Here come Munchausen, his granddaughter and dear
+                                guests!
+                                All characters were recorded by inimitable actors!
+                                Both offline and online modes are available! Over 8 hours of the narration!</p>
 
-                        <p class="h1 font-markscript my-3">Here come Munchausen, his granddaughter and dear guests!
-                            All characters were recorded by inimitable actors!
-                            Both offline and online modes are available! Over 8 hours of the narration!</p>
+                            <img data-src="/assets/ramka_2.png"
+                                 style="transform: rotate(180deg);"
+                                 alt=""
+                                 class="img-fluid decor-img">
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height:40vh">
 
-                        <img data-src="/assets/ramka_2.png"
-                             style="transform: rotate(180deg);"
-                             alt=""
-                             class="img-fluid decor-img">
-
-                    </div>
-                </div>
-            </div>
-            <div class="container p-0">
-
-                <div class="row no-gutters">
-                    <div class="col-12 col-md-10 col-lg-9 mx-auto">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-1">
-                                <img id="actors-carousel-prev" data-src="/assets/arrow.png" alt=""
-                                     class="img-fluid p-1"
-                                     style="transform: rotate(180deg)"/>
-                            </div>
-                            <div class="col-10">
-                                <div id="actors-carousel" data-carousel-3d>
-                                    <div class="slide">
-                                        <img class="painting img-fluid"
-                                             data-src="/assets/characters/an_munchausen-0.png"
-                                             data-first-frame="/assets/characters/an_munchausen-0.png"
-                                             data-animation="/assets/characters/an_munchausen.gif"
-                                             data-animation-duration="800"
-                                             data-audio="/assets/characters/media/s_munchausen_1.wav,/assets/characters/media/s_munchausen_2.wav,/assets/characters/media/s_munchausen_3.wav"
-                                             alt="">
-                                        <h5 class="h5 painting-text font-markscript w-50 p-4">Munchausen</h5>
-                                    </div>
-                                    <div class="slide">
-                                        <img class="painting img-fluid"
-                                             data-src="/assets/characters/an_daughter-0.png"
-                                             data-first-frame="/assets/characters/an_daughter-0.png"
-                                             data-animation="/assets/characters/an_daughter.gif"
-                                             data-animation-duration="1040"
-                                             data-audio="/assets/characters/media/s_daughter_1.wav,/assets/characters/media/s_daughter_2.wav,/assets/characters/media/s_daughter_3.wav"
-                                             alt="">
-                                        <h5 class="h5 painting-text font-markscript w-50 p-4">Daughter</h5>
-                                    </div>
-                                    <div class="slide">
-                                        <img class="painting img-fluid"
-                                             data-src="/assets/characters/an_nemo-0.png"
-                                             data-first-frame="/assets/characters/an_nemo-0.png"
-                                             data-animation="/assets/characters/an_nemo.gif"
-                                             data-animation-duration="4500"
-                                             data-audio="/assets/characters/media/s_nemo_1.wav,/assets/characters/media/s_nemo_2.wav,/assets/characters/media/s_nemo_3.wav"
-                                             alt="">
-                                        <h5 class="h5 painting-text font-markscript w-50 p-4">Captain Nemo</h5>
-                                    </div>
-                                    <div class="slide">
-                                        <img class="painting img-fluid"
-                                             data-src="/assets/characters/an_list_1-0.png"
-                                             data-first-frame="/assets/characters/an_list_1-0.png"
-                                             data-animation="/assets/characters/an_list_1.gif"
-                                             data-animation-duration="4000"
-                                             data-audio="/assets/characters/media/s_list_1_1.wav,/assets/characters/media/s_list_1_2.wav,/assets/characters/media/s_list_1_3.wav"
-                                             alt="">
-                                        <p class="h5 painting-text font-markscript w-50 p-4">First guest</p>
-                                    </div>
-                                    <div class="slide">
-                                        <img class="painting img-fluid"
-                                             data-src="/assets/characters/an_list_2-0.png"
-                                             data-first-frame="/assets/characters/an_list_2-0.png"
-                                             data-animation="/assets/characters/an_list_2.gif"
-                                             data-animation-duration="3200"
-                                             data-audio="/assets/characters/media/s_list_2_1.wav,/assets/characters/media/s_list_2_2.wav,/assets/characters/media/s_list_2_3.wav"
-                                             alt="">
-                                        <h5 class="h5 painting-text font-markscript w-50 p-4">Second guest</h5>
-                                    </div>
-                                    <div class="slide">
-                                        <img class="painting img-fluid"
-                                             data-src="/assets/characters/an_list_3-0.png"
-                                             data-first-frame="/assets/characters/an_list_3-0.png"
-                                             data-animation="/assets/characters/an_list_3.gif"
-                                             data-animation-duration="3000"
-                                             data-audio="/assets/characters/media/s_list_3_1.wav,/assets/characters/media/s_list_3_2.wav,/assets/characters/media/s_list_3_3.wav"
-                                             alt="">
-                                        <h5 class="h5 painting-text font-markscript w-50 p-4">Third guest</h5>
-                                    </div>
-                                    <div class="slide">
-                                        <img class="painting img-fluid"
-                                             data-src="/assets/characters/an_nephew-0.png"
-                                             data-first-frame="/assets/characters/an_nephew-0.png"
-                                             data-animation="/assets/characters/an_nephew.gif"
-                                             data-animation-duration="3400"
-                                             data-audio="/assets/characters/media/s_nephew_1.wav,/assets/characters/media/s_nephew_2.wav,/assets/characters/media/s_nephew_3.wav"
-                                             alt="">
-                                        <h5 class="h5 painting-text font-markscript w-50 p-4">Nephew</h5>
+                    <td style="width: 100%;vertical-align: top;text-align: center">
+                        <div class="container-fluid">
+                            <div class="row no-gutters">
+                                <div class="col-12 col-md-8 col-lg-6 mx-auto">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-1">
+                                            <img id="actors-carousel-prev" data-src="/assets/arrow.png" alt=""
+                                                 class="img-fluid p-1"
+                                                 style="transform: rotate(180deg)"/>
+                                        </div>
+                                        <div class="col-10">
+                                            <div id="actors-carousel" data-carousel-3d>
+                                                <div class="slide">
+                                                    <img class="painting img-fluid"
+                                                         data-src="/assets/characters/an_munchausen-0.png"
+                                                         data-first-frame="/assets/characters/an_munchausen-0.png"
+                                                         data-animation="/assets/characters/an_munchausen.gif"
+                                                         data-animation-duration="800"
+                                                         data-audio="/assets/characters/media/s_munchausen_1.wav,/assets/characters/media/s_munchausen_2.wav,/assets/characters/media/s_munchausen_3.wav"
+                                                         alt="">
+                                                    <h5 class="h5 painting-text font-markscript w-50 p-4">
+                                                        Munchausen</h5>
+                                                </div>
+                                                <div class="slide">
+                                                    <img class="painting img-fluid"
+                                                         data-src="/assets/characters/an_daughter-0.png"
+                                                         data-first-frame="/assets/characters/an_daughter-0.png"
+                                                         data-animation="/assets/characters/an_daughter.gif"
+                                                         data-animation-duration="1040"
+                                                         data-audio="/assets/characters/media/s_daughter_1.wav,/assets/characters/media/s_daughter_2.wav,/assets/characters/media/s_daughter_3.wav"
+                                                         alt="">
+                                                    <h5 class="h5 painting-text font-markscript w-50 p-4">
+                                                        Daughter</h5>
+                                                </div>
+                                                <div class="slide">
+                                                    <img class="painting img-fluid"
+                                                         data-src="/assets/characters/an_nemo-0.png"
+                                                         data-first-frame="/assets/characters/an_nemo-0.png"
+                                                         data-animation="/assets/characters/an_nemo.gif"
+                                                         data-animation-duration="4500"
+                                                         data-audio="/assets/characters/media/s_nemo_1.wav,/assets/characters/media/s_nemo_2.wav,/assets/characters/media/s_nemo_3.wav"
+                                                         alt="">
+                                                    <h5 class="h5 painting-text font-markscript w-50 p-4">Captain
+                                                        Nemo</h5>
+                                                </div>
+                                                <div class="slide">
+                                                    <img class="painting img-fluid"
+                                                         data-src="/assets/characters/an_list_1-0.png"
+                                                         data-first-frame="/assets/characters/an_list_1-0.png"
+                                                         data-animation="/assets/characters/an_list_1.gif"
+                                                         data-animation-duration="4000"
+                                                         data-audio="/assets/characters/media/s_list_1_1.wav,/assets/characters/media/s_list_1_2.wav,/assets/characters/media/s_list_1_3.wav"
+                                                         alt="">
+                                                    <p class="h5 painting-text font-markscript w-50 p-4">First
+                                                        guest</p>
+                                                </div>
+                                                <div class="slide">
+                                                    <img class="painting img-fluid"
+                                                         data-src="/assets/characters/an_list_2-0.png"
+                                                         data-first-frame="/assets/characters/an_list_2-0.png"
+                                                         data-animation="/assets/characters/an_list_2.gif"
+                                                         data-animation-duration="3200"
+                                                         data-audio="/assets/characters/media/s_list_2_1.wav,/assets/characters/media/s_list_2_2.wav,/assets/characters/media/s_list_2_3.wav"
+                                                         alt="">
+                                                    <h5 class="h5 painting-text font-markscript w-50 p-4">Second
+                                                        guest</h5>
+                                                </div>
+                                                <div class="slide">
+                                                    <img class="painting img-fluid"
+                                                         data-src="/assets/characters/an_list_3-0.png"
+                                                         data-first-frame="/assets/characters/an_list_3-0.png"
+                                                         data-animation="/assets/characters/an_list_3.gif"
+                                                         data-animation-duration="3000"
+                                                         data-audio="/assets/characters/media/s_list_3_1.wav,/assets/characters/media/s_list_3_2.wav,/assets/characters/media/s_list_3_3.wav"
+                                                         alt="">
+                                                    <h5 class="h5 painting-text font-markscript w-50 p-4">Third
+                                                        guest</h5>
+                                                </div>
+                                                <div class="slide">
+                                                    <img class="painting img-fluid"
+                                                         data-src="/assets/characters/an_nephew-0.png"
+                                                         data-first-frame="/assets/characters/an_nephew-0.png"
+                                                         data-animation="/assets/characters/an_nephew.gif"
+                                                         data-animation-duration="3400"
+                                                         data-audio="/assets/characters/media/s_nephew_1.wav,/assets/characters/media/s_nephew_2.wav,/assets/characters/media/s_nephew_3.wav"
+                                                         alt="">
+                                                    <h5 class="h5 painting-text font-markscript w-50 p-4">
+                                                        Nephew</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <img id="actors-carousel-next" data-src="/assets/arrow.png" alt=""
+                                                 class="img-fluid p-1"/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-1">
-                                <img id="actors-carousel-next" data-src="/assets/arrow.png" alt=""
-                                     class="img-fluid p-1"/>
+
                             </div>
                         </div>
-                    </div>
+                    </td>
 
-                </div>
-            </div>
+                </tr>
+                </tbody>
+            </table>
+
         </section>
 
         <section data-background-image="/assets/Elements_web/background_2.jpg"
+                 class="reveal-slide-5">
 
+            <div class="d-none d-lg-block">
+                <table class="p-0 my-0 mx-5 border-0">
+                    <tbody>
+                    <tr style="height: 100vh;">
+                        <td style="width: 33.3%;vertical-align: middle;text-align: center">
+                            <img data-src="/assets/ramka_2.png"
+                                 alt=""
+                                 class="img-fluid decor-img">
 
-                 class="reveal-slide-5 align-slide-content-center">
-            <div class="container">
+                            <p class="h3 font-markscript my-1">Try the free version for now! Listen to
+                                Munchausen's
+                                stories anywhere and anytime! And support us!</p>
 
-                <!--Desktop-->
-                <div class="d-none d-lg-block">
-                    <div class="row align-items-center">
-                        <div class="col-4">
-                            <div class="row">
-                                <div class="col-12">
-                                    <img data-src="/assets/ramka_2.png"
-                                         alt=""
-                                         class="img-fluid decor-img">
+                            <img data-src="/assets/ramka_2.png"
+                                 style="transform: rotate(180deg);"
+                                 alt=""
+                                 class="img-fluid decor-img">
 
-                                    <p class="h3 font-markscript my-3">Try the free version for now! Listen to
-                                        Munchausen's
-                                        stories anywhere and anytime! And support us!</p>
-
-                                    <img data-src="/assets/ramka_2.png"
-                                         style="transform: rotate(180deg);"
-                                         alt=""
-                                         class="img-fluid decor-img">
-
-                                </div>
-                                <div class="col-12">
-
-                                    <img data-src="/assets/Elements_web/An_icon_munchauzen.gif"
-                                         alt=""
-                                         class="img-fluid p-1">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-
-                            <div class="card version-card">
+                            <img data-src="/assets/Elements_web/An_icon_munchauzen.gif"
+                                 id="slide-5-img-3-desktop"
+                                 alt=""
+                                 class="img-fluid p-1 mt-4">
+                        </td>
+                        <td style="width: 33.3%;vertical-align: middle;text-align: center">
+                            <div class="card version-card mx-3">
                                 <div class="version-card-header">
                                     <img class="img-fluid py-2 px-5" data-src="/assets/Elements_web/demo_version.png"
-                                         style="max-height: 600px;"
+                                         id="slide-5-img-1-desktop"
                                          alt="">
                                 </div>
                                 <div class="card-body text-center bg-color-primary-light version-card-body">
@@ -408,17 +504,15 @@
                                         <p class="mb-2">95 illustrations!</p>
                                     </div>
 
-                                    <h3 class="h2 font-roboto">FREE</h3>
+                                    <h3 class="h2 font-roboto m-0">FREE</h3>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="col-4">
-
-                            <div class="card version-card">
+                        </td>
+                        <td style="width: 33.3%;vertical-align: middle;text-align: center">
+                            <div class="card version-card mx-3">
                                 <div class="version-card-header">
                                     <img class="img-fluid py-2 px-5" data-src="/assets/Elements_web/Уходит_премиум.png"
-                                         style="max-height: 600px;"
+                                         id="slide-5-img-2-desktop"
                                          alt="">
                                 </div>
                                 <div class="card-body text-center bg-color-primary-light version-card-body">
@@ -430,89 +524,94 @@
                                         <p class="mb-2">All 250+ illustrations!</p>
                                     </div>
 
-                                    <h3 class="h2 font-roboto">$4.99</h3>
+                                    <h3 class="h2 font-roboto m-0">$4.99</h3>
                                 </div>
                             </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
 
-                        </div>
-                    </div>
-                </div>
-
-                <!--Mobile-->
-                <div class="d-block d-lg-none">
-                    <div class="row align-items-center">
-                        <div class="col-12 col-sm-10 mx-auto">
-
-                            <div class="card version-card mb-4">
+            <div class="d-block d-lg-none">
+                <table class="p-0 m-0 border-0 w-100">
+                    <tbody>
+                    <tr style="height: 45vh;">
+                        <td style="width: 100%;vertical-align: bottom;text-align: center">
+                            <div class="card version-card mx-4 my-2">
                                 <a href="javascript:"
                                    data-googleplay="https://play.google.com/apps/ua.gram.munhauzen.free"
                                    data-appstore="http://itunes.apple.com/app/id000000000"
                                    rel="nofollow"
                                    class="version-card-header p-3 my-rounded mobile-link">
                                     <div class="row">
-                                        <div class="col-6 pr-1">
+                                        <div class="col-6 pr-1 text-left">
                                             <img class="img-fluid my-shadow my-rounded"
                                                  data-src="/assets/Elements_web/demo_version.png"
+                                                 id="slide-5-img-1-mobile"
                                                  style=""
                                                  alt="">
                                         </div>
                                         <div class="col-6 px-1 text-left" style="position: relative">
-                                            <h2 class="h4 font-markscript color-primary">Demo version</h2>
+                                            <h2 class="version-card-mobile-title font-markscript color-primary">Demo
+                                                version</h2>
 
-                                            <div class="font-roboto">
-                                                <p class="small mb-3 color-accent">More than 2 hours of audiobook!</p>
-                                                <p class="small mb-3 color-accent">29 opened chapters!</p>
-                                                <p class="small mb-3 color-accent">95 illustrations!</p>
+                                            <div class="version-card-mobile-description font-roboto">
+                                                <p class="mb-1 mb-sm-3 color-accent">More than 2 hours of audiobook!</p>
+                                                <p class="mb-1 mb-sm-3 color-accent">29 opened chapters!</p>
+                                                <p class="mb-1 mb-sm-3 color-accent">95 illustrations!</p>
                                             </div>
 
-                                            <h3 class="h4 font-weight-bold font-roboto color-primary m-0"
-                                                style="position:absolute;bottom:0">FREE</h3>
+                                            <h3 class="h4 font-roboto color-primary m-0 version-card-mobile-price">
+                                                FREE</h3>
                                         </div>
                                     </div>
                                 </a>
                             </div>
-
-                        </div>
-                        <div class="col-12 col-sm-10 mx-auto">
-
-                            <div class="card version-card">
+                        </td>
+                    </tr>
+                    <tr style="height: 45vh;">
+                        <td style="width: 100%;vertical-align: top;text-align: center">
+                            <div class="card version-card mx-4 my-2">
                                 <a href="javascript:"
                                    data-googleplay="https://play.google.com/apps/ua.gram.munhauzen.pro"
                                    data-appstore="http://itunes.apple.com/app/id000000001"
                                    rel="nofollow"
                                    class="version-card-header p-3 my-rounded mobile-link">
                                     <div class="row">
-                                        <div class="col-6 pr-1">
+                                        <div class="col-6 pr-1 text-left">
                                             <img class="img-fluid my-shadow my-rounded"
                                                  data-src="/assets/Elements_web/Уходит_премиум.png"
+                                                 id="slide-5-img-2-mobile"
                                                  alt="">
                                         </div>
                                         <div class="col-6 px-1 text-left" style="position: relative">
-                                            <h2 class="h4 font-markscript color-primary">Full version</h2>
+                                            <h2 class="version-card-mobile-title font-markscript color-primary">Full
+                                                version</h2>
 
-                                            <div class="font-roboto">
-                                                <p class="small mb-3 color-accent">More than 7 hours of audiobook!!</p>
-                                                <p class="small mb-3 color-accent">All 69 chapters are available!</p>
-                                                <p class="small mb-3 color-accent">All 250+ illustrations!</p>
+                                            <div class="version-card-mobile-description font-roboto">
+                                                <p class="mb-1 mb-sm-3 color-accent">More than 7 hours of
+                                                    audiobook!!</p>
+                                                <p class="mb-1 mb-sm-3 color-accent">All 69 chapters are available!</p>
+                                                <p class="mb-1 mb-sm-3 color-accent">All 250+ illustrations!</p>
                                             </div>
 
-                                            <h3 class="h4 font-weight-bold font-roboto color-primary m-0"
-                                                style="position:absolute;bottom:0">$4.99</h3>
+                                            <h3 class="h4 font-roboto color-primary m-0 version-card-mobile-price">
+                                                $4.99</h3>
                                         </div>
                                     </div>
                                 </a>
                             </div>
-
-                        </div>
-                    </div>
-                </div>
-
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+
         </section>
 
         <section data-background-image="/assets/Elements_web/background_1.jpg"
                  class="reveal-slide-6">
-
 
             <div class="d-none d-lg-block">
                 <img data-src="/assets/Elements_web/Мюнхаузен_подозрительній_цвет_гамма.png" alt=""
@@ -524,47 +623,50 @@
                      style="position: fixed;right: 0;bottom: 0;width: 30%;">
             </div>
 
-
             <img data-src="/assets/Elements_web/без ваувау.png" alt=""
                  class="img-fluid"
                  style="width: 100%;max-width: 400px;position: fixed;top: 40%;left: 50%;transform: translate(-50%, -50%);">
 
-            <div id="wau-container">
-                <img data-src="/assets/wau-0.png"
-                     data-animation="/assets/wau.gif"
+            <div id="wau-container" style="text-align: center">
+                <img data-src="/assets/wau-bottom-0.png"
+                     data-animation="/assets/wau-bottom.gif"
                      alt=""
-                     class="img-fluid"
+                     style="position: fixed;bottom: 0;"
                      id="wau-animation">
             </div>
 
-            <div class="container-fluid">
-                <div class="row my-5">
-                    <div class="col-12">
+            <table class="m-0 p-0 border-0 w-100"
+                   style="position: fixed;top: 0;left: 0">
+                <tbody>
+                <tr style="height: 50vh;">
+                    <td style="vertical-align: middle;text-align: center;">
 
-                        <h2 class="h1 font-markscript">Download, listen and enjoy my incredible adventures!</h2>
+                        <h2 class="h1 font-markscript px-3 pt-4">Download, listen and enjoy my incredible
+                            adventures!</h2>
 
-                    </div>
+                    </td>
+                </tr>
+                <tr style="height: 50vh;">
+                    <td style="vertical-align: bottom;text-align: center;">
 
-                </div>
-
-                <div style="position: fixed;bottom: 30px;left: 0;width: 100%; text-align: center;">
-                    <div class="text-nowrap">
-                        <a class="mx-2" href="https://itunes.apple.com/app/id000000001" rel="nofollow">
-                            <img data-src="/assets/Elements_web/Download_on_the_App_Store_Badge.png"
-                                 style="width: 120px"
-                                 alt="Download on App Store"
-                                 class="img-fluid">
-                        </a>
-                        <a class="mx-2" href="https://play.google.com/apps/ua.gram.munhauzen.pro" rel="nofollow">
-                            <img data-src="/assets/Elements_web/google-play-badge.png"
-                                 style="width: 120px"
-                                 alt="Download on Google Play"
-                                 class="img-fluid">
-                        </a>
-                    </div>
-                </div>
-            </div>
-
+                        <div class="text-nowrap mb-3">
+                            <a class="mx-2" href="https://itunes.apple.com/app/id000000001" rel="nofollow">
+                                <img data-src="/assets/Elements_web/Download_on_the_App_Store_Badge.png"
+                                     style="width: 120px"
+                                     alt="Download on App Store"
+                                     class="img-fluid">
+                            </a>
+                            <a class="mx-2" href="https://play.google.com/apps/ua.gram.munhauzen.pro" rel="nofollow">
+                                <img data-src="/assets/Elements_web/google-play-badge.png"
+                                     style="width: 120px"
+                                     alt="Download on Google Play"
+                                     class="img-fluid">
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
         </section>
     </div>
@@ -597,7 +699,7 @@
 <script type="text/javascript" src="/js/progressbar.min.js"></script>
 <!--END Progress bar-->
 
-<script type="text/javascript" src="/js/index.js?v=5"></script>
+<script type="text/javascript" src="/js/index.js?v=6"></script>
 
 </body>
 </html>

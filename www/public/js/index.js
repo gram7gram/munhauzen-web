@@ -6,6 +6,9 @@
   var isCarouselEnabled = false;
   var isOrientationLandscape = true;
   var isAndroid;
+  var screenHeight;
+  var screenWidth;
+  var xs, sm, md, lg, xl
 
   function startLoading() {
     progressBar = new ProgressBar.Line('#loading-bar', {
@@ -18,7 +21,13 @@
       svgStyle: {width: '100%', height: '100%', 'stroke-linecap': "round"}
     });
 
-    progressBar.animate(0.9);
+    progressBar.animate(0.25);
+  }
+
+  function startLoadingGif() {
+    console.log('startLoadingGif');
+
+    progressBar.animate(0.75);
 
     setTimeout(function () {
       var loading = $('#loading')
@@ -37,6 +46,8 @@
 
     }, 1500)
   }
+
+  window.onLoadingGifLoadedCallback = startLoadingGif
 
   function stopLoading() {
 
@@ -182,6 +193,7 @@
 
 
       var timeoutId = 0
+
       function onChange(e, index) {
 
         console.log('carousel', index)
@@ -282,22 +294,126 @@
   }
 
   $(function () {
-    isOrientationLandscape = $(window).height() < $(window).width();
 
     startLoadingAnimation();
 
     setLinksBasedOnPlatform();
 
-    var slide1 = $('.reveal-slide-1')
+    configureSlides()
 
-    console.log('isOrientationLandscape', isOrientationLandscape);
+    startLoading();
+  })
+
+  function configureSlides() {
+    console.log('configureSlides')
+
+    screenHeight = $(window).height();
+    screenWidth = $(window).width();
+    isOrientationLandscape = screenHeight < screenWidth
+
+    xs = screenWidth <= 576
+    sm = 577 <= screenWidth && screenWidth <= 768
+    md = 769 <= screenWidth && screenWidth <= 992
+    lg = 993 <= screenWidth && screenWidth <= 1200
+    xl = 1201 <= screenWidth
+
+    configureSlide1()
+    configureSlide2()
+    configureSlide3()
+    configureSlide5()
+    configureSlide6()
+  }
+
+  function configureSlide1() {
+
+    var slide1 = $('.reveal-slide-1')
 
     if (isOrientationLandscape) {
       slide1.attr('data-background-video', slide1.attr('data-background-video-land'))
     } else {
       slide1.attr('data-background-video', slide1.attr('data-background-video-port'))
     }
+  }
 
-    startLoading();
-  })
+  function configureSlide2() {
+
+    var imgMobile = $('#slide-2-img-mobile')
+    var imgDesktop = $('#slide-2-img-desktop')
+
+    imgMobile.css('max-height', screenHeight / 2 - 20)
+    imgDesktop.css('max-height', screenHeight * 0.75)
+
+  }
+
+  function configureSlide3() {
+
+    var img1Mobile = $('#slide-3-img-1-mobile')
+    var img1Desktop = $('#slide-3-img-1-desktop')
+
+    var img2Mobile = $('#slide-3-img-2-mobile')
+    var img2Desktop = $('#slide-3-img-2-desktop')
+
+    var img3Desktop = $('#slide-3-img-3-desktop')
+
+    img1Mobile.css('max-height', screenHeight * 0.35 - 20)
+    img1Desktop.css('max-height', screenHeight * 0.4)
+
+    img2Mobile.css('max-height', screenHeight * 0.35 - 20)
+    img2Desktop.css('max-height', screenHeight * 0.4)
+
+    img3Desktop.css('max-height', screenHeight * 0.4)
+
+  }
+
+  function configureSlide5() {
+
+    var img1Mobile = $('#slide-5-img-1-mobile')
+    var img1Desktop = $('#slide-5-img-1-desktop')
+
+    var img2Mobile = $('#slide-5-img-2-mobile')
+    var img2Desktop = $('#slide-5-img-2-desktop')
+
+    var img3Desktop = $('#slide-5-img-3-desktop')
+
+    img1Mobile.css('max-height', screenHeight * 0.35 - 20)
+    img1Desktop.css('max-height', screenHeight * 0.4)
+
+    img2Mobile.css('max-height', screenHeight * 0.35 - 20)
+    img2Desktop.css('max-height', screenHeight * 0.4)
+
+    img3Desktop.css('max-height', screenHeight * 0.3)
+
+  }
+
+  function configureSlide6() {
+    var wau = $('#wau-animation')
+    var container = $('#wau-container')
+
+    var width
+    if (screenWidth < 400) {
+      width = screenWidth * 1.5
+    } else if (xs) {
+      width = screenWidth * 1.25
+    } else if (sm) {
+      width = screenWidth * 0.75
+    } else if (md) {
+      width = screenWidth * 0.6
+    } else if (lg) {
+      width = screenWidth * 0.4
+    } else {
+      width = screenWidth * 0.4
+    }
+
+    var height = width / 1.642
+
+    wau.css({
+      width: width,
+      height: height,
+      left: (screenWidth - width) / 2
+    })
+
+    container.css({width: screenWidth, height: screenHeight})
+  }
+
+  window.addEventListener('resize', configureSlides)
 })()
