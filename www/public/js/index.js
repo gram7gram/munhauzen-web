@@ -1,10 +1,11 @@
 (function () {
 
-  var progressBar
-  var currentAudio
-  var isAudioEnabled = true
-  var isCarouselEnabled = false
-  var isAndroid
+  var progressBar;
+  var currentAudio;
+  var isAudioEnabled = true;
+  var isCarouselEnabled = false;
+  var isOrientationLandscape = true;
+  var isAndroid;
 
   function startLoading() {
     progressBar = new ProgressBar.Line('#loading-bar', {
@@ -19,7 +20,22 @@
 
     progressBar.animate(0.9);
 
-    setTimeout(startReveal, 1500)
+    setTimeout(function () {
+      var loading = $('#loading')
+
+      loading.find('div').addClass('move-left-and-fade-out')
+
+      setTimeout(function () {
+
+        loading.remove()
+
+        stopLoading()
+
+      }, 1500)
+
+      startReveal()
+
+    }, 1500)
   }
 
   function stopLoading() {
@@ -28,6 +44,12 @@
 
     progressBar.destroy()
     progressBar = null
+  }
+
+  function startLoadingAnimation() {
+    var img = $('#loading-gif')
+
+    img.attr('src', img.attr('data-animation'))
   }
 
   function startWauAnimation() {
@@ -40,10 +62,6 @@
 
   function startReveal() {
     try {
-
-      var loading = $('#loading')
-
-      loading.find('div').addClass('move-left-and-fade-out')
 
       Reveal.addEventListener('slidechanged', function (e) {
         var index = Reveal.getSlides().indexOf(e.currentSlide)
@@ -75,7 +93,7 @@
         fragments: false,
         controls: true,
         transition: 'slide',
-        backgroundTransition: 'none', //none/fade/slide/convex/concave/zoom
+        backgroundTransition: 'none',
         controlsTutorial: true,
         overview: false,
         help: true,
@@ -89,14 +107,6 @@
         maxScale: 1
 
       });
-
-      setTimeout(function () {
-
-        loading.remove()
-
-        stopLoading()
-
-      }, 1500)
 
     } catch (e) {
       console.error(e)
@@ -170,6 +180,8 @@
         carousel.Carousel3d('next')
       })
 
+
+      var timeoutId = 0
       function onChange(e, index) {
 
         console.log('carousel', index)
@@ -195,21 +207,30 @@
 
 
         //Start animation changer
-        clearInterval(animationInterval)
-        animationInterval = setInterval(function () {
+        var duration = parseInt(currentImg.attr('data-animation-duration'));
 
-          isAnimation = !isAnimation
+        function toggleImage() {
 
-          if (isAnimation) {
-            currentImg.attr('src', currentImg.attr('data-animation'))
-          } else {
-            currentImg.attr('src', currentImg.attr('data-first-frame'))
-          }
+          isAnimation = false
 
-        }, 5000)
+          currentImg.attr('src', currentImg.attr('data-first-frame'))
+
+          clearTimeout(timeoutId)
+          timeoutId = setTimeout(toggleAnimation, 5000)
+        }
+
+        function toggleAnimation() {
+          isAnimation = true
+
+          currentImg.attr('src', currentImg.attr('data-animation'))
+
+          clearTimeout(timeoutId)
+          timeoutId = setTimeout(toggleImage, duration)
+        }
+
+        toggleAnimation()
       }
 
-      var animationInterval = 0
       carousel.on('select', onChange);
 
       onChange(null, 0)
@@ -261,10 +282,22 @@
   }
 
   $(function () {
+    isOrientationLandscape = $(window).height() < $(window).width();
 
-    startLoading();
+    startLoadingAnimation();
 
     setLinksBasedOnPlatform();
 
+    var slide1 = $('.reveal-slide-1')
+
+    console.log('isOrientationLandscape', isOrientationLandscape);
+
+    if (isOrientationLandscape) {
+      slide1.attr('data-background-video', slide1.attr('data-background-video-land'))
+    } else {
+      slide1.attr('data-background-video', slide1.attr('data-background-video-port'))
+    }
+
+    startLoading();
   })
 })()

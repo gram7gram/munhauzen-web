@@ -42,7 +42,7 @@
     <link rel="stylesheet" type="text/css" href="/vendor/carousel-3d/jquery.carousel-3d.default.css?v=1"/>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/reveal.css?v=1">
-    <link rel="stylesheet" type="text/css" href="/css/custom.css?v=6">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css?v=7">
 
 </head>
 <body class="color-accent bg-color-yellow body-bg-light">
@@ -50,7 +50,11 @@
 <div id="loading" class="text-center">
 
     <div style="position: fixed;top: 50%;left: 0;width:100%;transform: translate(0,-50%)">
-        <img src="/assets/loading.gif" alt="" class="img-fluid"
+        <img src="/assets/loading-0.png"
+             data-animation="/assets/loading.gif"
+             alt=""
+             class="img-fluid"
+             id="loading-gif"
              style="width: 300px;">
     </div>
     <div style="position: fixed;top: 70%;left: 0;width:100%;transform: translate(0,-50%)">
@@ -129,7 +133,9 @@
 <div id="main-content" class="reveal">
     <div class="slides">
 
-        <section data-background-image="/assets/Elements_web/background_1.jpg"
+        <section data-background-video=""
+                 data-background-video-land="/assets/trailer.mp4"
+                 data-background-video-port="/assets/trailer.mp4"
                  class="reveal-slide-1">
 
             <div class="container-fluid">
@@ -263,7 +269,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col-1">
                                 <img id="actors-carousel-prev" data-src="/assets/arrow.png" alt=""
-                                     class="img-fluid"
+                                     class="img-fluid p-1"
                                      style="transform: rotate(180deg)"/>
                             </div>
                             <div class="col-10">
@@ -273,6 +279,7 @@
                                              data-src="/assets/characters/an_munchausen-0.png"
                                              data-first-frame="/assets/characters/an_munchausen-0.png"
                                              data-animation="/assets/characters/an_munchausen.gif"
+                                             data-animation-duration="800"
                                              data-audio="/assets/characters/media/s_munchausen_1.wav,/assets/characters/media/s_munchausen_2.wav,/assets/characters/media/s_munchausen_3.wav"
                                              alt="">
                                         <h5 class="h5 painting-text font-markscript w-50 p-4">Munchausen</h5>
@@ -282,6 +289,7 @@
                                              data-src="/assets/characters/an_daughter-0.png"
                                              data-first-frame="/assets/characters/an_daughter-0.png"
                                              data-animation="/assets/characters/an_daughter.gif"
+                                             data-animation-duration="1040"
                                              data-audio="/assets/characters/media/s_daughter_1.wav,/assets/characters/media/s_daughter_2.wav,/assets/characters/media/s_daughter_3.wav"
                                              alt="">
                                         <h5 class="h5 painting-text font-markscript w-50 p-4">Daughter</h5>
@@ -291,6 +299,7 @@
                                              data-src="/assets/characters/an_nemo-0.png"
                                              data-first-frame="/assets/characters/an_nemo-0.png"
                                              data-animation="/assets/characters/an_nemo.gif"
+                                             data-animation-duration="4500"
                                              data-audio="/assets/characters/media/s_nemo_1.wav,/assets/characters/media/s_nemo_2.wav,/assets/characters/media/s_nemo_3.wav"
                                              alt="">
                                         <h5 class="h5 painting-text font-markscript w-50 p-4">Captain Nemo</h5>
@@ -300,6 +309,7 @@
                                              data-src="/assets/characters/an_list_1-0.png"
                                              data-first-frame="/assets/characters/an_list_1-0.png"
                                              data-animation="/assets/characters/an_list_1.gif"
+                                             data-animation-duration="4000"
                                              data-audio="/assets/characters/media/s_list_1_1.wav,/assets/characters/media/s_list_1_2.wav,/assets/characters/media/s_list_1_3.wav"
                                              alt="">
                                         <p class="h5 painting-text font-markscript w-50 p-4">First guest</p>
@@ -309,6 +319,7 @@
                                              data-src="/assets/characters/an_list_2-0.png"
                                              data-first-frame="/assets/characters/an_list_2-0.png"
                                              data-animation="/assets/characters/an_list_2.gif"
+                                             data-animation-duration="3200"
                                              data-audio="/assets/characters/media/s_list_2_1.wav,/assets/characters/media/s_list_2_2.wav,/assets/characters/media/s_list_2_3.wav"
                                              alt="">
                                         <h5 class="h5 painting-text font-markscript w-50 p-4">Second guest</h5>
@@ -318,6 +329,7 @@
                                              data-src="/assets/characters/an_list_3-0.png"
                                              data-first-frame="/assets/characters/an_list_3-0.png"
                                              data-animation="/assets/characters/an_list_3.gif"
+                                             data-animation-duration="3000"
                                              data-audio="/assets/characters/media/s_list_3_1.wav,/assets/characters/media/s_list_3_2.wav,/assets/characters/media/s_list_3_3.wav"
                                              alt="">
                                         <h5 class="h5 painting-text font-markscript w-50 p-4">Third guest</h5>
@@ -327,6 +339,7 @@
                                              data-src="/assets/characters/an_nephew-0.png"
                                              data-first-frame="/assets/characters/an_nephew-0.png"
                                              data-animation="/assets/characters/an_nephew.gif"
+                                             data-animation-duration="3400"
                                              data-audio="/assets/characters/media/s_nephew_1.wav,/assets/characters/media/s_nephew_2.wav,/assets/characters/media/s_nephew_3.wav"
                                              alt="">
                                         <h5 class="h5 painting-text font-markscript w-50 p-4">Nephew</h5>
@@ -335,7 +348,7 @@
                             </div>
                             <div class="col-1">
                                 <img id="actors-carousel-next" data-src="/assets/arrow.png" alt=""
-                                     class="img-fluid"/>
+                                     class="img-fluid p-1"/>
                             </div>
                         </div>
                     </div>
@@ -498,8 +511,6 @@
         </section>
 
         <section data-background-image="/assets/Elements_web/background_1.jpg"
-
-
                  class="reveal-slide-6">
 
 
@@ -586,7 +597,7 @@
 <script type="text/javascript" src="/js/progressbar.min.js"></script>
 <!--END Progress bar-->
 
-<script type="text/javascript" src="/js/index.js?v=4"></script>
+<script type="text/javascript" src="/js/index.js?v=5"></script>
 
 </body>
 </html>
