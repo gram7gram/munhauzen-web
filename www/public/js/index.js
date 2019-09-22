@@ -57,12 +57,6 @@
     progressBar = null
   }
 
-  function startLoadingAnimation() {
-    var img = $('#loading-gif')
-
-    img.attr('src', img.attr('data-animation'))
-  }
-
   function startWauAnimation() {
     var img = $('#wau-animation')
 
@@ -87,6 +81,10 @@
             startWauAnimation();
             break;
         }
+
+        Reveal.configure({
+          controls: !((xs || sm) && Reveal.isLastSlide())
+        })
 
       });
 
@@ -212,8 +210,9 @@
         //Play audio
         var audio = currentImg.attr('data-audio').split(',')
         var randomIndex = Math.floor(Math.random() * audio.length);
+        var url = window.location.protocol + "//" + window.location.host + audio[randomIndex]
 
-        playAudioForSlide(audio[randomIndex])
+        playAudioForSlide(url)
 
 
         //Start animation changer
@@ -292,8 +291,6 @@
   }
 
   $(function () {
-
-    startLoadingAnimation();
 
     setLinksBasedOnPlatform();
 
