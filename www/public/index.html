@@ -53,7 +53,6 @@
         <img src="/assets/loading.gif"
              alt=""
              class="img-fluid"
-             onload="onLoadingGifLoadedCallback()"
              id="loading-gif"
              style="width: 300px;">
     </div>
@@ -133,16 +132,46 @@
 <div id="main-content" class="reveal">
     <div class="slides">
 
-        <section data-background-image="/assets/trailer-0.jpg"
+        <section data-background-image=""
+                 data-background-image-land="/assets/trailer-0.jpg"
+                 data-background-image-port="/assets/trailer-mob-0.jpg"
                  class="reveal-slide-1">
 
+            <video id="slide-2-video"
+                   loop
+                   muted
+                   playsinline
+                   style="position: absolute;top:0;left:0">
+                <source
+                        src=""
+                        type="video/mp4"
+                        data-src-land="/assets/trailer-2.mp4?v=1"
+                        data-src-port="/assets/trailer-mob-2.mp4?v=1"/>
+            </video>
+
             <video id="slide-1-video"
-                   class="bg-color-yellow"
-                   data-src=""
-                   data-autoplay
-                   style="position: absolute;top:0;left:0"
-                   data-src-land="/assets/trailer.mp4"
-                   data-src-port="/assets/trailer.mp4"></video>
+                   data-duration="5000"
+                   muted
+                   playsinline
+                   style="position: absolute;top:0;left:0">
+                <source
+                        src=""
+                        type="video/mp4"
+                        data-src-land="/assets/trailer-1-1080p.mp4"
+                        data-src-port="/assets/trailer-mob-1-1080p.mp4"/>
+                <source
+                        src=""
+                        type="video/mp4"
+                        data-src-land="/assets/trailer-1-720p.mp4"
+                        data-src-port="/assets/trailer-mob-1-720p.mp4"
+                        media="all and (max-width: 720px)"/>
+                <source
+                        src=""
+                        type="video/mp4"
+                        data-src-land="/assets/trailer-1-480p.mp4"
+                        data-src-port="/assets/trailer-mob-1-480p.mp4"
+                        media="all and (max-width: 480px)"/>
+            </video>
 
             <div class="container-fluid">
                 <div class="row my-5">
@@ -710,7 +739,7 @@
 <script type="text/javascript" src="/js/progressbar.min.js"></script>
 <!--END Progress bar-->
 
-<script type="text/javascript" src="/js/index.js?v=1"></script>
+<script type="text/javascript" src="/js/index.js?v=3"></script>
 
 </body>
 </html>
