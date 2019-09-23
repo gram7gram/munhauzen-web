@@ -86,9 +86,9 @@ function startReveal() {
           break;
       }
 
-      // Reveal.configure({
-      //   controls: !((xs || sm) && Reveal.isLastSlide())
-      // })
+      Reveal.configure({
+        controls: !((xs || sm) && Reveal.isLastSlide())
+      })
     }
 
     Reveal.addEventListener('slidechanged', function (e) {
@@ -327,9 +327,9 @@ function startVideo() {
 
       console.log('video part 2');
 
-      video1.addClass('d-none')
-
       playMedia(nativeVideo2)
+
+      video1.addClass('d-none')
 
     }, duration)
 
@@ -370,7 +370,6 @@ function configureSlides() {
 
 function configureSlide1() {
 
-  var slide1 = $('.reveal-slide-1')
   var video1 = $('#slide-1-video')
   var video2 = $('#slide-2-video')
   var source1 = video1.find('source');
@@ -394,16 +393,15 @@ function configureSlide1() {
     }
   })
 
-  if (isOrientationLandscape) {
-    slide1.attr('data-background-image', slide1.attr('data-background-image-land'))
-  } else {
-    slide1.attr('data-background-port', slide1.attr('data-background-image-port'))
-  }
-
   var height1, height2, width2, width1
 
-  width1 = screenWidth
-  height1 = Math.ceil(width1 * 1.777)
+  if (isOrientationLandscape) {
+    width1 = screenWidth
+    height1 = Math.ceil(width1 / 1.777)
+  } else {
+    width1 = screenWidth
+    height1 = Math.ceil(width1 * 1.777)
+  }
 
   video1.css({
     width: width1,
@@ -413,9 +411,13 @@ function configureSlide1() {
   video1.attr('width', width1)
   video1.attr('height', height1)
 
-  width2 = screenWidth
-  height2 = Math.ceil(width2 * 1.777)
-
+  if (isOrientationLandscape) {
+    width2 = screenWidth
+    height2 = Math.ceil(width2 / 1.777)
+  } else {
+    width2 = screenWidth
+    height2 = Math.ceil(width2 * 1.777)
+  }
   video2.css({
     width: width2,
     height: height2,
