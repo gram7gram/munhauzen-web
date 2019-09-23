@@ -86,9 +86,9 @@ function startReveal() {
           break;
       }
 
-      Reveal.configure({
-        controls: !((xs || sm) && Reveal.isLastSlide())
-      })
+      // Reveal.configure({
+      //   controls: !((xs || sm) && Reveal.isLastSlide())
+      // })
     }
 
     Reveal.addEventListener('slidechanged', function (e) {
@@ -438,7 +438,7 @@ function configureSlide2() {
   var imgMobile = $('#slide-2-img-mobile')
   var imgDesktop = $('#slide-2-img-desktop')
 
-  imgMobile.css('max-height', Math.ceil(screenHeight / 2 - 20))
+  imgMobile.css('max-height', Math.ceil(screenHeight * 0.4 - 20))
   imgDesktop.css('max-height', Math.ceil(screenHeight * 0.75))
 
 }
@@ -467,23 +467,24 @@ function configureSlide4() {
 
   var carousel = $('#slide-4-carousel')
 
-  var height
+  var height, width
   if (xs) {
-    height = screenHeight * 0.3
+    width = screenWidth * 0.9
+    height = width / 2
   } else if (sm) {
-    height = screenHeight * 0.4
+    width = screenWidth * 0.9
+    height = width / 2
   } else if (lg) {
-    height = screenHeight * 0.35
+    height = Math.ceil(screenHeight * 0.35)
+    width = Math.ceil(height * 2)
   } else {
-    height = screenWidth * 0.25
+    height = Math.ceil(screenWidth * 0.25)
+    width = Math.ceil(height * 2)
   }
 
-  height = Math.ceil(height)
-  var width = Math.ceil(height * 2)
-
   carousel.css({
+    width: width,
     height: height,
-    width: width
   })
 
 }
