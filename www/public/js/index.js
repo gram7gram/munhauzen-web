@@ -402,31 +402,23 @@ function configureSlide1() {
 
   var height1, height2, width2, width1
 
-  if (isOrientationLandscape) {
-    height1 = screenHeight
-    height2 = screenHeight
-    width1 = Math.ceil(height1 * 1.777)
-    width2 = Math.ceil(height2 * 1.777)
-  } else {
-    width1 = screenWidth
-    width2 = screenWidth
-    height1 = Math.ceil(width1 * 1.777)
-    height2 = Math.ceil(width2 * 1.777)
-  }
+  width1 = screenWidth
+  height1 = Math.ceil(width1 * 1.777)
 
   video1.css({
     width: width1,
     height: height1,
-    left: Math.ceil((screenWidth - width1) / 2)
   })
 
   video1.attr('width', width1)
   video1.attr('height', height1)
 
+  width2 = screenWidth
+  height2 = Math.ceil(width2 * 1.777)
+
   video2.css({
     width: width2,
     height: height2,
-    left: Math.ceil((screenWidth - width2) / 2)
   })
 
   video2.attr('width', width2)
