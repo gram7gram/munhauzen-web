@@ -393,19 +393,22 @@ function configureSlide1() {
     }
   })
 
-  var height1, height2, width2, width1
+  var height1, height2, width2, width1, top1, top2
 
   if (isOrientationLandscape) {
     width1 = screenWidth
     height1 = Math.ceil(width1 / 1.777)
+    top1 = Math.ceil((screenHeight - height1) / 2)
   } else {
     width1 = screenWidth
     height1 = Math.ceil(width1 * 1.777)
+    top1 = 0
   }
 
   video1.css({
     width: width1,
     height: height1,
+    top: top1
   })
 
   video1.attr('width', width1)
@@ -414,13 +417,16 @@ function configureSlide1() {
   if (isOrientationLandscape) {
     width2 = screenWidth
     height2 = Math.ceil(width2 / 1.777)
+    top2 = Math.ceil((screenHeight - height2) / 2)
   } else {
     width2 = screenWidth
     height2 = Math.ceil(width2 * 1.777)
+    top2 = 0
   }
   video2.css({
     width: width2,
     height: height2,
+    top: top2
   })
 
   video2.attr('width', width2)
