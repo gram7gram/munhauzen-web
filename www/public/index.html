@@ -138,6 +138,7 @@
                  class="reveal-slide-1">
 
             <video id="slide-2-video"
+                   class="bg-color-yellow"
                    loop
                    muted
                    playsinline
@@ -145,11 +146,24 @@
                 <source
                         src=""
                         type="video/mp4"
-                        data-src-land="/assets/trailer-2.mp4?v=1"
-                        data-src-port="/assets/trailer-mob-2.mp4?v=1"/>
+                        data-src-land="/assets/trailer-2-1080p.mp4"
+                        data-src-port="/assets/trailer-mob-2-1080p.mp4"/>
+                <source
+                        src=""
+                        type="video/mp4"
+                        data-src-land="/assets/trailer-2-720p.mp4"
+                        data-src-port="/assets/trailer-mob-2-720p.mp4"
+                        media="all and (max-width: 720px)"/>
+                <source
+                        src=""
+                        type="video/mp4"
+                        data-src-land="/assets/trailer-2-480p.mp4"
+                        data-src-port="/assets/trailer-mob-2-480p.mp4"
+                        media="all and (max-width: 480px)"/>
             </video>
 
             <video id="slide-1-video"
+                   class="bg-color-yellow"
                    data-duration="5000"
                    muted
                    playsinline
@@ -240,7 +254,7 @@
                                  class="img-fluid decor-img"/>
                         </td>
                     </tr>
-                    <tr style="height:50vh">
+                    <tr style="height:45vh">
                         <td style="vertical-align: top;overflow: hidden">
                             <img data-src="/assets/painting1.png"
                                  id="slide-2-img-mobile"
@@ -739,7 +753,7 @@
 <script type="text/javascript" src="/js/progressbar.min.js"></script>
 <!--END Progress bar-->
 
-<script type="text/javascript" src="/js/index.js?v=3"></script>
+<script type="text/javascript" src="/js/index.js?v=56"></script>
 
 </body>
 </html>

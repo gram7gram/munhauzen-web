@@ -3,10 +3,18 @@ var currentAudio;
 var isAudioEnabled = true;
 var isCarouselEnabled = false;
 var isOrientationLandscape = true;
-var isAndroid;
 var screenHeight;
 var screenWidth;
 var xs, sm, md, lg, xl
+
+function playMedia(media) {
+  var playPromise = media.play();
+  if (playPromise !== null) {
+    playPromise.catch(() => {
+      media.play();
+    })
+  }
+}
 
 function startLoading() {
   progressBar = new ProgressBar.Line('#loading-bar', {
@@ -67,15 +75,14 @@ function startReveal() {
     var onSlideChanged = function (index) {
       console.log('onSlideChanged', index)
 
+      startWauAnimation();
+
       switch (index) {
         case 0:
           startVideo();
           break;
         case 3:
           startCarousel();
-          break;
-        case 5:
-          startWauAnimation();
           break;
       }
 
@@ -175,12 +182,7 @@ function startCarousel() {
         console.log('playAudioForSlide', url);
 
         currentAudio = new Audio(url)
-        var playPromise = currentAudio.play();
-        if (playPromise !== null) {
-          playPromise.catch(() => {
-            currentAudio.play();
-          })
-        }
+        playMedia(currentAudio)
       } catch (e) {
         console.error(e)
       }
@@ -264,14 +266,14 @@ function setLinksBasedOnPlatform() {
 
   var os = getMobileOperatingSystem()
 
-  isAndroid = os === 'Android'
+  var isAndroid = os === 'Android'
 
   var links = $('.mobile-link')
 
   for (var i = 0; i < links.length; i++) {
     var link = $(links[i])
 
-    link.attr('href', isAndroid
+    link.attr('href', !isAndroid
       ? link.attr('data-appstore')
       : link.attr('data-googleplay'))
   }
@@ -327,13 +329,13 @@ function startVideo() {
 
       video1.addClass('d-none')
 
-      nativeVideo2.play()
+      playMedia(nativeVideo2)
 
     }, duration)
 
   }
 
-  nativeVideo1.play()
+  playMedia(nativeVideo1)
 }
 
 $(function () {
@@ -398,35 +400,37 @@ function configureSlide1() {
     slide1.attr('data-background-port', slide1.attr('data-background-image-port'))
   }
 
-  var height = screenHeight
-  var width1
-  var width2
+  var height1, height2, width2, width1
 
   if (isOrientationLandscape) {
-    width1 = (height * 1.777).toFixed(4)
-    width2 = (height * 1.777).toFixed(4)
+    height1 = screenHeight
+    height2 = screenHeight
+    width1 = Math.ceil(height1 * 1.777)
+    width2 = Math.ceil(height2 * 1.777)
   } else {
-    width1 = (height * 0.5625).toFixed(4)
-    width2 = (height * 0.5625).toFixed(4)
+    width1 = screenWidth
+    width2 = screenWidth
+    height1 = Math.ceil(width1 * 1.777)
+    height2 = Math.ceil(width2 * 1.777)
   }
 
   video1.css({
     width: width1,
-    height: height,
-    left: ((screenWidth - width1) / 2).toFixed(4)
+    height: height1,
+    left: Math.ceil((screenWidth - width1) / 2)
   })
 
   video1.attr('width', width1)
-  video1.attr('height', height)
+  video1.attr('height', height1)
 
   video2.css({
     width: width2,
-    height: height,
-    left: ((screenWidth - width2) / 2).toFixed(4)
+    height: height2,
+    left: Math.ceil((screenWidth - width2) / 2)
   })
 
   video2.attr('width', width2)
-  video2.attr('height', height)
+  video2.attr('height', height2)
 }
 
 function configureSlide2() {
@@ -434,8 +438,8 @@ function configureSlide2() {
   var imgMobile = $('#slide-2-img-mobile')
   var imgDesktop = $('#slide-2-img-desktop')
 
-  imgMobile.css('max-height', (screenHeight / 2 - 20).toFixed(4))
-  imgDesktop.css('max-height', (screenHeight * 0.75).toFixed(4))
+  imgMobile.css('max-height', Math.ceil(screenHeight / 2 - 20))
+  imgDesktop.css('max-height', Math.ceil(screenHeight * 0.75))
 
 }
 
@@ -449,13 +453,13 @@ function configureSlide3() {
 
   var img3Desktop = $('#slide-3-img-3-desktop')
 
-  img1Mobile.css('max-height', (screenHeight * 0.35 - 20).toFixed(4))
-  img1Desktop.css('max-height', (screenHeight * 0.4).toFixed(4))
+  img1Mobile.css('max-height', Math.ceil(screenHeight * 0.35 - 20))
+  img1Desktop.css('max-height', Math.ceil(screenHeight * 0.4))
 
-  img2Mobile.css('max-height', (screenHeight * 0.35 - 20).toFixed(4))
-  img2Desktop.css('max-height', (screenHeight * 0.4).toFixed(4))
+  img2Mobile.css('max-height', Math.ceil(screenHeight * 0.35 - 20))
+  img2Desktop.css('max-height', Math.ceil(screenHeight * 0.4))
 
-  img3Desktop.css('max-height', (screenHeight * 0.4).toFixed(4))
+  img3Desktop.css('max-height', Math.ceil(screenHeight * 0.4))
 
 }
 
@@ -474,9 +478,12 @@ function configureSlide4() {
     height = screenWidth * 0.25
   }
 
+  height = Math.ceil(height)
+  var width = Math.ceil(height * 2)
+
   carousel.css({
-    height: height.toFixed(4),
-    width: (height * 2).toFixed(4)
+    height: height,
+    width: width
   })
 
 }
@@ -491,13 +498,16 @@ function configureSlide5() {
 
   var img3Desktop = $('#slide-5-img-3-desktop')
 
-  img1Mobile.css('max-height', screenHeight * 0.35 - 20)
-  img1Desktop.css('max-height', screenHeight * 0.4)
+  var width1 = Math.ceil(screenHeight * 0.35 - 20)
+  var width2 = Math.ceil(screenHeight * 0.4)
 
-  img2Mobile.css('max-height', screenHeight * 0.35 - 20)
-  img2Desktop.css('max-height', screenHeight * 0.4)
+  img1Mobile.css('max-height', width1)
+  img1Desktop.css('max-height', width2)
 
-  img3Desktop.css('max-height', screenHeight * 0.3)
+  img2Mobile.css('max-height', width1)
+  img2Desktop.css('max-height', width2)
+
+  img3Desktop.css('max-height', Math.ceil(screenHeight * 0.3))
 
 }
 
@@ -524,12 +534,13 @@ function configureSlide6() {
     width = screenWidth * 0.4
   }
 
-  var height = width / 1.642
+  width = Math.ceil(width)
+  var height = Math.ceil(width / 1.642)
 
   wau.css({
     width: width,
     height: height,
-    left: ((screenWidth - width) / 2).toFixed(4)
+    left: Math.ceil((screenWidth - width) / 2)
   })
 
   container.css({width: screenWidth, height: screenHeight})
