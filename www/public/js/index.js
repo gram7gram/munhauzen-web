@@ -416,7 +416,7 @@ function configureSlide1() {
     }
   })
 
-  var height1, width1, x1 = 0, y1 = 0
+  var height1, width1, x1, y1 = 0
 
   if (isOrientationLandscape) {
     width1 = screenWidth
@@ -433,7 +433,7 @@ function configureSlide1() {
 
     if (height1 < screenHeight) {
       height1 = screenHeight
-      width1 = Math.ceil(height1 * 1.777)
+      width1 = Math.ceil(height1 / 1.777)
     }
   }
 
@@ -449,7 +449,7 @@ function configureSlide1() {
   video1.attr('width', width1)
   video1.attr('height', height1)
 
-  var height2, width2, x2 = 0, y2 = 0
+  var height2, width2, x2, y2 = 0
 
   if (isOrientationLandscape) {
     width2 = screenWidth
@@ -466,7 +466,7 @@ function configureSlide1() {
 
     if (height2 < screenHeight) {
       height2 = screenHeight
-      width2 = Math.ceil(height2 * 1.777)
+      width2 = Math.ceil(height2 / 1.777)
     }
   }
 
