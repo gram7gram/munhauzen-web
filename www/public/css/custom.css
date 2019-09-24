@@ -8,6 +8,14 @@
     src: url("/fonts/Marck_Script/MarckScript-Regular.ttf");
 }
 
+.navigate-left {
+    opacity: 1 !important;
+}
+
+.slides > section {
+    padding: 0
+}
+
 .body-bg-light {
     background: url('/assets/Elements_web/background_1.jpg') no-repeat center;
     -webkit-background-size: cover;
@@ -338,4 +346,9 @@
         height: 30vh;
     }
 
+}
+
+.animation-fade-in {
+    opacity: 1;
+    transition: opacity .3s;
 }

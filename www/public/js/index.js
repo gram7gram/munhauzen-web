@@ -1,11 +1,12 @@
-var progressBar;
 var currentAudio;
+var progressBar;
 var isAudioEnabled = true;
 var isCarouselEnabled = false;
 var isOrientationLandscape = true;
 var screenHeight;
 var screenWidth;
-var xs, sm, md, lg, xl
+var xs, sm, md, lg, xl;
+var carouselTimeout;
 
 function playMedia(media) {
   var playPromise = media.play();
@@ -17,9 +18,11 @@ function playMedia(media) {
 }
 
 function startLoading() {
+  console.log('startLoading');
+
   progressBar = new ProgressBar.Line('#loading-bar', {
     easing: 'easeInOut',
-    duration: 1500,
+    duration: 100,
     strokeWidth: 1,
     color: '#29230C',
     trailWidth: 1,
@@ -28,14 +31,37 @@ function startLoading() {
   });
 
   progressBar.animate(0.25);
+
+  setTimeout(startLoadingGif, 500)
 }
 
 function startLoadingGif() {
   console.log('startLoadingGif');
 
+  progressBar.animate(0.5);
+}
+
+function onVideoReady() {
+  console.log('onVideoReady');
+
   progressBar.animate(0.75);
 
   setTimeout(function () {
+
+    startReveal()
+
+  }, 500)
+}
+
+function onLoadingCompleted() {
+  console.log('onLoadingCompleted');
+
+  progressBar.animate(1);
+
+  $(document.body).toggleClass('body-bg-light body-bg-dark')
+
+  setTimeout(function () {
+
     var loading = $('#loading')
 
     loading.find('div').addClass('move-left-and-fade-out')
@@ -48,9 +74,7 @@ function startLoadingGif() {
 
     }, 1500)
 
-    startReveal()
-
-  }, 1500)
+  }, 500)
 }
 
 function stopLoading() {
@@ -61,21 +85,13 @@ function stopLoading() {
   progressBar = null
 }
 
-function startWauAnimation() {
-  var img = $('#wau-animation')
-
-  if (img.is(':visible')) {
-    img.attr('src', img.attr('data-animation'))
-  }
-}
-
 function startReveal() {
   try {
 
     var onSlideChanged = function (index) {
       console.log('onSlideChanged', index)
 
-      startWauAnimation();
+      clearTimeout(carouselTimeout)
 
       switch (index) {
         case 0:
@@ -100,9 +116,7 @@ function startReveal() {
 
     Reveal.addEventListener('ready', function () {
 
-      progressBar.animate(1);
-
-      $(document.body).toggleClass('body-bg-light body-bg-dark')
+      onLoadingCompleted()
 
       var index = Reveal.getSlides().indexOf(Reveal.getCurrentSlide())
 
@@ -110,16 +124,15 @@ function startReveal() {
     });
 
     Reveal.initialize({
-      center: false,
-      fragments: false,
       controls: true,
-      transition: 'slide',
-      backgroundTransition: 'none',
-      controlsTutorial: true,
-      overview: false,
-      help: true,
-      history: true,
+      progress: true,
+      hash: true,
       mouseWheel: true,
+      center: false,
+      overview: false,
+      fragments: false,
+
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
 
       width: "100%",
       height: "100%",
@@ -207,8 +220,6 @@ function startCarousel() {
     })
 
 
-    var timeoutId = 0
-
     function onChange(e, index) {
 
       console.log('carousel', index)
@@ -243,8 +254,8 @@ function startCarousel() {
 
         currentImg.attr('src', currentImg.attr('data-first-frame'))
 
-        clearTimeout(timeoutId)
-        timeoutId = setTimeout(toggleAnimation, 5000)
+        clearTimeout(carouselTimeout)
+        carouselTimeout = setTimeout(toggleAnimation, 5000)
       }
 
       function toggleAnimation() {
@@ -252,8 +263,8 @@ function startCarousel() {
 
         currentImg.attr('src', currentImg.attr('data-animation'))
 
-        clearTimeout(timeoutId)
-        timeoutId = setTimeout(toggleImage, duration)
+        clearTimeout(carouselTimeout)
+        carouselTimeout = setTimeout(toggleImage, duration)
       }
 
       toggleAnimation()
@@ -350,15 +361,6 @@ function startVideo() {
   playMedia(nativeVideo2)
 }
 
-$(function () {
-
-  setLinksBasedOnPlatform();
-
-  configureSlides()
-
-  startLoading();
-})
-
 function configureSlides() {
   console.log('configureSlides')
 
@@ -388,6 +390,14 @@ function configureSlide1() {
   var source1 = video1.find('source');
   var source2 = video2.find('source');
 
+  var nativeVideo1 = video1[0]
+  var nativeVideo2 = video2[0]
+
+  nativeVideo1.load()
+  nativeVideo2.load()
+
+  nativeVideo1.oncanplay = onVideoReady
+
   source1.each(function (i, e) {
     var source = $(e)
     if (isOrientationLandscape) {
@@ -406,43 +416,67 @@ function configureSlide1() {
     }
   })
 
-  var height1, width1, top1
+  var height1, width1, x1 = 0, y1 = 0
 
   if (isOrientationLandscape) {
     width1 = screenWidth
     height1 = Math.ceil(width1 / 1.777)
-    top1 = Math.ceil((screenHeight - height1) / 2)
+
+    if (height1 < screenHeight) {
+      height1 = screenHeight
+      width1 = Math.ceil(height1 * 1.777)
+    }
+
   } else {
     width1 = screenWidth
     height1 = Math.ceil(width1 * 1.777)
-    top1 = 0
+
+    if (height1 < screenHeight) {
+      height1 = screenHeight
+      width1 = Math.ceil(height1 * 1.777)
+    }
   }
+
+  x1 = Math.ceil((screenWidth - width1) / 2)
 
   video1.css({
     width: width1,
     height: height1,
-    top: top1
+    top: y1,
+    left: x1,
   })
 
   video1.attr('width', width1)
   video1.attr('height', height1)
 
-  var height2, width2, top2
+  var height2, width2, x2 = 0, y2 = 0
 
   if (isOrientationLandscape) {
     width2 = screenWidth
     height2 = Math.ceil(width2 / 1.777)
-    top2 = Math.ceil((screenHeight - height2) / 2)
+
+    if (height2 < screenHeight) {
+      height2 = screenHeight
+      width2 = Math.ceil(height2 * 1.777)
+    }
+
   } else {
     width2 = screenWidth
     height2 = Math.ceil(width2 * 1.777)
-    top2 = 0
+
+    if (height2 < screenHeight) {
+      height2 = screenHeight
+      width2 = Math.ceil(height2 * 1.777)
+    }
   }
+
+  x2 = Math.ceil((screenWidth - width2) / 2)
 
   video2.css({
     width: width2,
     height: height2,
-    top: top2
+    top: y2,
+    left: x2,
   })
 
   video2.attr('width', width2)
@@ -459,7 +493,7 @@ function configureSlide1() {
   width3 = Math.ceil(width2 * percentBounds[0] / 100)
   height3 = Math.ceil(height2 * percentBounds[1] / 100)
   x = Math.ceil(width2 * percentBounds[2] / 100)
-  y = top2 + Math.ceil(height2 * percentBounds[3] / 100)
+  y = y2 + Math.ceil(height2 * percentBounds[3] / 100)
 
 
   video3.css({
@@ -589,4 +623,21 @@ function configureSlide6() {
 
 window.addEventListener('resize', configureSlides)
 
-setTimeout(startLoadingGif, 500)
+$(function () {
+
+  setLinksBasedOnPlatform();
+
+  configureSlides()
+
+  startLoading();
+})
+
+/* iOS re-orientation fix */
+if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+  /* iOS hides Safari address bar */
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      window.scrollTo(0, 1);
+    }, 1000);
+  });
+}

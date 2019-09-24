@@ -453,16 +453,16 @@
 		var testElement = document.createElement( 'div' );
 
 		features.transforms3d = 'WebkitPerspective' in testElement.style ||
-								'MozPerspective' in testElement.style ||
-								'msPerspective' in testElement.style ||
-								'OPerspective' in testElement.style ||
-								'perspective' in testElement.style;
+			'MozPerspective' in testElement.style ||
+			'msPerspective' in testElement.style ||
+			'OPerspective' in testElement.style ||
+			'perspective' in testElement.style;
 
 		features.transforms2d = 'WebkitTransform' in testElement.style ||
-								'MozTransform' in testElement.style ||
-								'msTransform' in testElement.style ||
-								'OTransform' in testElement.style ||
-								'transform' in testElement.style;
+			'MozTransform' in testElement.style ||
+			'msTransform' in testElement.style ||
+			'OTransform' in testElement.style ||
+			'transform' in testElement.style;
 
 		features.requestAnimationFrameMethod = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
 		features.requestAnimationFrame = typeof features.requestAnimationFrameMethod === 'function';
@@ -477,7 +477,7 @@
 		// up slides. Zoom produces crisper results but has a lot of
 		// xbrowser quirks so we only use it in whitelsited browsers.
 		features.zoom = 'zoom' in testElement.style && !isMobileDevice &&
-						( isChrome || /Version\/[\d\.]+.*Safari/.test( UA ) );
+			( isChrome || /Version\/[\d\.]+.*Safari/.test( UA ) );
 
 	}
 
@@ -1201,15 +1201,15 @@
 		// the same.
 		if( data.background || data.backgroundColor || data.backgroundImage || data.backgroundVideo || data.backgroundIframe ) {
 			element.setAttribute( 'data-background-hash', data.background +
-															data.backgroundSize +
-															data.backgroundImage +
-															data.backgroundVideo +
-															data.backgroundIframe +
-															data.backgroundColor +
-															data.backgroundRepeat +
-															data.backgroundPosition +
-															data.backgroundTransition +
-															data.backgroundOpacity );
+				data.backgroundSize +
+				data.backgroundImage +
+				data.backgroundVideo +
+				data.backgroundIframe +
+				data.backgroundColor +
+				data.backgroundRepeat +
+				data.backgroundPosition +
+				data.backgroundTransition +
+				data.backgroundOpacity );
 		}
 
 		// Additional and optional background properties
@@ -2079,15 +2079,15 @@
 
 		dom.overlay.innerHTML = [
 			'<header>',
-				'<a class="close" href="#"><span class="icon"></span></a>',
-				'<a class="external" href="'+ url +'" target="_blank"><span class="icon"></span></a>',
+			'<a class="close" href="#"><span class="icon"></span></a>',
+			'<a class="external" href="'+ url +'" target="_blank"><span class="icon"></span></a>',
 			'</header>',
 			'<div class="spinner"></div>',
 			'<div class="viewport">',
-				'<iframe src="'+ url +'"></iframe>',
-				'<small class="viewport-inner">',
-					'<span class="x-frame-error">Unable to load iframe. This is likely due to the site\'s policy (x-frame-options).</span>',
-				'</small>',
+			'<iframe src="'+ url +'"></iframe>',
+			'<small class="viewport-inner">',
+			'<span class="x-frame-error">Unable to load iframe. This is likely due to the site\'s policy (x-frame-options).</span>',
+			'</small>',
 			'</div>'
 		].join('');
 
@@ -2164,10 +2164,10 @@
 
 			dom.overlay.innerHTML = [
 				'<header>',
-					'<a class="close" href="#"><span class="icon"></span></a>',
+				'<a class="close" href="#"><span class="icon"></span></a>',
 				'</header>',
 				'<div class="viewport">',
-					'<div class="viewport-inner">'+ html +'</div>',
+				'<div class="viewport-inner">'+ html +'</div>',
 				'</div>'
 			].join('');
 
@@ -2686,10 +2686,10 @@
 
 		// Check which implementation is available
 		var requestMethod = element.requestFullscreen ||
-							element.webkitRequestFullscreen ||
-							element.webkitRequestFullScreen ||
-							element.mozRequestFullScreen ||
-							element.msRequestFullscreen;
+			element.webkitRequestFullscreen ||
+			element.webkitRequestFullScreen ||
+			element.mozRequestFullScreen ||
+			element.msRequestFullscreen;
 
 		if( requestMethod ) {
 			requestMethod.apply( element );
@@ -3449,15 +3449,15 @@
 		var url = '#' + locationHash();
 		if( typeof b === 'number' && !isNaN( b ) ) {
 			return  '<a href="' + url + '">' +
-					'<span class="slide-number-a">'+ a +'</span>' +
-					'<span class="slide-number-delimiter">'+ delimiter +'</span>' +
-					'<span class="slide-number-b">'+ b +'</span>' +
-					'</a>';
+				'<span class="slide-number-a">'+ a +'</span>' +
+				'<span class="slide-number-delimiter">'+ delimiter +'</span>' +
+				'<span class="slide-number-b">'+ b +'</span>' +
+				'</a>';
 		}
 		else {
 			return '<a href="' + url + '">' +
-			       '<span class="slide-number-a">'+ a +'</span>' +
-			       '</a>';
+				'<span class="slide-number-a">'+ a +'</span>' +
+				'</a>';
 		}
 
 	}
@@ -3472,10 +3472,10 @@
 
 		// Remove the 'enabled' class from all directions
 		dom.controlsLeft.concat( dom.controlsRight )
-						.concat( dom.controlsUp )
-						.concat( dom.controlsDown )
-						.concat( dom.controlsPrev )
-						.concat( dom.controlsNext ).forEach( function( node ) {
+			.concat( dom.controlsUp )
+			.concat( dom.controlsDown )
+			.concat( dom.controlsPrev )
+			.concat( dom.controlsNext ).forEach( function( node ) {
 			node.classList.remove( 'enabled' );
 			node.classList.remove( 'fragmented' );
 
@@ -5121,7 +5121,7 @@
 
 		// Prevent all other events when a modifier is pressed
 		var unusedModifier = 	!prevSlideShortcut && !firstSlideShortcut && !lastSlideShortcut &&
-								( event.shiftKey || event.altKey || event.ctrlKey || event.metaKey );
+			( event.shiftKey || event.altKey || event.ctrlKey || event.metaKey );
 
 		// Disregard the event if there's a focused element or a
 		// keyboard modifier key is present
@@ -5536,8 +5536,8 @@
 	function onPageVisibilityChange( event ) {
 
 		var isHidden =  document.webkitHidden ||
-						document.msHidden ||
-						document.hidden;
+			document.msHidden ||
+			document.hidden;
 
 		// If, after clicking a link or similar and we're coming back,
 		// focus the document.body to ensure we can use keyboard shortcuts
