@@ -189,10 +189,20 @@ function startCarousel() {
     }
 
     $('#actors-carousel-prev').on('click', function () {
+      if (currentAudio) {
+        currentAudio.pause()
+        currentAudio = null
+      }
+
       carousel.Carousel3d('prev')
     })
 
     $('#actors-carousel-next').on('click', function () {
+      if (currentAudio) {
+        currentAudio.pause()
+        currentAudio = null
+      }
+
       carousel.Carousel3d('next')
     })
 
