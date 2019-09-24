@@ -307,6 +307,7 @@ function startVideo() {
 
   var video1 = $('#slide-1-video')
   var video2 = $('#slide-2-video')
+  var video3 = $('#slide-3-video')
 
   video1.removeClass('d-none')
 
@@ -329,6 +330,7 @@ function startVideo() {
 
       playMedia(nativeVideo2)
 
+      video3.removeClass('d-none')
       video1.addClass('d-none')
 
     }, duration)
@@ -372,6 +374,7 @@ function configureSlide1() {
 
   var video1 = $('#slide-1-video')
   var video2 = $('#slide-2-video')
+  var video3 = $('#slide-3-video')
   var source1 = video1.find('source');
   var source2 = video2.find('source');
 
@@ -393,7 +396,7 @@ function configureSlide1() {
     }
   })
 
-  var height1, height2, width2, width1, top1, top2
+  var height1, width1, top1
 
   if (isOrientationLandscape) {
     width1 = screenWidth
@@ -414,6 +417,8 @@ function configureSlide1() {
   video1.attr('width', width1)
   video1.attr('height', height1)
 
+  var height2, width2, top2
+
   if (isOrientationLandscape) {
     width2 = screenWidth
     height2 = Math.ceil(width2 / 1.777)
@@ -423,6 +428,7 @@ function configureSlide1() {
     height2 = Math.ceil(width2 * 1.777)
     top2 = 0
   }
+
   video2.css({
     width: width2,
     height: height2,
@@ -431,6 +437,30 @@ function configureSlide1() {
 
   video2.attr('width', width2)
   video2.attr('height', height2)
+
+  var height3, width3, x, y, percentBounds
+
+  if (!isOrientationLandscape) {
+    percentBounds = [80, 25.5, 10, 13.8]
+  } else {
+    percentBounds = [23.6, 23.8, 38.2, 24.2]
+  }
+
+  width3 = Math.ceil(screenWidth * percentBounds[0] / 100)
+  height3 = Math.ceil(screenHeight * percentBounds[1] / 100)
+  x = Math.ceil(screenWidth * percentBounds[2] / 100)
+  y = Math.ceil(screenHeight * percentBounds[3] / 100)
+
+
+  video3.css({
+    width: width3,
+    height: height3,
+    top: y,
+    left: x,
+  })
+
+  video3.attr('width', width3)
+  video3.attr('height', height3)
 }
 
 function configureSlide2() {
