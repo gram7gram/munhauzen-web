@@ -309,6 +309,7 @@ function startVideo() {
   var video2 = $('#slide-2-video')
   var video3 = $('#slide-3-video')
 
+  video3.addClass('d-none')
   video1.removeClass('d-none')
 
   var duration = parseInt(video1.attr('data-duration'))
