@@ -7,6 +7,7 @@ var screenHeight;
 var screenWidth;
 var xs, sm, md, lg, xl;
 var carouselTimeout;
+var isIos;
 
 function playMedia(media) {
   var playPromise = media.play();
@@ -287,14 +288,14 @@ function setLinksBasedOnPlatform() {
 
   var os = getMobileOperatingSystem()
 
-  var isAndroid = os === 'Android'
+  isIos = os === 'IOS'
 
   var links = $('.mobile-link')
 
   for (var i = 0; i < links.length; i++) {
     var link = $(links[i])
 
-    link.attr('href', !isAndroid
+    link.attr('href', isIos
       ? link.attr('data-appstore')
       : link.attr('data-googleplay'))
   }
@@ -314,7 +315,7 @@ function getMobileOperatingSystem() {
 
   // iOS detection from: http://stackoverflow.com/a/9039885/177710
   if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-    return "iOS";
+    return "IOS";
   }
 
   return "unknown";
@@ -630,14 +631,15 @@ $(function () {
   configureSlides()
 
   startLoading();
-})
 
-/* iOS re-orientation fix */
-if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
-  /* iOS hides Safari address bar */
-  window.addEventListener("load", function () {
-    setTimeout(function () {
-      window.scrollTo(0, 1);
-    }, 1000);
-  });
-}
+  if (isIos) {
+
+    /* iOS hides Safari address bar */
+    window.addEventListener("load", function () {
+      setInterval(function () {
+        window.scrollTo(0, 1);
+      }, 1000);
+    });
+
+  }
+})
