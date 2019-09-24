@@ -492,7 +492,7 @@ function configureSlide1() {
 
   width3 = Math.ceil(width2 * percentBounds[0] / 100)
   height3 = Math.ceil(height2 * percentBounds[1] / 100)
-  x = Math.ceil(width2 * percentBounds[2] / 100)
+  x = x2 + Math.ceil(width2 * percentBounds[2] / 100)
   y = y2 + Math.ceil(height2 * percentBounds[3] / 100)
 
 
