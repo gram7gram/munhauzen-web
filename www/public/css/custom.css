@@ -188,7 +188,6 @@
     }
 }
 
-
 @media (max-width: 320px) {
 
     .decor-img {
@@ -209,14 +208,6 @@
     .reveal-slide-4 .h1,
     .reveal-slide-3 .h1 {
         font-size: 1.2rem;
-    }
-
-    .slide-2-title {
-        height: 40vh;
-    }
-
-    .slide-3-title {
-        height: 50vh;
     }
 }
 
@@ -322,6 +313,7 @@
     .slide-2-title {
         height: 50vh;
     }
+
     .slide-3-title {
         height: 40vh;
     }

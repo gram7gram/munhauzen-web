@@ -8,6 +8,7 @@ var screenWidth;
 var xs, sm, md, lg, xl;
 var carouselTimeout;
 var isIos;
+var currentProgress = 0
 
 function playMedia(media) {
   var playPromise = media.play();
@@ -31,7 +32,10 @@ function startLoading() {
     svgStyle: {width: '100%', height: '100%', 'stroke-linecap': "round"}
   });
 
-  progressBar.animate(0.25);
+  if (currentProgress < 0.25) {
+    currentProgress = 0.25
+    progressBar.animate(currentProgress);
+  }
 
   setTimeout(startLoadingGif, 500)
 }
@@ -39,13 +43,19 @@ function startLoading() {
 function startLoadingGif() {
   console.log('startLoadingGif');
 
-  progressBar.animate(0.5);
+  if (currentProgress < 0.5) {
+    currentProgress = 0.5
+    progressBar.animate(currentProgress);
+  }
 }
 
 function onVideoReady() {
   console.log('onVideoReady');
 
-  progressBar.animate(0.75);
+  if (currentProgress < 0.75) {
+    currentProgress = 0.75
+    progressBar.animate(currentProgress);
+  }
 
   setTimeout(function () {
 
@@ -57,7 +67,10 @@ function onVideoReady() {
 function onLoadingCompleted() {
   console.log('onLoadingCompleted');
 
-  progressBar.animate(1);
+  if (currentProgress < 1) {
+    currentProgress = 1
+    progressBar.animate(currentProgress);
+  }
 
   $(document.body).toggleClass('body-bg-light body-bg-dark')
 
@@ -286,10 +299,6 @@ function startCarousel() {
 
 function setLinksBasedOnPlatform() {
 
-  var os = getMobileOperatingSystem()
-
-  isIos = os === 'IOS'
-
   var links = $('.mobile-link')
 
   for (var i = 0; i < links.length; i++) {
@@ -435,7 +444,10 @@ function configureSlide1() {
     if (height1 < screenHeight) {
       height1 = screenHeight
       width1 = Math.ceil(height1 / 1.777)
+    } else if (height1 > screenHeight) {
+      y1 = Math.ceil((screenHeight - height1) / 2)
     }
+
   }
 
   x1 = Math.ceil((screenWidth - width1) / 2)
@@ -468,6 +480,8 @@ function configureSlide1() {
     if (height2 < screenHeight) {
       height2 = screenHeight
       width2 = Math.ceil(height2 / 1.777)
+    } else if (height1 > screenHeight) {
+      y2 = Math.ceil((screenHeight - height2) / 2)
     }
   }
 
@@ -626,6 +640,10 @@ window.addEventListener('resize', configureSlides)
 
 $(function () {
 
+  var os = getMobileOperatingSystem()
+
+  isIos = os === 'IOS'
+
   setLinksBasedOnPlatform();
 
   configureSlides()
@@ -637,7 +655,7 @@ $(function () {
     /* iOS hides Safari address bar */
     window.addEventListener("load", function () {
       setInterval(function () {
-        window.scrollTo(0, 1);
+        window.scrollTo(0, 30);
       }, 1000);
     });
 
