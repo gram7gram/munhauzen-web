@@ -650,14 +650,4 @@ $(function () {
 
   startLoading();
 
-  if (isIos) {
-
-    /* iOS hides Safari address bar */
-    window.addEventListener("load", function () {
-      setInterval(function () {
-        window.scrollTo(0, 30);
-      }, 1000);
-    });
-
-  }
 })
