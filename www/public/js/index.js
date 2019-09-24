@@ -328,8 +328,6 @@ function startVideo() {
 
       console.log('video part 2');
 
-      playMedia(nativeVideo2)
-
       video3.removeClass('d-none')
       video1.addClass('d-none')
 
@@ -338,6 +336,7 @@ function startVideo() {
   }
 
   playMedia(nativeVideo1)
+  playMedia(nativeVideo2)
 }
 
 $(function () {
@@ -446,10 +445,10 @@ function configureSlide1() {
     percentBounds = [23.6, 23.8, 38.2, 24.2]
   }
 
-  width3 = Math.ceil(screenWidth * percentBounds[0] / 100)
-  height3 = Math.ceil(screenHeight * percentBounds[1] / 100)
-  x = Math.ceil(screenWidth * percentBounds[2] / 100)
-  y = Math.ceil(screenHeight * percentBounds[3] / 100)
+  width3 = Math.ceil(width2 * percentBounds[0] / 100)
+  height3 = Math.ceil(height2 * percentBounds[1] / 100)
+  x = Math.ceil(width2 * percentBounds[2] / 100)
+  y = top2 + Math.ceil(height2 * percentBounds[3] / 100)
 
 
   video3.css({
