@@ -12,6 +12,7 @@ var isIos;
 var currentProgress = 0
 var playPromise
 var carouselIndex
+var canUseCarouselPromise = true
 
 function playMedia(media) {
   playPromise = media.play();
@@ -246,12 +247,18 @@ function startCarousel() {
 
         currentAudio = new Audio(url)
         playPromise = currentAudio.play();
-        if (playPromise !== null) {
-          playPromise.catch(() => {
-            if (carouselIndex === index) {
-              currentAudio.play();
-            }
-          })
+
+        if (canUseCarouselPromise) {
+
+          canUseCarouselPromise = false
+
+          if (playPromise !== null) {
+            playPromise.catch(() => {
+              if (carouselIndex === index) {
+                currentAudio.play();
+              }
+            })
+          }
         }
 
       } catch (e) {
