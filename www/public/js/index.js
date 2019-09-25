@@ -661,9 +661,9 @@ function configureSlide6() {
   } else if (md) {
     width = screenWidth * 0.6
   } else if (lg) {
-    width = screenWidth * 0.5
+    width = screenWidth * 0.4
   } else {
-    width = screenWidth * 0.5
+    width = screenWidth * 0.3
   }
 
   if ((xs || sm || md) && isOrientationLandscape) {
