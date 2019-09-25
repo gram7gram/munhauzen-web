@@ -38,6 +38,10 @@
     z-index: 900;
 }
 
+#footer-links {
+    height: 20vh
+}
+
 .move-left-and-fade-out {
     transition: left 1.5s, opacity 1.5s;
     left: -50% !important;
@@ -209,6 +213,10 @@
     .reveal-slide-3 .h1 {
         font-size: 1.2rem;
     }
+
+    #footer-links {
+        height: 30vh
+    }
 }
 
 /*// Extra small devices (portrait phones, less than 576px)*/
@@ -240,6 +248,10 @@
 
     .slide-3-title {
         height: 50vh;
+    }
+
+    #footer-links {
+        height: 27.5vh
     }
 
 }
