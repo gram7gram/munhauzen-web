@@ -7,7 +7,6 @@ var isRevealEnabled = false;
 var screenHeight;
 var screenWidth;
 var xs, sm, md, lg, xl;
-var carouselTimeout;
 var isIos;
 var currentProgress = 0
 var playPromise
@@ -113,7 +112,12 @@ function startReveal() {
     var onSlideChanged = function (index) {
       console.log('onSlideChanged', index)
 
-      clearTimeout(carouselTimeout)
+      clearTimeout()
+
+      if (currentAudio) {
+        currentAudio.pause()
+        currentAudio = null
+      }
 
       switch (index) {
         case 0:
@@ -326,8 +330,8 @@ function startCarousel() {
 
         currentImg.attr('src', currentImg.attr('data-first-frame'))
 
-        clearTimeout(carouselTimeout)
-        carouselTimeout = setTimeout(toggleAnimation, 5000)
+        clearTimeout()
+        setTimeout(toggleAnimation, 5000)
       }
 
       function toggleAnimation() {
@@ -335,8 +339,8 @@ function startCarousel() {
 
         currentImg.attr('src', currentImg.attr('data-animation'))
 
-        clearTimeout(carouselTimeout)
-        carouselTimeout = setTimeout(toggleImage, duration)
+        clearTimeout()
+        setTimeout(toggleImage, duration)
       }
 
       toggleAnimation()
@@ -388,8 +392,6 @@ function getMobileOperatingSystem() {
   return "unknown";
 }
 
-var videoTimeoutId
-
 function startVideo() {
 
   console.log('video part 1');
@@ -413,8 +415,8 @@ function startVideo() {
 
     console.log('video part 1 oncanplay');
 
-    clearTimeout(videoTimeoutId)
-    videoTimeoutId = setTimeout(function () {
+    clearTimeout()
+    setTimeout(function () {
 
       console.log('video part 2');
 
