@@ -165,9 +165,7 @@ function startReveal() {
 
       var index = Reveal.getSlides().indexOf(Reveal.getCurrentSlide())
 
-      setTimeout(function () {
-        onSlideChanged(index)
-      }, 500)
+      onSlideChanged(index)
     });
 
     Reveal.initialize({
@@ -335,9 +333,7 @@ function startCarousel() {
 
     carousel.on('select', onChange);
 
-    setTimeout(function () {
-      onChange(null, 0)
-    }, 1000)
+    onChange(null, 0)
 
     isCarouselEnabled = true
 
