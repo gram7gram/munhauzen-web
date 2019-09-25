@@ -3,6 +3,7 @@ var progressBar;
 var isAudioEnabled = true;
 var isCarouselEnabled = false;
 var isOrientationLandscape = true;
+var isRevealEnabled = false;
 var screenHeight;
 var screenWidth;
 var xs, sm, md, lg, xl;
@@ -72,12 +73,11 @@ function onLoadingCompleted() {
     progressBar.animate(currentProgress);
   }
 
-  $(document.body).toggleClass('body-bg-light body-bg-dark')
-
   setTimeout(function () {
 
     var loading = $('#loading')
 
+    loading.addClass('move-left-and-fade-out')
     loading.find('div').addClass('move-left-and-fade-out')
 
     setTimeout(function () {
@@ -100,7 +100,12 @@ function stopLoading() {
 }
 
 function startReveal() {
+
+  if (isRevealEnabled) return
+
   try {
+
+    console.log('startReveal');
 
     var onSlideChanged = function (index) {
       console.log('onSlideChanged', index)
@@ -109,10 +114,34 @@ function startReveal() {
 
       switch (index) {
         case 0:
+          $(document.body).removeClass('body-bg-dark')
+          $(document.body).addClass('body-bg-light')
+
           startVideo();
+
+          break;
+        case 1:
+          $(document.body).removeClass('body-bg-light')
+          $(document.body).addClass('body-bg-dark')
+          break;
+        case 2:
+          $(document.body).removeClass('body-bg-light')
+          $(document.body).addClass('body-bg-dark')
           break;
         case 3:
+          $(document.body).removeClass('body-bg-light')
+          $(document.body).addClass('body-bg-dark')
+
           startCarousel();
+
+          break;
+        case 4:
+          $(document.body).removeClass('body-bg-light')
+          $(document.body).addClass('body-bg-dark')
+          break;
+        case 5:
+          $(document.body).removeClass('body-bg-dark')
+          $(document.body).addClass('body-bg-light')
           break;
       }
 
@@ -147,6 +176,7 @@ function startReveal() {
       fragments: false,
 
       transition: 'slide', // none/fade/slide/convex/concave/zoom
+      backgroundTransition: 'none',
 
       width: "100%",
       height: "100%",
@@ -156,8 +186,12 @@ function startReveal() {
 
     });
 
+    isRevealEnabled = true
+
   } catch (e) {
     console.error(e)
+
+    isRevealEnabled = false;
   }
 }
 
@@ -444,8 +478,6 @@ function configureSlide1() {
     if (height1 < screenHeight) {
       height1 = screenHeight
       width1 = Math.ceil(height1 / 1.777)
-    } else if (height1 > screenHeight) {
-      y1 = Math.ceil((screenHeight - height1) / 2)
     }
 
   }
@@ -453,14 +485,14 @@ function configureSlide1() {
   x1 = Math.ceil((screenWidth - width1) / 2)
 
   video1.css({
-    width: width1,
-    height: height1,
-    top: y1,
-    left: x1,
+    width: width1 + 'px',
+    height: height1 + 'px',
+    top: y1 + 'px',
+    left: x1 + 'px',
   })
 
-  video1.attr('width', width1)
-  video1.attr('height', height1)
+  video1.attr('width', width1 + 'px')
+  video1.attr('height', height1 + 'px')
 
   var height2, width2, x2, y2 = 0
 
@@ -480,22 +512,20 @@ function configureSlide1() {
     if (height2 < screenHeight) {
       height2 = screenHeight
       width2 = Math.ceil(height2 / 1.777)
-    } else if (height1 > screenHeight) {
-      y2 = Math.ceil((screenHeight - height2) / 2)
     }
   }
 
   x2 = Math.ceil((screenWidth - width2) / 2)
 
   video2.css({
-    width: width2,
-    height: height2,
-    top: y2,
-    left: x2,
+    width: width2 + 'px',
+    height: height2 + 'px',
+    top: y2 + 'px',
+    left: x2 + 'px',
   })
 
-  video2.attr('width', width2)
-  video2.attr('height', height2)
+  video2.attr('width', width2 + 'px')
+  video2.attr('height', height2 + 'px')
 
   var height3, width3, x, y, percentBounds
 
@@ -512,14 +542,14 @@ function configureSlide1() {
 
 
   video3.css({
-    width: width3,
-    height: height3,
-    top: y,
-    left: x,
+    width: width3 + 'px',
+    height: height3 + 'px',
+    top: y + 'px',
+    left: x + 'px',
   })
 
-  video3.attr('width', width3)
-  video3.attr('height', height3)
+  video3.attr('width', width3 + 'px')
+  video3.attr('height', height3 + 'px')
 }
 
 function configureSlide2() {
@@ -527,8 +557,8 @@ function configureSlide2() {
   var imgMobile = $('#slide-2-img-mobile')
   var imgDesktop = $('#slide-2-img-desktop')
 
-  imgMobile.css('max-height', Math.ceil(screenHeight * 0.4 - 20))
-  imgDesktop.css('max-height', Math.ceil(screenHeight * 0.75))
+  imgMobile.css('max-height', Math.ceil(screenHeight * 0.4 - 20) + 'px')
+  imgDesktop.css('max-height', Math.ceil(screenHeight * 0.75) + 'px')
 
 }
 
@@ -542,13 +572,13 @@ function configureSlide3() {
 
   var img3Desktop = $('#slide-3-img-3-desktop')
 
-  img1Mobile.css('max-height', Math.ceil(screenHeight * 0.35 - 20))
-  img1Desktop.css('max-height', Math.ceil(screenHeight * 0.4))
+  img1Mobile.css('max-height', Math.ceil(screenHeight * 0.35 - 20) + 'px')
+  img1Desktop.css('max-height', Math.ceil(screenHeight * 0.4) + 'px')
 
-  img2Mobile.css('max-height', Math.ceil(screenHeight * 0.35 - 20))
-  img2Desktop.css('max-height', Math.ceil(screenHeight * 0.4))
+  img2Mobile.css('max-height', Math.ceil(screenHeight * 0.35 - 20) + 'px')
+  img2Desktop.css('max-height', Math.ceil(screenHeight * 0.4) + 'px')
 
-  img3Desktop.css('max-height', Math.ceil(screenHeight * 0.4))
+  img3Desktop.css('max-height', Math.ceil(screenHeight * 0.4) + 'px')
 
 }
 
@@ -572,8 +602,8 @@ function configureSlide4() {
   }
 
   carousel.css({
-    width: width,
-    height: height,
+    width: width + 'px',
+    height: height + 'px',
   })
 
 }
@@ -591,21 +621,20 @@ function configureSlide5() {
   var width1 = Math.ceil(screenHeight * 0.35 - 20)
   var width2 = Math.ceil(screenHeight * 0.4)
 
-  img1Mobile.css('max-height', width1)
-  img1Desktop.css('max-height', width2)
+  img1Mobile.css('max-height', width1 + 'px')
+  img1Desktop.css('max-height', width2 + 'px')
 
-  img2Mobile.css('max-height', width1)
-  img2Desktop.css('max-height', width2)
+  img2Mobile.css('max-height', width1 + 'px')
+  img2Desktop.css('max-height', width2 + 'px')
 
-  img3Desktop.css('max-height', Math.ceil(screenHeight * 0.3))
+  img3Desktop.css('max-height', Math.ceil(screenHeight * 0.3) + 'px')
 
 }
 
 function configureSlide6() {
   var wau = $('#wau-animation')
-  var container = $('#wau-container')
 
-  var width
+  var width, height, x
   if (screenWidth < 400) {
     width = screenWidth * 1.5
   } else if (xs) {
@@ -615,25 +644,33 @@ function configureSlide6() {
   } else if (md) {
     width = screenWidth * 0.6
   } else if (lg) {
-    width = screenWidth * 0.4
+    width = screenWidth * 0.5
   } else {
-    width = screenWidth * 0.4
+    width = screenWidth * 0.5
   }
 
   if ((xs || sm || md) && isOrientationLandscape) {
     width = screenWidth * 0.4
   }
 
+  height = Math.ceil(width / 1.642)
+
+  if (!isOrientationLandscape) {
+    if (height > screenHeight * 0.45) {
+      height = screenHeight * 0.45
+      width = height * 1.642
+    }
+  }
+
   width = Math.ceil(width)
-  var height = Math.ceil(width / 1.642)
+  height = Math.ceil(height)
+  x = Math.ceil((screenWidth - width) / 2)
 
   wau.css({
-    width: width,
-    height: height,
-    left: Math.ceil((screenWidth - width) / 2)
+    width: width + 'px',
+    height: height + 'px',
+    left: x + 'px'
   })
-
-  container.css({width: screenWidth, height: screenHeight})
 }
 
 window.addEventListener('resize', configureSlides)
