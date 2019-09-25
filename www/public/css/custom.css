@@ -8,7 +8,7 @@
     src: url("/fonts/Marck_Script/MarckScript-Regular.ttf");
 }
 
-.navigate-left {
+.navigate-left,.navigate-up,.navigate-down,.navigate-right {
     opacity: 1 !important;
 }
 
