@@ -10,9 +10,11 @@ var xs, sm, md, lg, xl;
 var carouselTimeout;
 var isIos;
 var currentProgress = 0
+var playPromise
+var carouselIndex
 
 function playMedia(media) {
-  var playPromise = media.play();
+  playPromise = media.play();
   if (playPromise !== null) {
     playPromise.catch(() => {
       media.play();
@@ -163,7 +165,9 @@ function startReveal() {
 
       var index = Reveal.getSlides().indexOf(Reveal.getCurrentSlide())
 
-      onSlideChanged(index)
+      setTimeout(function () {
+        onSlideChanged(index)
+      }, 500)
     });
 
     Reveal.initialize({
@@ -225,7 +229,7 @@ function startCarousel() {
 
     })
 
-    function playAudioForSlide(url) {
+    function playAudioForSlide(index, url) {
 
       try {
 
@@ -243,7 +247,15 @@ function startCarousel() {
         console.log('playAudioForSlide', url);
 
         currentAudio = new Audio(url)
-        playMedia(currentAudio)
+        playPromise = currentAudio.play();
+        if (playPromise !== null) {
+          playPromise.catch(() => {
+            if (carouselIndex === index) {
+              currentAudio.play();
+            }
+          })
+        }
+
       } catch (e) {
         console.error(e)
       }
@@ -267,10 +279,13 @@ function startCarousel() {
       carousel.Carousel3d('next')
     })
 
-
     function onChange(e, index) {
 
+      if (index === carouselIndex) return
+
       console.log('carousel', index)
+
+      carouselIndex = index
 
       var isAnimation = true
 
@@ -290,7 +305,7 @@ function startCarousel() {
       var randomIndex = Math.floor(Math.random() * audio.length);
       var url = window.location.protocol + "//" + window.location.host + audio[randomIndex]
 
-      playAudioForSlide(url)
+      playAudioForSlide(index, url)
 
 
       //Start animation changer
@@ -320,7 +335,9 @@ function startCarousel() {
 
     carousel.on('select', onChange);
 
-    onChange(null, 0)
+    setTimeout(function () {
+      onChange(null, 0)
+    }, 1000)
 
     isCarouselEnabled = true
 
