@@ -11,7 +11,6 @@ var isIos;
 var currentProgress = 0
 var playPromise
 var carouselIndex
-var canUseCarouselPromise = true
 
 function playMedia(media) {
   playPromise = media.play();
@@ -250,17 +249,16 @@ function startCarousel() {
         console.log('playAudioForSlide', url);
 
         currentAudio = new Audio(url)
-        playPromise = currentAudio.play();
+        currentAudio.oncanplay = function () {
+          if (carouselIndex !== index) return
 
-        if (canUseCarouselPromise) {
-
-          canUseCarouselPromise = false
-
+          playPromise = currentAudio.play();
           if (playPromise !== null) {
             playPromise.catch(() => {
-              if (carouselIndex === index) {
-                currentAudio.play();
-              }
+              if (carouselIndex !== index) return
+
+              currentAudio.play();
+
             })
           }
         }
@@ -319,7 +317,6 @@ function startCarousel() {
       var url = window.location.protocol + "//" + window.location.host + audio[randomIndex]
 
       playAudioForSlide(index, url)
-
 
       //Start animation changer
       var duration = parseInt(currentImg.attr('data-animation-duration'));
