@@ -260,6 +260,8 @@ function startCarousel() {
     }
 
     $('#actors-carousel-prev').on('click', function () {
+      carouselIndex = -1
+
       if (currentAudio) {
         currentAudio.pause()
         currentAudio = null
@@ -269,6 +271,8 @@ function startCarousel() {
     })
 
     $('#actors-carousel-next').on('click', function () {
+      carouselIndex = -1
+
       if (currentAudio) {
         currentAudio.pause()
         currentAudio = null
