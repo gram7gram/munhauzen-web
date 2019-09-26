@@ -8,12 +8,34 @@
     src: url("/fonts/Marck_Script/MarckScript-Regular.ttf");
 }
 
-.navigate-left,.navigate-up,.navigate-down,.navigate-right {
+.navigate-left, .navigate-up, .navigate-down, .navigate-right {
     opacity: 1 !important;
 }
 
 .slides > section {
-    padding: 0
+    padding: 0;
+}
+
+.reveal-slide-1,
+.reveal-slide-2,
+.reveal-slide-3,
+.reveal-slide-4,
+.reveal-slide-5,
+.reveal-slide-6 {
+    position: relative !important;
+}
+
+.reveal-slide-1 {
+    height: 100vh !important;
+}
+
+.reveal-slide-2,
+.reveal-slide-3,
+.reveal-slide-4,
+.reveal-slide-5,
+.reveal-slide-6 {
+    margin-top: 10vh !important;
+    height: 90vh !important;
 }
 
 .body-bg-light {
