@@ -441,12 +441,16 @@ function configureSlides() {
   lg = 993 <= screenWidth && screenWidth <= 1200
   xl = 1201 <= screenWidth
 
-  configureSlide1()
-  configureSlide2()
-  configureSlide3()
-  configureSlide4()
-  configureSlide5()
-  configureSlide6()
+  try {
+    configureSlide1()
+    configureSlide2()
+    configureSlide3()
+    configureSlide4()
+    configureSlide5()
+    configureSlide6()
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 function configureSlide1() {
