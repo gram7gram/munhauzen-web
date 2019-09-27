@@ -212,6 +212,20 @@ function startCarousel() {
     var carousel = $('#actors-carousel');
     var slides = carousel.find('.slide')
 
+    slides.each(function (i, e) {
+      var slide = $(e);
+
+      slide.on('click', function (e) {
+        e.preventDefault();
+
+        if (carouselIndex === i) {
+          carouselIndex = -1
+
+          onChange(null, i)
+        }
+      })
+    })
+
     volumeBtn.on('click', function (e) {
       e.preventDefault();
 
@@ -250,7 +264,7 @@ function startCarousel() {
 
         currentAudio = new Audio(url)
         currentAudio.oncanplay = function () {
-          if (carouselIndex !== index) return
+          if (carouselIndex !== index || !currentAudio) return
 
           playPromise = currentAudio.play();
           if (playPromise !== null) {
