@@ -150,10 +150,6 @@ function startReveal() {
           $(document.body).addClass('body-bg-light')
           break;
       }
-
-      Reveal.configure({
-        controls: !((xs || sm) && Reveal.isLastSlide())
-      })
     }
 
     Reveal.addEventListener('slidechanged', function (e) {
@@ -254,15 +250,14 @@ function startCarousel() {
           currentAudio = null
         }
 
-        if (!url) {
-          throw 'Missing url'
-        }
-
         if (!isAudioEnabled) return
 
         console.log('playAudioForSlide', url);
 
         currentAudio = new Audio(url)
+        // currentAudio.onerror = function (e) {
+        //   alert('audio error: ' + JSON.stringify(e))
+        // }
         currentAudio.oncanplay = function () {
           if (carouselIndex !== index || !currentAudio) return
 
@@ -328,7 +323,8 @@ function startCarousel() {
       //Play audio
       var audio = currentImg.attr('data-audio').split(',')
       var randomIndex = Math.floor(Math.random() * audio.length);
-      var url = window.location.protocol + "//" + window.location.host + audio[randomIndex]
+      var url = window.location.protocol + "//" + window.location.host
+        + audio[randomIndex]
 
       playAudioForSlide(index, url)
 
@@ -675,7 +671,8 @@ function configureSlide5() {
 function configureSlide6() {
   var wau = $('#wau-animation')
 
-  var width, height, x
+  var width, height, x;
+
   if (screenWidth < 400) {
     width = screenWidth * 1.5
   } else if (xs) {
@@ -694,7 +691,7 @@ function configureSlide6() {
     width = screenWidth * 0.4
   }
 
-  height = Math.ceil(width / 1.642)
+  height = width / 1.642
 
   if (!isOrientationLandscape) {
     if (height > screenHeight * 0.45) {
