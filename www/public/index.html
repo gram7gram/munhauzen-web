@@ -48,8 +48,6 @@
 
 <div id="loading" class="text-center w-100 h-100 body-bg-light">
 
-    <div style="position: fixed;top: 50%;left: 0;width:100%;transform: translate(0,-50%)">
-
         <picture class="d-block position-absolute"
                  style="left:50%;top:50%;transform: translate(-50%,-50%)">
             <img src="/assets/loading_earth.png"
@@ -73,10 +71,11 @@
                  style="width: 300px;">
 
         </picture>
-    </div>
-    <div style="position: fixed;top: 75%;left: 0;width:100%;transform: translate(0,-50%)">
-        <div id="loading-bar" style="width: 240px;height: 5px;margin: 0 auto"></div>
-    </div>
+
+        <div class="d-block position-absolute"
+             style="left:50%;top:calc(50% + 200px);transform: translate(-50%,-50%)">
+            <div id="loading-bar" style="width: 240px;height: 5px;margin: 0 auto"></div>
+        </div>
 
 </div>
 
