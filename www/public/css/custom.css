@@ -56,8 +56,7 @@
 }
 
 .move-left-and-fade-out {
-    transition: left 1.5s, opacity 1.5s;
-    left: -50% !important;
+    transition: opacity 1.5s;
     opacity: 0;
 }
 
