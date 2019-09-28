@@ -59,11 +59,7 @@ function onVideoReady() {
     progressBar.animate(currentProgress);
   }
 
-  setTimeout(function () {
-
-    startReveal()
-
-  }, 500)
+  setTimeout(startReveal, 500)
 }
 
 function onLoadingCompleted() {

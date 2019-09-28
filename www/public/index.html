@@ -49,13 +49,20 @@
 <div id="loading" class="text-center w-100 h-100 body-bg-light">
 
     <div style="position: fixed;top: 50%;left: 0;width:100%;transform: translate(0,-50%)">
-        <picture>
-            <source media="screen and (max-width: 576px)" srcset="/assets/loading-mob.gif?v=1"/>
-            <img src="/assets/loading.gif?v=1"
+
+        <picture class="d-block position-relative">
+            <img src="/assets/loading_earth.png"
+                 alt=""
+                 class="img-fluid animation-spin-10s"
+                 style="width: 300px;">
+
+        </picture>
+        <picture class="d-block position-relative" style="top: -300px;">
+            <img src="/assets/loading_hare.gif"
                  alt=""
                  class="img-fluid"
-                 id="loading-gif"
-                 style="width: 50%;max-width: 300px;">
+                 style="width: 200px;">
+
         </picture>
     </div>
     <div style="position: fixed;top: 70%;left: 0;width:100%;transform: translate(0,-50%)">
@@ -771,7 +778,7 @@
 <script type="text/javascript" src="/js/progressbar.min.js"></script>
 <!--END Progress bar-->
 
-<script type="text/javascript" src="/js/index.js?v=44"></script>
+<script type="text/javascript" src="/js/index.js?v=45"></script>
 
 </body>
 </html>
