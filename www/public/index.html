@@ -41,41 +41,34 @@
     <link rel="stylesheet" type="text/css" href="/css/reset.css?v=1">
     <link rel="stylesheet" type="text/css" href="/css/reveal.css?v=4">
 
-    <link rel="stylesheet" type="text/css" href="/css/custom.css?v=6">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css?v=7">
 
 </head>
 <body class="color-accent bg-color-yellow body-bg-light">
 
 <div id="loading" class="text-center w-100 h-100 body-bg-light">
 
-        <picture class="d-block position-absolute"
-                 style="left:50%;top:50%;transform: translate(-50%,-50%)">
-            <img src="/assets/loading_earth.png"
-                 alt=""
-                 class="animation-spin-10s"
-                 style="width: 300px;">
+    <picture class="d-block position-absolute" id="loading-earth">
+        <img src="/assets/loading_earth.png"
+             alt=""
+             class="animation-spin-10s">
+    </picture>
 
-        </picture>
-        <picture class="d-block position-absolute"
-                 style="left:50%;top:50%;transform: translate(-50%,-170px)">
-            <img src="/assets/loading_hare.gif"
-                 alt=""
-                 style="width: 200px;">
+    <picture class="d-block position-absolute" id="loading-hare">
+        <img src="/assets/loading_hare.gif"
+             alt="">
+    </picture>
 
-        </picture>
-        <picture class="d-block position-absolute"
-                 style="left:50%;top:50%;transform: translate(-50%,-50%)">
-            <img src="/assets/loading_flies.png"
-                 alt=""
-                 class="animation-spin-14s"
-                 style="width: 300px;">
+    <picture class="d-block position-absolute" id="loading-flies">
+        <img src="/assets/loading_flies.png"
+             alt=""
+             class="animation-spin-14s">
 
-        </picture>
+    </picture>
 
-        <div class="d-block position-absolute"
-             style="left:50%;top:calc(50% + 160px);transform: translate(-50%,-50%)">
-            <div id="loading-bar" style="width: 240px;height: 5px;margin: 0 auto"></div>
-        </div>
+    <div class="d-block position-absolute" id="loading-bar-container">
+        <div id="loading-bar"></div>
+    </div>
 
 </div>
 
