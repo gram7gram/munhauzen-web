@@ -251,21 +251,14 @@ function startCarousel() {
         console.log('playAudioForSlide', url);
 
         currentAudio = new Audio(url)
-        // currentAudio.onerror = function (e) {
-        //   alert('audio error: ' + JSON.stringify(e))
-        // }
-        currentAudio.oncanplay = function () {
-          if (carouselIndex !== index || !currentAudio) return
+        playPromise = currentAudio.play();
+        if (playPromise !== null) {
+          playPromise.catch(() => {
+            if (carouselIndex !== index) return
 
-          playPromise = currentAudio.play();
-          if (playPromise !== null) {
-            playPromise.catch(() => {
-              if (carouselIndex !== index) return
+            currentAudio.play();
 
-              currentAudio.play();
-
-            })
-          }
+          })
         }
 
       } catch (e) {
