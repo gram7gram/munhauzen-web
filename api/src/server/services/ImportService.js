@@ -121,8 +121,9 @@ const parse = async function (file, locale) {
 }
 
 /**
- * Header: id_option, id_chapter, description_option_eng, id_audio, id_picture, type_pictures,
- * duration_picture, Interaction, action, id_decisions, decision_order, inventory_required, inventory_abscent
+ * Header: id_option, id_chapter, description_option_eng, description_option_ru, id_audio, id_picture, type_pictures,
+ * duration_picture_eng, duration_picture_ru, Interaction, action, id_decisions, decision_order,
+ * inventory_required, inventory_abscent
  */
 const parseScenario = source => async function (locale, sheet) {
 
@@ -223,11 +224,22 @@ const parseScenario = source => async function (locale, sheet) {
       image.image = 'p' + currentScenario.name.substr(1)
     }
 
-    if (item.duration_picture) {
-      if (item.duration_picture === 'R') {
+    let durationPicture = 0
+
+    switch (locale) {
+      case 'en':
+        durationPicture = item.duration_picture_eng
+        break;
+      case 'ru':
+        durationPicture = item.duration_picture_ru
+        break;
+    }
+
+    if (durationPicture) {
+      if (durationPicture === 'R') {
         image.isR = true
       } else {
-        let value = parseInt(item.duration_picture)
+        let value = parseInt(durationPicture)
         if (value > 0) {
           image.duration = value
         }
