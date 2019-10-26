@@ -7,8 +7,15 @@ function alertSuccess() {
   toastr.success(i18n.t('placeholders.success'))
 }
 
-function alertError() {
-  toastr.error(i18n.t('notifications.error_title'))
+function alertError({payload}) {
+
+  let msg = i18n.t('notifications.error_title')
+
+  if (payload && payload.message) {
+    msg = payload.message
+  }
+
+  toastr.error(msg)
 }
 
 export default function* sagas() {
