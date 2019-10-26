@@ -3,7 +3,6 @@ const chapterService = require('../services/ChapterService')
 const Chapter = require('../../database/model/Chapter').Chapter;
 const checkId = require('../services/RequestParamsValidator').checkId
 const router = new express.Router({mergeParams: true});
-const logger = require('../../logger');
 
 router.get('/chapters', async (req, res) => {
 
@@ -16,7 +15,7 @@ router.get('/chapters', async (req, res) => {
     })
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,
@@ -41,7 +40,7 @@ router.get('/chapters/:id', checkId, async (req, res) => {
 
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,
@@ -60,7 +59,7 @@ router.post('/chapters', async (req, res) => {
 
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,
@@ -86,7 +85,7 @@ router.put('/chapters/:id', checkId, async (req, res) => {
 
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,
@@ -104,7 +103,7 @@ router.delete('/chapters/:id', checkId, async (req, res) => {
 
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,

@@ -1,6 +1,5 @@
 const express = require('express');
 const router = new express.Router({mergeParams: true});
-const logger = require('../../logger');
 const host = require('../../../parameters').host;
 
 const expansions = {
@@ -11,6 +10,14 @@ const expansions = {
       },
       mdpi: {
         getExpansion: () => require('../resources/1-en-mdpi-expansion.json')
+      }
+    },
+    ru: {
+      hdpi: {
+        getExpansion: () => require('../resources/1-ru-hdpi-expansion.json')
+      },
+      mdpi: {
+        getExpansion: () => require('../resources/1-ru-mdpi-expansion.json')
       }
     }
   }
@@ -59,7 +66,7 @@ router.get('/expansions/:version/:dpi', (req, res, next) => {
 
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,

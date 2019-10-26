@@ -1,4 +1,3 @@
-const logger = require('../../logger');
 const Scenario = require('../../database/model/Scenario').Scenario;
 
 const ScenarioService = (function () {
@@ -20,7 +19,7 @@ const ScenarioService = (function () {
       })
 
     } catch (e) {
-      logger.error(e);
+
     }
   }
 

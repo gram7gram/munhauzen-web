@@ -20,7 +20,7 @@ const ImageService = (function () {
       })
 
     } catch (e) {
-      logger.error(e);
+
     }
   }
 

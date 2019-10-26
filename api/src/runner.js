@@ -1,10 +1,9 @@
-const logger = require('./logger')
 const parameters = require('../parameters')
 
-logger.info(`Starting app in ${process.env.NODE_ENV} environment...`)
+console.log(`Starting app in ${process.env.NODE_ENV} environment...`)
 
 process.on('unhandledRejection', (reason, p) => {
-  logger.error(
+  console.error(
     "Unhandled Rejection at:\r\n"
     + "Promise:\r\n" + JSON.stringify(p)
     + "Reason:\r\n" + JSON.stringify(reason)
@@ -18,5 +17,5 @@ db.connect()
 const server = require('./index');
 
 server.listen(parameters.port, () => {
-  logger.info('Server started')
+  console.log('Server started')
 })

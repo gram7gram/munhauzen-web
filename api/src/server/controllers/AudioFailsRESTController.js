@@ -3,7 +3,6 @@ const audioFailService = require('../services/AudioFailService')
 const AudioFail = require('../../database/model/AudioFail').AudioFail;
 const checkId = require('../services/RequestParamsValidator').checkId
 const router = new express.Router({mergeParams: true});
-const logger = require('../../logger');
 
 router.get('/audio-fails', async (req, res) => {
 
@@ -16,7 +15,7 @@ router.get('/audio-fails', async (req, res) => {
     })
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,
@@ -41,7 +40,7 @@ router.get('/audio-fails/:id', checkId, async (req, res) => {
 
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,
@@ -60,7 +59,7 @@ router.post('/audio-fails', async (req, res) => {
 
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,
@@ -86,7 +85,7 @@ router.put('/audio-fails/:id', checkId, async (req, res) => {
 
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,
@@ -104,7 +103,7 @@ router.delete('/audio-fails/:id', checkId, async (req, res) => {
 
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,

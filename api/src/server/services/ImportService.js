@@ -10,8 +10,6 @@ const Scenario = require('../../database/model/Scenario').Scenario;
 const imageService = require('../services/ImageService')
 const scenarioService = require('../services/ScenarioService')
 
-const logger = require('../../logger');
-
 const aggregate = async function (data, callback) {
   return await Promise.all(data.map(callback))
 }
@@ -22,8 +20,6 @@ const parse = async function (file, locale) {
   try {
     workbook = xlsx.read(file.data.buffer, {type: 'buffer'})
   } catch (e) {
-
-    logger.error(e)
 
     throw {
       e,
@@ -190,7 +186,7 @@ const parseScenario = source => async function (locale, sheet) {
 
   const parseAudio = item => {
     const audio = {
-      audio: item.id_audio ? item.id_audio.trim() : null,
+      audio: item.id_audio ? (item.id_audio + "").trim() : null,
       duration: 0
     }
 
@@ -326,7 +322,6 @@ const parseScenario = source => async function (locale, sheet) {
 
     } catch (e) {
 
-      logger.error(e)
 
       if (e && e.code === 11000) {
         return {
@@ -474,7 +469,6 @@ const parseChapters = async function (locale, sheet) {
 
     } catch (e) {
 
-      logger.error(e)
 
       if (e && e.code === 11000) {
         return {
@@ -542,7 +536,6 @@ const parseGameInventory = async function (locale, sheet) {
 
     } catch (e) {
 
-      logger.error(e)
 
       if (e && e.code === 11000) {
         return {
@@ -612,7 +605,6 @@ const parseMenuInventory = async function (locale, sheet) {
 
     } catch (e) {
 
-      logger.error(e)
 
       if (e && e.code === 11000) {
         return {
@@ -712,7 +704,6 @@ const parseStatueInventory = async function (locale, sheet) {
 
     } catch (e) {
 
-      logger.error(e)
 
       if (e && e.code === 11000) {
         return {
@@ -824,7 +815,6 @@ const parseImage = async function (locale, sheet) {
 
     } catch (e) {
 
-      logger.error(e)
 
       if (e && e.code === 11000) {
         return {
@@ -848,7 +838,7 @@ const parseImage = async function (locale, sheet) {
 }
 
 /**
- * Header: Id_audio, file, duration_audio
+ * Header: Id_audio, file, duration_audio_eng, duration_audio_ru
  *
  * @param sheet
  */
@@ -859,14 +849,24 @@ const parseAudio = async function (locale, sheet) {
   const data = json.filter(item =>
     item.Id_audio !== undefined
     && item.file !== undefined
-    && item.duration_audio !== undefined
+    && (item.duration_audio_eng !== undefined || duration_audio_ru !== undefined)
   )
 
   if (data.length === 0) return
 
   const result = await aggregate(data, async item => {
 
-    let duration = parseInt(item.duration_audio);
+    let duration = 0
+
+    switch (locale) {
+      case 'en':
+        duration = parseInt(item.duration_audio_eng);
+        break;
+      case 'ru':
+        duration = parseInt(item.duration_audio_ru);
+        break;
+    }
+
     if (isNaN(duration)) duration = 0
 
     const content = {
@@ -884,7 +884,6 @@ const parseAudio = async function (locale, sheet) {
 
     } catch (e) {
 
-      logger.error(e)
 
       if (e && e.code === 11000) {
         return {
@@ -958,7 +957,6 @@ const parseAudioFail = async function (locale, sheet) {
 
     } catch (e) {
 
-      logger.error(e)
 
       if (e && e.code === 11000) {
         return {

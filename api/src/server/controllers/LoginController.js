@@ -1,5 +1,4 @@
 const express = require('express');
-const logger = require('../../logger');
 const parameters = require('../../../parameters');
 const AuthService = require('../services/AuthService')
 
@@ -37,7 +36,7 @@ router.post('/login', async (req, res) => {
 
   } catch (e) {
 
-    logger.error(e);
+
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,
@@ -71,7 +70,7 @@ router.post('/login-check', async (req, res) => {
 
   } catch (e) {
 
-    logger.error(e);
+
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,

@@ -1,5 +1,4 @@
 const express = require('express');
-const logger = require('../../logger');
 const fileUpload = require('express-fileupload');
 
 const importService = require('../services/ImportService')
@@ -28,14 +27,12 @@ router.post('/import', fileUpload({}), async (req, res) => {
       return
     }
 
-    await exportService.generateArchive(req.params.locale)
+    await exportService.generateArchive(locale)
 
     res.status(201).json({
       result: result.result
     })
   } catch (e) {
-
-    logger.error(e);
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,

@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const logger = require('../../logger');
 const archiver = require('archiver');
 const parameters = require('../../../parameters');
 
@@ -20,40 +19,55 @@ const generateArchive = async function (locale) {
   });
 
   archive.on('error', function (err) {
-
-    logger.error(err)
-
     throw err;
   })
 
   const audio = await Audio.find({locale}).sort({name: 'asc'}).lean()
   if (audio.length === 0) {
-    throw 'Missing audio'
+    throw {
+      code: 404,
+      message: 'Не найдено аудио при генерации архива игры'
+    }
   }
 
   const fails = await AudioFail.find({locale}).sort({order: 'asc', name: 'asc'}).lean()
   if (fails.length === 0) {
-    throw 'Missing fails'
+    throw {
+      code: 404,
+      message: 'Не найдено фейлов при генерации архива игры'
+    }
   }
 
   const chapters = await Chapter.find({locale}).sort({name: 'asc'}).lean()
   if (chapters.length === 0) {
-    throw 'Missing chapters'
+    throw {
+      code: 404,
+      message: 'Не найдено глав при генерации архива игры'
+    }
   }
 
   const scenario = await Scenario.find({locale}).sort({name: 'asc'}).lean()
   if (scenario.length === 0) {
-    throw 'Missing scenario'
+    throw {
+      code: 404,
+      message: 'Не найдено сценария при генерации архива игры'
+    }
   }
 
   const inventory = await Inventory.find({locale}).sort({name: 'asc'}).lean()
   if (inventory.length === 0) {
-    throw 'Missing inventory'
+    throw {
+      code: 404,
+      message: 'Не найдено инвентаря при генерации архива игры'
+    }
   }
 
   const images = await Image.find({locale, isReserved: {$ne: true}}).sort({order: 'asc', name: 'asc'}).lean()
   if (images.length === 0) {
-    throw 'Missing images'
+    throw {
+      code: 404,
+      message: 'Не найдено картинок при генерации архива игры'
+    }
   }
 
   archive.append(JSON.stringify(audio), {name: 'audio.json'})

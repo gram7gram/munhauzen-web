@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-const logger = require('../../logger')
 const params = require('../../../parameters')
 
 const isAdmin = (req, res, next) => {
@@ -25,7 +24,7 @@ const isAdmin = (req, res, next) => {
     next();
 
   } catch (e) {
-    logger.error(e)
+    
 
     res.status(401).json({
       message: "Not authorized"

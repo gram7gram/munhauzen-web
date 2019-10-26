@@ -1,4 +1,3 @@
-const logger = require('../logger')
 const parameters = require('../../parameters')
 
 const mongoose = require('mongoose');
@@ -17,26 +16,26 @@ const connect = (host, opts = {}) => {
   opts.useFindAndModify = false
 
   mongoose.connect(host, opts).catch(e => {
-    logger.error(e)
+    
   })
 }
 
 mongoose.connection.on('connected', () => {
 
-  logger.info(`Connected with mongo database @ ${host}`);
+  console.log(`Connected with mongo database @ ${host}`);
 
 })
 
 mongoose.connection.on('error', (err) => {
 
-  logger.error(`Error with mongo database @ ${host}`);
-  logger.error(err.stack);
+  console.error(`Error with mongo database @ ${host}`);
+  console.error(err.stack);
 
 })
 
 mongoose.connection.on('disconnected', () => {
 
-  logger.info(`Disconnected from mongo database @ ${host}`);
+  console.error(`Disconnected from mongo database @ ${host}`);
 
   setTimeout(() => {
     connect(host, params)
@@ -49,7 +48,7 @@ module.exports = {
   },
   disconnect: (done) => {
     mongoose.disconnect(done).catch(e => {
-      logger.error(e)
+      
     });
   },
 };

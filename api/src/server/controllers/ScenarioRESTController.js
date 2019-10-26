@@ -3,7 +3,6 @@ const scenarioService = require('../services/ScenarioService')
 const Scenario = require('../../database/model/Scenario').Scenario;
 const checkId = require('../services/RequestParamsValidator').checkId
 const router = new express.Router({mergeParams: true});
-const logger = require('../../logger');
 
 router.get('/scenario', async (req, res) => {
 
@@ -18,7 +17,7 @@ router.get('/scenario', async (req, res) => {
     })
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,
@@ -43,7 +42,7 @@ router.get('/scenario/:id', checkId, async (req, res) => {
 
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,
@@ -62,7 +61,7 @@ router.post('/scenario', async (req, res) => {
 
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,
@@ -88,7 +87,7 @@ router.put('/scenario/:id', checkId, async (req, res) => {
 
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,
@@ -106,7 +105,7 @@ router.delete('/scenario/:id', checkId, async (req, res) => {
 
   } catch (e) {
 
-    logger.error(e)
+    
 
     res.status(e.code > 400 ? e.code : 500).json({
       ...e,
