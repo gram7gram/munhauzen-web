@@ -34,7 +34,7 @@ class Home extends PureComponent {
 
     const {uploadResult} = this.props.Home
 
-    return <div className="p-2 bg-dark">
+    return <div className="p-2 bg-dark" style={{maxHeight: '500px', overflow: 'auto'}}>
 
       {uploadResult.map((result, key) => {
 

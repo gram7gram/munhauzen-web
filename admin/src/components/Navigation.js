@@ -4,6 +4,7 @@ import {Link, withRouter} from 'react-router-dom';
 import * as Pages from '../router/Pages'
 import i18n from "../i18n";
 import {createStructuredSelector} from "reselect";
+import Cookies from "js-cookie";
 import {connect} from "react-redux";
 import Logout from "../screens/Login/actions/Logout";
 
@@ -21,6 +22,10 @@ class Navigation extends PureComponent {
 
   logout = () => {
     this.props.dispatch(Logout())
+  }
+
+  setLocale = locale => () => {
+    Cookies.set('locale', locale)
   }
 
   render() {
@@ -57,6 +62,7 @@ class Navigation extends PureComponent {
 
               return <li key={i} className={"nav-item" + (i === 0 ? " border-left border-dark" : "")}>
                 <a className={"nav-link" + (locale === item ? " active" : "")}
+                   onClick={this.setLocale(item)}
                    href={url}>{item}</a>
               </li>
             })}

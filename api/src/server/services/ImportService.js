@@ -30,7 +30,6 @@ const parse = async function (file, locale) {
   const handlers = {
     'chapters': parseChapters,
     'pictures': parseImage,
-    'audio_scenario': parseAudio,
     'inventory (items for game)': parseGameInventory,
     'global_inventory (menu)': parseMenuInventory,
     'statue_inventory (statue, arch)': parseStatueInventory,
@@ -39,12 +38,15 @@ const parse = async function (file, locale) {
   switch (locale) {
     case 'en':
       handlers['fails_Eng'] = parseAudioFail
+      handlers['audio_scenario_eng'] = parseAudio
       break;
     case 'ru':
       handlers['fails_Ru'] = parseAudioFail
+      handlers['audio_scenario_ru'] = parseAudio
       break;
     case 'ua':
       handlers['fails_Ukr'] = parseAudioFail
+      handlers['audio_scenario_ukr'] = parseAudio
       break;
   }
 
@@ -861,7 +863,7 @@ const parseAudio = async function (locale, sheet) {
   const data = json.filter(item =>
     item.Id_audio !== undefined
     && item.file !== undefined
-    && (item.duration_audio_eng !== undefined || duration_audio_ru !== undefined)
+    && (item.duration_audio_eng !== undefined || item.duration_audio_ru !== undefined || item.duration_audio_ukr !== undefined)
   )
 
   if (data.length === 0) return
@@ -876,6 +878,9 @@ const parseAudio = async function (locale, sheet) {
         break;
       case 'ru':
         duration = parseInt(item.duration_audio_ru);
+        break;
+      case 'ua':
+        duration = parseInt(item.duration_audio_ukr);
         break;
     }
 

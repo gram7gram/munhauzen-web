@@ -6,6 +6,9 @@ import i18n from '../../i18n'
 import {CHANGE} from "./actions";
 import LoginAction from "./actions/Login";
 import logo from "../../assets/images/menu_logo.png";
+import parameters from "../../parameters";
+import gplay from "../../assets/images/gplay.png";
+import apPStore from "../../assets/images/app-store.png";
 
 class Login extends Component {
 
@@ -68,6 +71,30 @@ class Login extends Component {
           </button>
 
 
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-10 col-sm-6 col-lg-4 mx-auto my-4">
+          <div className="row">
+            <div className="col-6">
+
+              <a href={parameters.gplayLink} rel="nofollow">
+                <img src={gplay} className="img-fluid"
+                     height="50"
+                     alt=""/>
+              </a>
+
+            </div>
+            <div className="col-6">
+
+              <a href={parameters.appStoreLink} rel="nofollow">
+                <img src={apPStore} className="img-fluid"
+                     height="50"
+                     alt=""/>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
