@@ -37,25 +37,25 @@ const parse = async function (file, locale) {
 
   switch (locale) {
     case 'en':
-      handlers['fails_Eng'] = parseAudioFail
       handlers['audio_scenario_eng'] = parseAudio
+      handlers['fails_Eng'] = parseAudioFail
       break;
     case 'ru':
-      handlers['fails_Ru'] = parseAudioFail
       handlers['audio_scenario_ru'] = parseAudio
+      handlers['fails_Ru'] = parseAudioFail
       break;
     case 'ua':
-      handlers['fails_Ukr'] = parseAudioFail
       handlers['audio_scenario_ukr'] = parseAudio
+      handlers['fails_Ukr'] = parseAudioFail
       break;
   }
 
-  await Scenario.deleteMany()
-  await Inventory.deleteMany()
-  await AudioFail.deleteMany()
-  await Audio.deleteMany()
-  await Image.deleteMany()
-  await Chapter.deleteMany()
+  await Scenario.deleteMany({locale})
+  await Inventory.deleteMany({locale})
+  await AudioFail.deleteMany({locale})
+  await Audio.deleteMany({locale})
+  await Image.deleteMany({locale})
+  await Chapter.deleteMany({locale})
 
   let result = await aggregate(Object.keys(handlers), async name => {
 
@@ -140,14 +140,14 @@ const parseScenario = source => async function (locale, sheet) {
 
   if (data.length === 0) return
 
-  const audios = await Audio.find().lean()
-  const images = await Image.find().lean()
+  const audios = await Audio.find({locale}).lean()
+  const images = await Image.find({locale}).lean()
 
   const warnings = [], scenarios = {}
 
   let currentScenario
 
-  const parseDecision = item => {
+  const createDecision = item => {
 
     const decision = {
       order: 0,
@@ -187,7 +187,7 @@ const parseScenario = source => async function (locale, sheet) {
     return decision
   }
 
-  const parseAudio = item => {
+  const createAudio = item => {
     const audio = {
       audio: item.id_audio ? (item.id_audio + "").trim() : null,
       duration: 0
@@ -208,7 +208,9 @@ const parseScenario = source => async function (locale, sheet) {
       const match = audios.find(item => item.name === audio.audio)
       if (!match) {
         warnings.push('Аудио ' + audio.audio + ' не существует')
-      } else if (match.duration > 0) {
+      } else if (!match.duration) {
+        warnings.push('Длительно аудио ' + audio.audio + ' не указана')
+      } else {
         audio.duration = match.duration
       }
     }
@@ -216,7 +218,7 @@ const parseScenario = source => async function (locale, sheet) {
     return audio
   }
 
-  const parseImage = item => {
+  const createImage = item => {
     const image = {
       image: item.id_picture ? item.id_picture.trim() : null,
       duration: 0
@@ -281,7 +283,7 @@ const parseScenario = source => async function (locale, sheet) {
     return image
   }
 
-  const parseScenario = item => {
+  const createScenario = item => {
 
     let text = '';
 
@@ -359,7 +361,7 @@ const parseScenario = source => async function (locale, sheet) {
         scenarios[currentScenario.name] = {...currentScenario}
       }
 
-      currentScenario = parseScenario(item)
+      currentScenario = createScenario(item)
 
       if (currentScenario.name === 'a1_intro') {
         currentScenario.isBegin = true
@@ -369,15 +371,15 @@ const parseScenario = source => async function (locale, sheet) {
     if (currentScenario) {
 
       if (item.id_picture && item.id_picture !== 'Empty' && item.id_picture !== 'XXX') {
-        currentScenario.images.push(parseImage(item))
+        currentScenario.images.push(createImage(item))
       }
 
       if (item.id_audio && item.id_audio !== 'Empty' && item.id_audio !== 'XXX') {
-        currentScenario.audio.push(parseAudio(item))
+        currentScenario.audio.push(createAudio(item))
       }
 
       if (item.id_decisions && item.id_decisions !== 'Empty') {
-        currentScenario.decisions.push(parseDecision(item))
+        currentScenario.decisions.push(createDecision(item))
       }
     }
 
