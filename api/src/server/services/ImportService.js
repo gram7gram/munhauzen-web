@@ -363,7 +363,7 @@ const parseScenario = source => async function (locale, sheet) {
 
       currentScenario = createScenario(item)
 
-      if (currentScenario.name === 'a1_intro') {
+      if (currentScenario.name === 'a1_intro_chapter') {
         currentScenario.isBegin = true
       }
     }
