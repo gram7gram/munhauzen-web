@@ -14,6 +14,10 @@ services:
       - '/var/run/docker.sock:/tmp/docker.sock:ro'
 #      - '/etc/letsencrypt/live/thebaronmunchausen.com/fullchain.pem:/etc/nginx/certs/thebaronmunchausen.com.crt'
 #      - '/etc/letsencrypt/live/thebaronmunchausen.com/privkey.pem:/etc/nginx/certs/thebaronmunchausen.com.key'
+#      - '/etc/letsencrypt/live/admin.thebaronmunchausen.com/fullchain.pem:/etc/nginx/certs/admin.thebaronmunchausen.com.crt'
+#      - '/etc/letsencrypt/live/admin.thebaronmunchausen.com/privkey.pem:/etc/nginx/certs/admin.thebaronmunchausen.com.key'
+#      - '/etc/letsencrypt/live/api.thebaronmunchausen.com/fullchain.pem:/etc/nginx/certs/api.thebaronmunchausen.com.crt'
+#      - '/etc/letsencrypt/live/api.thebaronmunchausen.com/privkey.pem:/etc/nginx/certs/api.thebaronmunchausen.com.key'
 
   www:
     build: ./www/env

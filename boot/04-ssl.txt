@@ -16,4 +16,4 @@ certbot certonly \
     -d api.thebaronmunchausen.com
 
 cron
-0 0 1 * * crontab renew
+0 0 1 * * certbot renew
