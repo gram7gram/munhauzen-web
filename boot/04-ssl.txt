@@ -1,16 +1,17 @@
+apt install certbot
 
 certbot certonly \
-    --webroot --webroot-path /var/www/munchausen-web/admin/build \
+    --webroot --webroot-path /var/www/munhauzen-web/admin/build \
     -m fingertipsandcompany@gmail.com \
     -d admin.thebaronmunchausen.com
 
 certbot certonly \
-    --webroot --webroot-path /var/www/munchausen-web/www/public \
+    --webroot --webroot-path /var/www/munhauzen-web/www/public \
     -m fingertipsandcompany@gmail.com \
     -d thebaronmunchausen.com
 
 certbot certonly \
-    --webroot --webroot-path /var/www/munchausen-web/api/public \
+    --webroot --webroot-path /var/www/munhauzen-web/api/public \
     -m fingertipsandcompany@gmail.com \
     -d api.thebaronmunchausen.com
 
