@@ -1,0 +1,18 @@
+
+certbot certonly \
+    --webroot --webroot-path /var/www/munchausen-web/admin/build \
+    -m fingertipsandcompany@gmail.com \
+    -d admin.thebaronmunchausen.com
+
+certbot certonly \
+    --webroot --webroot-path /var/www/munchausen-web/www/public \
+    -m fingertipsandcompany@gmail.com \
+    -d thebaronmunchausen.com
+
+certbot certonly \
+    --webroot --webroot-path /var/www/munchausen-web/api/public \
+    -m fingertipsandcompany@gmail.com \
+    -d api.thebaronmunchausen.com
+
+cron
+0 0 1 * * crontab renew
