@@ -1,9 +1,3 @@
 #!/usr/bin/env bash
 
-cd ..
-
-docker-compose up -d
-
-#docker-compose exec admin npm rebuild node-sass
-
 docker-compose exec admin npm "$@"

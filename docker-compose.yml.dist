@@ -5,8 +5,6 @@ services:
   proxy:
     image: jwilder/nginx-proxy:alpine
     restart: unless-stopped
-    environment:
-      - HTTPS_METHOD=nohttps
     ports:
       - '80:80'
 #      - '443:443'
@@ -14,15 +12,14 @@ services:
       - backend
     volumes:
       - '/var/run/docker.sock:/tmp/docker.sock:ro'
-#      - '/etc/letsencrypt/live/fingertips.com/fullchain.pem:/etc/nginx/certs/fingertips.com.crt'
-#      - '/etc/letsencrypt/live/fingertips.com/privkey.pem:/etc/nginx/certs/fingertips.com.key'
+#      - '/etc/letsencrypt/live/thebaronmunchausen.com/fullchain.pem:/etc/nginx/certs/thebaronmunchausen.com.crt'
+#      - '/etc/letsencrypt/live/thebaronmunchausen.com/privkey.pem:/etc/nginx/certs/thebaronmunchausen.com.key'
 
   www:
     build: ./www/env
     restart: unless-stopped
     environment:
-      - HTTPS_METHOD=nohttps
-      - VIRTUAL_HOST=fingertips.cf,www.fingertips.cf
+      - VIRTUAL_HOST=thebaronmunchausen.com,www.thebaronmunchausen.com
     networks:
       - backend
     volumes:
@@ -32,8 +29,7 @@ services:
     build: ./api/env
     restart: unless-stopped
     environment:
-      - HTTPS_METHOD=nohttps
-      - VIRTUAL_HOST=munchausen-api.fingertips.cf
+      - VIRTUAL_HOST=api.thebaronmunchausen.com
     networks:
       - backend
     volumes:
@@ -43,8 +39,7 @@ services:
     build: ./admin/env
     restart: unless-stopped
     environment:
-      - HTTPS_METHOD=nohttps
-      - VIRTUAL_HOST=munchausen.fingertips.cf
+      - VIRTUAL_HOST=admin.thebaronmunchausen.com
     networks:
       - backend
     volumes:
