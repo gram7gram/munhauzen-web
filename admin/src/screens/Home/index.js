@@ -79,7 +79,7 @@ class Home extends PureComponent {
       <div className="row">
         <div className="col-8 mx-auto">
           <div className="row">
-            <div className="col-5 text-center">
+            <div className="col-12 col-lg-5 text-center">
               <h1>{i18n.t('home.title')}</h1>
               <h1>[ {locale} ]</h1>
 
@@ -103,7 +103,7 @@ class Home extends PureComponent {
               </div>
 
               <div className="row">
-                <div className="col-6">
+                <div className="col-12 col-md-6">
 
                   <a href={parameters.gplayLink} rel="nofollow">
                     <img src={gplay} className="img-fluid"
@@ -111,7 +111,7 @@ class Home extends PureComponent {
                   </a>
 
                 </div>
-                <div className="col-6">
+                <div className="col-12 col-md-6">
 
                   <a href={parameters.appStoreLink} rel="nofollow">
                     <img src={apPStore} className="img-fluid"
@@ -121,16 +121,17 @@ class Home extends PureComponent {
               </div>
             </div>
 
-            <div className="col-7">
+            <div className="col-12 col-lg-7">
 
               {uploadResult && uploadResult.length > 0
                 ? this.renderErrors()
-                : <img src={images[random.int(0, images.length - 1)]}
+                : <div className="text-center">
+                  <img src={images[random.int(0, images.length - 1)]}
                        alt=""
                        className="img-fluid shadow mx-auto"/>
-              }
-            </div>
+                </div>}
 
+            </div>
           </div>
         </div>
       </div>

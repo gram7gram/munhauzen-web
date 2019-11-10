@@ -10,6 +10,9 @@ const Scenario = require('../../database/model/Scenario').Scenario;
 const imageService = require('../services/ImageService')
 const scenarioService = require('../services/ScenarioService')
 
+const hasCyrillic = name => /[АаБбВвГгДдЕеЭэЖжЗзИиЙйЫыКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчЩщШшЮюЯяЬьЪъЁё]/.test(name.toLowerCase())
+  || /[АаБбВвГгДдЕеЄєЖжЗзИиЙйІіЇїКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчЩщШшЮюЯяЬь]/.test(name.toLowerCase())
+
 const aggregate = async function (data, callback) {
   return await Promise.all(data.map(callback))
 }
@@ -156,6 +159,10 @@ const parseScenario = source => async function (locale, sheet) {
       inventoryAbsent: [],
     }
 
+    if (decision.scenario && hasCyrillic(decision.scenario)) {
+      warnings.push(`У сценария ${decision.scenario} кирилица в названии`)
+    }
+
     if (item.decision_order !== undefined) {
       let value = parseInt(item.decision_order)
       if (isNaN(value)) value = 0
@@ -193,6 +200,10 @@ const parseScenario = source => async function (locale, sheet) {
       duration: 0
     }
 
+    if (hasCyrillic(audio.audio)) {
+      warnings.push(`У аудио ${audio.audio} кирилица в названии`)
+    }
+
     if (audio.audio === 'Z') {
       audio.audio = 's' + currentScenario.name.substr(1)
     }
@@ -222,6 +233,10 @@ const parseScenario = source => async function (locale, sheet) {
     const image = {
       image: item.id_picture ? item.id_picture.trim() : null,
       duration: 0
+    }
+
+    if (hasCyrillic(image.image)) {
+      warnings.push(`У картинки ${image.image} кирилица в названии`)
     }
 
     if (image.image === 'Z') {
@@ -309,6 +324,10 @@ const parseScenario = source => async function (locale, sheet) {
       locale,
       text,
       source
+    }
+
+    if (scenario.name && hasCyrillic(scenario.name)) {
+      warnings.push(`У сценария ${scenario.name} кирилица в названии`)
     }
 
     if (item.Interaction) {
@@ -464,6 +483,10 @@ const parseChapters = async function (locale, sheet) {
       description
     }
 
+    if (hasCyrillic(content.name)) {
+      warnings.push(`У главы ${content.name} кирилица в названии`)
+    }
+
     if (item.chapter_audio !== undefined) {
       content.chapterAudio = item.chapter_audio.trim()
     }
@@ -526,6 +549,10 @@ const parseGameInventory = async function (locale, sheet) {
     const content = {
       name: item.Name.trim().toUpperCase(),
       locale,
+    }
+
+    if (hasCyrillic(content.name)) {
+      warnings.push(`У инвентаря ${content.name} кирилица в названии`)
     }
 
     if (item.Related_option) {
@@ -595,6 +622,10 @@ const parseMenuInventory = async function (locale, sheet) {
       name: item.inventory_global_required.trim().toUpperCase(),
       locale,
       isMenu: true,
+    }
+
+    if (hasCyrillic(content.name)) {
+      warnings.push(`У инвентаря ${content.name} кирилица в названии`)
     }
 
     if (item.Related_option) {
@@ -712,6 +743,10 @@ const parseStatueInventory = async function (locale, sheet) {
       description
     }
 
+    if (hasCyrillic(content.name)) {
+      warnings.push(`У инвентаря ${content.name} кирилица в названии`)
+    }
+
     try {
 
       await Inventory.findOneAndUpdate({name: content.name}, content, {
@@ -783,6 +818,10 @@ const parseImage = async function (locale, sheet) {
       order: i,
       locale,
       description
+    }
+
+    if (hasCyrillic(content.name)) {
+      warnings.push(`У картинки ${content.name} кирилица в названии`)
     }
 
     if (item.iscolor) {
@@ -895,6 +934,10 @@ const parseAudio = async function (locale, sheet) {
       locale
     }
 
+    if (hasCyrillic(content.name)) {
+      warnings.push(`У аудио ${content.name} кирилица в названии`)
+    }
+
     try {
 
       await Audio.findOneAndUpdate({name: content.name}, content, {
@@ -964,6 +1007,10 @@ const parseAudioFail = async function (locale, sheet) {
       locale,
       description: item.description_audio,
       order: i,
+    }
+
+    if (hasCyrillic(content.name)) {
+      warnings.push(`У фейла ${content.name} кирилица в названии`)
     }
 
     content.audio = content.name.split('_fail')[0]
