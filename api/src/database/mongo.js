@@ -16,26 +16,26 @@ const connect = (host, opts = {}) => {
   opts.useFindAndModify = false
 
   mongoose.connect(host, opts).catch(e => {
-    
+    console.error('[mongodb]', e);
   })
 }
 
-mongoose.connection.on('connected', () => {
-
-  console.log(`Connected with mongo database @ ${host}`);
-
-})
+// mongoose.connection.on('connected', () => {
+//
+//   console.log('[mongodb]', `Connected with mongo database @ ${host}`);
+//
+// })
 
 mongoose.connection.on('error', (err) => {
 
-  console.error(`Error with mongo database @ ${host}`);
-  console.error(err.stack);
+  console.error('[mongodb]', `Error with mongo database @ ${host}`);
+  // console.error(err.stack);
 
 })
 
 mongoose.connection.on('disconnected', () => {
 
-  console.error(`Disconnected from mongo database @ ${host}`);
+  console.error('[mongodb]', `Disconnected from mongo database @ ${host}`);
 
   setTimeout(() => {
     connect(host, params)
@@ -48,7 +48,7 @@ module.exports = {
   },
   disconnect: (done) => {
     mongoose.disconnect(done).catch(e => {
-      
+      console.error('[mongodb]', e);
     });
   },
 };

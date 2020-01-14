@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "locale": "en",
+  "dpi": "hdpi",
+  "size": 138610614,
+  "sizeMB": 132.19,
+  "parts": {
+    "count": 5,
+    "items": [
+      {
+        "size": 12382541,
+        "sizeMB": 11.81,
+        "part": 3,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi-Part_1/part3.zip"
+      },
+      {
+        "size": 16064523,
+        "sizeMB": 15.32,
+        "part": 4,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi-Part_1/part4.zip"
+      },
+      {
+        "size": 19268087,
+        "sizeMB": 18.38,
+        "part": 5,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi-Part_1/part5.zip"
+      },
+      {
+        "size": 20311073,
+        "sizeMB": 19.37,
+        "part": 2,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi-Part_1/part2.zip"
+      },
+      {
+        "size": 70584390,
+        "sizeMB": 67.31,
+        "part": 1,
+        "checksum": "",
+        "path": "/expansions/1-en-hdpi-Part_1/part1.zip"
+      }
+    ]
+  }
+}

@@ -14,7 +14,6 @@ const ImportController = require('./server/controllers/ImportController');
 const ExpansionRESTController = require('./server/controllers/ExpansionRESTController');
 const LoginController = require('./server/controllers/LoginController');
 
-const ErrorLogger = require('./server/services/ErrorLogger');
 const isAdmin = require('./server/services/AuthService').isAdmin;
 
 const app = express();
@@ -42,7 +41,5 @@ app.all('*', (req, res) => {
     message: 'No route found'
   })
 });
-
-app.use(ErrorLogger);
 
 module.exports = app
