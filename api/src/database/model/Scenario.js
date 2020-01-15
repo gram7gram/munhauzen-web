@@ -61,6 +61,10 @@ const schema = new mongoose.Schema({
     type: String,
     required: false
   },
+  expansion: {
+    type: String,
+    required: false
+  },
   isBegin: {
     type: Boolean,
     required: false

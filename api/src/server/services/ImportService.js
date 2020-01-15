@@ -9,6 +9,7 @@ const Scenario = require('../../database/model/Scenario').Scenario;
 
 const imageService = require('../services/ImageService')
 const scenarioService = require('../services/ScenarioService')
+const {getExpansionName} = require('./ExpansionNameService')
 
 const hasCyrillic = name => /[АаБбВвГгДдЕеЭэЖжЗзИиЙйЫыКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчЩщШшЮюЯяЬьЪъЁё]/.test(name.toLowerCase())
   || /[АаБбВвГгДдЕеЄєЖжЗзИиЙйІіЇїКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчЩщШшЮюЯяЬь]/.test(name.toLowerCase())
@@ -325,6 +326,8 @@ const parseScenario = source => async function (locale, sheet) {
       text,
       source
     }
+
+    scenario.expansion = getExpansionName(scenario.chapter)
 
     if (scenario.name && hasCyrillic(scenario.name)) {
       warnings.push(`У сценария ${scenario.name} кирилица в названии`)
