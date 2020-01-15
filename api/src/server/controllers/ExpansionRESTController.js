@@ -32,8 +32,11 @@ router.get('/expansions/:version/:dpi', (req, res, next) => {
   if ([
     'free',
     'full_munchausen_audiobook_eng',
-    'part2_munchausen_audiobook_eng',
-    'part1_munchausen_audiobook_eng'
+    'part_2_munchausen_audiobook_eng',
+    'part_1_munchausen_audiobook_eng',
+    'full_munchausen_audiobook_ru',
+    'part_2_munchausen_audiobook_ru',
+    'part_1_munchausen_audiobook_ru',
   ].indexOf(req.query.product) === -1) {
     res.status(400).json({
       message: 'Invalid `product` in request',
@@ -55,13 +58,16 @@ router.get('/expansions/:version/:dpi', (req, res, next) => {
     case "free":
       parts = ["Part_demo"]
       break
+    case "full_munchausen_audiobook_ru":
     case "full_munchausen_audiobook_eng":
       parts = ["Part_demo", "Part_1", "Part_2"]
       break;
-    case "part2_munchausen_audiobook_eng":
+    case "part_2_munchausen_audiobook_ru":
+    case "part_2_munchausen_audiobook_eng":
       parts = ["Part_demo", "Part_2"]
       break;
-    case "part1_munchausen_audiobook_eng":
+    case "part_1_munchausen_audiobook_ru":
+    case "part_1_munchausen_audiobook_eng":
       parts = ["Part_demo", "Part_1"]
       break;
   }

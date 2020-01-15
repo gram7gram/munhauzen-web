@@ -5,8 +5,11 @@ describe('ExpansionRESTController', () => {
   const products = [
     'free',
     'full_munchausen_audiobook_eng',
-    'part2_munchausen_audiobook_eng',
-    'part1_munchausen_audiobook_eng'
+    'part_2_munchausen_audiobook_eng',
+    'part_1_munchausen_audiobook_eng',
+    'full_munchausen_audiobook_ru',
+    'part_2_munchausen_audiobook_ru',
+    'part_1_munchausen_audiobook_ru',
   ]
 
   const dpis = ['mdpi', 'hdpi']
