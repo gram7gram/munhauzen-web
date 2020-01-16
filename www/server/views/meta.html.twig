@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta name="robots" content="noindex, nofollow">
+{#<meta name="robots" content="index, follow" />#}
+
+<link rel="canonical"
+      hreflang="{{ locale }}"
+      href="{{ parameters.host }}/{% if locale != parameters.defaultLocale %}{{ locale }}{% endif %}"/>
+{% for loc in parameters.supportedLocales %}
+    <link rel="alternate"
+          hreflang="{% if loc != parameters.defaultLocale %}{{ loc }}{% else %}x-default{% endif %}"
+          href="{{ parameters.host }}/{% if loc != parameters.defaultLocale %}{{ loc }}{% endif %}"/>
+{% endfor %}
+
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png"/>
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114.png"/>
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72x72.png"/>
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png"/>
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="/apple-touch-icon-60x60.png"/>
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png"/>
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="/apple-touch-icon-76x76.png"/>
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/apple-touch-icon-152x152.png"/>
+<link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"/>
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"/>
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"/>
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"/>
+<link rel="icon" type="image/png" href="/favicon-128.png" sizes="128x128"/>
+
+<!--Bootstrap conflicts with Reveal (no slide animation with original bs.css)-->
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css?v={{ version }}">

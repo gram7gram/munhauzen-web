@@ -1,7 +1,22 @@
 {
+  "index": {
+    "meta": {
+      "title": "“Oh, that Munchausen!“ - interactive audio book",
+      "description": "",
+      "keywords": ""
+    }
+  },
+  "privacy": {
+    "meta": {
+      "title": "Privacy Policy - “Oh, that Munchausen!“",
+      "description": "Privacy Policy for application",
+      "keywords": "Privacy policy"
+    }
+  },
   "nav": {
     "appstore": "Download on App Store",
-    "gplay": "Download on Google Play"
+    "gplay": "Download on Google Play",
+    "sound": "Toggle sound"
   },
   "slide1": {
     "title": "Our guests have already come, let’s start!"

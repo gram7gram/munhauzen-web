@@ -1,4 +1,5 @@
 const i18n = require('i18n-js');
+const parameters = require('../parameters')
 
 const translations = {
   ua: () => require("./translations/ua.json"),
@@ -20,7 +21,24 @@ const prepareTranslations = (locale) => {
   i18n.missingTranslation = (name) => name;
 }
 
+const detectLocale = (req, res, next) => {
+
+  let locale = req.params.locale || parameters.defaultLocale
+  if (parameters.supportedLocales.indexOf(locale) === -1) {
+    locale = parameters.defaultLocale
+  }
+
+  console.log('locale', locale);
+
+  req.locale = locale
+
+  prepareTranslations(req.locale)
+
+  next()
+}
+
 module.exports = {
   i18n,
   prepareTranslations,
+  detectLocale,
 }

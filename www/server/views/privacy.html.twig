@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="{{ locale }}">
+<head>
+
+    <title>{{ i18n.t('privacy.meta.title') }}{{ parameters.pageprefix }}</title>
+
+    <meta name="description" content="{{ i18n.t('privacy.meta.description') }}">
+    <meta name="keywords" content="{{ i18n.t('privacy.meta.keywords') }}">
+
+    <meta name="og:title" content="{{ i18n.t('privacy.meta.title') }}">
+    <meta name="og:description" content="{{ i18n.t('privacy.meta.description') }}">
+
+    {% include './meta.html.twig' %}
+
+</head>
+<body class="color-accent bg-color-yellow body-bg-light">
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            {% if locale == 'ru' %}
+                {% include './ru/privacy.html.twig' %}
+            {% else %}
+                {% include './en/privacy.html.twig' %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

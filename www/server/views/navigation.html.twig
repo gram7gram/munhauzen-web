@@ -33,40 +33,54 @@
                 <div class="col-6 col-md-9">
                     <ul class="navbar-nav align-items-top">
                         <li class="nav-item d-none d-md-block ml-auto">
-                            <a class="nav-link py-0" href="{{ parameters.appstore }}" rel="nofollow">
+                            <a class="nav-link py-0" href="{{ parameters.appstore }}"
+                               title="{{ i18n.t('nav.appstore') }}"
+                               rel="nofollow">
                                 <img src="/assets/Elements_web/Download_on_the_App_Store_Badge.png?v=1"
                                      style="max-height: 30px"
-                                     alt="Download on App Store"
+                                     alt="{{ i18n.t('nav.appstore') }}"
                                      class="img-fluid">
                             </a>
                         </li>
                         <li class="nav-item d-none d-md-block">
                             <a class="nav-link py-0" href="{{ parameters.gplay }}"
+                               title="{{ i18n.t('nav.gplay') }}"
                                rel="nofollow">
                                 <img src="/assets/Elements_web/google-play-badge.png?v=1"
                                      style="max-height: 30px"
-                                     alt="Download on Google Play"
+                                     alt="{{ i18n.t('nav.gplay') }}"
                                      class="img-fluid">
                             </a>
                         </li>
                         <li class="nav-item dropdown font-roboto ml-auto ml-md-0">
-                            <a class="h5 nav-link dropdown-toggle m-0" href="#" id="langDropdown"
-                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                ENG
+                            <a class="h5 nav-link dropdown-toggle m-0 text-uppercase" href="#"
+                               id="langDropdown"
+                               role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                {{ locale }}
                             </a>
-                            <div class="dropdown-menu bg-color-yellow w-100 text-center" aria-labelledby="langDropdown">
-                                <a class="dropdown-item h5 p-0 my-2" href="/ru">RU</a>
-                                {#<a class="dropdown-item h5 p-0 my-2" href="/ua">UA</a>#}
+                            <div class="dropdown-menu bg-color-yellow w-100 text-center"
+                                 aria-labelledby="langDropdown">
+                                {% for loc in parameters.supportedLocales %}
+                                    {% if loc != locale %}
+                                        <a class="dropdown-item h5 p-0 my-2 text-uppercase"
+                                           href="/{% if loc != parameters.defaultLocale %}{{ loc }}{% endif %}">
+                                            {{ loc }}
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link p-0" href="#">
                                 <img id="navigation-volume"
                                      src="/assets/sound.png?v=1"
                                      data-on="/assets/sound.png?v=1"
                                      data-off="/assets/sound_off.png?v=1"
                                      style="max-height: 30px"
-                                     alt="Toggle sound"
+                                     alt="{{ i18n.t('nav.sound') }}"
                                      class="img-fluid">
                             </a>
                         </li>

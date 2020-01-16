@@ -2,10 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const morgan = require('morgan')
-const langParser = require('accept-language-parser')
-const prepareTranslations = require('./i18n').prepareTranslations
+const {detectLocale} = require('./i18n')
 
 const publicDir = path.resolve(__dirname, '../public')
+
+const router = new express.Router({mergeParams: true});
 
 const IndexController = require('./controllers/IndexController');
 
@@ -14,24 +15,15 @@ const app = express();
 app.use(cors())
 app.use(morgan('tiny'))
 
-app.use((req, res, next) => {
-
-  const defaultLocale = 'en'
-  const supported = ['en', 'ru']
-
-  let locale = langParser.pick(supported, req.headers['accept-language'] || '')
-  if (!locale) {
-    locale = defaultLocale
-  }
-
-  prepareTranslations(locale)
-
-  next()
-})
-
-app.use(IndexController)
-
 app.use(express.static(publicDir))
+
+router.get('/', detectLocale, IndexController.index)
+router.get('/privacy', detectLocale, IndexController.privacy)
+
+router.get('/:locale', detectLocale, IndexController.index)
+router.get('/:locale/privacy', detectLocale, IndexController.privacy)
+
+app.use(router)
 
 app.use('*', (req, res) => {
   res.status(404).send('Not found')

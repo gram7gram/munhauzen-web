@@ -1,4 +1,15 @@
 {
+  "index": {
+    "meta": {
+      "title": "“Ох уж этот Мюнхаузен!” - интерактивная аудиокнига-игра",
+      "description": "Слушай 69 разделов! Принимай решенье! И наслаждайся последствиями!",
+      "keywords": "Интерактивная аудиокнига,Барон Мюнхаузен,Скачать бесплатно аудиокнигу,Аудиокнига игра,Невероятные приключения Барона Мюнхаузена,Аудиокнига на телефона телефона,Интересная аудиокнига"
+    }
+  },
+  "nav": {
+    "appstore": "Download on App Store",
+    "gplay": "Download on Google Play"
+  },
   "slide1": {
     "title": "Our guests have already come, let’s start!"
   },
@@ -6,15 +17,56 @@
     "title": "“Oh, that Munchausen!” is an interactive audiobook game in which you play the role of a granddaughter and help grandfather Baron remember and tell all his adventures! Get ready and listen!"
   },
   "slide3": {
-    "title": ""
+    "title": "All incredible adventures of Baron Munchausen, comic plot twists, puzzles and quests, over 250 colorful illustrations and funny animations will surprise and bring you a laugh and a smile!",
+    "card1": "Listen<br/>69 chapters!",
+    "card2": "Make<br/>decisions!",
+    "card3": "And enjoy the<br/>consequences!"
   },
   "slide4": {
-    "title": ""
+    "title": "Here come Munchausen, his granddaughter and dear guests! All characters were recorded by inimitable actors! Both offline and online modes are available! Over 8 hours of the narration!",
+    "person1": "Munchausen",
+    "person2": "Daughter",
+    "person3": "Captain Nemo",
+    "person4": "First guest",
+    "person5": "Second guest",
+    "person6": "Third guest",
+    "person7": "Nephew"
   },
   "slide5": {
-    "title": ""
+    "title": "Try the free version for now! Listen to Munchausen's stories anywhere and anytime! And support us!",
+    "subtitle": "All Munchausen’s adventures in one application!",
+    "card1": {
+      "img": "/assets/Elements_web/Уходит_премиум.png",
+      "imgMob": "/assets/purchase/free.png",
+      "title": "Try for free",
+      "subtitle": "Demo version",
+      "hours": "More than 2 hours of audiobook",
+      "chapters": "29 opened chapters",
+      "images": "95 illustrations",
+      "price": "FREE"
+    },
+    "card2": {
+      "img": "/assets/Elements_web/demo_version.png",
+      "imgMob": "/assets/purchase/part1.png",
+      "title": "Buy one part",
+      "subtitle": "Part 1 or Part 2",
+      "hours": "More than 4 hours of audiobook!",
+      "chapters": "34 chapters are available!",
+      "images": "100+ illustrations!",
+      "price": "$3 only!"
+    },
+    "card3": {
+      "img": "/assets/Elements_web/Игра макет Разные_3.png",
+      "imgMob": "/assets/purchase/full.png",
+      "title": "Buy full book",
+      "subtitle": "Full version",
+      "hours": "More than 7 hours of audiobook!!",
+      "chapters": "All 69 chapters are available!!",
+      "images": "All 250+ illustrations!!",
+      "price": "$5"
+    }
   },
   "slide6": {
-    "title": ""
+    "title": "Download, listen and enjoy my incredible adventures!"
   }
 }

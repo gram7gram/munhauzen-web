@@ -1,46 +1,23 @@
+{% set version = '2020-01-17' %}
+
 <!doctype html>
-<html lang="en">
+<html lang="{{ locale }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Oh, that Munchausen!{{ parameters.pageprefix }}</title>
-    <meta name="robots" content="noindex, nofollow">
-    <!--<meta name="robots" content="index, follow" />-->
+    <title>{{ i18n.t('index.meta.title') }}{{ parameters.pageprefix }}</title>
 
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <meta name="description" content="{{ i18n.t('index.meta.description') }}">
+    <meta name="keywords" content="{{ i18n.t('index.meta.keywords') }}">
 
-    <meta name="og:title" content="Oh, that Munchausen!">
-    <meta name="og:description" content="">
-    <meta name="og:image" content="">
+    <meta name="og:title" content="{{ i18n.t('index.meta.title') }}">
+    <meta name="og:description" content="{{ i18n.t('index.meta.description') }}">
 
-    <link rel="canonical" hreflang="en" href="https://www.thebaronmunchausen.com/">
-    <link rel="alternate" hreflang="x-default" href="https://www.thebaronmunchausen.com/">
-    <link rel="alternate" hreflang="ru" href="https://www.thebaronmunchausen.com/ru">
-    <link rel="alternate" hreflang="uk" href="https://www.thebaronmunchausen.com/ua">
+    {% include './meta.html.twig' %}
 
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72x72.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/apple-touch-icon-60x60.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/apple-touch-icon-76x76.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/apple-touch-icon-152x152.png"/>
-    <link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"/>
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"/>
-    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"/>
-    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"/>
-    <link rel="icon" type="image/png" href="/favicon-128.png" sizes="128x128"/>
-
-    <!--Bootstrap conflicts with Reveal (no slide animation with original bs.css)-->
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css?v=3">
-
-    <link rel="stylesheet" type="text/css" href="/vendor/carousel-3d/jquery.carousel-3d.default.css?v=1"/>
-    <link rel="stylesheet" type="text/css" href="/css/reset.css?v=1">
-    <link rel="stylesheet" type="text/css" href="/css/reveal.css?v=4">
-    <link rel="stylesheet" type="text/css" href="/css/custom.css?v=8">
+    <link rel="stylesheet" type="text/css" href="/vendor/carousel-3d/jquery.carousel-3d.default.css?v={{ version }}"/>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css?v={{ version }}">
+    <link rel="stylesheet" type="text/css" href="/css/reveal.css?v={{ version }}">
+    <link rel="stylesheet" type="text/css" href="/css/presentation.css?v={{ version }}">
 
 </head>
 <body class="bg-color-yellow body-bg-light">
@@ -107,15 +84,10 @@
 <script type="text/javascript" src="/vendor/carousel-3d/jquery.carousel-3d.min.js"></script>
 <!--END Carousel 3D-->
 
-<!--START Reveal-->
-<script type="text/javascript" src="/js/reveal.js?v=2"></script>
-<!--END Reveal-->
-
-<!--START Progress bar-->
+<script type="text/javascript" src="/js/reveal.js?v={{ version }}"></script>
 <script type="text/javascript" src="/js/progressbar.min.js"></script>
-<!--END Progress bar-->
 
-<script type="text/javascript" src="/js/index.js?v=47"></script>
+<script type="text/javascript" src="/js/index.js?v={{ version }}"></script>
 
 </body>
 </html>

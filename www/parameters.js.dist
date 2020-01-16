@@ -7,6 +7,9 @@ const config = {
     host: 'https://thebaronmunchausen.com',
     gplay: 'https://play.google.com/apps/en.munchausen.fingertipsandcompany.full',
     appstore: 'https://itunes.apple.com/app/id000000001',
+    defaultLocale: 'en',
+    supportedLocales: ['en', 'ru'],
+    email: 'fingertipsandcompany@gmail.com',
     gtm: {
       enabled: true,
       code: ''
