@@ -100,7 +100,22 @@
 .version-card .version-card-mobile-price {
     position: absolute;
     bottom: 0;
+    left: 0;
     font-weight: bold;
+}
+
+.version-card .version-card-discount {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    max-height: 30px;
+}
+
+@media (min-width: 768px) {
+    .version-card .version-card-discount {
+        bottom: 5px;
+        right: 5px;
+    }
 }
 
 .version-card .version-card-header {

@@ -51,17 +51,19 @@
       "hours": "Более 2 часов аудио-истории",
       "chapters": "29 доступных глав",
       "images": "95 илюстраций",
-      "price": "БЕСПЛАТНО"
+      "price": "БЕСПЛАТНО",
+      "discount": ""
     },
     "card2": {
       "img": "/assets/Elements_web/demo_version.png",
       "imgMob": "/assets/purchase/part1.png",
       "title": "Купите часть",
-      "subtitle": "Part 1 or Part 2",
-      "hours": "More than 4 hours of audiobook!",
-      "chapters": "34 chapters are available!",
-      "images": "100+ illustrations!",
-      "price": "$3 only!"
+      "subtitle": "Часть 1 или 2",
+      "hours": "Более 4 часов аудио-истории!",
+      "chapters": "34 глав!",
+      "images": "100+ илюстраций!",
+      "price": "Всего $3!",
+      "discount": ""
     },
     "card3": {
       "img": "/assets/Elements_web/Игра макет Разные_3.png",
@@ -71,7 +73,8 @@
       "hours": "Более 7 часов аудио-истории!!",
       "chapters": "Все 69 глав!!",
       "images": "Все 250+ илюстраций!!",
-      "price": "$5"
+      "price": "$5",
+      "discount": "/assets/purchase/off.png"
     }
   },
   "slide6": {

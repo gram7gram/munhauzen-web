@@ -6,9 +6,9 @@
             <tr style="height: 80vh;">
                 <td style="vertical-align: middle;text-align: center">
                     <div class="container-fluid">
-                        <div class="row align-items-center no-gutters">
+                        <div class="row align-items-top no-gutters">
                             <div class="col-3">
-                                <div class="mx-1 pt-5">
+                                <div class="mx-1">
                                     <img data-src="/assets/ramka_2.png?v=1"
                                          alt=""
                                          class="img-fluid decor-img">
@@ -63,6 +63,12 @@
                                                 <h3 class="h2 font-roboto color-accent m-0">
                                                     {{ i18n.t('slide5.'+card+'.price')|safe }}
                                                 </h3>
+
+                                                {% if i18n.t('slide5.'+card+'.discount') %}
+                                                    <img class="img-fluid version-card-discount"
+                                                         data-src="{{ i18n.t('slide5.'+card+'.discount') }}?v=1"
+                                                         alt="">
+                                                {% endif %}
                                             </div>
                                         </a>
                                     </div>
@@ -72,7 +78,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <h2 class="h2 mt-3 text-center font-markscript">
+                                <h2 class="h2 m-0 text-center font-markscript">
                                     “{{ i18n.t('slide5.subtitle')|safe }}“
                                 </h2>
                             </div>
@@ -98,7 +104,7 @@
                                class="version-card-header p-1 p-md-3 my-rounded mobile-link">
                                 <div class="container-fluid p-0">
                                     <div class="row no-gutters align-items-center">
-                                        <div class="col-5 text-left">
+                                        <div class="col-5 col-sm-auto text-left">
                                             <img class="img-fluid pr-2"
                                                  data-src="{{ i18n.t('slide5.'+card+'.imgMob') }}?v=1"
                                                  id="slide-5-img-{{ loop.index }}-mobile"
@@ -110,14 +116,20 @@
                                             </h2>
 
                                             <div class="version-card-mobile-description font-roboto">
-                                                <p class="mb-1 mb-sm-3 color-accent">{{ i18n.t('slide5.'+card+'.hours')|safe }}</p>
-                                                <p class="mb-1 mb-sm-3 color-accent">{{ i18n.t('slide5.'+card+'.chapters')|safe }}</p>
-                                                <p class="mb-1 mb-sm-3 color-accent">{{ i18n.t('slide5.'+card+'.images')|safe }}</p>
+                                                <p class="mb-1 color-accent">{{ i18n.t('slide5.'+card+'.hours')|safe }}</p>
+                                                <p class="mb-1 color-accent">{{ i18n.t('slide5.'+card+'.chapters')|safe }}</p>
+                                                <p class="mb-1 color-accent">{{ i18n.t('slide5.'+card+'.images')|safe }}</p>
                                             </div>
 
                                             <h3 class="h4 font-roboto color-primary m-0 version-card-mobile-price">
                                                 {{ i18n.t('slide5.'+card+'.price')|safe }}
                                             </h3>
+
+                                            {% if i18n.t('slide5.'+card+'.discount') %}
+                                                <img class="img-fluid version-card-discount"
+                                                     data-src="{{ i18n.t('slide5.'+card+'.discount') }}?v=1"
+                                                     alt="">
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
