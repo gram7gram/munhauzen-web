@@ -642,18 +642,24 @@ function configureSlide5() {
   var img2Mobile = $('#slide-5-img-2-mobile')
   var img2Desktop = $('#slide-5-img-2-desktop')
 
+  var img3Mobile = $('#slide-5-img-3-mobile')
   var img3Desktop = $('#slide-5-img-3-desktop')
 
-  var width1 = Math.ceil(screenHeight * 0.35 - 20)
-  var width2 = Math.ceil(screenHeight * 0.4)
+  var img0Desktop = $('#slide-5-img-0-desktop')
 
-  img1Mobile.css('max-height', width1 + 'px')
-  img1Desktop.css('max-height', width2 + 'px')
+  var maxHeight1 = Math.ceil(screenHeight * 0.25 - 20)
+  var maxHeight2 = Math.ceil(screenHeight * 0.35)
 
-  img2Mobile.css('max-height', width1 + 'px')
-  img2Desktop.css('max-height', width2 + 'px')
+  img1Mobile.css('max-height', maxHeight1 + 'px')
+  img1Desktop.css('max-height', maxHeight2 + 'px')
 
-  img3Desktop.css('max-height', Math.ceil(screenHeight * 0.3) + 'px')
+  img2Mobile.css('max-height', maxHeight1 + 'px')
+  img2Desktop.css('max-height', maxHeight2 + 'px')
+
+  img3Mobile.css('max-height', maxHeight1 + 'px')
+  img3Desktop.css('max-height', maxHeight2 + 'px')
+
+  img0Desktop.css('max-height', Math.ceil(screenHeight * 0.3) + 'px')
 
 }
 

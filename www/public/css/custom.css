@@ -87,7 +87,6 @@
 
 .version-card .version-card-text > p {
     font-weight: bold;
-    font-size: 14px;
     line-height: 21px;
     color: white
 }
@@ -95,7 +94,6 @@
 .version-card .version-card-mobile-description {
     position: absolute;
     top: 50%;
-    left: 5px;
     transform: translate(0, -50%);
 }
 
@@ -111,6 +109,8 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 .version-card .version-card-body {
@@ -440,4 +440,136 @@
 .animation-fade-in {
     opacity: 1;
     transition: opacity .3s;
+}
+
+.h1 {
+    font-size: 2.5rem;
+}
+
+.h2 {
+    font-size: 2rem;
+}
+
+.h3 {
+    font-size: 1.75rem;
+}
+
+.h4 {
+    font-size: 1.5rem;
+}
+
+.h5, .p {
+    font-size: 1.25rem;
+}
+
+.h6 {
+    font-size: 1rem;
+}
+
+@media (min-width: 576px) {
+    .h1 {
+        font-size: 2.5rem;
+    }
+
+    .h2 {
+        font-size: 2rem;
+    }
+
+    .h3 {
+        font-size: 1.75rem;
+    }
+
+    .h4 {
+        font-size: 1.5rem;
+    }
+
+    .h5, .p {
+        font-size: 1.25rem;
+    }
+
+    .h6 {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .h1 {
+        font-size: 2rem;
+    }
+
+    .h2 {
+        font-size: 1.5rem;
+    }
+
+    .h3 {
+        font-size: 1.25rem;
+    }
+
+    .h4 {
+        font-size: 1rem;
+    }
+
+    .h5, .p {
+        font-size: .75rem;
+    }
+
+    .h6 {
+        font-size: .5em;
+    }
+}
+
+@media (min-width: 992px) {
+    .h1 {
+        font-size: 2.25rem;
+    }
+
+    .h2 {
+        font-size: 1.75rem;
+    }
+
+    .h3 {
+        font-size: 1.5rem;
+    }
+
+    .h4 {
+        font-size: 1.25rem;
+    }
+
+    .h5, .p {
+        font-size: 1rem;
+    }
+
+    .h6 {
+        font-size: .75em;
+    }
+}
+
+/*@media (min-width: 1200px) {*/
+/*    .container {*/
+/*        max-width: 1140px;*/
+/*    }*/
+/*}*/
+
+#slide-6-img-1 {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 75%;
+    max-width: 500px;
+    z-index: 3;
+}
+
+#slide-6-img-2 {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 75%;
+    max-width: 600px;
+    z-index: 3;
+}
+
+#wau-animation {
+    position: absolute;
+    bottom: 0;
+    z-index: 4;
 }

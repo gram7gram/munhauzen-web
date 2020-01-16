@@ -1,5 +1,6 @@
 admin/node_modules
 api/node_modules
+www/node_modules
 
 *.zip
 .DS_Store
@@ -9,17 +10,16 @@ npm-debug.log*
 
 admin/package-lock.json
 api/package-lock.json
+www/package-lock.json
 
 admin/src/parameters.js
 api/parameters.js
+www/parameters.js
 
 docker-compose.yml
 api/env/Dockerfile
 admin/env/Dockerfile
 www/env/Dockerfile
-
-api/logs/*.log
-admin/logs/*.log
 
 .persistency
 

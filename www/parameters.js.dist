@@ -1,0 +1,21 @@
+const env = process.env.NODE_ENV || 'production'
+
+const config = {
+  development: {},
+  production: {
+    pageprefix: ' - thebaronmunchausen.com',
+    host: 'https://thebaronmunchausen.com',
+    gplay: 'https://play.google.com/apps/en.munchausen.fingertipsandcompany.full',
+    appstore: 'https://itunes.apple.com/app/id000000001',
+    gtm: {
+      enabled: true,
+      code: ''
+    }
+  }
+}
+
+if (config[env] === undefined) {
+  throw `Missing parameters for ${env} environment`
+}
+
+module.exports = config[env]
