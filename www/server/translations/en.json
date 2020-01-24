@@ -26,6 +26,7 @@
   },
   "slide3": {
     "title": "All incredible adventures of Baron Munchausen, comic plot twists, puzzles and quests, over 250 colorful illustrations and funny animations will surprise and bring you a laugh and a smile!",
+    "title_mobile": "All incredible adventures of Baron Munchausen, comic plot twists, puzzles and quests, over 250 colorful illustrations and funny animations will surprise and bring you a laugh and a smile!",
     "card1": "Listen<br/>69 chapters!",
     "card2": "Make<br/>decisions!",
     "card3": "And enjoy the<br/>consequences!"
@@ -41,7 +42,7 @@
     "person7": "Nephew"
   },
   "slide5": {
-    "title": "Try the free version for now! Listen to Munchausen's stories anywhere and anytime! And support us!",
+    "title": "Try the free version for now! Listen to Munchausen's stories anywhere and anytime!<br/>And support us!",
     "subtitle": "All Munchausen’s adventures in one application!",
     "card1": {
       "img": "/assets/Elements_web/Уходит_премиум.png",

@@ -617,14 +617,17 @@ function configureSlide3() {
 function configureSlide4() {
 
   var carousel = $('#slide-4-carousel')
+  var text = $('#slide-4-text')
 
-  var height, width
+  var height, width, textHeight = '40vh'
   if (xs) {
     width = screenWidth * 0.9
     height = width / 2
+    textHeight = '30vh'
   } else if (sm) {
     width = screenWidth * 0.9
     height = width / 2
+    textHeight = '30vh'
   } else if (lg) {
     height = Math.ceil(screenHeight * 0.35)
     width = Math.ceil(height * 2)
@@ -632,6 +635,10 @@ function configureSlide4() {
     height = Math.ceil(screenWidth * 0.25)
     width = Math.ceil(height * 2)
   }
+
+  text.css({
+    height: textHeight
+  })
 
   carousel.css({
     width: width + 'px',
