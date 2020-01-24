@@ -60,9 +60,10 @@
                                         {{ i18n.t('slide5.'+card+'.price')|safe }}
                                     </h3>
 
-                                    {% if i18n.t('slide5.'+card+'.discount') %}
+                                    {% set discount = i18n.t('slide5.'+card+'.discount') %}
+                                    {% if discount %}
                                         <img class="img-fluid version-card-discount"
-                                             data-src="{{ i18n.t('slide5.'+card+'.discount') }}?v=1"
+                                             data-src="{{ discount }}?v=1"
                                              alt="">
                                     {% endif %}
                                 </div>
@@ -115,9 +116,10 @@
                                                 {{ i18n.t('slide5.'+card+'.price')|safe }}
                                             </h3>
 
-                                            {% if i18n.t('slide5.'+card+'.discount') %}
+                                            {% set discount = i18n.t('slide5.'+card+'.discount') %}
+                                            {% if discount %}
                                                 <img class="img-fluid version-card-discount"
-                                                     data-src="{{ i18n.t('slide5.'+card+'.discount') }}?v=1"
+                                                     data-src="{{ discount }}?v=1"
                                                      alt="">
                                             {% endif %}
                                         </div>

@@ -106,7 +106,7 @@
     position: absolute;
     bottom: 0;
     right: 10px;
-    max-height: 30px;
+    max-height: 50px;
 }
 
 @media (min-width: 768px) {

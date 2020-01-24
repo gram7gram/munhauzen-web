@@ -1,9 +1,9 @@
 {
   "index": {
     "meta": {
-      "title": "“Oh, that Munchausen!“ - interactive audio book",
-      "description": "",
-      "keywords": ""
+      "title": "“Oh, that Munchausen!” - new interactive audiobook game is already on AppleStore and GooglePlay!",
+      "description": "Listen to the world classic comedy based on the original adventures of Baron Munchausen! Download and listen to Munchausen’s incredible adventures!",
+      "keywords": "Interactive audiobook, decision game, game choose story, audio game, baron Munchausen, game quest, listen audiobook, listen tale, download audiobook, download adventures"
     }
   },
   "privacy": {
@@ -51,7 +51,8 @@
       "hours": "More than 2 hours of audiobook",
       "chapters": "29 opened chapters",
       "images": "95 illustrations",
-      "price": "FREE"
+      "price": "FREE",
+      "discount": ""
     },
     "card2": {
       "img": "/assets/Elements_web/demo_version.png",
@@ -61,7 +62,8 @@
       "hours": "More than 4 hours of audiobook!",
       "chapters": "34 chapters are available!",
       "images": "100+ illustrations!",
-      "price": "$3 only!"
+      "price": "$3 only!",
+      "discount": ""
     },
     "card3": {
       "img": "/assets/Elements_web/Игра макет Разные_3.png",
@@ -71,10 +73,15 @@
       "hours": "More than 7 hours of audiobook!!",
       "chapters": "All 69 chapters are available!!",
       "images": "All 250+ illustrations!!",
-      "price": "$5"
+      "price": "$5",
+      "discount": "/assets/purchase/off.png"
     }
   },
   "slide6": {
     "title": "Download, listen and enjoy my incredible adventures!"
+  },
+  "footer": {
+    "copyright": "FingertipsAndCompany. All rights reserved.",
+    "privacy": "Privacy policy"
   }
 }
