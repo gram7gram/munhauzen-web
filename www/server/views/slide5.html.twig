@@ -4,121 +4,111 @@
         <table class="p-0 m-0 border-0 w-100">
             <tbody>
             <tr style="height: 80vh;">
-                <td style="vertical-align: middle;text-align: center">
-                    <div class="container-fluid">
-                        <div class="row align-items-top no-gutters">
-                            <div class="col-3">
-                                <div class="mx-1">
-                                    <img data-src="/assets/ramka_2.png?v=1"
-                                         alt=""
-                                         class="img-fluid decor-img">
+                <td style="width: 25%;vertical-align: middle;text-align: center">
+                    <div class="mx-1 mt-5">
+                        <img data-src="/assets/ramka_2.png?v=1"
+                             alt=""
+                             class="img-fluid decor-img">
 
-                                    <p class="h3 font-markscript my-3">
-                                        “{{ i18n.t('slide5.title')|safe }}“
-                                    </p>
+                        <p class="h3 font-markscript my-3">
+                            “{{ i18n.t('slide5.title')|safe }}“
+                        </p>
 
-                                    <img data-src="/assets/ramka_2.png?v=1"
-                                         style="transform: rotate(180deg);"
-                                         alt=""
-                                         class="img-fluid decor-img">
+                        <img data-src="/assets/ramka_2.png?v=1"
+                             style="transform: rotate(180deg);"
+                             alt=""
+                             class="img-fluid decor-img">
 
-                                    <div>
-                                        <img data-src="/assets/Elements_web/An_icon_munchauzen.gif?v=1"
-                                             id="slide-5-img-0-desktop"
-                                             alt=""
-                                             class="img-fluid p-1 mt-4">
-                                    </div>
-                                </div>
-                            </div>
-
-                            {% for card in [ 'card1', 'card2', 'card3' ] %}
-                                <div class="col-3">
-                                    <h3 class="h2 color-accent font-markscript text-truncate">
-                                        {{ i18n.t('slide5.'+card+'.title')|safe }}
-                                    </h3>
-                                    <div class="card version-card mx-1">
-
-                                        <a href="javascript:"
-                                           data-googleplay="{{ parameters.gplay }}"
-                                           data-appstore="{{ parameters.appstore }}"
-                                           rel="nofollow"
-                                           class="mobile-link">
-                                            <div class="version-card-header">
-                                                <img class="img-fluid p-1"
-                                                     data-src="{{ i18n.t('slide5.'+card+'.img') }}?v=1"
-                                                     id="slide-5-img-{{ loop.index }}-desktop"
-                                                     alt="{{ i18n.t('slide5.'+card+'.subtitle') }}">
-                                            </div>
-                                            <div class="card-body text-center bg-color-primary-light version-card-body p-2">
-                                                <h2 class="h2 color-accent font-markscript text-truncate">
-                                                    {{ i18n.t('slide5.'+card+'.subtitle')|safe }}
-                                                </h2>
-
-                                                <div class="version-card-text font-roboto">
-                                                    <p class="p mb-2">{{ i18n.t('slide5.'+card+'.hours')|safe }}</p>
-                                                    <p class="p mb-2">{{ i18n.t('slide5.'+card+'.chapters')|safe }}</p>
-                                                    <p class="p mb-2">{{ i18n.t('slide5.'+card+'.images')|safe }}</p>
-                                                </div>
-
-                                                <h3 class="h2 font-roboto color-accent m-0">
-                                                    {{ i18n.t('slide5.'+card+'.price')|safe }}
-                                                </h3>
-
-                                                {% if i18n.t('slide5.'+card+'.discount') %}
-                                                    <img class="img-fluid version-card-discount"
-                                                         data-src="{{ i18n.t('slide5.'+card+'.discount') }}?v=1"
-                                                         alt="">
-                                                {% endif %}
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            {% endfor %}
-
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <h2 class="h2 m-0 mt-lg-3 text-center font-markscript">
-                                    “{{ i18n.t('slide5.subtitle')|safe }}“
-                                </h2>
-                            </div>
+                        <div>
+                            <img data-src="/assets/Elements_web/An_icon_munchauzen.gif?v=1"
+                                 id="slide-5-img-0-desktop"
+                                 alt=""
+                                 class="img-fluid p-1 mt-4">
                         </div>
                     </div>
                 </td>
+                {% for card in [ 'card1', 'card2', 'card3' ] %}
+                    <td style="width: 25%;vertical-align: middle;text-align: center">
+                        <h3 class="h2 color-accent font-markscript text-truncate">
+                            {{ i18n.t('slide5.'+card+'.title')|safe }}
+                        </h3>
+                        <div class="card version-card mx-1">
+
+                            <a href="javascript:"
+                               data-googleplay="{{ parameters.gplay }}"
+                               data-appstore="{{ parameters.appstore }}"
+                               rel="nofollow"
+                               class="mobile-link">
+                                <div class="version-card-header">
+                                    <img class="img-fluid p-1"
+                                         data-src="{{ i18n.t('slide5.'+card+'.img') }}?v=1"
+                                         id="slide-5-img-{{ loop.index }}-desktop"
+                                         alt="{{ i18n.t('slide5.'+card+'.subtitle') }}">
+                                </div>
+                                <div class="card-body text-center bg-color-primary-light version-card-body p-2">
+                                    <h2 class="h2 color-accent font-markscript text-truncate">
+                                        {{ i18n.t('slide5.'+card+'.subtitle')|safe }}
+                                    </h2>
+
+                                    <div class="version-card-text font-roboto">
+                                        <p class="p mb-2">{{ i18n.t('slide5.'+card+'.hours')|safe }}</p>
+                                        <p class="p mb-2">{{ i18n.t('slide5.'+card+'.chapters')|safe }}</p>
+                                        <p class="p mb-2">{{ i18n.t('slide5.'+card+'.images')|safe }}</p>
+                                    </div>
+
+                                    <h3 class="h2 font-roboto color-accent m-0">
+                                        {{ i18n.t('slide5.'+card+'.price')|safe }}
+                                    </h3>
+
+                                    {% if i18n.t('slide5.'+card+'.discount') %}
+                                        <img class="img-fluid version-card-discount"
+                                             data-src="{{ i18n.t('slide5.'+card+'.discount') }}?v=1"
+                                             alt="">
+                                    {% endif %}
+                                </div>
+                            </a>
+                        </div>
+                    </td>
+                {% endfor %}
             </tr>
             </tbody>
         </table>
+
+        <h2 class="h2 m-0 mt-lg-3 text-center font-markscript">
+            “{{ i18n.t('slide5.subtitle')|safe }}“
+        </h2>
+
     </div>
 
     <div class="d-block d-md-none">
         <table class="p-0 m-0 border-0 w-100">
             <tbody>
             {% for card in [ 'card1', 'card2', 'card3' ] %}
-                <tr style="height: 20vh;">
+                <tr>
                     <td style="width: 100%;vertical-align: middle;text-align: center">
-                        <div class="card version-card mx-4 my-2">
+                        <div class="card version-card mx-2 mb-2">
                             <a href="javascript:"
                                data-googleplay="{{ parameters.gplay }}"
                                data-appstore="http://itunes.apple.com/app/id000000000"
                                rel="nofollow"
                                class="version-card-header p-1 p-md-3 my-rounded mobile-link">
                                 <div class="container-fluid p-0">
-                                    <div class="row no-gutters align-items-center">
+                                    <div class="row no-gutters align-items-top">
                                         <div class="col-5 col-sm-auto text-left">
                                             <img class="img-fluid pr-2"
                                                  data-src="{{ i18n.t('slide5.'+card+'.imgMob') }}?v=1"
                                                  id="slide-5-img-{{ loop.index }}-mobile"
                                                  alt="{{ i18n.t('slide5.'+card+'.subtitle') }}">
                                         </div>
-                                        <div class="col-7 text-left position-relative" style="min-height: 150px">
+                                        <div class="col-7 text-left">
                                             <h2 class="version-card-mobile-title font-markscript color-primary text-truncate">
                                                 {{ i18n.t('slide5.'+card+'.subtitle')|safe }}
                                             </h2>
 
                                             <div class="version-card-mobile-description font-roboto">
                                                 <p class="mb-1 color-accent">{{ i18n.t('slide5.'+card+'.hours')|safe }}</p>
-                                                <p class="mb-1 color-accent">{{ i18n.t('slide5.'+card+'.chapters')|safe }}</p>
-                                                <p class="mb-1 color-accent">{{ i18n.t('slide5.'+card+'.images')|safe }}</p>
+                                                <p class="mb-1 color-accent d-none d-sm-block">{{ i18n.t('slide5.'+card+'.chapters')|safe }}</p>
+                                                <p class="mb-1 color-accent d-none d-sm-block">{{ i18n.t('slide5.'+card+'.images')|safe }}</p>
                                             </div>
 
                                             <h3 class="h4 font-roboto color-primary m-0 version-card-mobile-price">

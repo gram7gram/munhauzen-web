@@ -440,6 +440,12 @@ function configureSlides() {
   lg = 993 <= screenWidth && screenWidth <= 1200
   xl = 1201 <= screenWidth
 
+  console.log('xs', xs);
+  console.log('sm', sm);
+  console.log('md', md);
+  console.log('lg', lg);
+  console.log('xl', xl);
+
   try {
     configureSlide1()
     configureSlide2()
@@ -647,17 +653,23 @@ function configureSlide5() {
 
   var img0Desktop = $('#slide-5-img-0-desktop')
 
-  var maxHeight1 = Math.ceil(screenHeight * 0.25 - 20)
-  var maxHeight2 = Math.ceil(screenHeight * 0.35)
+  var maxHeightMobile, maxHeightDesktop;
 
-  img1Mobile.css('max-height', maxHeight1 + 'px')
-  img1Desktop.css('max-height', maxHeight2 + 'px')
+  maxHeightMobile = Math.ceil(screenHeight * 0.25 - 20)
 
-  img2Mobile.css('max-height', maxHeight1 + 'px')
-  img2Desktop.css('max-height', maxHeight2 + 'px')
+  if (lg || xl) {
+    maxHeightDesktop = Math.ceil(screenHeight * 0.5)
+  } else {
+    maxHeightDesktop = Math.ceil(screenHeight * 0.35)
+  }
 
-  img3Mobile.css('max-height', maxHeight1 + 'px')
-  img3Desktop.css('max-height', maxHeight2 + 'px')
+  img1Mobile.css('max-height', maxHeightMobile + 'px')
+  img2Mobile.css('max-height', maxHeightMobile + 'px')
+  img3Mobile.css('max-height', maxHeightMobile + 'px')
+
+  img1Desktop.css('max-height', maxHeightDesktop + 'px')
+  img2Desktop.css('max-height', maxHeightDesktop + 'px')
+  img3Desktop.css('max-height', maxHeightDesktop + 'px')
 
   img0Desktop.css('max-height', Math.ceil(screenHeight * 0.3) + 'px')
 

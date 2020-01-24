@@ -23,7 +23,11 @@
 .reveal-slide-2,
 .reveal-slide-3,
 .reveal-slide-4,
-.reveal-slide-5,
+.reveal-slide-5 {
+    margin-top: 7.5vh !important;
+    height: 85vh !important;
+}
+
 .reveal-slide-6 {
     margin-top: 10vh !important;
     height: 90vh !important;
@@ -92,15 +96,9 @@
 }
 
 .version-card .version-card-mobile-description {
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
 }
 
 .version-card .version-card-mobile-price {
-    position: absolute;
-    bottom: 0;
-    left: 0;
     font-weight: bold;
 }
 
@@ -587,4 +585,8 @@
     position: absolute;
     bottom: 0;
     z-index: 4;
+}
+
+#navigation img {
+    max-height: 40px;
 }

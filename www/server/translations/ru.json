@@ -46,7 +46,7 @@
     "card1": {
       "img": "/assets/Elements_web/Уходит_премиум.png",
       "imgMob": "/assets/purchase/free.png",
-      "title": "Попробуйте",
+      "title": "Попробуйте!",
       "subtitle": "Демо версия",
       "hours": "Более 2 часов аудио-истории",
       "chapters": "29 доступных глав",
@@ -57,7 +57,7 @@
     "card2": {
       "img": "/assets/Elements_web/demo_version.png",
       "imgMob": "/assets/purchase/part1.png",
-      "title": "Купите часть",
+      "title": "Купите часть!",
       "subtitle": "Часть 1 или 2",
       "hours": "Более 4 часов аудио-истории!",
       "chapters": "34 глав!",
@@ -68,7 +68,7 @@
     "card3": {
       "img": "/assets/Elements_web/Игра макет Разные_3.png",
       "imgMob": "/assets/purchase/full.png",
-      "title": "Купите всю книгу",
+      "title": "Купите всю книгу!",
       "subtitle": "Полная версия",
       "hours": "Более 7 часов аудио-истории!!",
       "chapters": "Все 69 глав!!",

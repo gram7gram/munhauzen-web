@@ -46,7 +46,7 @@
     "card1": {
       "img": "/assets/Elements_web/Уходит_премиум.png",
       "imgMob": "/assets/purchase/free.png",
-      "title": "Try for free",
+      "title": "Try for free!",
       "subtitle": "Demo version",
       "hours": "More than 2 hours of audiobook",
       "chapters": "29 opened chapters",
@@ -56,7 +56,7 @@
     "card2": {
       "img": "/assets/Elements_web/demo_version.png",
       "imgMob": "/assets/purchase/part1.png",
-      "title": "Buy one part",
+      "title": "Buy one part!",
       "subtitle": "Part 1 or Part 2",
       "hours": "More than 4 hours of audiobook!",
       "chapters": "34 chapters are available!",
@@ -66,7 +66,7 @@
     "card3": {
       "img": "/assets/Elements_web/Игра макет Разные_3.png",
       "imgMob": "/assets/purchase/full.png",
-      "title": "Buy full book",
+      "title": "Buy full book!",
       "subtitle": "Full version",
       "hours": "More than 7 hours of audiobook!!",
       "chapters": "All 69 chapters are available!!",

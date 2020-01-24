@@ -1,45 +1,42 @@
 <nav id="navigation">
     <div class="navbar fixed-top navbar-expand">
         <div class="container-fluid p-0">
-            <div class="row no-gutters w-100">
-                <div class="col-6 col-md-3">
-                    <ul class="navbar-nav">
+            <div class="row no-gutters w-100 align-items-center">
+
+                <div class="col-6">
+                    <ul class="navbar-nav justify-content-start">
                         <li class="nav-item">
-                            <a class="nav-link color-accent" href="/">
-                                <img src="/assets/Logo_FingerTips.png?v=1" class="img-fluid" alt=""
-                                     style="max-height: 60px"/>
+                            <a class="nav-link color-accent p-0" href="/">
+                                <img src="/assets/Logo_FingerTips.png?v=1" class="img-fluid p-1" alt=""/>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link color-accent" href="#">
-                                <img src="/assets/fb.png?v=1" class="img-fluid" alt=""
-                                     style="max-height: 30px"/>
+                            <a class="nav-link color-accent p-0" href="#">
+                                <img src="/assets/fb.png?v=1" class="img-fluid p-1" alt=""/>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link color-accent" href="#">
-                                <img src="/assets/ig.png?v=1" class="img-fluid" alt=""
-                                     style="max-height: 30px"/>
+                            <a class="nav-link color-accent p-0" href="#">
+                                <img src="/assets/ig.png?v=1" class="img-fluid p-1" alt=""/>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link color-accent" href="#">
-                                <img src="/assets/vk-social.png?v=1" class="img-fluid" alt=""
-                                     style="max-height: 30px"/>
+                            <a class="nav-link color-accent p-0" href="#">
+                                <img src="/assets/vk-social.png?v=1" class="img-fluid p-1" alt=""/>
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div class="col-6 col-md-9">
-                    <ul class="navbar-nav align-items-top">
-                        <li class="nav-item d-none d-md-block ml-auto">
+
+                <div class="col-6">
+                    <ul class="navbar-nav justify-content-end">
+                        <li class="nav-item d-none d-md-block">
                             <a class="nav-link py-0" href="{{ parameters.appstore }}"
                                title="{{ i18n.t('nav.appstore') }}"
                                rel="nofollow">
                                 <img src="/assets/Elements_web/Download_on_the_App_Store_Badge.png?v=1"
-                                     style="max-height: 30px"
                                      alt="{{ i18n.t('nav.appstore') }}"
-                                     class="img-fluid">
+                                     class="img-fluid p-1">
                             </a>
                         </li>
                         <li class="nav-item d-none d-md-block">
@@ -47,13 +44,13 @@
                                title="{{ i18n.t('nav.gplay') }}"
                                rel="nofollow">
                                 <img src="/assets/Elements_web/google-play-badge.png?v=1"
-                                     style="max-height: 30px"
                                      alt="{{ i18n.t('nav.gplay') }}"
-                                     class="img-fluid">
+                                     class="img-fluid p-1">
                             </a>
                         </li>
-                        <li class="nav-item dropdown font-roboto ml-auto ml-md-0">
-                            <a class="h5 nav-link dropdown-toggle m-0 text-uppercase" href="#"
+                        <li class="nav-item dropdown font-roboto d-flex align-items-center">
+                            <a class="h4 nav-link dropdown-toggle m-0 text-uppercase p-0" href="#"
+                               style="max-height: 40px"
                                id="langDropdown"
                                role="button"
                                data-toggle="dropdown"
@@ -81,7 +78,7 @@
                                      data-off="/assets/sound_off.png?v=1"
                                      style="max-height: 30px"
                                      alt="{{ i18n.t('nav.sound') }}"
-                                     class="img-fluid">
+                                     class="img-fluid p-1">
                             </a>
                         </li>
                     </ul>
