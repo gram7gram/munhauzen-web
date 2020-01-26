@@ -16,7 +16,7 @@
            style="position: absolute;top: 0;left: 0">
         <tbody>
         <tr style="height: 50vh;">
-            <td style="vertical-align: middle;text-align: center;">
+            <td style="vertical-align: middle;text-align: center;" colspan="2">
 
                 <h2 class="h1 font-markscript px-3">
                     “{{ i18n.t('slide6.title') }}“
@@ -26,6 +26,23 @@
                      class="img-fluid"
                      style="width: 100%;max-width: 600px;">
 
+            </td>
+        </tr>
+        <tr>
+            <td style="vertical-align: middle;text-align: right;width:50%">
+                <a class="mx-2 d-none d-md-block d-lg-none" href="{{ parameters.appstore }}" rel="nofollow">
+                    <img data-src="/assets/Elements_web/Download_on_the_App_Store_Badge.png?v=1"
+                         alt="{{ i18n.t('nav.appstore') }}"
+                         class="img-fluid">
+                </a>
+            </td>
+            <td style="vertical-align: middle;text-align: left;width:50%">
+                <a class="mx-2 d-none d-md-block d-lg-none" href="{{ parameters.gplay }}"
+                   rel="nofollow">
+                    <img data-src="/assets/Elements_web/google-play-badge.png?v=1"
+                         alt="{{ i18n.t('nav.gplay') }}"
+                         class="img-fluid">
+                </a>
             </td>
         </tr>
         </tbody>
@@ -41,26 +58,26 @@
            style="position: absolute;bottom: 0;left: 0; z-index: 900;">
         <tbody>
         <tr id="footer-links">
-            <td style="vertical-align: middle;text-align: center;">
-
-                <div class="text-nowrap">
-                    <a class="mx-2" href="{{ parameters.appstore }}" rel="nofollow">
-                        <img data-src="/assets/Elements_web/Download_on_the_App_Store_Badge.png?v=1"
-                             style="width: 120px"
-                             alt="{{ i18n.t('nav.appstore') }}"
-                             class="img-fluid">
-                    </a>
-                    <a class="mx-2" href="{{ parameters.gplay }}"
-                       rel="nofollow">
-                        <img data-src="/assets/Elements_web/google-play-badge.png?v=1"
-                             style="width: 120px"
-                             alt="{{ i18n.t('nav.gplay') }}"
-                             class="img-fluid">
-                    </a>
-                </div>
-
+            <td style="vertical-align: middle;text-align: right;width:50%">
+                <a class="mx-2 d-block d-md-none d-lg-block" href="{{ parameters.appstore }}" rel="nofollow">
+                    <img data-src="/assets/Elements_web/Download_on_the_App_Store_Badge.png?v=1"
+                         alt="{{ i18n.t('nav.appstore') }}"
+                         class="img-fluid">
+                </a>
+            </td>
+            <td style="vertical-align: middle;text-align: left;width:50%">
+                <a class="mx-2 d-block d-md-none d-lg-block" href="{{ parameters.gplay }}"
+                   rel="nofollow">
+                    <img data-src="/assets/Elements_web/google-play-badge.png?v=1"
+                         alt="{{ i18n.t('nav.gplay') }}"
+                         class="img-fluid">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <p class="font-roboto position-fixed p-2 text-center w-100" style="bottom: 0">
-                    {{ moment().format('YYYY')}}
+                    {{ moment().format('YYYY') }}
                     &nbsp;{{ i18n.t('footer.copyright') }}
                     &nbsp;<a href="/privacy">{{ i18n.t('footer.privacy') }}</a>
                 </p>

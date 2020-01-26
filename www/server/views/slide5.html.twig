@@ -6,7 +6,7 @@
             <tr style="height: 80vh;">
                 <td style="width: 25%;vertical-align: middle;text-align: center">
                     <div class="mx-1 mt-5">
-                        <img data-src="/assets/ramka_2.png?v=1"
+                        <img data-src="/assets/ramka_2.png?v=2"
                              alt=""
                              class="img-fluid decor-img">
 
@@ -14,13 +14,13 @@
                             “{{ i18n.t('slide5.title')|safe }}“
                         </p>
 
-                        <img data-src="/assets/ramka_2.png?v=1"
+                        <img data-src="/assets/ramka_2.png?v=2"
                              style="transform: rotate(180deg);"
                              alt=""
                              class="img-fluid decor-img">
 
                         <div>
-                            <img data-src="/assets/Elements_web/An_icon_munchauzen.gif?v=1"
+                            <img data-src="/assets/Elements_web/An_icon_munchauzen.gif?v=2"
                                  id="slide-5-img-0-desktop"
                                  alt=""
                                  class="img-fluid p-1 mt-4">
@@ -32,7 +32,7 @@
                         <h3 class="h2 color-accent font-markscript text-truncate">
                             {{ i18n.t('slide5.'+card+'.title')|safe }}
                         </h3>
-                        <div class="card version-card mx-1">
+                        <div class="card version-card mx-1 version-card-desktop">
 
                             <a href="javascript:"
                                data-googleplay="{{ parameters.gplay }}"
@@ -41,7 +41,7 @@
                                class="mobile-link">
                                 <div class="version-card-header">
                                     <img class="img-fluid p-1"
-                                         data-src="{{ i18n.t('slide5.'+card+'.img') }}?v=1"
+                                         data-src="{{ i18n.t('slide5.'+card+'.img') }}?v=2"
                                          id="slide-5-img-{{ loop.index }}-desktop"
                                          alt="{{ i18n.t('slide5.'+card+'.subtitle') }}">
                                 </div>
@@ -51,9 +51,9 @@
                                     </h2>
 
                                     <div class="version-card-text font-roboto">
-                                        <p class="p mb-2">{{ i18n.t('slide5.'+card+'.hours')|safe }}</p>
-                                        <p class="p mb-2">{{ i18n.t('slide5.'+card+'.chapters')|safe }}</p>
-                                        <p class="p mb-2">{{ i18n.t('slide5.'+card+'.images')|safe }}</p>
+                                        <p class="p mb-2 text-truncate">{{ i18n.t('slide5.'+card+'.hours')|safe }}</p>
+                                        <p class="p mb-2 text-truncate">{{ i18n.t('slide5.'+card+'.chapters')|safe }}</p>
+                                        <p class="p mb-2 text-truncate">{{ i18n.t('slide5.'+card+'.images')|safe }}</p>
                                     </div>
 
                                     <h3 class="h2 font-roboto color-accent m-0">
@@ -63,7 +63,7 @@
                                     {% set discount = i18n.t('slide5.'+card+'.discount') %}
                                     {% if discount %}
                                         <img class="img-fluid version-card-discount"
-                                             data-src="{{ discount }}?v=1"
+                                             data-src="{{ discount }}?v=2"
                                              alt="">
                                     {% endif %}
                                 </div>
@@ -97,9 +97,10 @@
                                     <div class="row no-gutters align-items-top">
                                         <div class="col-5 col-sm-auto text-left">
                                             <img class="img-fluid pr-2"
-                                                 data-src="{{ i18n.t('slide5.'+card+'.imgMob') }}?v=1"
+                                                 data-src="{{ i18n.t('slide5.'+card+'.imgMob') }}?v=2"
                                                  id="slide-5-img-{{ loop.index }}-mobile"
-                                                 alt="{{ i18n.t('slide5.'+card+'.subtitle') }}">
+                                                 alt="{{ i18n.t('slide5.'+card+'.subtitle') }}"
+                                                 style="box-shadow: 0 8px 6px -6px #0000007a;">
                                         </div>
                                         <div class="col-7 text-left">
                                             <h2 class="version-card-mobile-title font-markscript color-primary text-truncate">
@@ -107,9 +108,9 @@
                                             </h2>
 
                                             <div class="version-card-mobile-description font-roboto">
-                                                <p class="mb-1 color-accent">{{ i18n.t('slide5.'+card+'.hours')|safe }}</p>
-                                                <p class="mb-1 color-accent d-none d-sm-block">{{ i18n.t('slide5.'+card+'.chapters')|safe }}</p>
-                                                <p class="mb-1 color-accent d-none d-sm-block">{{ i18n.t('slide5.'+card+'.images')|safe }}</p>
+                                                <p class="mb-1 color-accent small">{{ i18n.t('slide5.'+card+'.hours')|safe }}</p>
+                                                <p class="mb-1 color-accent small">{{ i18n.t('slide5.'+card+'.chapters')|safe }}</p>
+                                                <p class="mb-1 color-accent small">{{ i18n.t('slide5.'+card+'.images')|safe }}</p>
                                             </div>
 
                                             <h3 class="h4 font-roboto color-primary m-0 version-card-mobile-price">
@@ -119,7 +120,7 @@
                                             {% set discount = i18n.t('slide5.'+card+'.discount') %}
                                             {% if discount %}
                                                 <img class="img-fluid version-card-discount"
-                                                     data-src="{{ discount }}?v=1"
+                                                     data-src="{{ discount }}?v=2"
                                                      alt="">
                                             {% endif %}
                                         </div>

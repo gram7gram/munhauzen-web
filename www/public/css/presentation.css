@@ -89,6 +89,10 @@
     background: none;
 }
 
+.version-card-desktop {
+    max-width: 20vw;
+}
+
 .version-card .version-card-text > p {
     font-weight: bold;
     line-height: 21px;
@@ -96,10 +100,15 @@
 }
 
 .version-card .version-card-mobile-description {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
 }
 
 .version-card .version-card-mobile-price {
     font-weight: bold;
+    position: absolute;
+    bottom: 0;
 }
 
 .version-card .version-card-discount {
