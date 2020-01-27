@@ -49,9 +49,9 @@
       "imgMob": "/assets/purchase/free.png",
       "title": "Попробуйте!",
       "subtitle": "Демо версия",
-      "hours": "Более 2 часов аудио-истории",
-      "chapters": "29 доступных глав",
-      "images": "95 илюстраций",
+      "hours": "Более 1 часа аудиокниги!",
+      "chapters": "10 разделов!",
+      "images": "31 иллюстрация!",
       "price": "БЕСПЛАТНО",
       "discount": ""
     },
@@ -60,9 +60,9 @@
       "imgMob": "/assets/purchase/part1.png",
       "title": "Купите часть!",
       "subtitle": "Часть 1 или 2",
-      "hours": "Более 4 часов аудио-истории!",
-      "chapters": "34 глав!",
-      "images": "100+ илюстраций!",
+      "hours": "Около 4 часов аудиокниги!",
+      "chapters": "34 раздела!",
+      "images": "100+ иллюстраций!",
       "price": "Всего $3!",
       "discount": ""
     },
@@ -71,9 +71,9 @@
       "imgMob": "/assets/purchase/full.png",
       "title": "Купите всю книгу!",
       "subtitle": "Полная версия",
-      "hours": "Более 7 часов аудио-истории!!",
-      "chapters": "Все 69 глав!!",
-      "images": "Все 250+ илюстраций!!",
+      "hours": "Более 8 часов аудиокниги!",
+      "chapters": "Все 69 разделов!",
+      "images": "Все 250+ иллюстраций!",
       "price": "$5",
       "discount": "/assets/purchase/off.png"
     }

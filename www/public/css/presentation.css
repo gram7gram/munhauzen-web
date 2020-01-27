@@ -89,7 +89,8 @@
     background: none;
 }
 
-.version-card-desktop {
+.version-card-desktop,
+.version-card-desktop-title {
     max-width: 20vw;
 }
 

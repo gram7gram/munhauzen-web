@@ -49,9 +49,9 @@
       "imgMob": "/assets/purchase/free.png",
       "title": "Try for free!",
       "subtitle": "Demo version",
-      "hours": "More than 2 hours of audiobook",
-      "chapters": "29 opened chapters",
-      "images": "95 illustrations",
+      "hours": "About 1 hour of audiobook!",
+      "chapters": "10 chapters!",
+      "images": "31 illustrations!",
       "price": "FREE",
       "discount": ""
     },
@@ -60,8 +60,8 @@
       "imgMob": "/assets/purchase/part1.png",
       "title": "Buy one part!",
       "subtitle": "Part 1 or Part 2",
-      "hours": "More than 4 hours of audiobook!",
-      "chapters": "34 chapters are available!",
+      "hours": "About 4 hours of audiobook!",
+      "chapters": "34 chapters!",
       "images": "100+ illustrations!",
       "price": "$3 only!",
       "discount": ""
@@ -71,9 +71,9 @@
       "imgMob": "/assets/purchase/full.png",
       "title": "Buy full book!",
       "subtitle": "Full version",
-      "hours": "More than 7 hours of audiobook!!",
-      "chapters": "All 69 chapters are available!!",
-      "images": "All 250+ illustrations!!",
+      "hours": "More then 8 hours of audiobook!",
+      "chapters": "All 69 chapters!",
+      "images": "All 250+ illustrations!",
       "price": "$5",
       "discount": "/assets/purchase/off.png"
     }
