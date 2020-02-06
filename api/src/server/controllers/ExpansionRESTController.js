@@ -18,6 +18,22 @@ const expansions = {
   '1-en-hdpi-Part_demo': () => require('../resources/1-en-hdpi-Part_demo-expansion.json'),
   '1-en-hdpi-Part_1': () => require('../resources/1-en-hdpi-Part_1-expansion.json'),
   '1-en-hdpi-Part_2': () => require('../resources/1-en-hdpi-Part_2-expansion.json'),
+
+  //ru
+  '2-ru-mdpi-Part_demo': () => require('../resources/2-ru-mdpi-Part_demo-expansion.json'),
+  '2-ru-mdpi-Part_1': () => require('../resources/2-ru-mdpi-Part_1-expansion.json'),
+  '2-ru-mdpi-Part_2': () => require('../resources/2-ru-mdpi-Part_2-expansion.json'),
+  '2-ru-hdpi-Part_demo': () => require('../resources/2-ru-hdpi-Part_demo-expansion.json'),
+  '2-ru-hdpi-Part_1': () => require('../resources/2-ru-hdpi-Part_1-expansion.json'),
+  '2-ru-hdpi-Part_2': () => require('../resources/2-ru-hdpi-Part_2-expansion.json'),
+
+  //en
+  '2-en-mdpi-Part_demo': () => require('../resources/2-en-mdpi-Part_demo-expansion.json'),
+  '2-en-mdpi-Part_1': () => require('../resources/2-en-mdpi-Part_1-expansion.json'),
+  '2-en-mdpi-Part_2': () => require('../resources/2-en-mdpi-Part_2-expansion.json'),
+  '2-en-hdpi-Part_demo': () => require('../resources/2-en-hdpi-Part_demo-expansion.json'),
+  '2-en-hdpi-Part_1': () => require('../resources/2-en-hdpi-Part_1-expansion.json'),
+  '2-en-hdpi-Part_2': () => require('../resources/2-en-hdpi-Part_2-expansion.json'),
 }
 
 router.get('/expansions/:version/:dpi', (req, res, next) => {
