@@ -16,4 +16,4 @@ certbot certonly \
     -d api.thebaronmunchausen.com
 
 cron
-0 0 1 * * certbot renew
+0 0 1 * * cd /var/www/munhauzen-web/boot && bash ./05-ssl-renew.sh && docker-compose restart-proxy
