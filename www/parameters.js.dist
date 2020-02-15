@@ -6,13 +6,13 @@ const config = {
     pageprefix: ' - thebaronmunchausen.com',
     host: 'https://thebaronmunchausen.com',
     gplay: 'https://play.google.com/apps/en.munchausen.fingertipsandcompany.full',
-    appstore: 'https://itunes.apple.com/app/id000000001',
+    appstore: 'https://itunes.apple.com/app/id1496752335',
     defaultLocale: 'en',
     supportedLocales: ['en', 'ru'],
     email: 'fingertipsandcompany@gmail.com',
     gtm: {
       enabled: true,
-      code: ''
+      code: 'UA-157590413-1'
     }
   }
 }
