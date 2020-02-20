@@ -19,8 +19,7 @@
     "sound": "Toggle sound"
   },
   "slide1": {
-    "title": "Our guests have already come, let’s start!",
-    "betaTitle": "Open beta now!"
+    "title": "Our guests have already come, let’s start!"
   },
   "slide2": {
     "title": "“Oh, that Munchausen!” is an interactive audiobook game in which you play the role of a granddaughter and help grandfather Baron remember and tell all his adventures! Get ready and listen!"
@@ -81,6 +80,10 @@
   },
   "slide6": {
     "title": "Download, listen and enjoy my incredible adventures!"
+  },
+  "slide7": {
+    "title": "Open beta now!",
+    "content": "Download free and send us feedback to"
   },
   "footer": {
     "copyright": "FingertipsAndCompany. All rights reserved.",

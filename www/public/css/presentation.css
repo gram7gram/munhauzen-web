@@ -33,6 +33,10 @@
     height: 90vh !important;
 }
 
+.reveal-slide-7 {
+    height: 100vh !important;
+}
+
 .body-bg-light {
     background: url('/assets/Elements_web/background_1.jpg') no-repeat center;
     -webkit-background-size: cover;

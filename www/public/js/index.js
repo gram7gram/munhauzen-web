@@ -455,6 +455,7 @@ function configureSlides() {
     configureSlide4()
     configureSlide5()
     configureSlide6()
+    configureSlide7()
   } catch (e) {
     console.log(e);
   }
@@ -725,6 +726,10 @@ function configureSlide6() {
     height: height + 'px',
     left: x + 'px'
   })
+}
+
+function configureSlide7() {
+
 }
 
 window.addEventListener('resize', configureSlides)
