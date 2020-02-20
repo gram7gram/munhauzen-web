@@ -600,3 +600,19 @@
 #navigation img {
     max-height: 40px;
 }
+
+#beta-title {
+    font-size: 6rem;
+}
+
+@media (min-width: 992px) {
+    #beta-title {
+        font-size: 8rem;
+    }
+}
+
+@media (min-width: 1600px) {
+    #beta-title {
+        font-size: 11rem;
+    }
+}
