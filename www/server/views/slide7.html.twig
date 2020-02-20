@@ -18,9 +18,10 @@
                             {{ i18n.t('slide7.content')|safe }}
                         </p>
 
-                        <p class="h2">
-                            <a href="mailto:test.munchausen@ukr.net">
-                                test.munchausen@ukr.net
+                        <p>
+                            <a href="{{ parameters.feedback[locale] }}" rel="nofollow"
+                               class="btn btn-lg btn-link font-markscript">
+                                {{ i18n.t('slide7.feedback')|safe }}
                             </a>
                         </p>
                     </div>

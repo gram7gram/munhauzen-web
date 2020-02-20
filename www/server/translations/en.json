@@ -83,7 +83,8 @@
   },
   "slide7": {
     "title": "Open beta now!",
-    "content": "Download free and send us feedback to"
+    "content": "Download for free and send us feedback",
+    "feedback": "Feedback"
   },
   "footer": {
     "copyright": "FingertipsAndCompany. All rights reserved.",
