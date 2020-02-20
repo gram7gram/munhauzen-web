@@ -7,7 +7,7 @@ var isRevealEnabled = false;
 var screenHeight;
 var screenWidth;
 var xs, sm, md, lg, xl;
-var isIos;
+var isIos, isAndroid;
 var currentProgress = 0
 var playPromise
 var carouselIndex
@@ -362,9 +362,11 @@ function setLinksBasedOnPlatform() {
   for (var i = 0; i < links.length; i++) {
     var link = $(links[i])
 
-    link.attr('href', isIos
-      ? link.attr('data-appstore')
-      : link.attr('data-googleplay'))
+    if (isIos) {
+      link.attr('href', link.attr('data-appstore'))
+    } else if (isAndroid) {
+      link.attr('href', link.attr('data-googleplay'))
+    }
   }
 }
 
@@ -732,6 +734,7 @@ $(function () {
   var os = getMobileOperatingSystem()
 
   isIos = os === 'IOS'
+  isAndroid = os === 'Android'
 
   setLinksBasedOnPlatform();
 
