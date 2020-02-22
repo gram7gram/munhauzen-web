@@ -1,6 +1,6 @@
 <section class="reveal-slide-6">
 
-    <div class="d-none d-lg-block">
+    <div class="d-none d-lg-block" style="z-index: 200">
         <img data-src="/assets/Elements_web/Мюнхаузен_подозрительній_цвет_гамма.png?v=1"
              alt=""
              class="img-fluid"
@@ -28,27 +28,10 @@
 
             </td>
         </tr>
-        <tr>
-            <td style="vertical-align: middle;text-align: right;width:50%">
-                <a class="mx-2 d-none d-md-block d-lg-none" href="{{ parameters.appstore[locale] }}" rel="nofollow">
-                    <img data-src="/assets/Elements_web/Download_on_the_App_Store_Badge.png?v=1"
-                         alt="{{ i18n.t('nav.appstore') }}"
-                         class="img-fluid">
-                </a>
-            </td>
-            <td style="vertical-align: middle;text-align: left;width:50%">
-                <a class="mx-2 d-none d-md-block d-lg-none" href="{{ parameters.gplay[locale] }}"
-                   rel="nofollow">
-                    <img data-src="/assets/Elements_web/google-play-badge.png?v=1"
-                         alt="{{ i18n.t('nav.gplay') }}"
-                         class="img-fluid">
-                </a>
-            </td>
-        </tr>
         </tbody>
     </table>
 
-    <div id="wau-container" style="text-align: center;width:100%;height:90vh">
+    <div id="wau-container" style="text-align: center;width:100%;height:90vh;z-index: 90">
         <img data-src="/assets/wau-bottom.gif?v=1"
              alt=""
              id="wau-animation">
@@ -59,14 +42,14 @@
         <tbody>
         <tr id="footer-links">
             <td style="vertical-align: middle;text-align: right;width:50%">
-                <a class="mx-2 d-block d-md-none d-lg-block" href="{{ parameters.appstore }}" rel="nofollow">
+                <a class="mx-2 d-block" href="{{ parameters.appstore[locale] }}" rel="nofollow">
                     <img data-src="/assets/Elements_web/Download_on_the_App_Store_Badge.png?v=1"
                          alt="{{ i18n.t('nav.appstore') }}"
                          class="img-fluid">
                 </a>
             </td>
             <td style="vertical-align: middle;text-align: left;width:50%">
-                <a class="mx-2 d-block d-md-none d-lg-block" href="{{ parameters.gplay }}"
+                <a class="mx-2 d-block" href="{{ parameters.gplay[locale] }}"
                    rel="nofollow">
                     <img data-src="/assets/Elements_web/google-play-badge.png?v=1"
                          alt="{{ i18n.t('nav.gplay') }}"
