@@ -24,15 +24,6 @@
                 media="screen and (max-width: 480px`)"/>
     </video>
 
-    {#<iframe id="slide-3-video"
-            class="d-none"
-            style="position: absolute;top:0;left:0"
-            width="764" height="573"
-            src="https://www.youtube.com/embed/Dw17-BEFb3Y"
-            frameborder="0"
-            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>#}
-
     <video id="slide-1-video"
            data-duration="5000"
            muted
@@ -57,17 +48,26 @@
                 media="screen and (max-width: 480px)"/>
     </video>
 
-    <img src="/assets/Elements_web/Старт_ФИНАЛ_Цвет.jpg?v=1"
+    <iframe id="slide-3-video"
+            class="d-none"
+            style="position: absolute;top:0;left:0;z-index:4"
+            width="764" height="573"
+            src="{{ i18n.t('slide1.youtube') }}"
+            frameborder="0"
+            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+
+    {# <img src="/assets/Elements_web/Старт_ФИНАЛ_Цвет.jpg?v=1"
          alt="" id="slide-3-video"
          class="d-none"
-         style="position: absolute;top:0;left:0;width:764px;height:573px;z-index:4">
+         style="position: absolute;top:0;left:0;width:764px;height:573px;z-index:4"> #}
 
     <div style="z-index: 5;position: relative;top:12vh">
         <h1 class="h1 m-0 text-center font-markscript">“{{ i18n.t('slide1.title')|safe }}“</h1>
     </div>
 
-    <div style="z-index: 6;position: relative;height: 80vh;" class="d-flex align-items-center">
+    {# <div style="z-index: 6;position: relative;height: 80vh;" class="d-flex align-items-center">
         <h2 class="beta-title m-0 text-center font-markscript font-weight-bold w-100">{{ i18n.t('slide7.title')|safe }}</h2>
-    </div>
+    </div> #}
 
 </section>
