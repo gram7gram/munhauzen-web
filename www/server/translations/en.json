@@ -64,7 +64,7 @@
       "hours": "About 4 hours of audiobook!",
       "chapters": "34 chapters!",
       "images": "100+ illustrations!",
-      "price": "$3 only!",
+      "price": "$5 only!",
       "discount": ""
     },
     "card3": {
@@ -75,7 +75,7 @@
       "hours": "More then 8 hours of audiobook!",
       "chapters": "All 69 chapters!",
       "images": "All 250+ illustrations!",
-      "price": "$5",
+      "price": "$8",
       "discount": "/assets/purchase/off.png"
     }
   },

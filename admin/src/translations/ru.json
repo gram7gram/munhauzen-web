@@ -13,7 +13,7 @@
     "error_title": "Произошла ошибка..."
   },
   "home": {
-    "title": "Барон Мюнхаузен"
+    "title": "Барон Мюнхгаузен"
   },
   "logout": {
     "action": "Выход"
@@ -91,7 +91,7 @@
   "audio_fail_edit": {
     "title": "Редакт. фейла",
     "title_new": "Новый фейл",
-    "isFailMunhauzen": "Фейл Мюнхаузена",
+    "isFailMunhauzen": "Фейл Мюнхгаузена",
     "isFailDaughter": "Фейл дочери",
     "isFailOpenedOnStart": "Фейл стает доступен при первом запуске",
     "isFailOpenedOnComplete": "Фейл стает доступен при прохождении книги",
